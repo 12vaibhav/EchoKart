@@ -25,6 +25,11 @@ import { DeliveryReturnsPage } from './pages/DeliveryReturnsPage';
 import { TrackOrderPage } from './pages/TrackOrderPage';
 import { HelpFAQPage } from './pages/HelpFAQPage';
 import { ImportantPage } from './pages/ImportantPage';
+import { PrivacyPolicyPage } from './pages/policies/PrivacyPolicyPage';
+import { TermsConditionsPage } from './pages/policies/TermsConditionsPage';
+import { RefundCancellationPage } from './pages/policies/RefundCancellationPage';
+import { ReturnPolicyPage } from './pages/policies/ReturnPolicyPage';
+import { ShippingPolicyPage } from './pages/policies/ShippingPolicyPage';
 import { AuthPage } from './pages/AuthPage';
 
 import {
@@ -429,6 +434,11 @@ export default function App() {
         {route.path === 'track' && <TrackOrderPage initialOrderId={route.id} />}
         {route.path === 'help' && <HelpFAQPage />}
         {route.path === 'important' && <ImportantPage />}
+        {route.path === 'privacy-policy' && <PrivacyPolicyPage />}
+        {route.path === 'terms-conditions' && <TermsConditionsPage />}
+        {route.path === 'refund-cancellation' && <RefundCancellationPage />}
+        {route.path === 'return-policy' && <ReturnPolicyPage />}
+        {route.path === 'shipping-policy' && <ShippingPolicyPage />}
         {route.path === 'auth' && <AuthPage onNavigate={navigate} />}
       </main>
       <Footer onNavigate={navigate} />

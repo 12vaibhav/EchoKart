@@ -68,7 +68,7 @@ export const ImportantPage = () => (
     <h2 className="text-2xl font-bold mb-4">Shipping Policy</h2>
     <p className="mb-8 text-gray-600">We offer free standard shipping on all orders across India. Delivery typically takes 3-7 business days.</p>
     
-    <h2 className="text-2xl font-bold mb-4">Terms of Service</h2>
+    <h2 className="text-2xl font-bold mb-4">Terms & Conditions</h2>
     <p className="text-gray-600">By using our website, you agree to our terms and conditions. Please read them carefully to understand your rights and obligations.</p>
   </motion.div>
 );

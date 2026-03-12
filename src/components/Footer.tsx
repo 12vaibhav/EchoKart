@@ -71,8 +71,9 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
             <div className="lg:col-span-3">
               <h4 className="font-bold text-[15px] mb-6">Delivery & returns</h4>
               <ul className="space-y-4 text-gray-300 text-[13.5px] font-medium">
-                <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('delivery'); }} className="hover:opacity-80 transition-opacity">Shipping information</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('delivery'); }} className="hover:opacity-80 transition-opacity">Returns & refunds</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('shipping-policy'); }} className="hover:opacity-80 transition-opacity">Shipping policy</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('return-policy'); }} className="hover:opacity-80 transition-opacity">Return policy</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('refund-cancellation'); }} className="hover:opacity-80 transition-opacity">Refund & Cancellation policy</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('track'); }} className="hover:opacity-80 transition-opacity">Track your order</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('help'); }} className="hover:opacity-80 transition-opacity">Help & FAQs</a></li>
               </ul>
@@ -84,9 +85,8 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
               <ul className="space-y-4 text-gray-300 text-[13.5px] font-medium">
                 <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('about'); }} className="hover:opacity-80 transition-opacity">Our Story</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('contact'); }} className="hover:opacity-80 transition-opacity">Contact us</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('important'); }} className="hover:opacity-80 transition-opacity">Privacy policy</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('important'); }} className="hover:opacity-80 transition-opacity">Shipping policy</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('important'); }} className="hover:opacity-80 transition-opacity">Terms of service</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('privacy-policy'); }} className="hover:opacity-80 transition-opacity">Privacy policy</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('terms-conditions'); }} className="hover:opacity-80 transition-opacity">Terms & Conditions</a></li>
               </ul>
             </div>
 
