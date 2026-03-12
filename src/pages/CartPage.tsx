@@ -61,11 +61,11 @@ export const CartPage = ({ onNavigate }: { onNavigate: (path: string, id?: numbe
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         {/* Left Column: Product List */}
         <div className="lg:col-span-2">
-          <div className="flex items-center justify-between border-b pb-6 mb-6">
-            <h2 className="text-2xl font-bold text-slate-900">Shopping Cart ({cartCount} items)</h2>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-6 mb-6 gap-4">
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight">Shopping Cart ({cartCount})</h2>
             <button 
               onClick={() => onNavigate('home')}
-              className="text-[#e31c3d] font-bold hover:underline flex items-center gap-1 text-sm bg-transparent border-0 cursor-pointer"
+              className="text-[#e31c3d] font-black hover:underline flex items-center gap-1.5 text-[10px] uppercase tracking-widest bg-transparent border-0 cursor-pointer self-start sm:self-auto"
             >
               <ArrowLeft className="w-4 h-4" />
               Continue Shopping
@@ -81,13 +81,13 @@ export const CartPage = ({ onNavigate }: { onNavigate: (path: string, id?: numbe
               <div className="flex flex-col flex-1">
                 <div className="flex justify-between items-start">
                   <div className="pr-4">
-                    <h3 className="text-lg font-bold text-slate-900 line-clamp-1">{item.title}</h3>
-                    <p className="text-xs font-black text-[#e31c3d] uppercase tracking-widest mt-1">{item.brand}</p>
-                    {item.variant && <p className="text-sm text-slate-500 mt-1">Variant: {item.variant}</p>}
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900 line-clamp-2">{item.title}</h3>
+                    <p className="text-[10px] font-black text-[#e31c3d] uppercase tracking-widest mt-1">{item.brand}</p>
+                    {item.variant && <p className="text-xs text-slate-500 mt-1">Variant: {item.variant}</p>}
                   </div>
                   <div className="text-right shrink-0">
-                    <p className="text-lg font-black text-slate-900">₹{item.price.toLocaleString('en-IN')}</p>
-                    {item.oldPrice && <p className="text-sm text-slate-400 line-through">₹{item.oldPrice.toLocaleString('en-IN')}</p>}
+                    <p className="text-base sm:text-lg font-black text-slate-900">₹{item.price.toLocaleString('en-IN')}</p>
+                    {item.oldPrice && <p className="text-xs sm:text-sm text-slate-400 line-through">₹{item.oldPrice.toLocaleString('en-IN')}</p>}
                   </div>
                 </div>
                 
@@ -141,8 +141,8 @@ export const CartPage = ({ onNavigate }: { onNavigate: (path: string, id?: numbe
             </div>
             
             <div className="flex justify-between items-center mb-8">
-              <span className="text-lg font-black text-slate-900 uppercase tracking-tight">Total</span>
-              <span className="text-3xl font-black text-[#e31c3d]">₹{finalTotal.toLocaleString('en-IN')}</span>
+              <span className="text-sm sm:text-lg font-black text-slate-900 uppercase tracking-tight">Total Payable</span>
+              <span className="text-2xl sm:text-3xl font-black text-[#e31c3d]">₹{finalTotal.toLocaleString('en-IN')}</span>
             </div>
             
             <button 

@@ -61,13 +61,13 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
         </div>
       </div>
 
-      <motion.div {...fadeInUpProps} className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <motion.div {...fadeInUpProps} className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           
           {/* Left: Image Gallery (Side-by-Side Reference Design) */}
           <div className="flex flex-col-reverse sm:flex-row gap-4 lg:gap-6 lg:h-[600px] h-auto">
             {/* Vertical Thumbnails (Bottom on mobile, Left on desktop) */}
-            <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-auto gap-3 w-full sm:w-20 md:w-24 shrink-0 pb-2 sm:pb-0 pr-2 sm:pr-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-auto gap-3 w-full sm:w-20 md:w-24 shrink-0 pb-2 sm:pb-0 pr-2 sm:pr-0 scrollbar-hide">
               {images.map((img: string, i: number) => (
                 <div 
                   key={i} 
@@ -80,7 +80,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             </div>
 
             {/* Main Image Viewport */}
-            <div className="relative flex-1 bg-gradient-to-br from-gray-50 to-white rounded-3xl border border-gray-100 shadow-sm flex items-center justify-center p-0 group overflow-hidden min-h-[400px]">
+            <div className="relative flex-1 bg-gradient-to-br from-gray-50 to-white rounded-2xl sm:rounded-3xl border border-gray-100 shadow-sm flex items-center justify-center p-0 group overflow-hidden min-h-[300px] sm:min-h-[400px]">
               {tags && tags.length > 0 && (
                 <div className="absolute top-6 left-6 flex flex-col gap-2 z-10">
                   {tags.map((tag: any, idx: number) => (
@@ -93,9 +93,9 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               
               <button 
                 onClick={() => toggleWishlist(product)}
-                className={`absolute top-6 right-6 w-11 h-11 bg-white rounded-full flex items-center justify-center border border-gray-100 transition-all z-10 hover:scale-110 ${isWishlisted ? 'text-[#e31c3d] shadow-md' : 'text-gray-400 hover:text-[#e31c3d] hover:shadow-md'}`}
+                className={`absolute top-4 right-4 sm:top-6 sm:right-6 w-9 h-9 sm:w-11 sm:h-11 bg-white rounded-full flex items-center justify-center border border-gray-100 transition-all z-10 hover:scale-110 ${isWishlisted ? 'text-[#e31c3d] shadow-md' : 'text-gray-400 hover:text-[#e31c3d] hover:shadow-md'}`}
               >
-                <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-current' : ''}`} />
+                <Heart className={`w-4 h-4 sm:w-5 sm:h-5 ${isWishlisted ? 'fill-current' : ''}`} />
               </button>
 
               <img 
@@ -153,14 +153,14 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                   </span>
                 </div>
 
-                <div className="flex items-baseline gap-4 mb-8 p-6 rounded-[2rem] bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-sm relative overflow-hidden group max-w-md">
+                <div className="flex items-baseline gap-3 sm:gap-4 mb-6 sm:mb-8 p-4 sm:p-6 rounded-2xl sm:rounded-[2rem] bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-sm relative overflow-hidden group max-w-full sm:max-w-md">
                    <div className="absolute -right-4 -top-4 w-24 h-24 bg-[#e31c3d] opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.05] transition-opacity"></div>
-                    <span className="text-3xl sm:text-4xl font-black text-[#e31c3d] tracking-tighter">₹{price.toLocaleString('en-IN')}</span>
+                    <span className="text-2xl sm:text-4xl font-black text-[#e31c3d] tracking-tighter">₹{price.toLocaleString('en-IN')}</span>
                    {oldPrice && (
-                     <span className="text-xl text-gray-400 line-through decoration-[1.5px] font-medium decoration-gray-300">₹{oldPrice.toLocaleString('en-IN')}</span>
+                     <span className="text-lg sm:text-xl text-gray-400 line-through decoration-[1.5px] font-medium decoration-gray-300">₹{oldPrice.toLocaleString('en-IN')}</span>
                    )}
                    {oldPrice && (
-                     <div className="bg-red-50 text-[#e31c3d] text-xs font-extrabold px-3 py-1.5 rounded-full border border-red-100 shadow-sm">
+                     <div className="bg-red-50 text-[#e31c3d] text-[10px] sm:text-xs font-extrabold px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-red-100 shadow-sm">
                        SAVE {Math.round(((oldPrice - price) / oldPrice) * 100)}%
                      </div>
                    )}

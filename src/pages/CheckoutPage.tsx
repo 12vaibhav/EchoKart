@@ -141,26 +141,26 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
   return (
     <motion.div {...fadeInUpProps} className="max-w-7xl mx-auto px-4 py-8 md:py-12">
       {/* Progress Stepper */}
-      <div className="mb-12 max-w-2xl mx-auto px-4 mt-4">
+      <div className="mb-8 md:mb-12 max-w-2xl mx-auto px-2 sm:px-4 mt-2 sm:mt-4">
         <div className="flex items-center justify-between mb-4 relative">
           <div className="absolute top-[1.25rem] left-0 w-full h-[2px] bg-slate-100 z-0"></div>
           <div className="absolute top-[1.25rem] left-0 w-1/2 h-[2px] bg-[#e31c3d] z-0 transition-all duration-700"></div>
           
-          <div className="z-10 flex flex-col items-center gap-3 cursor-pointer" onClick={() => onNavigate('cart')}>
-            <div className="w-10 h-10 rounded-full bg-[#e31c3d] text-white flex items-center justify-center font-black text-sm shadow-md ring-4 ring-white">
-              <Check className="w-5 h-5 stroke-[3px]" />
+          <div className="z-10 flex flex-col items-center gap-2 sm:gap-3 cursor-pointer" onClick={() => onNavigate('cart')}>
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#e31c3d] text-white flex items-center justify-center font-black text-[10px] sm:text-sm shadow-md ring-4 ring-white">
+              <Check className="w-4 h-4 sm:w-5 sm:h-5 stroke-[3px]" />
             </div>
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Cart</span>
+            <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Cart</span>
           </div>
           
-          <div className="z-10 flex flex-col items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#e31c3d] text-white flex items-center justify-center font-black text-sm shadow-lg shadow-[#e31c3d]/20 ring-4 ring-white">2</div>
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-900">Review</span>
+          <div className="z-10 flex flex-col items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#e31c3d] text-white flex items-center justify-center font-black text-[10px] sm:text-sm shadow-lg shadow-[#e31c3d]/20 ring-4 ring-white">2</div>
+            <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-slate-900">Review</span>
           </div>
           
-          <div className="z-10 flex flex-col items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-black text-sm ring-4 ring-white transition-all">3</div>
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Checkout</span>
+          <div className="z-10 flex flex-col items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-black text-[10px] sm:text-sm ring-4 ring-white transition-all">3</div>
+            <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Checkout</span>
           </div>
         </div>
       </div>
@@ -332,29 +332,29 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     exit={{ opacity: 0, x: 20 }}
                     className="space-y-8"
                   >
-                    <div className="flex flex-col items-center justify-center p-8 bg-slate-50 rounded-3xl border border-dashed border-slate-200 gap-6">
-                      <div className="size-56 bg-white p-4 rounded-3xl shadow-xl shadow-slate-200/50 flex items-center justify-center relative group overflow-hidden">
+                    <div className="flex flex-col items-center justify-center p-4 sm:p-8 bg-slate-50 rounded-2xl sm:rounded-3xl border border-dashed border-slate-200 gap-4 sm:gap-6">
+                      <div className="size-44 sm:size-56 bg-white p-3 sm:p-4 rounded-2xl sm:rounded-3xl shadow-xl shadow-slate-200/50 flex items-center justify-center relative group overflow-hidden">
                          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-4 text-center">
-                            <QrCode className="w-12 h-12 text-[#e31c3d] opacity-20" />
-                            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Scan QR to Pay ₹{total.toLocaleString()}</p>
+                            <QrCode className="w-8 h-8 sm:w-12 sm:h-12 text-[#e31c3d] opacity-20" />
+                            <p className="text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400">Scan QR to Pay ₹{total.toLocaleString()}</p>
                          </div>
                          <img 
                            src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=store@upi%26pn=EchoKart%26am=${total}%26cu=INR`} 
                            alt="Payment QR"
-                           className="relative z-10 w-44 h-44 mix-blend-multiply transition-transform group-hover:scale-110 duration-500"
+                           className="relative z-10 w-32 h-32 sm:w-44 sm:h-44 mix-blend-multiply transition-transform group-hover:scale-110 duration-500"
                          />
                       </div>
                       <div className="text-center">
-                        <p className="text-lg font-black text-slate-900 tracking-tight">VPA: store@upi</p>
+                        <p className="text-base sm:text-lg font-black text-slate-900 tracking-tight">VPA: store@upi</p>
                         <button 
                           type="button"
                           onClick={() => {
                             navigator.clipboard.writeText('store@upi');
                             alert('UPI ID copied to clipboard!');
                           }}
-                          className="text-[10px] font-black uppercase tracking-widest text-[#e31c3d] hover:underline mt-2 flex items-center gap-1.5 justify-center bg-white px-4 py-2 rounded-full border border-slate-100 shadow-sm"
+                          className="text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-[#e31c3d] hover:underline mt-2 flex items-center gap-1.5 justify-center bg-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-slate-100 shadow-sm"
                         >
-                          <Copy size={12} /> Copy UPI ID
+                          <Copy size={10} className="sm:size-12" /> Copy UPI ID
                         </button>
                       </div>
                     </div>

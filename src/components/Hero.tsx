@@ -57,10 +57,10 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1700px] mx-auto px-2 sm:px-6 lg:px-8">
         <div 
           onClick={handleSlideClick}
-          className="relative w-full h-[480px] md:h-[580px] lg:h-[680px] rounded-[2.5rem] sm:rounded-[3.5rem] overflow-hidden group shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] border border-gray-100 cursor-pointer will-change-transform"
+          className="relative w-full h-[350px] sm:h-[450px] md:h-[580px] lg:h-[680px] rounded-[1.5rem] sm:rounded-[3.5rem] overflow-hidden group shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] border border-gray-100 cursor-pointer will-change-transform"
         >
           {/* Slides Container */}
           <AnimatePresence mode="popLayout" initial={false}>
@@ -108,7 +108,7 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
 
                   <motion.h1 
                     variants={itemVariants}
-                    className="text-white text-4xl sm:text-6xl md:text-7xl lg:text-[90px] font-black tracking-tight mb-10 drop-shadow-[0_10px_35px_rgba(0,0,0,0.5)] leading-[0.95] md:leading-[1]"
+                    className="text-white text-3xl sm:text-6xl md:text-7xl lg:text-[90px] font-black tracking-tight mb-6 md:mb-10 drop-shadow-[0_10px_35px_rgba(0,0,0,0.5)] leading-[0.95] md:leading-[1]"
                   >
                     {current.title.split(' ').map((word: string, i: number) => (
                       <span key={i} className="inline-block mr-[0.2em] last:mr-0">
@@ -120,10 +120,10 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
                   <motion.div variants={itemVariants} className="pointer-events-auto">
                     <button 
                       onClick={(e) => { e.stopPropagation(); handleSlideClick(); }}
-                      className="group/btn relative overflow-hidden bg-white text-black hover:text-white font-black py-4 px-12 rounded-full transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(0,0,0,0.3)] text-sm md:text-base tracking-widest uppercase flex items-center justify-center gap-3"
+                      className="group/btn relative overflow-hidden bg-white text-black hover:text-white font-black py-3 sm:py-4 px-8 sm:px-12 rounded-full transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(0,0,0,0.3)] text-xs sm:text-base tracking-widest uppercase flex items-center justify-center gap-3"
                     >
-                      <span className="relative z-10">Explore Collection</span>
-                      <ArrowRight className="w-5 h-5 relative z-10 group-hover/btn:translate-x-1 transition-transform" />
+                      <span className="relative z-10">Explore</span>
+                      <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover/btn:translate-x-1 transition-transform" />
                       <div className="absolute inset-0 bg-[#e31c3d] -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500 ease-[0.22,1,0.36,1]" />
                     </button>
                   </motion.div>
