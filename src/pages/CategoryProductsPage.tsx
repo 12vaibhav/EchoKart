@@ -37,14 +37,14 @@ const CategoryProductCard = ({ product, onNavigate, viewMode }: { product: any, 
 
   return (
     <div 
-      className={`bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 group ${
-        viewMode === 'list' ? 'flex flex-col sm:flex-row gap-4 sm:gap-6 sm:items-center' : 'flex flex-col'
+      className={`bg-white rounded-2xl p-4 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 group ${
+        viewMode === 'list' ? 'flex gap-6 items-center' : 'flex flex-col'
       }`}
       onClick={() => onNavigate('product', product.id)}
     >
       {/* Image Container */}
       <div className={`relative bg-[#f8f9fb] rounded-xl overflow-hidden flex items-center justify-center p-0 ${
-        viewMode === 'list' ? 'w-full sm:w-48 aspect-square sm:h-48 flex-shrink-0' : 'aspect-square mb-3 sm:mb-4'
+        viewMode === 'list' ? 'w-48 h-48 flex-shrink-0' : 'aspect-square mb-4'
       }`}>
         <button 
           onClick={(e) => { e.stopPropagation(); toggleWishlist(product); }}
@@ -82,20 +82,20 @@ const CategoryProductCard = ({ product, onNavigate, viewMode }: { product: any, 
         </h3>
 
         <div className="flex items-center gap-3 mb-2">
-          <span className="text-[#e31c3d] font-black text-lg sm:text-xl">
+          <span className="text-[#e31c3d] font-bold text-lg">
             ₹{(product.price || 0).toLocaleString('en-IN')}
           </span>
           {product.oldPrice && (
-            <div className="flex items-center gap-2">
-              <span className="text-gray-400 text-xs sm:text-sm line-through">
+            <>
+              <span className="text-gray-400 text-sm line-through">
                 ₹{oldPrice.toLocaleString('en-IN')}
               </span>
               {(oldPrice > (product.price || 0)) && (
-                <span className="text-[#e31c3d] text-[10px] sm:text-xs font-black bg-red-50 px-2 py-0.5 rounded">
-                  {Math.round(((oldPrice - (product.price || 0)) / oldPrice) * 100)}% OFF
+                <span className="text-[#e31c3d] text-sm font-medium bg-red-50 px-2 py-0.5 rounded">
+                  {Math.round(((oldPrice - (product.price || 0)) / oldPrice) * 100)}% off
                 </span>
               )}
-            </div>
+            </>
           )}
         </div>
 
@@ -104,13 +104,13 @@ const CategoryProductCard = ({ product, onNavigate, viewMode }: { product: any, 
             {[...Array(5)].map((_, i) => (
               <Star 
                 key={i} 
-                className={`w-3 sm:w-3.5 h-3 sm:h-3.5 ${i < Math.floor(Number(product.rating || 5)) ? 'fill-[#ff9c1a] text-[#ff9c1a]' : 'fill-gray-200 text-gray-200'}`} 
+                className={`w-3.5 h-3.5 ${i < Math.floor(Number(product.rating || 5)) ? 'fill-[#ff9c1a] text-[#ff9c1a]' : 'fill-gray-200 text-gray-200'}`} 
               />
             ))}
           </div>
-          <span className="text-xs sm:text-sm text-gray-900 font-bold">{Number(product.rating || 5).toFixed(1)}</span>
-          <span className="text-[10px] sm:text-sm text-gray-400">
-            ({product.reviewsCount !== undefined ? product.reviewsCount : (Array.isArray(product.reviews) ? product.reviews.length : (product.reviews || 0))})
+          <span className="text-sm text-gray-900 font-medium">{Number(product.rating || 5).toFixed(1)}</span>
+          <span className="text-sm text-gray-400">
+            ({product.reviewsCount !== undefined ? product.reviewsCount : (Array.isArray(product.reviews) ? product.reviews.length : (product.reviews || 0))} Reviews)
           </span>
         </div>
 
@@ -120,16 +120,16 @@ const CategoryProductCard = ({ product, onNavigate, viewMode }: { product: any, 
           </p>
         )}
 
-        <div className="flex gap-2 sm:gap-3 mt-auto">
+        <div className="flex gap-3 mt-auto">
           <button 
             onClick={(e) => { e.stopPropagation(); addToCart(product); }}
-            className="flex-1 border border-gray-200 text-gray-600 font-black py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs hover:bg-gray-50 transition-all flex items-center justify-center gap-1.5 active:scale-95"
+            className="flex-1 border border-gray-200 text-gray-600 font-medium py-2.5 rounded-xl text-sm hover:bg-gray-50 transition-all flex items-center justify-center gap-2 active:scale-95"
           >
-            <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Add
+            <ShoppingBag className="w-4 h-4" /> Add To Cart
           </button>
           <button 
             onClick={handleBuyNow}
-            className="flex-1 bg-[#e31c3d] text-white font-black py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs hover:bg-[#c41835] transition-all shadow-sm hover:shadow-md active:scale-95"
+            className="flex-1 bg-[#e31c3d] text-white font-medium py-2.5 rounded-xl text-sm hover:bg-[#c41835] transition-all shadow-sm hover:shadow-md active:scale-95"
           >
             Buy Now
           </button>
@@ -161,7 +161,6 @@ export const CategoryProductsPage = ({
   const [maxPrice, setMaxPrice] = useState<number>(25000);
   const [searchQuery, setSearchQuery] = useState<string>(initialSearchQuery || '');
   const [currentPage, setCurrentPage] = useState(1);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const itemsPerPage = 6;
 
   // Sync search query from props if it changes
@@ -236,84 +235,134 @@ export const CategoryProductsPage = ({
   return (
     <div className="bg-[#f8f9fb] min-h-screen pb-20">
       <div className="max-w-[1400px] mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-6 md:gap-8">
+        <div className="flex flex-col lg:flex-row gap-8">
           
-          {/* Mobile Filter Overlay */}
-          <AnimatePresence>
-            {isFilterOpen && (
-              <>
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  onClick={() => setIsFilterOpen(false)}
-                  className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] lg:hidden"
-                />
-                <motion.div 
-                  initial={{ x: '-100%' }}
-                  animate={{ x: 0 }}
-                  exit={{ x: '-100%' }}
-                  transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                  className="fixed inset-y-0 left-0 w-[280px] bg-white z-[101] lg:hidden p-6 overflow-y-auto"
-                >
-                  <div className="flex items-center justify-between mb-8">
-                    <h2 className="font-black text-xl text-gray-900 uppercase tracking-tight">Filters</h2>
-                    <button onClick={() => setIsFilterOpen(false)} className="p-2 bg-gray-100 rounded-full"><X size={20} /></button>
-                  </div>
-                  <FiltersSection 
-                    propCategories={propCategories} 
-                    allProducts={allProducts} 
-                    selectedCategory={selectedCategory} 
-                    setSelectedCategory={setSelectedCategory}
-                    selectedBrand={selectedBrand}
-                    setSelectedBrand={setSelectedBrand}
-                    selectedRating={selectedRating}
-                    setSelectedRating={setSelectedRating}
-                    maxPrice={maxPrice}
-                    setMaxPrice={setMaxPrice}
-                  />
-                </motion.div>
-              </>
-            )}
-          </AnimatePresence>
+          {/* Sidebar Filters */}
+          <div className="w-full lg:w-72 flex-shrink-0 space-y-8">
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+              <div className="flex items-center gap-2 mb-6">
+                <Filter className="w-5 h-5 text-gray-900" />
+                <h2 className="font-bold text-lg text-gray-900">Filters</h2>
+              </div>
 
-          {/* Sidebar Filters (Desktop Only) */}
-          <div className="hidden lg:block w-72 flex-shrink-0">
-             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 sticky top-28">
-               <div className="flex items-center gap-2 mb-6">
-                 <Filter className="w-5 h-5 text-gray-900" />
-                 <h2 className="font-bold text-lg text-gray-900">Filters</h2>
-               </div>
-               <FiltersSection 
-                propCategories={propCategories} 
-                allProducts={allProducts} 
-                selectedCategory={selectedCategory} 
-                setSelectedCategory={setSelectedCategory}
-                selectedBrand={selectedBrand}
-                setSelectedBrand={setSelectedBrand}
-                selectedRating={selectedRating}
-                setSelectedRating={setSelectedRating}
-                maxPrice={maxPrice}
-                setMaxPrice={setMaxPrice}
-              />
-             </div>
+              {/* Price Range */}
+              <div className="mb-8">
+                <h3 className="font-semibold text-gray-900 mb-4 flex justify-between">
+                  <span>Price Range</span>
+                  <span className="text-[#e31c3d]">Up to ₹{maxPrice.toLocaleString('en-IN')}</span>
+                </h3>
+                <input 
+                  type="range" 
+                  min="0" 
+                  max="50000" 
+                  step="500"
+                  value={maxPrice} 
+                  onChange={(e) => setMaxPrice(parseInt(e.target.value))}
+                  className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#e31c3d]"
+                />
+                <div className="flex justify-between text-[10px] font-bold text-gray-400 mt-2 uppercase tracking-wider">
+                  <span>₹0</span>
+                  <span>₹50,000</span>
+                </div>
+              </div>
+
+              {/* Categories */}
+              <div className="mb-8">
+                <h3 className="font-semibold text-gray-900 mb-4">Category</h3>
+                <div className="space-y-3">
+                  {propCategories.length > 0 ? (
+                    propCategories.map((cat, idx) => {
+                      const name = cat.name || cat.title;
+                      const count = allProducts.filter(p => p.category === name).length;
+                      return (
+                        <label 
+                          key={cat.id || idx} 
+                          className="flex items-center justify-between cursor-pointer group"
+                          onClick={() => setSelectedCategory(selectedCategory === name ? null : name)}
+                        >
+                          <span className={`transition-colors ${selectedCategory === name ? 'text-[#e31c3d] font-bold' : 'text-gray-600 group-hover:text-[#e31c3d]'}`}>{name}</span>
+                          <span className="text-gray-400 text-sm bg-gray-50 px-2 py-0.5 rounded-full">{count}</span>
+                        </label>
+                      );
+                    })
+                  ) : (
+                    <p className="text-xs text-gray-400 italic">No categories found</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Brands */}
+              <div className="mb-8">
+                <h3 className="font-semibold text-gray-900 mb-4">Brands</h3>
+                <div className="space-y-3">
+                  {(() => {
+                    const brands = Array.from(new Set(allProducts.map(p => p.brand || 'Echokart')));
+                    return brands.length > 0 ? (
+                      brands.map((brand, idx) => {
+                        const count = allProducts.filter(p => (p.brand || 'Echokart') === brand).length;
+                        return (
+                          <label 
+                            key={idx} 
+                            className="flex items-center justify-between cursor-pointer group"
+                            onClick={() => setSelectedBrand(selectedBrand === brand ? null : brand)}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${selectedBrand === brand ? 'border-[#e31c3d] bg-red-50' : 'border-gray-300 group-hover:border-[#e31c3d]'}`}>
+                                {selectedBrand === brand && <Check className="w-3.5 h-3.5 text-[#e31c3d]" />}
+                              </div>
+                              <span className={`transition-colors ${selectedBrand === brand ? 'text-[#e31c3d] font-bold' : 'text-gray-600 group-hover:text-[#e31c3d]'}`}>{brand}</span>
+                            </div>
+                            <span className="text-gray-400 text-sm bg-gray-50 px-2 py-0.5 rounded-full">{count}</span>
+                          </label>
+                        );
+                      })
+                    ) : (
+                      <p className="text-xs text-gray-400 italic">No brands found</p>
+                    );
+                  })()}
+                </div>
+              </div>
+
+              {/* Ratings */}
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-4">Ratings</h3>
+                <div className="space-y-3">
+                  {[5, 4, 3, 2, 1].map((stars) => {
+                    const count = allProducts.filter(p => Math.floor(Number(p.rating || 0)) >= stars).length;
+                    return (
+                      <label 
+                        key={stars} 
+                        className="flex items-center justify-between cursor-pointer group"
+                        onClick={() => setSelectedRating(selectedRating === stars ? null : stars)}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${selectedRating === stars ? 'border-[#e31c3d] bg-red-50' : 'border-gray-300 group-hover:border-[#e31c3d]'}`}>
+                            {selectedRating === stars && <Check className="w-3.5 h-3.5 text-[#e31c3d]" />}
+                          </div>
+                          <div className="flex gap-0.5">
+                            {[...Array(5)].map((_, i) => (
+                              <Star 
+                                key={i} 
+                                className={`w-3.5 h-3.5 ${i < stars ? 'fill-[#ff9c1a] text-[#ff9c1a]' : 'fill-gray-200 text-gray-200'}`} 
+                              />
+                            ))}
+                          </div>
+                        </div>
+                        <span className="text-gray-400 text-sm bg-gray-50 px-2 py-0.5 rounded-full">{count}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Main Content */}
           <div className="flex-1">
             {/* Top Bar */}
-            <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 mb-6 sm:mb-8">
-              <div className="flex flex-col md:flex-row gap-4 md:items-center justify-between">
+            <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 mb-8">
+              <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
                 
-                <div className="flex items-center justify-between w-full md:w-auto">
-                   <button 
-                     onClick={() => setIsFilterOpen(true)}
-                     className="lg:hidden flex items-center gap-2 px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold text-gray-900"
-                   >
-                     <Filter size={16} /> Filters
-                   </button>
-                   <span className="md:hidden text-gray-400 text-xs font-medium">{filteredProducts.length} results</span>
-                </div>
                 {/* Category Name / Search Result */}
                 <div className="flex flex-col">
                   {searchQuery ? (
@@ -337,37 +386,42 @@ export const CategoryProductsPage = ({
                 </span>
 
                 {/* Actions */}
-                <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-6 w-full md:w-auto">
-                  <div className="flex items-center gap-2 sm:gap-3">
-                    <span className="text-gray-500 text-[10px] sm:text-sm uppercase font-bold tracking-tight">Sort:</span>
-                    <select 
-                      value={sortBy}
-                      onChange={(e) => setSortBy(e.target.value)}
-                      className="bg-gray-50 border-none rounded-lg text-xs font-bold text-gray-900 py-1.5 pl-2 pr-8 focus:ring-0 cursor-pointer"
-                    >
-                      <option value="popular">Popular</option>
-                      <option value="top-rated">Top Rated</option>
-                      <option value="newest">Newest</option>
-                      <option value="price">Price</option>
-                    </select>
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-3">
+                    <span className="text-gray-500 text-sm">Sort by:</span>
+                    <div className="flex bg-gray-50 p-1 rounded-lg">
+                      {['Top Rated', 'Popular', 'Newest', 'Price'].map((opt) => (
+                        <button
+                          key={opt}
+                          onClick={() => setSortBy(opt.toLowerCase().replace(' ', '-'))}
+                          className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+                            sortBy === opt.toLowerCase().replace(' ', '-') 
+                              ? 'bg-white text-[#e31c3d] shadow-sm' 
+                              : 'text-gray-500 hover:text-gray-900'
+                          }`}
+                        >
+                          {opt}
+                        </button>
+                      ))}
+                    </div>
                   </div>
 
                   <div className="flex bg-gray-50 p-1 rounded-lg">
                     <button 
                       onClick={() => setViewMode('grid')}
-                      className={`p-1.5 sm:p-2 rounded-md transition-all ${
+                      className={`p-2 rounded-md transition-all ${
                         viewMode === 'grid' ? 'bg-white text-[#e31c3d] shadow-sm' : 'text-gray-400 hover:text-gray-600'
                       }`}
                     >
-                      <LayoutGrid className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <LayoutGrid className="w-5 h-5" />
                     </button>
                     <button 
                       onClick={() => setViewMode('list')}
-                      className={`p-1.5 sm:p-2 rounded-md transition-all ${
+                      className={`p-2 rounded-md transition-all ${
                         viewMode === 'list' ? 'bg-white text-[#e31c3d] shadow-sm' : 'text-gray-400 hover:text-gray-600'
                       }`}
                     >
-                      <ListIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <ListIcon className="w-5 h-5" />
                     </button>
                   </div>
                 </div>
@@ -411,118 +465,4 @@ export const CategoryProductsPage = ({
     </div>
   );
 };
-
-const FiltersSection = ({ 
-  propCategories, 
-  allProducts, 
-  selectedCategory, 
-  setSelectedCategory,
-  selectedBrand,
-  setSelectedBrand,
-  selectedRating,
-  setSelectedRating,
-  maxPrice,
-  setMaxPrice
-}: any) => (
-  <div className="space-y-8">
-    {/* Price Range */}
-    <div className="mb-8">
-      <h3 className="font-bold text-gray-900 mb-4 flex justify-between text-sm uppercase tracking-wider">
-        <span>Price Range</span>
-        <span className="text-[#e31c3d]">₹{maxPrice.toLocaleString()}</span>
-      </h3>
-      <input 
-        type="range" 
-        min="0" 
-        max="50000" 
-        step="500"
-        value={maxPrice} 
-        onChange={(e) => setMaxPrice(parseInt(e.target.value))}
-        className="w-full h-1.5 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-[#e31c3d]"
-      />
-      <div className="flex justify-between text-[10px] font-bold text-gray-400 mt-2 uppercase tracking-widest">
-        <span>₹0</span>
-        <span>₹50K</span>
-      </div>
-    </div>
-
-    {/* Categories */}
-    <div className="mb-8">
-      <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Category</h3>
-      <div className="space-y-3">
-        {propCategories.map((cat: any, idx: number) => {
-          const name = cat.name || cat.title;
-          const count = allProducts.filter((p: any) => p.category === name).length;
-          return (
-            <label 
-              key={cat.id || idx} 
-              className="flex items-center justify-between cursor-pointer group"
-              onClick={() => setSelectedCategory(selectedCategory === name ? null : name)}
-            >
-              <span className={`text-sm transition-colors ${selectedCategory === name ? 'text-[#e31c3d] font-bold' : 'text-gray-600 group-hover:text-[#e31c3d]'}`}>{name}</span>
-              <span className="text-gray-400 text-[10px] font-bold bg-gray-50 px-2 py-0.5 rounded-full">{count}</span>
-            </label>
-          );
-        })}
-      </div>
-    </div>
-
-    {/* Brands */}
-    <div className="mb-8">
-      <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Brands</h3>
-      <div className="space-y-3">
-        {Array.from(new Set(allProducts.map((p: any) => p.brand || 'Echokart'))).map((brand: any, idx: number) => {
-          const count = allProducts.filter((p: any) => (p.brand || 'Echokart') === brand).length;
-          return (
-            <label 
-              key={idx} 
-              className="flex items-center justify-between cursor-pointer group"
-              onClick={() => setSelectedBrand(selectedBrand === brand ? null : brand)}
-            >
-              <div className="flex items-center gap-3">
-                <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${selectedBrand === brand ? 'border-[#e31c3d] bg-red-50' : 'border-gray-300 group-hover:border-[#e31c3d]'}`}>
-                  {selectedBrand === brand && <Check className="w-3.5 h-3.5 text-[#e31c3d]" />}
-                </div>
-                <span className={`text-sm transition-colors ${selectedBrand === brand ? 'text-[#e31c3d] font-bold' : 'text-gray-600 group-hover:text-[#e31c3d]'}`}>{brand}</span>
-              </div>
-              <span className="text-gray-400 text-[10px] font-bold bg-gray-50 px-2 py-0.5 rounded-full">{count}</span>
-            </label>
-          );
-        })}
-      </div>
-    </div>
-
-    {/* Ratings */}
-    <div>
-      <h3 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Ratings</h3>
-      <div className="space-y-3">
-        {[5, 4, 3, 2, 1].map((stars) => {
-          const count = allProducts.filter((p: any) => Math.floor(Number(p.rating || 0)) >= stars).length;
-          return (
-            <label 
-              key={stars} 
-              className="flex items-center justify-between cursor-pointer group"
-              onClick={() => setSelectedRating(selectedRating === stars ? null : stars)}
-            >
-              <div className="flex items-center gap-3">
-                <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${selectedRating === stars ? 'border-[#e31c3d] bg-red-50' : 'border-gray-300 group-hover:border-[#e31c3d]'}`}>
-                  {selectedRating === stars && <Check className="w-3.5 h-3.5 text-[#e31c3d]" />}
-                </div>
-                <div className="flex gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star 
-                      key={i} 
-                      className={`w-3 h-3 ${i < stars ? 'fill-[#ff9c1a] text-[#ff9c1a]' : 'fill-gray-200 text-gray-200'}`} 
-                    />
-                  ))}
-                </div>
-              </div>
-              <span className="text-gray-400 text-[10px] font-bold bg-gray-50 px-2 py-0.5 rounded-full">{count}</span>
-            </label>
-          );
-        })}
-      </div>
-    </div>
-  </div>
-);
 

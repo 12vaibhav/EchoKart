@@ -16,14 +16,14 @@ export const VideoShowcase = ({ videos: propVideos, onNavigate }: { videos?: any
   return (
     <motion.section {...fadeInUpProps} className="py-20 bg-black text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-10 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-3 sm:mb-4 tracking-tight uppercase tracking-widest">Trending</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base px-4">Experience our viral sensations in action. Tap to explore.</p>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">Trending on Socials</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">Watch our top trending products in action. Experience the viral sensations before you buy.</p>
         </div>
         
-        <div className="flex sm:grid sm:grid-cols-3 gap-4 sm:gap-6 overflow-x-auto sm:overflow-visible pb-6 sm:pb-0 px-2 sm:px-0 hide-scrollbar snap-x snap-mandatory">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {displayVideos.map((video: any) => (
-            <div key={video.id} className="relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-[9/16] shadow-2xl group border border-gray-800 bg-gray-900 min-w-[260px] sm:min-w-0 snap-center">
+            <div key={video.id} className="relative rounded-3xl overflow-hidden aspect-[9/16] shadow-2xl group border border-gray-800 bg-gray-900">
               <video
                 className="w-full h-full object-cover"
                 autoPlay

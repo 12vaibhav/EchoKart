@@ -26,7 +26,7 @@ export const ProductCard = ({ product, onNavigate, onQuickView, className }: { k
   return (
     <div 
       onClick={() => onNavigate('product', product.id)} 
-      className={`bg-white rounded-[1.5rem] sm:rounded-[2.rem] p-3 sm:p-5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-slate-100 group hover:shadow-[0_24px_48px_rgba(0,0,0,0.1)] transition-all duration-500 flex flex-col cursor-pointer h-full relative overflow-hidden ${className || 'min-w-[170px] sm:min-w-[280px] md:min-w-[320px]'}`}
+      className={`bg-white rounded-[2rem] p-5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-slate-100 group hover:shadow-[0_24px_48px_rgba(0,0,0,0.1)] transition-all duration-500 flex flex-col cursor-pointer h-full relative overflow-hidden ${className || 'min-w-[280px] md:min-w-[320px]'}`}
     >
       <div className="relative aspect-square mb-6 bg-[#f8f9fb] rounded-2xl overflow-hidden group/img">
         <button 
@@ -37,23 +37,23 @@ export const ProductCard = ({ product, onNavigate, onQuickView, className }: { k
         </button>
 
         {/* Product Tags/Badges */}
-        <div className="absolute top-2 left-2 sm:top-4 sm:left-4 flex flex-col gap-1.5 sm:gap-2 z-20">
+        <div className="absolute top-4 left-4 flex flex-col gap-2 z-20">
           {(product.badges || product.tags) ? (
             <>
               {product.badges && product.badges.map((badge: any, i: number) => (
-                <span key={i} className={`bg-black text-white text-[8px] sm:text-[9px] font-black uppercase tracking-wider px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg shadow-lg`}>
+                <span key={i} className={`bg-black text-white text-[9px] font-black uppercase tracking-wider px-3 py-1.5 rounded-lg shadow-lg`}>
                   {badge.text}
                 </span>
               ))}
               {product.tags && product.tags.map((tag: string, i: number) => (
-                <span key={`tag-${i}`} className="bg-[#e31c3d] text-white text-[8px] sm:text-[9px] font-black uppercase tracking-wider px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg shadow-lg">
+                <span key={`tag-${i}`} className="bg-[#e31c3d] text-white text-[9px] font-black uppercase tracking-wider px-3 py-1.5 rounded-lg shadow-lg">
                   {tag}
                 </span>
               ))}
             </>
           ) : (
             product.sale && (
-               <span className="bg-[#e31c3d] text-white text-[8px] sm:text-[9px] font-black uppercase tracking-wider px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg shadow-lg">Sale</span>
+               <span className="bg-[#e31c3d] text-white text-[9px] font-black uppercase tracking-wider px-3 py-1.5 rounded-lg shadow-lg">Sale</span>
             )
           )}
         </div>
@@ -77,17 +77,17 @@ export const ProductCard = ({ product, onNavigate, onQuickView, className }: { k
       </div>
       
       <div className="flex flex-col flex-1">
-        <h3 className="font-black text-slate-900 text-base sm:text-lg mb-1 sm:mb-2 line-clamp-1 group-hover:text-[#e31c3d] transition-colors">
+        <h3 className="font-black text-slate-900 text-lg mb-2 line-clamp-1 group-hover:text-[#e31c3d] transition-colors">
           {product.title || product.name || 'Product'}
         </h3>
         
-        <div className="flex items-center justify-between mb-3 sm:mb-4">
+        <div className="flex items-center justify-between mb-4">
           <div className="flex flex-col">
-            <span className="text-[#e31c3d] font-black text-lg sm:text-xl">
+            <span className="text-[#e31c3d] font-black text-xl">
               ₹{itemPrice.toLocaleString('en-IN')}
             </span>
             {itemOldPrice && (
-              <span className="text-slate-400 text-[10px] sm:text-xs line-through font-medium">
+              <span className="text-slate-400 text-xs line-through font-medium">
                 ₹{itemOldPrice.toLocaleString('en-IN')}
               </span>
             )}
@@ -101,10 +101,10 @@ export const ProductCard = ({ product, onNavigate, onQuickView, className }: { k
           </div>
         </div>
 
-        <div className="mt-auto pt-3 sm:pt-4 border-t border-slate-50 flex gap-2 sm:gap-3">
+        <div className="mt-auto pt-4 border-t border-slate-50 flex gap-3">
           <button 
             onClick={handleBuyNow}
-            className="flex-1 bg-slate-900 text-white font-black py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl text-[10px] sm:text-[11px] uppercase tracking-widest hover:bg-[#e31c3d] transition-all shadow-lg active:scale-95"
+            className="flex-1 bg-slate-900 text-white font-black py-3.5 rounded-xl text-[11px] uppercase tracking-widest hover:bg-[#e31c3d] transition-all shadow-lg active:scale-95"
           >
             Buy Now
           </button>
