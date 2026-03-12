@@ -11,7 +11,6 @@ import { VideoShowcase } from './components/VideoShowcase';
 import { CustomerReviews } from './components/CustomerReviews';
 import { WhyChooseUs } from './components/WhyChooseUs';
 import { FAQSection } from './components/FAQSection';
-import { useNavigate } from './hooks/useNavigate';
 import { supabase } from './lib/supabase';
 import { HomePage } from './pages/HomePage';
 import { CategoryPage } from './pages/CategoryPage';
@@ -159,8 +158,30 @@ import { OrderDetailsPage } from './pages/dashboard/OrderDetailsPage';
 import { OrderConfirmationPage } from './pages/OrderConfirmationPage';
 import { AdminProfilePage } from './pages/AdminProfilePage';
 
+// Helper to sync route with URL
+const getRouteFromUrl = () => {
+  const path = window.location.pathname;
+  const searchParams = new URLSearchParams(window.location.search);
+  
+  if (path === '/' || path === '') return { path: 'home', id: null, categoryName: null, searchQuery: null };
+  
+  // Dashboard routes usually start with /dashboard
+  if (path.startsWith('/dashboard')) {
+    const id = searchParams.get('id');
+    return { path, id, categoryName: null, searchQuery: null };
+  }
+  
+  const cleanPath = path.replace('/', '');
+  return { 
+    path: cleanPath, 
+    id: searchParams.get('id'), 
+    categoryName: searchParams.get('category'), 
+    searchQuery: searchParams.get('q') 
+  };
+};
+
 export default function App() {
-  const [route, setRoute] = useState<{ path: string, id?: any, categoryName?: string | null, searchQuery?: string | null }>({ path: 'home', id: null, categoryName: null, searchQuery: null });
+  const [route, setRoute] = useState(getRouteFromUrl());
 
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
@@ -277,6 +298,15 @@ export default function App() {
     };
   }, []);
 
+  // Sync state with browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = () => {
+      setRoute(getRouteFromUrl());
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   const [customizations, setCustomizations] = useState(() => {
     const parse = (key: string) => {
       const val = localStorage.getItem(key);
@@ -317,6 +347,20 @@ export default function App() {
   }, []);
 
   const navigate = (path: string, id?: any, categoryName?: string | null, searchQuery?: string | null) => {
+    // Generate URL
+    let url = path === 'home' ? '/' : (path.startsWith('/') ? path : `/${path}`);
+    const params = new URLSearchParams();
+    if (id) params.set('id', id);
+    if (categoryName) params.set('category', categoryName);
+    if (searchQuery) params.set('q', searchQuery);
+    
+    const queryString = params.toString();
+    if (queryString) url += `?${queryString}`;
+    
+    // Update browser URL
+    window.history.pushState({}, '', url);
+    
+    // Update state
     setRoute({ path, id: id ?? null, categoryName: categoryName ?? null, searchQuery: searchQuery ?? null });
     window.scrollTo(0, 0);
   };
