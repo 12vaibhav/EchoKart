@@ -106,12 +106,6 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                   <span className="absolute -bottom-1.5 left-0 w-0 h-[2px] bg-[#e31c3d] shadow-[0_0_15px_#e31c3d] transition-all duration-300 group-hover:w-full" />
                 </button>
               ))}
-              <button
-                onClick={() => onNavigate('/dashboard')}
-                className="px-5 lg:px-6 py-2 border-2 border-white/20 hover:border-white text-white rounded-full text-[10px] lg:text-[11px] font-medium tracking-widest uppercase hover:bg-[#e31c3d] hover:text-white transition-all duration-300 shadow-lg whitespace-nowrap"
-              >
-                Admin
-              </button>
             </nav>
 
             {/* 3. Actions Section (Search & Icons) */}
@@ -344,15 +338,6 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                     {item}
                   </motion.button>
                 ))}
-                <motion.button
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 }}
-                  onClick={() => { onNavigate('/dashboard'); setIsMobileMenuOpen(false); }}
-                  className="text-left text-[#e31c3d] font-bold"
-                >
-                  Admin Panel
-                </motion.button>
               </div>
 
               <div className="mt-auto pt-12 border-t border-white/10">
