@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e31c3d",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211114",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .category-card:hover .overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .category-card:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex min-h-screen flex-col">
+<!-- Header -->
+<header class="sticky top-0 z-50 flex items-center justify-between bg-black px-6 py-4 md:px-16 lg:px-40 border-b border-slate-800">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="size-6 text-primary">
+<span class="material-symbols-outlined text-3xl">rocket_launch</span>
+</div>
+<h2 class="text-white text-2xl font-black leading-tight tracking-tight lowercase">echokart</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-white/80 hover:text-primary text-sm font-medium transition-colors" href="#">Home</a>
+<a class="text-white/80 hover:text-primary text-sm font-medium transition-colors" href="#">Deals</a>
+<a class="text-white/80 hover:text-primary text-sm font-medium transition-colors" href="#">Orders</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden lg:flex items-center bg-slate-900 rounded-lg px-3 py-1.5 w-64 border border-slate-800">
+<span class="material-symbols-outlined text-slate-400 text-xl">search</span>
+<input class="bg-transparent border-none text-white focus:ring-0 placeholder:text-slate-500 text-sm w-full" placeholder="Search products..." type="text"/>
+</label>
+<div class="flex items-center gap-4">
+<button class="text-white hover:text-primary transition-colors flex items-center">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="text-white hover:text-primary transition-colors flex items-center">
+<span class="material-symbols-outlined">person</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-slate-700">
+<img class="h-full w-full object-cover" data-alt="User profile avatar smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIOMkwcSGFNeSullviAXKrKe4EgXSUCjLsw-1y11vnqMJjuWxbE83QTOTMRdyaGlv3ezre-hPDrLhdBy_VLDLAMmdccTg4XcFSRt9w_TpKuP8SGTVGTYi4d0rqUSd-t3NY0RnwVel3TieNeA4XhftyU75_esxb0K2us0aSZ_qobkey4zep2igY4ybp7WsaqeThGU16pcctpTSpBJt6xIQ4LM_ojn6TIoJgHJhom3ieHaLd4nU0kdCMSyKz6iYeSotzZuTwVniZ4mTe"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 px-6 py-8 md:px-16 lg:px-40">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 mb-8 text-sm text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-slate-900 dark:text-slate-100 font-medium">Categories</span>
+</nav>
+<!-- Page Title -->
+<div class="mb-10">
+<h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">Shop by category</h1>
+<p class="mt-2 text-slate-600 dark:text-slate-400 max-w-2xl">Discover our curated selection of premium products across top categories. Quality guaranteed from worldwide brands.</p>
+</div>
+<!-- Categories Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Electronics -->
+<a class="category-card group relative block overflow-hidden rounded-xl bg-slate-200 aspect-square" href="#">
+<img class="h-full w-full object-cover transition-transform duration-500" data-alt="Modern high-end electronic gadgets on a desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLlu37cl-0vh7QWj-XL9AT3bXZx_RdmjgkO_SjPiKHZcA5lQmJRyS8Z852LxH9f0y1cufY2eY_7G8XEetyjseeBDyjxboA7nkXR_0thv1pH7ZimhaHQGt2-69zV_LmQUQAZgmaM-zYmQ7v3V8uzUPF66wH3fk1esRNEutQ7OTMzvt7A0gcr29hPip8F56NynPtiNseS424SNrVCIgHFaE4eqaFAWUYYOom9mcXwUk2mEpkLNDLYiFuX7cWVtMe0HlXKiCQXY1kJjnt"/>
+<div class="overlay absolute inset-0 bg-black/30 transition-colors duration-300"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<h3 class="text-xl font-bold text-white mb-1">Electronics</h3>
+<p class="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Explore gadgets &amp; tech</p>
+</div>
+<div class="absolute top-4 right-4">
+<span class="material-symbols-outlined text-white bg-primary rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">arrow_forward</span>
+</div>
+</a>
+<!-- Fashion -->
+<a class="category-card group relative block overflow-hidden rounded-xl bg-slate-200 aspect-square" href="#">
+<img class="h-full w-full object-cover transition-transform duration-500" data-alt="Stylish clothes hanging on a minimalist rack" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbSf6e9dQouYUOUaxaplgD4JDUed8iTGSckWSMulrons2vrQ_x4xsMlBiLh3JkCdyexYcxKmZtUCObwNhRExacnBJCC24znjzogcFyA651HIH7UYKf3PJLRKyDWOb0b79IgQmjPwyLNLki-gBaVEfXxK9Y6Hca93gwR5Lm2RAUdNztyWPwgjgX5YIpNO_L8gU9BPisERfLJFQS3BVAM1nm9ZXE0ZbB7GXx6X_p50DWcD4SRupL3dClnbL07zfxJIHjG3MzmZZT2nKK"/>
+<div class="overlay absolute inset-0 bg-black/30 transition-colors duration-300"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<h3 class="text-xl font-bold text-white mb-1">Fashion</h3>
+<p class="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">New season collections</p>
+</div>
+<div class="absolute top-4 right-4">
+<span class="material-symbols-outlined text-white bg-primary rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">arrow_forward</span>
+</div>
+</a>
+<!-- Home Decor -->
+<a class="category-card group relative block overflow-hidden rounded-xl bg-slate-200 aspect-square" href="#">
+<img class="h-full w-full object-cover transition-transform duration-500" data-alt="Minimalist living room with aesthetic decor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYiNqRw3lPox8lMCsGtKVv5CdYB3EAwEimGhr8caG0gJtKZbMaFh7jfJvP-PBV5wsVmPmFhU8I_IMpuVaJWzh9lPETIVtvi-R3GsGYybYPDRpJ5kkd0Nj8ll_TNWPR1pF4dqbLsvtfjC-0snqknS0iTfR_btSFTAlbLJ9tdOWtAvJLLWfZ6saWuwtRsek3GAblTP6zT8A-ZEHhUtpYSw4fac-p9LcRBwVgQqTyKeZNYQFDlb3dyyCBoy_AbMVHg8ExUOHU8-5v94RW"/>
+<div class="overlay absolute inset-0 bg-black/30 transition-colors duration-300"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<h3 class="text-xl font-bold text-white mb-1">Home Decor</h3>
+<p class="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Elevate your living space</p>
+</div>
+<div class="absolute top-4 right-4">
+<span class="material-symbols-outlined text-white bg-primary rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">arrow_forward</span>
+</div>
+</a>
+<!-- Accessories -->
+<a class="category-card group relative block overflow-hidden rounded-xl bg-slate-200 aspect-square" href="#">
+<img class="h-full w-full object-cover transition-transform duration-500" data-alt="Luxury wrist watch and sunglasses flatlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbnRPwgH5qwbYuqHXW6c29SBQc_bqVXhCOzrzOqVtpr0dbPTR2phrN6MCQLV8WjilUIHLR3YV7RFUmjcAAyqDyRFgBr0yaWs4AXO0W7QpzAbPIPiMLN2oA7ZjG2ihbpiRKisGveMwP6lAPbVS85xzEkhoPG7Kkoom3COok79XJT-_CNck605zxI1S1kKFmyBzOEazaCVc8fcYMBJzoU3VYrkhoO8pv1UgrHrUj3sWDUAlFJFa9mzVN1TvuIpL2WZAvG5GqMsdW4POt"/>
+<div class="overlay absolute inset-0 bg-black/30 transition-colors duration-300"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<h3 class="text-xl font-bold text-white mb-1">Accessories</h3>
+<p class="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">The perfect finishing touch</p>
+</div>
+<div class="absolute top-4 right-4">
+<span class="material-symbols-outlined text-white bg-primary rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">arrow_forward</span>
+</div>
+</a>
+<!-- Footwear -->
+<a class="category-card group relative block overflow-hidden rounded-xl bg-slate-200 aspect-square" href="#">
+<img class="h-full w-full object-cover transition-transform duration-500" data-alt="Close up of modern stylish sneakers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRePhXDjktgjFx-IlkCpOEYSPthm7SAmBl6Ykp_aYSm3S6pfkvyuL2E2YSm5SZVd5vxrskp9tqx3Gsz6EsO6CJwuPP2m8E9PLR98okY8YzkpX1pYOM5eUEt_WT4jHUalDToY9gdkDjyUZHQGETTc4dfo0aySkrdvLV9keHvHYdswsZ70dT7n58kNj4CuKiavua8raGj8VLh-uuDhnT4INTrAuSZiTmiLpEVF-0Q_VqZReZNdauBmO5yH3cHNexI9ifY_vpOvGBDRow"/>
+<div class="overlay absolute inset-0 bg-black/30 transition-colors duration-300"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<h3 class="text-xl font-bold text-white mb-1">Footwear</h3>
+<p class="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Step out in style</p>
+</div>
+<div class="absolute top-4 right-4">
+<span class="material-symbols-outlined text-white bg-primary rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">arrow_forward</span>
+</div>
+</a>
+<!-- Beauty -->
+<a class="category-card group relative block overflow-hidden rounded-xl bg-slate-200 aspect-square" href="#">
+<img class="h-full w-full object-cover transition-transform duration-500" data-alt="Various high-end skincare and beauty products" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0QcY_H2xit3ZDg9Uze81a6WyV6TLM_M5JAsCH4BvH_PBSGZgnHJ2CLzOyR2sb6wZHLaweV1ZJTHwFWkwb5SYu_Gl8QWOFUG5kPR3cZKu9tc1yhxoLyy_60J6ks5XIyF4uW_DRcGAHF-p-PUjh0MEP4D8oxX3Mpxawb0zk8AFkCSg1kVVFcol2zN99HJlTFOp4Rs85G4Am1FG-DgeyN-apYxUSS1qjqpPaGX29aV0r_Zjf3cT39DmlnQaIjn8yzSrvDmvfpAcw0rgo"/>
+<div class="overlay absolute inset-0 bg-black/30 transition-colors duration-300"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<h3 class="text-xl font-bold text-white mb-1">Beauty</h3>
+<p class="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Skin &amp; health care</p>
+</div>
+<div class="absolute top-4 right-4">
+<span class="material-symbols-outlined text-white bg-primary rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">arrow_forward</span>
+</div>
+</a>
+<!-- Sports -->
+<a class="category-card group relative block overflow-hidden rounded-xl bg-slate-200 aspect-square" href="#">
+<img class="h-full w-full object-cover transition-transform duration-500" data-alt="Dumbbells and gym equipment in a workout space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3miI0fyF-KVa5N5582qPxRhJpulYRUWSE42ZzMCwGk1OOu68UEdJRph1slDgc3fkn1Inu8o2CoM4blhZOBOsyDidAlk1Un0DRUwJhqmh56ZSO96LaPXd7FSsMDt3mnXjsJUjMU9qzw1LrFvVgn9Hv2f6T4p8sbXKLZbHbOTxY2HXkMv_D5D6Ll-gMx48bwbgvtOg5C2fI9lK3agaSjkcdytzq4hGVRv95Tu3k4FUOB8jdCwwZigukRGeyzOjrLKq9R7MC-gVTtXet"/>
+<div class="overlay absolute inset-0 bg-black/30 transition-colors duration-300"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<h3 class="text-xl font-bold text-white mb-1">Sports</h3>
+<p class="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Gear up for victory</p>
+</div>
+<div class="absolute top-4 right-4">
+<span class="material-symbols-outlined text-white bg-primary rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">arrow_forward</span>
+</div>
+</a>
+<!-- Kitchen -->
+<a class="category-card group relative block overflow-hidden rounded-xl bg-slate-200 aspect-square" href="#">
+<img class="h-full w-full object-cover transition-transform duration-500" data-alt="Modern kitchen tools and designer utensils" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOQ1Ju1ZhGsO6ujpMKeigWNrWwgpHbufP3zgVSgpFPlf0hYcL85i2DdD-XjXX2AQny7W5UxPble9IpkXtK9X4b4CN2nkO7hBs368Aa_WkJzQ2IaNx5kz9MHMWQTT7Aya5VNxgAGhdSZoeNW1vWUxg4b15bALK2CeW1UElSjB74Be-qzw1DEz9dJeFXo--g-is0lmmxqAbKvccmwq-mcUvYd8vh_jKA_aqcikqWp2fxe6sK4zDiNfdTrRBeqY5oMneGHSNkKuFYiG4l"/>
+<div class="overlay absolute inset-0 bg-black/30 transition-colors duration-300"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<h3 class="text-xl font-bold text-white mb-1">Kitchen</h3>
+<p class="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Cook like a professional</p>
+</div>
+<div class="absolute top-4 right-4">
+<span class="material-symbols-outlined text-white bg-primary rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">arrow_forward</span>
+</div>
+</a>
+</div>
+<!-- Promotion Banner -->
+<div class="mt-16 bg-primary rounded-2xl overflow-hidden flex flex-col md:flex-row items-center justify-between text-white shadow-xl shadow-primary/20">
+<div class="p-8 md:p-12 lg:w-1/2">
+<span class="bg-white/20 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Limited Offer</span>
+<h2 class="text-3xl md:text-4xl font-black mt-4 mb-4 leading-tight">Flash sale on all categories</h2>
+<p class="text-white/90 text-lg mb-8 leading-relaxed">Join our membership today and get up to 40% off on your first purchase across all categories.</p>
+<button class="bg-white text-primary font-bold px-8 py-3 rounded-lg hover:bg-slate-100 transition-all flex items-center gap-2">
+                        Shop Now <span class="material-symbols-outlined">trending_flat</span>
+</button>
+</div>
+<div class="hidden md:block w-1/2 h-[400px]">
+<img class="w-full h-full object-cover" data-alt="Fashion store interior with colorful displays" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkpOmq78e-rof0FY2Mfn-ZILy3t9cNivjA2ZOLe3xB3jQIx5cmq5zVGJQMfcEXQlS8cOnG9e1evwv0Hrv52k0Ef6QroLDlICwVCRg3lwfsCQ7ypbe9nL3UaklRSTXn0yu9LolysZIk7ofZPm590N6412_U6dDz3okrSqmGWgkTVrniNmoubxdwW_3cD37UlHuLXJlHJsWkOlCiAhtGujxjXakeGHg7HI326QasE7GkJoHo9o8NArDdmPA4CYz7acgbjJb86ELEEB0A"/>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-black text-white px-6 py-12 md:px-16 lg:px-40 mt-16">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-slate-800 pb-12">
+<div class="col-span-1 md:col-span-1">
+<h2 class="text-2xl font-black mb-6 lowercase">echokart</h2>
+<p class="text-slate-400 text-sm leading-relaxed">The ultimate destination for premium lifestyle products. Quality, style, and trust in every click.</p>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-6">Quick Links</h4>
+<ul class="space-y-4 text-slate-400 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Categories</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Flash Sales</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Gift Cards</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Store Locator</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-6">Support</h4>
+<ul class="space-y-4 text-slate-400 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Shipping Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Refunds &amp; Returns</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-6">Newsletter</h4>
+<p class="text-slate-400 text-sm mb-4">Stay updated with our latest drops.</p>
+<div class="flex gap-2">
+<input class="bg-slate-900 border-slate-800 rounded-lg text-sm px-4 py-2 w-full focus:ring-primary focus:border-primary" placeholder="Email address" type="email"/>
+<button class="bg-primary hover:bg-red-600 transition-colors px-4 py-2 rounded-lg">
+<span class="material-symbols-outlined text-base">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-xs gap-4">
+<p>© 2024 EchoKart. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-white transition-colors" href="#">Privacy</a>
+<a class="hover:text-white transition-colors" href="#">Cookie Policy</a>
+<a class="hover:text-white transition-colors" href="#">Accessibility</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

@@ -6,24 +6,24 @@ export const DashboardLayout = ({ children, currentPath, onNavigate }: { childre
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex font-sans">
+    <div className="h-screen flex overflow-hidden bg-slate-50 font-display selection:bg-[#e31c3d] selection:text-white">
       <Sidebar 
         isOpen={isSidebarOpen} 
         onClose={() => setIsSidebarOpen(false)} 
         currentPath={currentPath}
         onNavigate={(path) => {
           onNavigate(path);
-          setIsSidebarOpen(false); // Close on mobile navigation
+          setIsSidebarOpen(false);
         }}
       />
       
-      <div className="flex-1 flex flex-col lg:ml-64 min-w-0 transition-all duration-300">
-        <TopBar onMenuClick={() => setIsSidebarOpen(true)} />
+      <main className="flex-1 flex flex-col lg:ml-64 overflow-hidden">
+        <TopBar onMenuClick={() => setIsSidebarOpen(true)} onNavigate={onNavigate} />
         
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-hidden">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-8 custom-scrollbar">
           {children}
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 };

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Track Your Order | EchoKart</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e31c3d",
+                        "success": "#00c853",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211114",
+                        "brand-black": "#000000",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen w-full flex-col">
+<!-- Header -->
+<header class="sticky top-0 z-50 flex items-center justify-between bg-brand-black px-6 md:px-20 py-4 text-white">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
+<span class="material-symbols-outlined text-white text-2xl">shopping_cart_checkout</span>
+</div>
+<h2 class="text-xl font-black uppercase tracking-tighter">EchoKart</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8 text-sm font-semibold uppercase tracking-wider">
+<a class="hover:text-primary transition-colors" href="#">Shop</a>
+<a class="hover:text-primary transition-colors" href="#">Categories</a>
+<a class="hover:text-primary transition-colors" href="#">Deals</a>
+<a class="text-primary underline underline-offset-8" href="#">Track Order</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-all">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-all">
+<span class="material-symbols-outlined text-white">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-slate-200 overflow-hidden border-2 border-primary/20">
+<img class="h-full w-full object-cover" data-alt="User profile avatar smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-mndOTd-Ib5_3lM4-wNLOzV9ZYOvC9YkkOze6vWxeSEWk3TkODtsI04GCgGnf0U_FINUwQ2EJ8cMNnKa4VjfPAapwNCDeVyKxT1QNlFa1xfjR1Se34eybj0cc_SaPhU340lPrTFpQuS6k6G01Buk7TRnrp52A9QOyk9SytQMagQLhmfPNOHjBJJV33t3oMQk05pahaZPAmB1LZDjpUzcq2CfLCCYss1OL5M5UprRRq_I2AxaViNeBm_U_0Kax0bCjp3J2CcO_13sX"/>
+</div>
+</div>
+</header>
+<main class="mx-auto w-full max-w-6xl px-4 py-8 md:py-12">
+<!-- Order Header Info -->
+<div class="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+<div>
+<nav class="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500">
+<a href="#">Account</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a href="#">Orders</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary">Order #12345</span>
+</nav>
+<h1 class="text-4xl font-black tracking-tight md:text-5xl">Track Your Order</h1>
+<p class="mt-2 text-lg text-slate-600 dark:text-slate-400 font-medium">Order #12345 • Placed on Oct 24, 2023</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 rounded-lg border-2 border-slate-200 dark:border-slate-800 px-5 py-2.5 font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+<span class="material-symbols-outlined">receipt</span>
+                        Invoice
+                    </button>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+<!-- Left Column: Progress and Details -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Progress Card -->
+<div class="rounded-xl bg-white dark:bg-slate-900 p-8 shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="mb-10 flex items-center justify-between">
+<div>
+<h3 class="text-xl font-bold">Shipping Status</h3>
+<p class="text-slate-500">Arriving by Thursday, Oct 26</p>
+</div>
+<span class="rounded-full bg-primary/10 px-4 py-1.5 text-sm font-bold text-primary">IN TRANSIT</span>
+</div>
+<!-- Progress Bar Container -->
+<div class="relative mb-12">
+<!-- Background line -->
+<div class="absolute left-0 top-5 h-1 w-full bg-slate-100 dark:bg-slate-800"></div>
+<!-- Active line (Shipped stage) -->
+<div class="absolute left-0 top-5 h-1 w-1/3 bg-primary"></div>
+<div class="relative flex justify-between">
+<!-- Step 1: Confirmed -->
+<div class="flex flex-col items-center text-center">
+<div class="z-10 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white ring-4 ring-white dark:ring-slate-900">
+<span class="material-symbols-outlined text-xl">check</span>
+</div>
+<p class="mt-3 text-sm font-bold">Confirmed</p>
+<p class="text-[10px] text-slate-400">Oct 24, 10:30 AM</p>
+</div>
+<!-- Step 2: Shipped -->
+<div class="flex flex-col items-center text-center">
+<div class="z-10 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white ring-4 ring-white dark:ring-slate-900">
+<span class="material-symbols-outlined text-xl">local_shipping</span>
+</div>
+<p class="mt-3 text-sm font-bold">Shipped</p>
+<p class="text-[10px] text-slate-400">Oct 25, 02:15 PM</p>
+</div>
+<!-- Step 3: Out for Delivery -->
+<div class="flex flex-col items-center text-center">
+<div class="z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 ring-4 ring-white dark:ring-slate-900">
+<span class="material-symbols-outlined text-xl">home_pin</span>
+</div>
+<p class="mt-3 text-sm font-bold text-slate-400">Out for Delivery</p>
+<p class="text-[10px] text-slate-400">Pending</p>
+</div>
+<!-- Step 4: Delivered -->
+<div class="flex flex-col items-center text-center">
+<div class="z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 ring-4 ring-white dark:ring-slate-900">
+<span class="material-symbols-outlined text-xl">verified</span>
+</div>
+<p class="mt-3 text-sm font-bold text-slate-400">Delivered</p>
+<p class="text-[10px] text-slate-400">Pending</p>
+</div>
+</div>
+</div>
+<!-- Map Placeholder -->
+</div>
+<!-- Order Items -->
+<div class="rounded-xl bg-white dark:bg-slate-900 p-8 shadow-sm border border-slate-100 dark:border-slate-800">
+<h3 class="mb-6 text-xl font-bold">Order Items (3)</h3>
+<div class="space-y-6">
+<div class="flex items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-800">
+<div class="h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg bg-background-light">
+<img class="h-full w-full object-cover" data-alt="Premium Wireless Headphones in Matte Black" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC39yMn1QvtF64jS4hd7oI4VmPxKzUl1F7LTwslA_Aqc9MqFvjq37fFg5EV_JZM67zkfjD2bLSNzWXt152H_glB2OOe-nMWZ8PRvsYt7snz1dYjTHxDOaeVLGcMSZ0K3mEC6Z21Ih9xgbQNGD0_WbOFcHXISppsKI7iRuGzLRZ-au5bfFTxCeDwDPelULq7WPwO8LJUhMPIEwXez1_IuVhg8MeY0CmOCjmITrhNzxMcN-FIAIYEizxucpxp4O935gASOrKoFrL3_IWG"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold">EchoSonic Noise Cancelling Headphones</h4>
+<p class="text-sm text-slate-500">Matte Black | Qty: 1</p>
+</div>
+<div class="text-right font-black text-lg">$249.00</div>
+</div>
+<div class="flex items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-800">
+<div class="h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg bg-background-light">
+<img class="h-full w-full object-cover" data-alt="Sleek Minimalist Designer Watch" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzIh1JXydFC-2chzffmAAER6Lb-2agGWustp6RHULKqpTCO7xTJfFQefncwIE4ibIwkRa147eGsAv-UnMLXdNruOsmh6RZJT4-mg5hCw2ObKBxpk5ElslB_eRpC39hdpeVkAGN0BtFxc7w2WZYWgx5KnKHkN8D-elfTHL_4DZIdg8RxjsZ0RvZ1CPJdegOT4cb6t-T7B5_1UeFqeAhqntZmrKvbAFW8co-aIwC78AKoEy7WlvW84ALKEERM1Lp58eUs64LQES94bEu"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold">Minimalist Chronograph Series 4</h4>
+<p class="text-sm text-slate-500">Silver/Leather | Qty: 1</p>
+</div>
+<div class="text-right font-black text-lg">$185.00</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg bg-background-light">
+<img class="h-full w-full object-cover" data-alt="Sport performance running sneakers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_OywaLdwqn4DW3Oo_LXm-E48t2emLu3X3ZJRCsDspweVbwzV6OBjXzTt_Q6h3wDZUe-1-5AahWTlzZX_Rn1fBvY9wo2feMwZq6TOfDXouNtG9lgB25y-IE26wCmYKnWwaZoIiYvaKJsG7vqbyW7_xLvNbSnyDyYspjRTkBjImzxRsRq159s9GOcbAded3esT4B_aXEsRbADVEaw9Z4m0MegRSwWIqkHq62O_2Z3BVvE-oSxgX9a59h_jyyBh2yzh1aYvqWELSIKDY"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold">AeroGlide Performance Runners</h4>
+<p class="text-sm text-slate-500">Racing Red | Qty: 1</p>
+</div>
+<div class="text-right font-black text-lg">$120.00</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Shipping Details Summary -->
+<div class="space-y-8">
+<!-- Delivery Info -->
+<div class="rounded-xl bg-white dark:bg-slate-900 p-6 shadow-sm border border-slate-100 dark:border-slate-800">
+<h3 class="mb-6 text-lg font-bold border-b border-slate-100 dark:border-slate-800 pb-2">Shipping Details</h3>
+<div class="space-y-6">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<div>
+<p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Shipping Address</p>
+<p class="mt-1 font-bold">John Doe</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">123 Fifth Avenue, Suite 400<br/>New York, NY 10003<br/>United States</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+<div>
+<p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Shipping Method</p>
+<p class="mt-1 font-bold">EchoExpress Overnight</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">Tracking: EK-4920194021</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Summary Card -->
+<div class="rounded-xl bg-brand-black p-6 text-white shadow-xl shadow-brand-black/20">
+<h3 class="mb-6 text-lg font-bold border-b border-white/10 pb-2">Order Summary</h3>
+<div class="space-y-4">
+<div class="flex justify-between text-sm">
+<span class="text-slate-400">Subtotal</span>
+<span>$554.00</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-400">Shipping</span>
+<span class="text-success font-bold">FREE</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-400">Tax</span>
+<span>$44.32</span>
+</div>
+<div class="my-4 border-t border-white/10 pt-4 flex justify-between">
+<span class="text-lg font-bold">Total</span>
+<span class="text-2xl font-black text-primary">$598.32</span>
+</div>
+</div>
+</div>
+<!-- Support Card -->
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-auto bg-brand-black py-12 text-white">
+<div class="mx-auto max-w-6xl px-4 grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-3 mb-6">
+<div class="flex h-8 w-8 items-center justify-center rounded bg-primary">
+<span class="material-symbols-outlined text-white text-lg">shopping_cart_checkout</span>
+</div>
+<h2 class="text-lg font-black uppercase tracking-tighter">EchoKart</h2>
+</div>
+<p class="text-sm text-slate-400 leading-relaxed">Redefining the shopping experience with curated collections and lightning fast delivery worldwide.</p>
+</div>
+<div>
+<h4 class="mb-6 text-xs font-black uppercase tracking-widest text-primary">Shop</h4>
+<ul class="space-y-4 text-sm text-slate-400 font-medium">
+<li><a class="hover:text-white transition-colors" href="#">New Arrivals</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Best Sellers</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Electronics</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Lifestyle</a></li>
+</ul>
+</div>
+<div>
+<h4 class="mb-6 text-xs font-black uppercase tracking-widest text-primary">Support</h4>
+<ul class="space-y-4 text-sm text-slate-400 font-medium">
+<li><a class="hover:text-white transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Shipping Info</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Returns &amp; Refunds</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="mb-6 text-xs font-black uppercase tracking-widest text-primary">Newsletter</h4>
+<p class="mb-4 text-xs text-slate-400 uppercase font-bold">Stay updated with fresh drops</p>
+<div class="flex overflow-hidden rounded-lg bg-white/10 border border-white/5">
+<input class="w-full bg-transparent border-none px-4 text-sm focus:ring-0" placeholder="Email address" type="email"/>
+<button class="bg-primary px-4 py-3 hover:brightness-110 transition-all">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="mx-auto max-w-6xl px-4 mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500 font-bold uppercase tracking-widest">
+<p>© 2023 EchoKart Inc. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="hover:text-white transition-colors" href="#">Privacy</a>
+<a class="hover:text-white transition-colors" href="#">Terms</a>
+<a class="hover:text-white transition-colors" href="#">Accessibility</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

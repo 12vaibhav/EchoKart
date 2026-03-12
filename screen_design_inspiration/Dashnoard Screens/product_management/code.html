@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EchoKart Admin - Product Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e31c3d",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211114",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="w-64 bg-slate-950 text-white flex flex-col fixed h-full z-10">
+<div class="p-6">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white">bolt</span>
+</div>
+<div>
+<h1 class="text-lg font-bold leading-none">EchoKart</h1>
+<p class="text-slate-400 text-xs mt-1">Admin Panel</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-sm font-medium">Products</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="text-sm font-medium">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-sm font-medium">Reports</span>
+</a>
+<div class="pt-4 pb-2">
+<p class="px-4 text-[10px] uppercase tracking-wider text-slate-500 font-bold">System</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-white/10">
+<button class="w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-bold text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">logout</span>
+                    Logout
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 p-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+<div>
+<h2 class="text-3xl font-bold text-slate-900 dark:text-white">Manage products</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Overview and management of your inventory</p>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-bold text-sm transition-all shadow-lg shadow-primary/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">add</span>
+                    Add new product
+                </button>
+</div>
+<!-- Filters and Search -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm mb-6">
+<div class="flex flex-wrap items-center gap-4">
+<div class="flex-1 min-w-[300px] relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-background-light dark:bg-slate-800 border-none rounded-lg focus:ring-2 focus:ring-primary/20 text-sm" placeholder="Search products by name, SKU, or category..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 px-4 py-2.5 bg-background-light dark:bg-slate-800 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span>Category</span>
+<span class="material-symbols-outlined text-base">expand_more</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2.5 bg-background-light dark:bg-slate-800 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span>Status</span>
+<span class="material-symbols-outlined text-base">expand_more</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2.5 bg-background-light dark:bg-slate-800 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-base">filter_list</span>
+<span>More</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Products Table -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Thumbnail</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Product title</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Category</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Price</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Stock status</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Product Row 1 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="size-12 rounded-lg bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Black professional over-ear headphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADVkOKQG4fuU0VsORq_Uq8Gk4qLLOigqMyOQb7oonpmU-vzZn2Ewo5Lsi-0GKG-8VMRSmGwG5SZVY0aZDw_SkXpM7zQgOAWVjXVdkuYlSLjF7gMnUHZNrNM5rE_nOuyuFImcrrxnapvuPyFkguxAHbtKeAjyUEzCyt1EI4jeSLF3l8bsFeYThauic3yy4Mp7544ZN41xatWSgYjLuAOcNazXidjl6J3B0_sv6xorooJvMqjLxXQ8HYhlPj91m8C5qCeGJThjRpXnwr"/>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="font-semibold text-slate-900 dark:text-white">Sony WH-1000XM4</p>
+<p class="text-xs text-slate-500">SKU: SNY-1000-B</p>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-medium rounded-full">Electronics</span>
+</td>
+<td class="px-6 py-4 font-medium text-slate-900 dark:text-white">$349.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold rounded-full">
+<span class="size-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                        In stock
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Product Row 2 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="size-12 rounded-lg bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Mechanical keyboard with RGB lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlfo3gIuA9vYDMzbKPeCyLve-GClDIISSLTFr14RNfvdj8mTcj9UpndlxnX9lHV1Jl1fX70FAD-uPiVSgynDkwShINWzk31vRph1VKNucHiwv4dczfcnPoPmAuKy5j7moA_4siTY23LP-ovVzp27Gb53N1YJsFgTYQ0tYF0Y5-ZDyZVz1GZ_Vo7byfCd7E1bIcWOAFXFJROCBRU8W2YPGunh818klAiJjVRjcvBb2bC6ODC-Z-qjLHKsnjU0osBWkoFhPYUXV7_wNi"/>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="font-semibold text-slate-900 dark:text-white">Keychron K2</p>
+<p class="text-xs text-slate-500">SKU: KCH-K2-RGB</p>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-medium rounded-full">Accessories</span>
+</td>
+<td class="px-6 py-4 font-medium text-slate-900 dark:text-white">$89.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold rounded-full">
+<span class="size-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                        In stock
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Product Row 3 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="size-12 rounded-lg bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="iPhone 15 Pro leather case" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcLPVmVTFIoHlY_41AnmeIfSxA_Ac0kExOx7X8GfKcJB-VPLtLscLyZPfTd4JauaBCRSvaO30EoDnPqKCCerFBNaGMjzNKXnWhUORIoIjua3JbIWzuE6BM5oSrWjjQ13X3i5Aex1zArOdkpmfRjqBiJ3cCnkr_2DCiJHRTNNh9aA2y2BXWQ7O0EfbZjCgkGuJcK_xGUQkGHtMBcez9OOg6DyrLAnARTWhH2LVQJIXTgQnhlLE1ZGR-VqI3lK6G0hbTpT4frHBk7XVb"/>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="font-semibold text-slate-900 dark:text-white">iPhone 15 Pro Case</p>
+<p class="text-xs text-slate-500">SKU: APL-I15-CSE</p>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-medium rounded-full">Accessories</span>
+</td>
+<td class="px-6 py-4 font-medium text-slate-900 dark:text-white">$25.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-bold rounded-full">
+<span class="size-1.5 rounded-full bg-red-600 dark:bg-red-400"></span>
+                                        Out of stock
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Product Row 4 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="size-12 rounded-lg bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Apple Watch Series 9" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD75JZ7KpTQOYVEAj4p1SttfZt68XiA74Dv91v1OC71YRxRGdlC8-uOVVJAa0bqJa2o32qhZfNfaAJhym_xUnq3NJz3l4mDmoQBhHuVD8vQof-WgC5I-Df_q44MekRT-wRD5lOmC-1ou0NbLPSmU4qi08tU7SUGo58eHhsC9hoIaQvMCaA3MhpLnfTIZ54JtPadjxA31AP9zo9foP4SCJ6eJZuYOYP3bRPNqKuoN-WxuNFstUNdgXkBUrGsUAN2-jJd1bOMPGTHwe_P"/>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="font-semibold text-slate-900 dark:text-white">Apple Watch Series 9</p>
+<p class="text-xs text-slate-500">SKU: APL-W9-SLC</p>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-medium rounded-full">Electronics</span>
+</td>
+<td class="px-6 py-4 font-medium text-slate-900 dark:text-white">$399.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold rounded-full">
+<span class="size-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                        In stock
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between border-t border-slate-200 dark:border-slate-800">
+<p class="text-sm text-slate-500">Showing 1 to 4 of 48 products</p>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="size-8 flex items-center justify-center bg-primary text-white rounded font-medium text-sm">1</button>
+<button class="size-8 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 rounded font-medium text-sm">2</button>
+<button class="size-8 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 rounded font-medium text-sm">3</button>
+<button class="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

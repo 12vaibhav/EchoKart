@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout | EchoKart</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e31c3d",
+                        "success": "#00c853",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211114",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen flex-col">
+<!-- Header -->
+<header class="bg-black text-white px-4 md:px-10 py-4 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">shopping_cart</span>
+<h1 class="text-2xl font-black tracking-tight lowercase">echokart</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+<a class="hover:text-primary transition-colors" href="#">Shop</a>
+<a class="hover:text-primary transition-colors" href="#">Categories</a>
+<a class="hover:text-primary transition-colors" href="#">Deals</a>
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-lg">account_circle</span>
+                        Account
+                    </a>
+</nav>
+<div class="md:hidden">
+<span class="material-symbols-outlined">menu</span>
+</div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-7xl mx-auto px-4 py-8 md:py-12">
+<!-- Progress Stepper -->
+<div class="mb-10 max-w-2xl mx-auto">
+<div class="flex items-center justify-between mb-4 relative">
+<div class="absolute top-1/2 left-0 w-full h-1 bg-slate-200 -z-10 -translate-y-1/2 rounded-full"></div>
+<div class="absolute top-1/2 left-0 w-2/3 h-1 bg-primary -z-10 -translate-y-1/2 rounded-full transition-all duration-500"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="size-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-wider text-slate-500">Cart</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="size-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm ring-4 ring-primary/20">2</div>
+<span class="text-xs font-bold uppercase tracking-wider text-primary">Checkout</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="size-8 rounded-full bg-white border-2 border-slate-300 text-slate-400 flex items-center justify-center font-bold text-sm">3</div>
+<span class="text-xs font-bold uppercase tracking-wider text-slate-400">Review</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left Column: Forms -->
+<div class="lg:col-span-7 space-y-10">
+<section>
+<div class="flex items-center gap-3 mb-6">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">contact_mail</span>
+</div>
+<h2 class="text-2xl font-bold">Contact Information</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="col-span-2">
+<label class="block text-sm font-semibold mb-1.5">Email Address</label>
+<input class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary" placeholder="email@example.com" type="email"/>
+</div><div class="col-span-2">
+<label class="block text-sm font-semibold mb-1.5">Phone Number</label>
+<input class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary" placeholder="e.g. +1 123 456 7890" type="tel"/>
+</div>
+<div class="col-span-2 flex items-center gap-2 mt-1">
+<input class="rounded text-primary focus:ring-primary" id="newsletter" type="checkbox"/>
+<label class="text-sm text-slate-600" for="newsletter">Email me with news and offers</label>
+</div>
+</div>
+</section>
+<section>
+<div class="flex items-center gap-3 mb-6">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+</div>
+<h2 class="text-2xl font-bold">Shipping Address</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="col-span-1">
+<label class="block text-sm font-semibold mb-1.5">First Name</label>
+<input class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary" placeholder="John" type="text"/>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-semibold mb-1.5">Last Name</label>
+<input class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary" placeholder="Doe" type="text"/>
+</div>
+<div class="col-span-2">
+<label class="block text-sm font-semibold mb-1.5">House number/building name</label>
+<input class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary" placeholder="e.g. Apartment 4B, Echo Heights" type="text"/>
+</div><div class="col-span-2">
+<label class="block text-sm font-semibold mb-1.5">Road name/Area/Colony</label>
+<input class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary" placeholder="e.g. Main Street, Sector 5" type="text"/>
+</div><div class="col-span-1">
+<label class="block text-sm font-semibold mb-1.5">City</label>
+<input class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary" placeholder="New York" type="text"/>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-semibold mb-1.5">Pincode</label>
+<input class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary" placeholder="10001" type="text"/>
+</div>
+</div>
+</section>
+<section>
+<div class="flex items-center gap-3 mb-6">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+<h2 class="text-2xl font-bold">Payment Method</h2>
+</div>
+<div class="bg-white border-2 border-slate-100 rounded-xl p-6 shadow-sm">
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between border-b border-slate-100 pb-4">
+<div class="flex items-center gap-3">
+<input checked="" class="text-primary focus:ring-primary size-5" name="payment" type="radio"/>
+<span class="font-semibold">Credit Card</span>
+</div>
+<div class="flex gap-2 text-slate-400">
+<span class="material-symbols-outlined">credit_card</span>
+<span class="material-symbols-outlined">payments</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mt-2">
+<div class="col-span-2">
+<label class="block text-sm font-semibold mb-1.5">Card Number</label>
+<div class="relative">
+<input class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary pr-10" placeholder="0000 0000 0000 0000" type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-slate-400">lock</span>
+</div>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-semibold mb-1.5">Expiry Date</label>
+<input class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary" placeholder="MM/YY" type="text"/>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-semibold mb-1.5">CVV</label>
+<input class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary" placeholder="123" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 mt-4 text-success font-medium text-sm">
+<span class="material-symbols-outlined text-lg">verified_user</span>
+                            Your payment is secured with 256-bit SSL encryption
+                        </div>
+</section>
+</div>
+<!-- Right Column: Sidebar -->
+<div class="lg:col-span-5">
+<div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 sticky top-28 shadow-xl shadow-slate-200/50">
+<h3 class="text-xl font-bold mb-6">Order Summary</h3>
+<!-- Product List -->
+<div class="space-y-4 mb-8">
+<div class="flex gap-4">
+<div class="relative size-16 bg-slate-100 rounded-lg overflow-hidden border border-slate-200">
+<img class="w-full h-full object-cover" data-alt="Black studio wireless over-ear headphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIXfHbzusJ3YLFuiLNeqxRzuE-vdzJ-5XxomuIHyUMfP5GJ25c13_eVXOIXIv6Fi0NgYBy0VJnf5aDGM3SYbr1OJe3X7pxGIdfBmbGm4oaUivo6iy1xuNC-CxkP8lZv1qL5OoJgkr07VjcenCS5aqTPTHpJdmFKm1l_N2IXpY5mHDTMMGVGGbnYyWIoVJpUR2IxdWDWLa-FU2eFvAxAdDIRyVLHkIXe4YE1tIAzkNm_Br-VwfIYV2hRnkLbwAEtgxeGNfTVsrHKHwb"/>
+<span class="absolute -top-1 -right-1 size-5 bg-slate-800 text-white text-[10px] flex items-center justify-center rounded-full font-bold">1</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold">Echo Pro Headphones</h4>
+<p class="text-xs text-slate-500">Space Black / One Size</p>
+</div>
+<span class="text-sm font-bold">$299.00</span>
+</div>
+<div class="flex gap-4">
+<div class="relative size-16 bg-slate-100 rounded-lg overflow-hidden border border-slate-200">
+<img class="w-full h-full object-cover" data-alt="Classic minimal white wristwatch with leather strap" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRK6eva8sHcXSWRC21TBlIAZHBFsm22KH54nVMKSvhiemupHfsVzR7DDRlrnRUacHpAAh3yuB8FdQFfY-jMM22AOn1E1lYCUHPtVjncZ9C63agNRY9PEo4GLZFGMrpeZEVY8761HaED1QMBPgHo0Jx-dGYe_QTwsTl64yt0zqGQOra-oeETS1bHmLmAaPMlG3HlUPSHwIdDj2EUu8ryqUeqtPYHrrXgnWfNd5n45a93SXDrL7JxG32bvZqYDuSxEs4kMc2jEovwpiX"/>
+<span class="absolute -top-1 -right-1 size-5 bg-slate-800 text-white text-[10px] flex items-center justify-center rounded-full font-bold">1</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold">Minimalist Watch v2</h4>
+<p class="text-xs text-slate-500">Silver / Leather</p>
+</div>
+<span class="text-sm font-bold">$149.00</span>
+</div>
+</div>
+<!-- Discount Code -->
+<div class="flex gap-2 mb-8">
+<input class="flex-1 rounded-lg border-slate-300 text-sm focus:border-primary focus:ring-primary" placeholder="Gift card or discount code" type="text"/>
+<button class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg transition-colors text-sm">Apply</button>
+</div>
+<!-- Totals -->
+<div class="space-y-3 border-t border-slate-100 pt-6 mb-8">
+<div class="flex justify-between text-slate-600 text-sm">
+<span>Subtotal</span>
+<span>$448.00</span>
+</div>
+<div class="flex justify-between text-slate-600 text-sm">
+<span>Shipping</span>
+<span class="text-success font-medium">Free</span>
+</div>
+<div class="flex justify-between text-slate-600 text-sm">
+<span>Estimated Taxes</span>
+<span>$35.84</span>
+</div>
+<div class="flex justify-between text-lg font-black pt-2 border-t border-slate-100 mt-2">
+<span>Total</span>
+<span class="text-primary">$483.84</span>
+</div>
+</div>
+<!-- Main Button -->
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-extrabold py-4 rounded-xl shadow-lg shadow-primary/30 transition-all flex items-center justify-center gap-2 group">
+                            Complete Purchase
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<!-- Trust Badges -->
+<div class="mt-8 grid grid-cols-3 gap-4 border-t border-slate-100 pt-8">
+<div class="flex flex-col items-center gap-1 text-center">
+<span class="material-symbols-outlined text-slate-400 text-xl">shield</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-slate-500">Secure</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-center">
+<span class="material-symbols-outlined text-slate-400 text-xl">cached</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-slate-500">30-Day Return</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-center">
+<span class="material-symbols-outlined text-slate-400 text-xl">support_agent</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-slate-500">24/7 Support</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-black text-slate-400 py-12 px-4 border-t border-slate-800">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-primary">shopping_cart</span>
+<span class="text-xl font-black lowercase">echokart</span>
+</div>
+<div class="flex gap-8 text-sm">
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">Refund Policy</a>
+<a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+</div>
+<div class="text-xs">
+                        © 2024 EchoKart. All rights reserved.
+                    </div>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

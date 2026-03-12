@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e31c3d",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211114",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Your Cart | echokart</title>
+</head>
+<body class="bg-white font-display text-slate-900">
+<!-- Top Navigation Bar -->
+<header class="bg-black text-white px-4 md:px-10 py-4 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">shopping_cart_checkout</span>
+<h1 class="text-2xl font-bold tracking-tighter">echokart</h1>
+</div>
+<div class="hidden md:flex flex-1 max-w-md mx-10">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-slate-800 border-none rounded-lg py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary text-sm" placeholder="Search trending tech..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="hidden sm:inline text-sm font-medium">Account</span>
+</button>
+<button class="relative flex items-center gap-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="absolute -top-2 -right-2 bg-primary text-white text-[10px] font-bold px-1.5 rounded-full">3</span>
+<span class="hidden sm:inline text-sm font-medium">Cart</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 py-8">
+<!-- Progress Indicator -->
+<div class="mb-10">
+<div class="flex items-center justify-between mb-4 max-w-2xl mx-auto relative">
+<div class="absolute top-1/2 left-0 w-full h-0.5 bg-slate-100 -translate-y-1/2 z-0"></div>
+<div class="absolute top-1/2 left-0 w-1/3 h-0.5 bg-primary -translate-y-1/2 z-0"></div>
+<div class="z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold">1</div>
+<span class="text-xs font-bold text-slate-900 uppercase tracking-wider">Cart</span>
+</div>
+<div class="z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-bold">2</div>
+<span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Review</span>
+</div>
+<div class="z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-bold">3</div>
+<span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Checkout</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+<!-- Left Column: Product List -->
+<div class="lg:col-span-2">
+<div class="flex items-center justify-between border-b pb-6 mb-6">
+<h2 class="text-2xl font-bold">Shopping Cart (3 items)</h2>
+<a class="text-primary font-medium hover:underline flex items-center gap-1 text-sm" href="#">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                        Continue Shopping
+                    </a>
+</div>
+<!-- Product Item 1 -->
+<div class="flex flex-col sm:flex-row gap-6 py-6 border-b last:border-0">
+<div class="w-full sm:w-32 h-32 bg-slate-50 rounded-xl overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Black professional studio wireless over-ear headphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0FhmtiS8ml0j5z_IFgU2tAsMe-WddZ8Fv08o235D26LeY3y8ZEQXZmDcL119y8Dfr-c1wRYNTe6nqHIeWfYneb14ETSoO6bA0T6GzAke-_WqVGruuxcD8NV0fpHv_Ay6lqo3cfQp3lHXDzg_Gv4qS0lrRDbghB10UrvvGGiF-m4IZKuysLWjjFq5xVfS8vxFIlP-Vy-bjVLK9rTH0e8lEkYtiHAH4bkV4qMnI34dAOOIf0KkUfW86YaB4qj3rlDqyGlio6P_UwsGc"/>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-lg font-bold text-slate-900">Echo wireless headphones</h3>
+<p class="text-sm text-slate-500 mt-1">Color: Matte Black | Size: One Size</p>
+</div>
+<div class="text-right">
+<p class="text-lg font-bold text-primary">$129.00</p>
+<p class="text-sm text-slate-400 line-through">$159.00</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-4">
+<div class="flex items-center bg-slate-100 rounded-lg p-1">
+<button class="w-8 h-8 flex items-center justify-center text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="w-8 text-center font-bold text-sm">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors flex items-center gap-1 text-xs uppercase font-bold">
+<span class="material-symbols-outlined text-base">delete</span>
+                                Remove
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Item 2 -->
+<div class="flex flex-col sm:flex-row gap-6 py-6 border-b last:border-0">
+<div class="w-full sm:w-32 h-32 bg-slate-50 rounded-xl overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Minimalist white smart watch with silicone band" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjTsJuHiOH2qCIImMsqtoTbXUqJlEe-tFNXYXWg06pYymEWxooqmoPihbYtkMxU9eeUnqlOWU7ZYjQA5jn78ulrgV4Tf2A7Borgz6fOeuYpRCtNlAd-wFCOfYzaP5vphakX-zXLQCfvVpKVfVtVb8jCFhqO7VbLKMEZwYY1Ug5YfQEku1vGoezMsbOjalrDomvInI_E0JJ6XiSvcv-W5ooHB1im9TRKHmD2dyCxIMOEvwo_mpGjBPQXQ92Vz85LpJxEKCUxKRWN99p"/>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-lg font-bold text-slate-900">Echo smart watch series 5</h3>
+<p class="text-sm text-slate-500 mt-1">Color: Cloud White | Strap: Silicone</p>
+</div>
+<div class="text-right">
+<p class="text-lg font-bold text-primary">$299.00</p>
+<p class="text-sm text-slate-400 line-through">$349.00</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-4">
+<div class="flex items-center bg-slate-100 rounded-lg p-1">
+<button class="w-8 h-8 flex items-center justify-center text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="w-8 text-center font-bold text-sm">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors flex items-center gap-1 text-xs uppercase font-bold">
+<span class="material-symbols-outlined text-base">delete</span>
+                                Remove
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Item 3 -->
+<div class="flex flex-col sm:flex-row gap-6 py-6 border-b last:border-0">
+<div class="w-full sm:w-32 h-32 bg-slate-50 rounded-xl overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Silver ultra-thin tablet computer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt9Wnnu-RI101gL09nSzdmgXaHglQK9g7eJMPmF9dKGeGU8aM_FQa80fNmgkMbBVka64vAD_-XCLQgE6KKE4l6xjVvn1jNNMXUAZ7uDX3GsAKUQ9_2k3gKU6oPlY_x7aaZi7pck9Zw8sGmIhwNPcakroMtF4uIghGi6MTMXy7JFmIkrdYS2nl4UCJqtxEQ-0l2Se6f9hM9L-5RystRqkCct8xjNKIRyVK7lJQV_BEdIB-4Bs_roydTgVvCGAPzYNzmJzYqVhp7sOxq"/>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-lg font-bold text-slate-900">Echo pad pro 11-inch</h3>
+<p class="text-sm text-slate-500 mt-1">Storage: 256GB | WiFi Only</p>
+</div>
+<div class="text-right">
+<p class="text-lg font-bold text-primary">$799.00</p>
+<p class="text-sm text-slate-400 line-through">$899.00</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-4">
+<div class="flex items-center bg-slate-100 rounded-lg p-1">
+<button class="w-8 h-8 flex items-center justify-center text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="w-8 text-center font-bold text-sm">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors flex items-center gap-1 text-xs uppercase font-bold">
+<span class="material-symbols-outlined text-base">delete</span>
+                                Remove
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Order Summary -->
+<div class="lg:col-span-1">
+<div class="bg-slate-50 rounded-2xl p-8 sticky top-24">
+<h2 class="text-xl font-bold mb-6">Order Summary</h2>
+<div class="space-y-4 mb-6 border-b pb-6 border-slate-200">
+<div class="flex justify-between text-slate-600">
+<span>Subtotal</span>
+<span class="font-medium text-slate-900">$1,227.00</span>
+</div>
+<div class="flex justify-between text-slate-600">
+<span>Shipping</span>
+<span class="font-medium text-slate-900">FREE</span>
+</div>
+<div class="flex justify-between text-slate-600">
+<span>Tax</span>
+<span class="font-medium text-slate-900">$98.16</span>
+</div>
+</div>
+<div class="flex justify-between items-center mb-8">
+<span class="text-lg font-bold">Total</span>
+<span class="text-2xl font-bold text-primary">$1,325.16</span>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02] active:scale-[0.98] mb-4">
+                        Proceed to Checkout
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<p class="text-center text-xs text-slate-400 px-4">
+                        By proceeding to checkout, you agree to echokart's Terms of Service and Privacy Policy.
+                    </p>
+<div class="mt-10">
+<h3 class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-4">Promo Code</h3>
+<div class="flex gap-2">
+<input class="flex-1 bg-white border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-primary focus:border-primary" placeholder="Enter code" type="text"/>
+<button class="bg-black text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-slate-800 transition-colors">Apply</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recommended Section -->
+<section class="mt-24">
+<h2 class="text-2xl font-bold mb-8">Customers also bought</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<div class="group cursor-pointer">
+<div class="relative aspect-square bg-slate-50 rounded-xl overflow-hidden mb-3">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Compact portable bluetooth speaker in blue" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9HF44LLae_CaYHPvFhCOzHoZXMRoKadbObO74JmbrKbGxnf1BLYkzHTwVjALOS3yXPRqp2AVekJV4unAKpG7RLu2KWCWZzxITMbgxM7h5KhGWT4qj5tzn3TRhtgpdic8S5HwZJGKOJQNpj9eiQ1G3YSGxfbFlDV-07uEQps-Pt6tk0qPO02xacef82XKmzIJ_rsd7mUlM5PwMaENS3GCZEqDguCPgB6zZkKr85pMzwUj780EL_tRdWMnfA5mcrOHq2VGTTtJYN84S"/>
+<button class="absolute bottom-2 right-2 bg-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary">add_shopping_cart</span>
+</button>
+</div>
+<h3 class="font-bold text-slate-900 text-sm">Echo go speaker</h3>
+<p class="text-primary font-bold">$49.00</p>
+</div>
+<div class="group cursor-pointer">
+<div class="relative aspect-square bg-slate-50 rounded-xl overflow-hidden mb-3">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="High speed mechanical gaming keyboard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvcHBa4a-J1J9gMzW_wr6qHdwdFXFU6B3uZiTF3RW3cn6q58Qq5ceqUo59V28PT33biL0CkPjpwnbuctVO7xBZZaL-2mNUSsgpoy1Ws23_BhdSyqh7OYWP1rYWzWhE0b6WTYeNmaKSTqx_I_VPJg6uoqk0o2lAaz5-S4-H_lMHuKmhyDeAOGm89I1ejEYhUlhn43DL6rBH9LCirRc22XGBIFIxMX-H5qCRcZaX5Rz4sXJz4h42VRGnyXI51IjlEZu95zYFpg4gNNWt"/>
+<button class="absolute bottom-2 right-2 bg-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary">add_shopping_cart</span>
+</button>
+</div>
+<h3 class="font-bold text-slate-900 text-sm">Echo mechanical keyboard</h3>
+<p class="text-primary font-bold">$129.00</p>
+</div>
+<div class="group cursor-pointer">
+<div class="relative aspect-square bg-slate-50 rounded-xl overflow-hidden mb-3">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Ergonomic wireless computer mouse" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmCA0YwF9cJJCzxjYalac2dPaGiRZCfNi9Mnic-l50SzXfXFgaE5DkYv-Lgi1vrcfbVIz9NiZrHC6ZtXoyi3R1jyS5BQ_YSMpYfU0wnlMbu4fxW9J_R56A_1gnA6VosmsFzs-Q3ke7MDvnhvOsJ4pohdpFkHSKkVFof5Em1tefkDxVbgOxgvWxr5w87nmhFalAC5w3sRYU2oAjcCiUGAFUvpdlenfS5iWUvBffKzAfIl_-Cy6U3cp3pIRDnP90BmXRDceg_XX4qkzN"/>
+<button class="absolute bottom-2 right-2 bg-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary">add_shopping_cart</span>
+</button>
+</div>
+<h3 class="font-bold text-slate-900 text-sm">Echo precision mouse</h3>
+<p class="text-primary font-bold">$79.00</p>
+</div>
+<div class="group cursor-pointer">
+<div class="relative aspect-square bg-slate-50 rounded-xl overflow-hidden mb-3">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Durable tablet protective case" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVQCdkJoEJF4EMtnEY0EE83oOAJI_RneJ5DMZoXHMeJzq5I_5qjC5Foax-eez03dFYU0ZEvzhCjt6KSZ_njEotm2ooTEk9zS976QEAswlGTDjxG8WHOrayRgkzx_oRafF4ihephB7hUS6Hzr1K9asYaYScgSopQTenq3fxa2ODcjrRVwg3ii9vew562w1oTyALK2RM1dM1NS2oJJ_4Tz4hNaFzzfN1-54rAyt_IXGYii-OkQnXF0hpLMIFHH3p1BwaimKwSrjv-IjA"/>
+<button class="absolute bottom-2 right-2 bg-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary">add_shopping_cart</span>
+</button>
+</div>
+<h3 class="font-bold text-slate-900 text-sm">Echo pad folio case</h3>
+<p class="text-primary font-bold">$39.00</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-black text-white mt-24 py-16">
+<div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">shopping_cart_checkout</span>
+<h2 class="text-2xl font-bold tracking-tighter">echokart</h2>
+</div>
+<p class="text-slate-400 text-sm leading-relaxed">
+                    Elevating your digital lifestyle with trending electronics and minimalist design. Join the echo ecosystem today.
+                </p>
+</div>
+<div>
+<h3 class="font-bold mb-6 text-sm uppercase tracking-widest text-primary">Shop</h3>
+<ul class="space-y-4 text-slate-400 text-sm">
+<li><a class="hover:text-white transition-colors" href="#">Headphones</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Smart Watches</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Tablets</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Accessories</a></li>
+</ul>
+</div>
+<div>
+<h3 class="font-bold mb-6 text-sm uppercase tracking-widest text-primary">Support</h3>
+<ul class="space-y-4 text-slate-400 text-sm">
+<li><a class="hover:text-white transition-colors" href="#">Order Status</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Returns &amp; Exchanges</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Shipping Policy</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h3 class="font-bold mb-6 text-sm uppercase tracking-widest text-primary">Newsletter</h3>
+<p class="text-slate-400 text-sm mb-4">Get early access to drops and exclusive offers.</p>
+<div class="flex gap-2">
+<input class="flex-1 bg-slate-800 border-none rounded-lg px-4 py-2 text-sm" placeholder="Email address" type="email"/>
+<button class="bg-primary text-white p-2 rounded-lg hover:bg-primary/80 transition-colors">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+<p>© 2024 echokart. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-white transition-colors" href="#">Cookie Policy</a>
+</div>
+</div>
+</footer>
+</body></html>

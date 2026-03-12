@@ -1,103 +1,186 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { Heart, Star, ShoppingBag } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Heart, Star, ShoppingBag, ArrowRight, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import { useCart } from '../contexts/CartContext';
+import { useWishlist } from '../contexts/WishlistContext';
 
 const fadeInUpProps = {
-  initial: { opacity: 0, y: 40 },
+  initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-50px" },
-  transition: { duration: 0.7, ease: "easeOut" }
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.5, ease: "easeOut" }
 };
 
-export const NewArrivals = ({ onNavigate }: { onNavigate: (path: string, id?: number | null) => void }) => {
+const containerVariants = {
+  initial: { opacity: 0 },
+  animate: { 
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05
+    }
+  }
+};
+
+const itemVariants = {
+  initial: { opacity: 0, y: 15 },
+  animate: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.4, ease: "easeOut" } 
+  }
+};
+
+export const NewArrivals = ({ products: propProducts, onNavigate }: { products?: any[], onNavigate: (path: string, id?: any, categoryName?: string | null) => void }) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const { addToCart } = useCart();
+  const { isInWishlist, toggleWishlist } = useWishlist();
+  
+  if (!propProducts || propProducts.length === 0) return null;
+  const displayProducts = propProducts;
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = window.innerWidth < 768 ? 260 : 340;
+      scrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <motion.section {...fadeInUpProps} className="py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10">
-          <h2 className="text-3xl font-bold text-black mb-2">New Arrivals</h2>
-          <p className="text-gray-600">Fresh trends just in. Upgrade your daily routine with these viral hits.</p>
+    <motion.section 
+      {...fadeInUpProps} 
+      className="py-8 bg-slate-50 relative overflow-hidden"
+    >
+      {/* Noble Aesthetic Overlay */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none mix-blend-overlay" style={{backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`}} />
+
+      <div className="max-w-[1700px] mx-auto px-8 sm:px-12 lg:px-24">
+        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="relative">
+             <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-[#e31c3d]/10 rounded-xl">
+                <Sparkles className="w-5 h-5 text-[#e31c3d]" />
+              </div>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#e31c3d]">Season Highlights</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter leading-none mb-4">
+              New Arrivals
+            </h2>
+            <p className="text-slate-500 font-medium max-w-xl text-lg">
+              The latest drops curated for your style. Experience innovation with our newest collection.
+            </p>
+            <div className="absolute -bottom-4 left-0 w-24 h-1.5 bg-[#e31c3d] rounded-full" />
+          </div>
+
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => scroll('left')} 
+              className="w-14 h-14 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:text-[#e31c3d] hover:border-[#e31c3d] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#e31c3d]/10 active:scale-95 group"
+            >
+              <ChevronLeft className="w-6 h-6 transition-transform group-hover:-translate-x-0.5" />
+            </button>
+            <button 
+              onClick={() => scroll('right')} 
+              className="w-14 h-14 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:text-[#e31c3d] hover:border-[#e31c3d] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#e31c3d]/10 active:scale-95 group"
+            >
+              <ChevronRight className="w-6 h-6 transition-transform group-hover:translate-x-0.5" />
+            </button>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* Large Promo Card */}
-          <div onClick={() => onNavigate('category', null)} className="lg:col-span-1 relative rounded-2xl overflow-hidden group cursor-pointer min-h-[400px]">
-            <img 
-              src="https://images.unsplash.com/photo-1550009158-9effb64fda70?w=800&q=80" 
-              alt="Promo" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute inset-0 p-8 flex flex-col justify-between">
-              <span className="text-white text-xs font-bold uppercase tracking-wider">Flash Sale</span>
-              <div>
-                <h3 className="text-white text-3xl font-bold mb-6 leading-tight">Smart Home<br/>Upgrades</h3>
-                <button className="bg-white text-black font-bold py-3 px-6 rounded-full hover:bg-gray-100 transition-colors">
-                  Shop Now
-                </button>
-              </div>
-            </div>
-          </div>
+        <div className="relative">
+          <motion.div 
+            ref={scrollRef} 
+            variants={containerVariants}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, margin: "-50px" }}
+            className="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth"
+          >
+            {displayProducts.map((item: any, idx) => {
+              const title = item.title || item.name;
+              const img = item.img || item.image;
+              const isWishlisted = isInWishlist(item.id);
+              
+              return (
+                <motion.div 
+                  key={item.id || idx} 
+                  variants={itemVariants}
+                  onClick={() => onNavigate('product', item.id)} 
+                  className="bg-white rounded-[2rem] p-5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-slate-100 group hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col cursor-pointer shrink-0 w-[260px] md:w-[320px] snap-start h-full relative overflow-hidden"
+                >
+                  <div className="relative aspect-square mb-6 rounded-2xl overflow-hidden group/img">
+                    <button 
+                      onClick={(e) => { e.stopPropagation(); toggleWishlist(item); }}
+                      className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all z-20 backdrop-blur-md ${isWishlisted ? 'bg-[#e31c3d] text-white' : 'bg-white/80 text-slate-400 hover:text-[#e31c3d] hover:bg-white'}`}
+                    >
+                      <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
+                    </button>
+                    
+                    {/* Discount/Badge */}
+                    {item.oldPrice && item.price && item.oldPrice > item.price && (
+                      <div className="absolute top-4 left-4 z-20">
+                        <span className="bg-[#e31c3d] text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-lg shadow-lg">
+                          -{Math.round(((item.oldPrice - item.price) / item.oldPrice) * 100)}%
+                        </span>
+                      </div>
+                    )}
 
-          {/* Smaller Cards Grid/Scroll */}
-          <div className="lg:col-span-3 flex overflow-x-auto hide-scrollbar space-x-6 pb-4 snap-x">
-            {[
-              { id: 1, title: 'LED Strip Lights', category: 'DECOR', price: 1499, oldPrice: 2499, img: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800&q=80', sale: true, rating: 4.8, reviews: 342 },
-              { id: 2, title: 'Smart Neck Massager', category: 'WELLNESS', price: 2999, oldPrice: null, img: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&q=80', sale: false, rating: 4.5, reviews: 128 },
-              { id: 3, title: 'Volcano Humidifier', category: 'HOME', price: 1999, oldPrice: null, img: 'https://images.unsplash.com/photo-1582979512210-99b6a53386f9?w=800&q=80', sale: false, rating: 4.9, reviews: 567 },
-              { id: 4, title: 'Wireless Car Charger', category: 'AUTO', price: 1799, oldPrice: 3499, img: 'https://images.unsplash.com/photo-1584006682522-dc17d6c0d9ac?w=800&q=80', sale: true, rating: 4.7, reviews: 215 },
-            ].map((item, idx) => (
-              <div key={idx} onClick={() => onNavigate('product', item.id)} className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 group hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer min-w-[280px] snap-start h-full">
-                <div className="relative aspect-square mb-4 bg-[#f8f9fb] rounded-xl overflow-hidden flex items-center justify-center p-6">
-                  <button className="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm text-gray-400 hover:text-[#e31c3d] transition-all z-10">
-                    <Heart className="w-4 h-4" />
-                  </button>
-                  {item.sale && (
-                    <span className="absolute top-3 left-3 bg-[#e31c3d] text-white text-[10px] uppercase font-bold px-2 py-1 rounded-md z-10">Sale</span>
-                  )}
-                  <img src={item.img} alt={item.title} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                </div>
-                
-                <h3 className="font-medium text-gray-900 text-sm mb-2 line-clamp-1">{item.title}</h3>
-                
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[#e31c3d] font-semibold text-sm">₹{item.price.toLocaleString('en-IN')}</span>
-                  {item.oldPrice && (
-                    <span className="text-gray-400 text-xs line-through">₹{item.oldPrice.toLocaleString('en-IN')}</span>
-                  )}
-                  {item.oldPrice && (
-                    <span className="text-[#e31c3d] text-xs">
-                      {Math.round(((item.oldPrice - item.price) / item.oldPrice) * 100)}% off
-                    </span>
-                  )}
-                </div>
-
-                <div className="flex items-center gap-1.5 mb-4">
-                  <div className="flex gap-0.5">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className={`w-3 h-3 ${i < item.rating ? 'fill-[#ff9c1a] text-[#ff9c1a]' : 'fill-gray-200 text-gray-200'}`} />
-                    ))}
+                    <img 
+                      src={img} 
+                      alt={title} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-110" 
+                      loading="lazy" 
+                    />
+                    
+                    {/* Quick Add Overlay */}
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); addToCart(item); }}
+                        className="w-full bg-white text-black font-black py-3 rounded-xl text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-[#e31c3d] hover:text-white transition-all shadow-xl"
+                      >
+                         <ShoppingBag size={14} /> Quick Add
+                      </button>
+                    </div>
                   </div>
-                  <span className="text-xs text-gray-900 font-medium">{item.rating.toFixed(1)}</span>
-                  <span className="text-xs text-gray-400">{item.reviews} Reviews</span>
-                </div>
+                  
+                  <div className="flex flex-col flex-1">
+                    <h3 className="font-black text-slate-900 text-lg mb-2 line-clamp-1 group-hover:text-[#e31c3d] transition-colors">
+                      {title}
+                    </h3>
+                    
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex flex-col">
+                        <span className="text-[#e31c3d] font-black text-xl">
+                          ₹{Number(item.price || 0).toLocaleString('en-IN')}
+                        </span>
+                        {item.oldPrice && (
+                          <span className="text-slate-400 text-xs line-through font-medium">
+                            ₹{Number(item.oldPrice).toLocaleString('en-IN')}
+                          </span>
+                        )}
+                      </div>
+                      
+                      <div className="flex items-center gap-1 bg-amber-50 px-2 py-1 rounded-lg">
+                        <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                        <span className="text-xs font-black text-amber-900">
+                          {Number(item.rating || 4.5).toFixed(1)}
+                        </span>
+                      </div>
+                    </div>
 
-                <div className="flex gap-2 mt-auto">
-                  <button 
-                    onClick={(e) => { e.stopPropagation(); /* add to cart */ }} 
-                    className="flex-1 bg-white border border-gray-200 text-gray-600 font-medium py-2 rounded-lg text-xs hover:bg-gray-50 transition-all flex items-center justify-center gap-1.5"
-                  >
-                    <ShoppingBag className="w-3.5 h-3.5" /> Add To Cart
-                  </button>
-                  <button 
-                    onClick={(e) => { e.stopPropagation(); onNavigate('product', item.id); }}
-                    className="flex-1 bg-[#e31c3d] text-white font-medium py-2 rounded-lg text-xs hover:bg-red-700 transition-all"
-                  >
-                    Buy Now
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+                    <div className="mt-auto pt-4 border-t border-slate-50 flex gap-3">
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); onNavigate('product', item.id); }}
+                        className="flex-1 bg-slate-900 text-white font-black py-3 rounded-xl text-[10px] uppercase tracking-widest hover:bg-[#e31c3d] transition-all shadow-lg active:scale-95"
+                      >
+                        Buy Now
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
       </div>
     </motion.section>

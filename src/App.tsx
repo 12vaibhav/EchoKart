@@ -11,7 +11,8 @@ import { VideoShowcase } from './components/VideoShowcase';
 import { CustomerReviews } from './components/CustomerReviews';
 import { WhyChooseUs } from './components/WhyChooseUs';
 import { FAQSection } from './components/FAQSection';
-import { Newsletter } from './components/Newsletter';
+import { useNavigate } from './hooks/useNavigate';
+import { supabase } from './lib/supabase';
 import { HomePage } from './pages/HomePage';
 import { CategoryPage } from './pages/CategoryPage';
 import { CategoryProductsPage } from './pages/CategoryProductsPage';
@@ -25,8 +26,8 @@ import { DeliveryReturnsPage } from './pages/DeliveryReturnsPage';
 import { TrackOrderPage } from './pages/TrackOrderPage';
 import { HelpFAQPage } from './pages/HelpFAQPage';
 import { ImportantPage } from './pages/ImportantPage';
-import { WishlistPage } from './pages/WishlistPage';
-import { CATEGORIES, TRENDING_PRODUCTS } from './data';
+import { AuthPage } from './pages/AuthPage';
+
 import {
   Search,
   User,
@@ -80,73 +81,7 @@ import {
 
 
 
-const FAQS = [
-  {
-    category: 'Shipping & Delivery',
-    items: [
-      {
-        q: 'Do you offer free shipping in India?',
-        a: 'Yes, we offer free standard shipping on all prepaid and COD orders across India.',
-        icon: <Truck className="w-5 h-5 text-[#e31c3d]" />,
-      },
-      {
-        q: 'How long will it take to receive my order?',
-        a: 'Standard delivery usually takes 3-7 business days depending on your location in India. Metro cities usually receive orders faster.',
-        icon: <Calendar className="w-5 h-5 text-[#e31c3d]" />,
-      },
-      {
-        q: 'Do you offer Cash on Delivery (COD)?',
-        a: 'Yes, we offer Cash on Delivery (COD) for most pin codes across India. You can select this option at checkout.',
-        icon: <DollarSign className="w-5 h-5 text-[#e31c3d]" />,
-      }
-    ],
-  },
-  {
-    category: 'Returns & Refunds',
-    items: [
-      {
-        q: 'What is your return policy?',
-        a: 'We offer a hassle-free 7-day return policy. If you are not satisfied with your product, you can initiate a return within 7 days of delivery.',
-        icon: <CornerUpLeft className="w-5 h-5 text-[#e31c3d]" />,
-      },
-      {
-        q: 'How do I initiate a return?',
-        a: 'You can easily initiate a return from your account dashboard or by contacting our customer support team via email or WhatsApp.',
-        icon: <MessageCircle className="w-5 h-5 text-[#e31c3d]" />,
-      },
-      {
-        q: 'When will I receive my refund?',
-        a: 'Once we receive and inspect your returned item, your refund will be processed within 5-7 business days to your original payment method or bank account.',
-        icon: <Shield className="w-5 h-5 text-[#e31c3d]" />,
-      },
-    ],
-  },
-  {
-    category: 'Order Tracking',
-    items: [
-      {
-        q: 'How can I track my order?',
-        a: 'Once your order is dispatched, you will receive a tracking link via SMS and email. You can also track it directly from the "Track Order" section on our website.',
-        icon: <Package className="w-5 h-5 text-[#e31c3d]" />,
-      }
-    ]
-  }
-];
 
-const MOCK_CART_ITEMS = [
-  { ...TRENDING_PRODUCTS[0], quantity: 1, variant: 'Sunset Orange' },
-  { ...TRENDING_PRODUCTS[1], quantity: 2, variant: 'Classic Black' },
-];
-
-const MOCK_ORDERS = [
-  { id: 'ORD-8293', date: 'Mar 05, 2026', status: 'Delivered', total: 3498, items: 2 },
-  { id: 'ORD-7124', date: 'Feb 28, 2026', status: 'In Transit', total: 1999, items: 1 },
-];
-
-const MOCK_WISHLIST = [
-  TRENDING_PRODUCTS[2],
-  TRENDING_PRODUCTS[3],
-];
 
 // --- Components ---
 
@@ -213,22 +148,189 @@ import { DashboardLayout } from './layouts/DashboardLayout';
 import { DashboardOverview } from './pages/dashboard/DashboardOverview';
 import { OrdersManagement } from './pages/dashboard/OrdersManagement';
 import { ProductsManagement } from './pages/dashboard/ProductsManagement';
+import { CategoriesManagement } from './pages/dashboard/CategoriesManagement';
 import { Earnings } from './pages/dashboard/Earnings';
 import { Customers } from './pages/dashboard/Customers';
 import { Analytics } from './pages/dashboard/Analytics';
 import { Promotions } from './pages/dashboard/Promotions';
 import { Settings } from './pages/dashboard/Settings';
 import { PlaceholderPage } from './pages/dashboard/PlaceholderPage';
-
-// ... existing imports ...
+import { OrderDetailsPage } from './pages/dashboard/OrderDetailsPage';
+import { OrderConfirmationPage } from './pages/OrderConfirmationPage';
+import { AdminProfilePage } from './pages/AdminProfilePage';
 
 export default function App() {
-  const [route, setRoute] = useState<{ path: string, id?: number | null, categoryName?: string | null }>({ path: 'home', id: null, categoryName: null });
+  const [route, setRoute] = useState<{ path: string, id?: any, categoryName?: string | null, searchQuery?: string | null }>({ path: 'home', id: null, categoryName: null, searchQuery: null });
 
-  const navigate = (path: string, id?: number | null, categoryName?: string | null) => {
-    setRoute({ path, id: id ?? null, categoryName: categoryName ?? null });
+  const [products, setProducts] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      
+      // Fetch all data in parallel for maximum performance
+      const [
+        { data: productsData, error: productsError },
+        { data: categoriesData, error: categoriesError },
+        { data: bData, error: bannersError },
+        { data: vData, error: videosError },
+        { data: rData, error: reviewsError }
+      ] = await Promise.all([
+        supabase.from('products').select('*, categories(name)'),
+        supabase.from('categories').select('*'),
+        supabase.from('banners').select('*').order('order', { ascending: true }),
+        supabase.from('videos').select('*').order('order', { ascending: true }),
+        supabase.from('reviews').select('*').order('created_at', { ascending: false })
+      ]);
+
+      if (productsError) throw productsError;
+      if (categoriesError) throw categoriesError;
+      if (bannersError) throw bannersError;
+      if (videosError) throw videosError;
+      if (reviewsError) throw reviewsError;
+
+      // Map Supabase product format
+      const mappedProducts = productsData?.map(p => ({
+        id: p.id,
+        title: p.name,
+        name: p.name,
+        price: p.price,
+        oldPrice: p.old_price,
+        image: p.main_image_url,
+        rating: p.rating,
+        reviews: p.reviews || [],
+        reviewsCount: p.reviews_count !== undefined && p.reviews_count !== null ? p.reviews_count : (p.reviews?.length || 0),
+        stock: p.stock_quantity,
+        isTrending: p.is_trending,
+        isNewArrival: p.is_new_arrival,
+        category: p.categories?.name || 'Uncategorized',
+        categoryId: p.category_id,
+        status: p.status || 'In Stock',
+        tags: p.tags || [],
+        description: p.description,
+        shortDescription: p.short_description,
+        images: p.images || [],
+        featureImages: p.feature_images || []
+      })) || [];
+
+      // Map Supabase category format
+      const mappedCategories = categoriesData?.map(c => ({
+        id: c.id,
+        title: c.name,
+        name: c.name,
+        image: c.image_url,
+        visible: c.visible,
+        isSale: c.is_sale,
+        items: 0,
+        trend: '0%',
+        trendUp: null
+      })) || [];
+
+      // Atomic state updates to prevent staggered renders
+      setProducts(mappedProducts);
+      setCategories(mappedCategories);
+      setCustomizations({
+        banners: bData?.map(b => ({
+          ...b,
+          image: b.image_url, // Hero.tsx expects 'image'
+          category_name: b.category_name
+        })) || [],
+        trending: mappedProducts.filter(p => p.isTrending),
+        arrivals: mappedProducts.filter(p => p.isNewArrival),
+        videos: vData?.map(v => ({
+          ...v,
+          src: v.video_url,    // VideoShowcase.tsx expects 'src'
+          product: v.product_name // VideoShowcase.tsx expects 'product'
+        })) || [],
+        reviews: rData?.map(r => ({
+          ...r,
+          text: r.comment || r.text,
+          name: r.name || 'Customer',
+          product: r.product_name || r.product,
+          avatar: r.avatar_url
+        })) || [],
+      });
+    } catch (error) {
+      console.error('Error fetching data from Supabase:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+
+    // Subscribe to changes for real-time updates
+    const channel = supabase
+      .channel('schema-db-changes')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, fetchData)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'categories' }, fetchData)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'banners' }, fetchData)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'videos' }, fetchData)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'reviews' }, fetchData)
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  const [customizations, setCustomizations] = useState(() => {
+    const parse = (key: string) => {
+      const val = localStorage.getItem(key);
+      if (!val) return [];
+      try { return JSON.parse(val); } catch(e) { console.error(`Failed to parse ${key}`, e); return []; }
+    };
+    return {
+      banners: parse('STORE_CUSTOM_BANNERS'),
+      trending: parse('STORE_CUSTOM_TRENDING'),
+      arrivals: parse('STORE_CUSTOM_ARRIVALS'),
+      videos: parse('STORE_CUSTOM_VIDEOS'),
+      reviews: parse('STORE_CUSTOM_REVIEWS'),
+    };
+  });
+
+  // Listener for storage changes (to sync across tabs/components if needed, though here we'll use a reload or direct state pass)
+  useEffect(() => {
+    const parse = (key: string) => {
+      const val = localStorage.getItem(key);
+      if (!val) return [];
+      try { return JSON.parse(val); } catch(e) { return []; }
+    };
+    const handleStorageChange = (e?: StorageEvent) => {
+      if (!e || e.key === 'STORE_CUSTOM_BANNERS' || e.key === 'STORE_CUSTOM_TRENDING' || e.key === 'STORE_CUSTOM_ARRIVALS' || e.key === 'STORE_CUSTOM_VIDEOS' || e.key === 'STORE_CUSTOM_REVIEWS') {
+        setCustomizations({
+          banners: parse('STORE_CUSTOM_BANNERS'),
+          trending: parse('STORE_CUSTOM_TRENDING'),
+          arrivals: parse('STORE_CUSTOM_ARRIVALS'),
+          videos: parse('STORE_CUSTOM_VIDEOS'),
+          reviews: parse('STORE_CUSTOM_REVIEWS'),
+        });
+      }
+      
+
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
+  const navigate = (path: string, id?: any, categoryName?: string | null, searchQuery?: string | null) => {
+    setRoute({ path, id: id ?? null, categoryName: categoryName ?? null, searchQuery: searchQuery ?? null });
     window.scrollTo(0, 0);
   };
+
+  if (loading && products.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-[#e31c3d] border-t-transparent rounded-full animate-spin"></div>
+          <p className="font-bold text-slate-400">Loading EchoKart...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Check if current route is a dashboard route
   const isDashboard = route.path.startsWith('/dashboard');
@@ -236,14 +338,17 @@ export default function App() {
   if (isDashboard) {
     return (
       <DashboardLayout currentPath={route.path} onNavigate={navigate}>
-        {route.path === '/dashboard' && <DashboardOverview />}
-        {route.path === '/dashboard/orders' && <OrdersManagement />}
-        {route.path === '/dashboard/products' && <ProductsManagement />}
+        {route.path === '/dashboard' && <DashboardOverview onNavigate={navigate} />}
+        {route.path === '/dashboard/orders' && <OrdersManagement onNavigate={navigate} />}
+        {route.path === '/dashboard/orders/detail' && <OrderDetailsPage orderId={route.id} onBack={() => navigate('/dashboard/orders')} />}
+        {route.path === '/dashboard/products' && <ProductsManagement products={products} onProductsChange={setProducts} />}
+        {route.path === '/dashboard/categories' && <CategoriesManagement categories={categories} onCategoriesChange={setCategories} />}
         {route.path === '/dashboard/earnings' && <Earnings />}
         {route.path === '/dashboard/customers' && <Customers />}
         {route.path === '/dashboard/analytics' && <Analytics />}
         {route.path === '/dashboard/promotions' && <Promotions />}
-        {route.path === '/dashboard/settings' && <Settings />}
+        {route.path === '/dashboard/settings' && <Settings products={products} />}
+        {route.path === '/dashboard/profile' && <AdminProfilePage onBack={() => navigate('/dashboard')} />}
         
         {/* Placeholders for other pages */}
         {route.path === '/dashboard/messages' && <PlaceholderPage title="Message Center" />}
@@ -253,36 +358,34 @@ export default function App() {
         {route.path === '/dashboard/support' && <PlaceholderPage title="Help & Support" />}
         {route.path === '/dashboard/inventory' && <PlaceholderPage title="Inventory Management" />}
         {route.path === '/dashboard/suppliers' && <PlaceholderPage title="Supplier Integration" />}
-        {route.path === '/dashboard/categories' && <PlaceholderPage title="Category Management" />}
         {route.path === '/dashboard/events' && <PlaceholderPage title="Events & Calendar" />}
         
         {/* Fallback */}
-        {!['/dashboard', '/dashboard/orders', '/dashboard/products', '/dashboard/earnings', '/dashboard/customers', '/dashboard/analytics', '/dashboard/promotions', '/dashboard/settings', '/dashboard/messages', '/dashboard/returns', '/dashboard/reviews', '/dashboard/bugs', '/dashboard/support', '/dashboard/inventory', '/dashboard/suppliers', '/dashboard/categories', '/dashboard/events'].includes(route.path) && <DashboardOverview />}
+        {!['/dashboard', '/dashboard/orders', '/dashboard/products', '/dashboard/categories', '/dashboard/earnings', '/dashboard/customers', '/dashboard/analytics', '/dashboard/promotions', '/dashboard/settings', '/dashboard/messages', '/dashboard/returns', '/dashboard/reviews', '/dashboard/bugs', '/dashboard/support', '/dashboard/inventory', '/dashboard/suppliers', '/dashboard/events', '/dashboard/profile', '/dashboard/orders/detail'].includes(route.path) && <DashboardOverview onNavigate={navigate} />}
       </DashboardLayout>
     );
   }
 
   return (
     <div className="font-sans text-[#333333] bg-[#ffffff] min-h-screen selection:bg-[#e31c3d] selection:text-white">
-      <div className="sticky top-0 z-50 flex flex-col">
-        <AnnouncementBar />
-        <Header onNavigate={navigate} />
-      </div>
-      <main>
-        {route.path === 'home' && <HomePage onNavigate={navigate} />}
-        {route.path === 'category' && route.id !== null && <CategoryProductsPage categoryIndex={route.id} onNavigate={navigate} />}
-        {route.path === 'category' && route.id === null && <CategoryPage onNavigate={navigate} />}
-        {route.path === 'product' && <ProductDetailPage productId={route.id ?? null} onNavigate={navigate} />}
+      <Header products={products} onNavigate={navigate} />
+      <main className="pt-20 md:pt-28">
+        {route.path === 'home' && <HomePage products={products} categories={categories} customizations={customizations} onNavigate={navigate} />}
+        {route.path === 'category' && <CategoryPage categories={categories} onNavigate={navigate} />}
+            {route.path === 'category-products' && <CategoryProductsPage products={products} categories={categories} categoryName={route.categoryName || 'All Products'} initialSearchQuery={route.searchQuery} onNavigate={navigate} />}
+            {route.path === 'product' && <ProductDetailPage productId={route.id} products={products} onNavigate={navigate} />}
         {route.path === 'cart' && <CartPage onNavigate={navigate} />}
         {route.path === 'checkout' && <CheckoutPage onNavigate={navigate} />}
-        {route.path === 'account' && <AccountPage onNavigate={navigate} />}
-        {route.path === 'wishlist' && <WishlistPage onNavigate={navigate} />}
+        {route.path === 'order-confirmation' && <OrderConfirmationPage onNavigate={navigate} orderId={route.id} />}
+        {route.path === 'account' && <AccountPage onNavigate={navigate} initialTab={route.id ?? undefined} />}
+        {route.path === 'wishlist' && <AccountPage onNavigate={navigate} initialTab={'wishlist' as any} />}
         {route.path === 'about' && <AboutUsPage />}
         {route.path === 'contact' && <ContactUsPage />}
         {route.path === 'delivery' && <DeliveryReturnsPage />}
-        {route.path === 'track' && <TrackOrderPage />}
+        {route.path === 'track' && <TrackOrderPage initialOrderId={route.id} />}
         {route.path === 'help' && <HelpFAQPage />}
         {route.path === 'important' && <ImportantPage />}
+        {route.path === 'auth' && <AuthPage onNavigate={navigate} />}
       </main>
       <Footer onNavigate={navigate} />
     </div>

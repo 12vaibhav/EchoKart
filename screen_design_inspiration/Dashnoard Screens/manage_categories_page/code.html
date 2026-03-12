@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EchoKart Admin - Manage Categories</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e31c3d",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211114",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="flex min-h-screen">
+<!-- Sidebar -->
+<aside class="w-64 bg-slate-950 text-slate-100 flex flex-col fixed h-full z-10">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary rounded-lg p-1.5">
+<span class="material-symbols-outlined text-white">shopping_cart</span>
+</div>
+<div>
+<h1 class="font-bold text-lg tracking-tight leading-none">EchoKart</h1>
+<p class="text-xs text-slate-400">Admin Portal</p>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="text-sm font-medium">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary text-white shadow-lg shadow-primary/20" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="text-sm font-medium">Categories</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-sm font-medium">Products</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Customers</span>
+</a>
+<div class="pt-4 pb-2 px-3">
+<p class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Settings</p>
+</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Store Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-900">
+<div class="flex items-center gap-3 p-2">
+<div class="size-9 rounded-full bg-slate-800 flex items-center justify-center overflow-hidden">
+<img alt="Admin Avatar" data-alt="Admin user profile headshot portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3TKKPX6tVnDhp9461RHG1qgswoRZhZM1-AO6qd6cegQibJ5urBtWYcWQeWLrovULZP2CnINrHdiqjPucH7XwGqixZiyV0sr_rgdBHYCt6voDxikv-Qzk4bzGPFSYGYXImgYu0VTaVjhi_Hu3LDWw68D4D1SPo9YHXjGPSIiH_1FNQUa60oU7c-0fHF_iuMQHro1qnL-G7v_i5dGIkrVtFmpge0xd52l0m_gJPFYydT4-giDyOgWME4NX2Sq1ulrw1gYmBdeFa7yw2"/>
+</div>
+<div class="overflow-hidden">
+<p class="text-sm font-medium truncate">Alex Carter</p>
+<p class="text-xs text-slate-500 truncate">Senior Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 ml-64 min-h-screen bg-white dark:bg-slate-950 transition-colors">
+<!-- Header -->
+<header class="h-16 bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-900 flex items-center justify-between px-8 sticky top-0 z-10">
+<div class="flex items-center gap-2">
+<h2 class="text-xl font-bold tracking-tight">Manage Categories</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-900 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary transition-all" placeholder="Search categories..." type="text"/>
+</div>
+<button class="size-10 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+</header>
+<div class="p-8">
+<!-- Top Actions -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div>
+<h3 class="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Product Categories</h3>
+<p class="text-slate-500 text-sm mt-1 font-medium">Overview and management of your store's department structure</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg font-bold text-sm shadow-lg shadow-primary/20 hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-xl">add_circle</span>
+                            Add New Category
+                        </button>
+</div>
+</div>
+<!-- Category Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Category Item 1 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-none transition-shadow group">
+<div class="aspect-video relative bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern high-tech gadgets and electronics collection" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAj91qo9SOJvNM3VwtI9xxDA6JTWfGjOoLahFv5prGenrayRYrLYXaRfpgNbpEqDJLSnUHa7cmf6m_-8PGDmvUr-TzbyCGYQUgrc0Yr80OMdx9NdTW1RWky4X8MKgW-uJfmGe5f7UJWr8verjGZVyFIktI9FIrY4u39VP-y-YF3qE9lX7d8fWo56UoYxC7SqDcKp2Ya2qD6X1itFKSWxXhcfx5ZdGNwkOWrsiJQtjKSRTgzy1yCvLFBfBdjhgJm49iAZ_DSyuAxGRn9"/>
+<div class="absolute top-3 right-3">
+<span class="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-400 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Visible</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-lg">Electronics</h4>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-4 text-sm text-slate-500 mb-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">inventory</span>
+<span>1,240 items</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">trending_up</span>
+<span class="text-emerald-500 font-medium">+12%</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-slate-50 dark:border-slate-800">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Visibility Toggle</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Category Item 2 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-none transition-shadow group">
+<div class="aspect-video relative bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Stylish boutique clothing and fashion accessories" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbp5Xo2S6t21j1_UDvO-UuIIz7OUES9Uh_lSDOU0Mc0P1FNhogm8p1yUMbpYtnGBb3lmBSyUu_5LvVU3ttcClBC7BEIxpuQw76nUWrUDi3KslNuQcJ1zgXN_jQ0cZdfLq2qD-u2HuzfwDe5fgtDLDKsEHNEN4oJj0ppFOwbac23uM6OD6BnC-1Nq6aFZ-kLhjV_FoOYDXEvfiz2NDn0QQtpsdjkKa1SkzZwYOG6R70QvN96gE_ok0N3VRcfjGmzXc7J4GSaumU1d85"/>
+<div class="absolute top-3 right-3">
+<span class="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-400 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Visible</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-lg">Fashion</h4>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-4 text-sm text-slate-500 mb-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">inventory</span>
+<span>2,150 items</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">trending_up</span>
+<span class="text-emerald-500 font-medium">+8%</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-slate-50 dark:border-slate-800">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Visibility Toggle</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Category Item 3 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-none transition-shadow group">
+<div class="aspect-video relative bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern kitchen interior with clean design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi6TsYBkRD7UtMs-oyGEWf1dNtUUZVZ6XDXERype6WBvrpO9n_1YMUCppMHGA23Xm-6TwwoGM-jsHlKaqVWAxIT1vhDggStEIthWbZ8KQxlJwHHdkZOu_BEIQg9Y9Hruji0vuJroY0V4WaQVyfHg5sRR_AXhODizDVUWlidKxz7vV5K03skcxRiVp4B0SFYvrLz2DEu5iB3HHgHigjJLZZQcJCOHJAiwntzdi3zTDyp586ZwL0pBwadrd_oSgRFiTJuMCmM40dTi8R"/>
+<div class="absolute top-3 right-3">
+<span class="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-400 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Visible</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-lg">Home &amp; Kitchen</h4>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-4 text-sm text-slate-500 mb-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">inventory</span>
+<span>850 items</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">trending_down</span>
+<span class="text-rose-500 font-medium">-2%</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-slate-50 dark:border-slate-800">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Visibility Toggle</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Category Item 4 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-none transition-shadow group opacity-75 grayscale hover:grayscale-0 hover:opacity-100 transition-all">
+<div class="aspect-video relative bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Selection of skincare and beauty products" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD65wqMD4XF-KtvZz28b3-GtrH3FGO7CsuGoKEdcFdKjoBRQpTsHZLPD4f0PiB6yLtW8BLaOe52gMh8SASprIh8Xv4DUSrp56Mz3sawDfyYiHva3LoaGfiO1OBrFkc3HDGQPk2v8572tg8RbFvlP9_KyibtAb13YRCTUuCxDohmvcWqjh-lKB5NOMYgFShYkek0Hj5RsYg3vqR_MCtiobJPsZLsB2HlKW8jJoRSd7JLlcpIw5K-EVSPmsE_Uv0mfkBS-JpFIUa87FkZ"/>
+<div class="absolute top-3 right-3">
+<span class="bg-slate-200 text-slate-600 dark:bg-slate-800 dark:text-slate-400 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Hidden</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-lg">Beauty</h4>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-4 text-sm text-slate-500 mb-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">inventory</span>
+<span>600 items</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">trending_flat</span>
+<span class="text-slate-400 font-medium">0%</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-slate-50 dark:border-slate-800">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Visibility Toggle</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Category Item 5 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-none transition-shadow group">
+<div class="aspect-video relative bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Assorted gym equipment and sports gear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIUeteUekAisBzRFE4sKAfeyUmwPEW31Rf-LDB1DlDqTELnRou1tURdm2Xo4EIYH8ZmGUPXjjbhPJMb1Ub1_Bpjd7J1gPXdV8Xqlv_MNB0ztDkj4kdf2ghK33alVfJVQ5M_2ra-SrlzCz83u48FAv1zSq5BLk9Gk78vxlhzuRHWRZfuZJSGz_6g47fWQkIitLBl8y0Kyk3Anyzb58rbSY8yBrLOIOiBj9LsB_djwGyWnCjy0360OI_5HyPJm2nl_MnIbJgl1fUhLE9"/>
+<div class="absolute top-3 right-3">
+<span class="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-400 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Visible</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-lg">Sports</h4>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-4 text-sm text-slate-500 mb-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">inventory</span>
+<span>420 items</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">trending_up</span>
+<span class="text-emerald-500 font-medium">+15%</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-slate-50 dark:border-slate-800">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Visibility Toggle</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Category Item 6 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-none transition-shadow group">
+<div class="aspect-video relative bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Colorful children toys and educational games" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC97y3Ge2iP24UX9ZucWwcEJYepPOq_DHSdjPATkOEmy_HK8MbJNz5-VQE_F-5B3SujzmZy1lRYpk8fbVAlzAdHEGQ9hU8WMFZ2UZNfFgznONhcRbzrrSs7p84zYOJTQZ30rBqsgp4l7ACnrBaaHys4cAsbP6U4Xx95xbTe-hNfixSGepkbGpeFqfSf58OcUyB769sPnh8E4mb5twOzl15urPQM36XFcwDMSm31bgIzTTuGYaoiaqaS0qnz9T_ZobBPKQopwYq8YnRE"/>
+<div class="absolute top-3 right-3">
+<span class="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-400 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Visible</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-lg">Toys</h4>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-4 text-sm text-slate-500 mb-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">inventory</span>
+<span>310 items</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">trending_up</span>
+<span class="text-emerald-500 font-medium">+4%</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-slate-50 dark:border-slate-800">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Visibility Toggle</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Add New Placeholder -->
+<button class="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl flex flex-col items-center justify-center p-8 gap-3 text-slate-400 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all group">
+<div class="size-14 rounded-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">add</span>
+</div>
+<span class="font-bold">Add New Category</span>
+</button>
+</div>
+<!-- Pagination/Stats Footer -->
+<div class="mt-12 flex flex-col md:flex-row items-center justify-between p-6 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800">
+<div class="text-sm font-medium text-slate-500">
+                        Showing <span class="text-slate-900 dark:text-white">6</span> of <span class="text-slate-900 dark:text-white">24</span> active categories
+                    </div>
+<div class="flex items-center gap-2 mt-4 md:mt-0">
+<button class="p-2 rounded-lg bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 disabled:opacity-50">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="size-10 rounded-lg bg-primary text-white font-bold">1</button>
+<button class="size-10 rounded-lg bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 font-bold hover:bg-slate-50 dark:hover:bg-slate-900">2</button>
+<button class="size-10 rounded-lg bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 font-bold hover:bg-slate-50 dark:hover:bg-slate-900">3</button>
+<button class="p-2 rounded-lg bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

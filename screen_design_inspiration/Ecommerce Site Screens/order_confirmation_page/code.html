@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e31c3d",
+                        "success": "#00c853",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211114",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background-light font-display">
+<!-- Header -->
+<header class="bg-black text-white px-6 md:px-12 py-4 flex items-center justify-between sticky top-0 z-50">
+<div class="flex items-center gap-2">
+<span class="text-2xl font-bold tracking-tighter">echokart</span>
+</div>
+<div class="flex items-center gap-6">
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</header>
+<main class="max-w-4xl mx-auto px-4 py-12">
+<!-- Success Header -->
+<div class="text-center mb-12">
+<div class="inline-flex items-center justify-center w-20 h-20 bg-success/10 rounded-full mb-6">
+<span class="material-symbols-outlined text-success text-5xl">check_circle</span>
+</div>
+<h1 class="text-4xl font-bold text-slate-900 mb-2">Thank you for your order!</h1>
+<p class="text-slate-500 text-lg">Order #12345</p>
+<p class="text-slate-500">A confirmation email has been sent to your inbox.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Order Summary & Details -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Delivery Status Card -->
+<div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+<h2 class="text-xl font-semibold">Estimated Delivery</h2>
+</div>
+<p class="text-2xl font-bold text-slate-900">Oct 24th - Oct 27th, 2024</p>
+<p class="text-slate-500 mt-1">Standard Shipping (3-5 business days)</p>
+</div>
+<!-- Items -->
+<div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+<h2 class="text-xl font-semibold mb-6">Order Summary</h2>
+<div class="space-y-6">
+<!-- Item 1 -->
+<div class="flex gap-4">
+<div class="w-24 h-24 bg-slate-100 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Premium wireless headphones" class="w-full h-full object-cover" data-alt="Modern high-end wireless headphones on white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2d7YkGoDm7n2akVDXxM2udNnFQYfKysuAzkesdvs-TLX_KT319DGdOPSZ1F1CFUpKkP-gOm92P9_6uL48wfaPv1FTtcqjYG_vRZR1tQJorKyqZq2iJppLwVjknw_BoYG1OojnrHS1dxGMQTjanEYilkWSNBTBtuqrUuwOQazGfqEnylL_yG81RcelFjAWvnveFlDNVHeS4Pbyl6YEb8X-nY5y9evS6r4FOwOYhZgMjrlZ_VKXpitjdFALr84iI9Bwqz7kg9rsh-4N"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between">
+<h3 class="font-medium text-slate-900">EchoPod Pro Max</h3>
+<p class="font-bold text-slate-900">$299.00</p>
+</div>
+<p class="text-sm text-slate-500">Space Gray | Quantity: 1</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-4">
+<div class="w-24 h-24 bg-slate-100 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Premium watch" class="w-full h-full object-cover" data-alt="Minimalist elegant white designer wrist watch" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjdrB9PZiFVA7dUDMRMNclkQuY30zeNUXXIHCeLCCnYzZTHvrU4nGrG7AMLTLVFwyxoCc4skqkxCMyoEInyILyu_5QYi8xO96Jsw6phmZFauI9N040YZJ8qJ1GtjUbIg_n3Sd9wcHDzuzZ3o_6zYIEVq_a6aYEIfbruWu5lb9gaHcq4PEt5bJQ_OlRAQA-OtkS1qTar30r1nMGTwH1YMHpJ6XrwUvQRErjLfGwvlpemlmUag5pJJNgVzILzL1_qF5l_Y5s0rOsz9V5"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between">
+<h3 class="font-medium text-slate-900">Minimalist Timepiece</h3>
+<p class="font-bold text-slate-900">$150.00</p>
+</div>
+<p class="text-sm text-slate-500">Silver Mesh | Quantity: 1</p>
+</div>
+</div>
+</div>
+<!-- Totals -->
+<div class="mt-8 pt-6 border-t border-slate-100 space-y-3">
+<div class="flex justify-between text-slate-600">
+<span>Subtotal</span>
+<span>$449.00</span>
+</div>
+<div class="flex justify-between text-slate-600">
+<span>Shipping</span>
+<span class="text-success font-medium">Free</span>
+</div>
+<div class="flex justify-between text-slate-600">
+<span>Estimated Tax</span>
+<span>$38.17</span>
+</div>
+<div class="flex justify-between text-xl font-bold text-slate-900 pt-3 border-t border-slate-100">
+<span>Total</span>
+<span>$487.17</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Shipping & Payment -->
+<div class="space-y-8">
+<!-- Shipping Address -->
+<div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+<h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400">location_on</span>
+                        Shipping Address
+                    </h2>
+<div class="text-slate-600 space-y-1">
+<p class="font-medium text-slate-900">Alex Johnson</p>
+<p>123 Tech Avenue</p>
+<p>Suite 400</p>
+<p>San Francisco, CA 94105</p>
+</div>
+<div class="mt-6">
+<div class="w-full h-32 rounded-lg bg-slate-200 overflow-hidden grayscale opacity-80 border border-slate-100">
+<img alt="Map location" class="w-full h-full object-cover" data-alt="Stylized map showing San Francisco city streets" data-location="San Francisco" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmESZ32py3J9UW06BGmXw1Z97XTGTydXh5E6O7y4Nv6I09_zjWoZXuWlATj3Gk0Dqt1uzxiLIm7lARLxB2pCXnxzZTja-Ou8i1FIwuSo1eSIj8UGOMa6MgFrFz72foRJy67n__7Sg7E1Y6eqixuh8ie9gUpHyIz_xC7RKkipoKgKAJ_1FA83f7mrcrCSVbbaL9hXtPog_005xbwBDf77qNARucTefxsn7qDawfeT170Y-lGbG-aWpy1DKClRVFu6DsnKP-r8wxmFrX"/>
+</div>
+</div>
+</div>
+<!-- Payment Method -->
+<div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+<h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400">credit_card</span>
+                        Payment Method
+                    </h2>
+<div class="flex items-center gap-3">
+<div class="w-12 h-8 bg-slate-100 rounded border border-slate-200 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-600">payments</span>
+</div>
+<div>
+<p class="font-medium text-slate-900">Visa ending in 4242</p>
+<p class="text-sm text-slate-500">Billed: $487.17</p>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="space-y-4 pt-4">
+<button class="w-full py-4 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+                        Continue Shopping
+                    </button>
+<button class="w-full py-4 bg-white text-slate-900 border border-slate-200 font-bold rounded-xl hover:bg-slate-50 transition-all">
+                        Track Order
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-black text-white mt-12 py-16 px-6 md:px-12">
+<div class="max-w-6xl mx-auto">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-12 border-b border-white/10 pb-12">
+<div>
+<h4 class="font-bold text-lg mb-6 tracking-tighter">echokart</h4>
+<p class="text-white/60 text-sm leading-relaxed">Redefining the digital shopping experience with curated excellence.</p>
+</div>
+<div>
+<h5 class="font-bold mb-6">Support</h5>
+<ul class="space-y-3 text-white/60 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Returns &amp; Refunds</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Shipping Info</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold mb-6">Company</h5>
+<ul class="space-y-3 text-white/60 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Sustainability</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold mb-6">Connect</h5>
+<div class="flex gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">language</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">share</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">mail</span>
+</div>
+</div>
+</div>
+<div class="text-center text-white/40 text-xs">
+                © 2024 EchoKart Inc. All rights reserved. Built for excellence.
+            </div>
+</div>
+</footer>
+</body></html>

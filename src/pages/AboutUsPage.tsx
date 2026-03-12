@@ -12,10 +12,10 @@ export const AboutUsPage = () => (
   <motion.div {...fadeInUpProps} className="max-w-4xl mx-auto px-4 py-16">
     <h1 className="text-4xl font-bold mb-8">About Us</h1>
     <h2 className="text-2xl font-bold mb-4">Our Story</h2>
-    <p className="mb-8 text-gray-600">Echokart was born out of a passion for finding the most helpful and trending products that make daily life easier and more enjoyable. We curate the best finds from around the world.</p>
+    <p className="mb-8 text-gray-600">EchoKart was born from a genuine passion for discovering the most helpful and trending products that genuinely simplify and enhance everyday life. We carefully curate the absolute best finds from around the world, bringing you innovative, high-quality items that spark joy and make every moment more enjoyable.</p>
     <h2 className="text-2xl font-bold mb-4">Brands</h2>
-    <p className="mb-8 text-gray-600">We partner with top-tier brands to ensure quality and reliability in every product we offer.</p>
+    <p className="mb-8 text-gray-600">At EchoKart, we proudly partner with top-tier, trusted brands to bring you only the highest-quality products. Every item in our collection is carefully selected for reliability, durability, and style, so you can shop with complete confidence knowing you're getting authentic, premium trending essentials every time.</p>
     <h2 className="text-2xl font-bold mb-4">Advice & Reviews</h2>
-    <p className="text-gray-600">Our team of experts tests every product to provide honest advice and reviews, helping you make informed decisions.</p>
+    <p className="text-gray-600">At EchoKart, our dedicated team of experts personally tests every trending product to deliver honest, unbiased advice and detailed reviews, empowering you to shop with complete confidence and make truly informed decisions.</p>
   </motion.div>
 );

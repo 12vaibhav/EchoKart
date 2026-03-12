@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e31c3d",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#110809",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>EchoKart Admin Dashboard</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 bg-slate-950 dark:bg-black text-white flex flex-col shrink-0 border-r border-slate-800">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary size-10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white">shopping_cart</span>
+</div>
+<div>
+<h1 class="text-xl font-extrabold tracking-tight">EchoKart</h1>
+<p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Admin Engine</p>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary text-white font-medium transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span>Manage Orders</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">sell</span>
+<span>Manage Categories</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">palette</span>
+<span>Store Customization</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">add_box</span>
+<span>Add Product</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-800">
+<button class="w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 py-2.5 rounded-lg font-bold text-sm transition-all">
+<span class="material-symbols-outlined text-sm">visibility</span>
+<span>View Store</span>
+</button>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-hidden">
+<header class="h-16 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 shrink-0">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-900 border-none rounded-lg focus:ring-2 focus:ring-primary/50 text-sm" placeholder="Search analytics, orders, or products..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-primary rounded-full border-2 border-white dark:border-slate-950"></span>
+</button>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-800 mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold">Alex Rivera</p>
+<p class="text-xs text-slate-500">Store Manager</p>
+</div>
+<div class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden border border-slate-300 dark:border-slate-700">
+<img alt="User Profile" data-alt="User profile avatar illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2quoNL_tLzNe9Z_Dh7FvNXv-c7qbKhnU1O_hCSoW9-PsI1sN19ygCRqbX4I_pQG7btubE8kV3rUg2eaZIcdupN5ey_5k_3PZal1mcc2cDPZU7nK43ns3G685n5Lnpv-STrH1uCAgUyflFzG2tkqHnC1IpIQPi_OrqlQ1K-wpqWp054TKr9G8jMhdG3oOYVCdXePFXJFH5HHFO6mbl8CGzZuOzRjG6Axzx1_JZOjDBxIrE8HYe0D4BYBum6jeUJr8DcQgqgPvY5ZmI"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 bg-slate-50 dark:bg-background-dark/50">
+<div class="mb-8">
+<h2 class="text-2xl font-black tracking-tight text-slate-900 dark:text-white">Dashboard Overview</h2>
+<p class="text-slate-500">Track your store's performance and recent activity in real-time.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-green-600 text-sm font-bold bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full">+12.5%</span>
+</div>
+<p class="text-sm text-slate-500 font-medium mb-1">Total Sales</p>
+<h3 class="text-2xl font-black text-slate-900 dark:text-white">$42,500.00</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-500/10 rounded-lg text-blue-500">
+<span class="material-symbols-outlined">shopping_cart_checkout</span>
+</div>
+<span class="text-green-600 text-sm font-bold bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full">+8.2%</span>
+</div>
+<p class="text-sm text-slate-500 font-medium mb-1">New Orders</p>
+<h3 class="text-2xl font-black text-slate-900 dark:text-white">156</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-orange-500/10 rounded-lg text-orange-500">
+<span class="material-symbols-outlined">assignment_return</span>
+</div>
+<span class="text-orange-600 text-sm font-bold bg-orange-50 dark:bg-orange-900/20 px-2 py-0.5 rounded-full">-2.1%</span>
+</div>
+<p class="text-sm text-slate-500 font-medium mb-1">Active Returns</p>
+<h3 class="text-2xl font-black text-slate-900 dark:text-white">12</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-purple-500/10 rounded-lg text-purple-500">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<span class="text-green-600 text-sm font-bold bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full">+0.4%</span>
+</div>
+<p class="text-sm text-slate-500 font-medium mb-1">Conversion Rate</p>
+<h3 class="text-2xl font-black text-slate-900 dark:text-white">3.2%</h3>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<h3 class="font-bold text-lg">Manage Incoming Orders</h3>
+<button class="text-primary text-sm font-bold hover:underline">View All Orders</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-slate-950 text-slate-500 text-xs font-bold uppercase tracking-wider">
+<tr>
+<th class="px-6 py-3">Order ID</th>
+<th class="px-6 py-3">Customer</th>
+<th class="px-6 py-3">Amount</th>
+<th class="px-6 py-3">Status</th>
+<th class="px-6 py-3 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-950 transition-colors">
+<td class="px-6 py-4 font-mono text-sm">#ORD-9021</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+<img alt="Customer Initials" data-alt="Customer avatar placeholder initials" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoCOLo01GRcXQs3uGUsjamvHElZ1W4_zHU6uJtx_1PM8RECb550nnFC6IZ6u5TFVYc1AqLq25pHunWtsgaaWcbCDvZoZI_onatMP25C8IZ7LMWTpl2McIv9mby6Yc5cBnzHO9-KVNklGksuy0YtokrQ9Fj2twOlB2F0NIAutPdGCntow2cq5AOEeORLH2HLw9895T0XV-c5YWdDjme2ZrA4DVWtxEciVxZuDt6l9-eYzOj5NqzByM0BF3N3_J_whCDJKRazUV_KrKQ"/>
+</div>
+<span class="text-sm font-medium">John Doe</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-bold">$124.99</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">Processing</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">
+<span class="material-symbols-outlined text-slate-500">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-950 transition-colors">
+<td class="px-6 py-4 font-mono text-sm">#ORD-9020</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+<img alt="Customer Initials" data-alt="Customer avatar placeholder initials" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR7TzGSBjLYwh-_gRKY9izraZ3BgRUgIrulcpLvuDgLcybzTh38qBsAaGAMmdgGliEp9QKw4Mnqd2g-yzwsOVVasjGfYi91wka3VdDKjxAhMsmu5B8bMmwY_05ZmOcHuBoFbjn4LHK-L-VfU852XNSFmfJciWp3Q3Hpxx7lVuYZMDUZEOUClp9q9amcmS2XRAUrwl9rvopWP4fucxtKiXM9DN6AUS9STQkch2XHnIeuvmykHl_187NX3F3Wa-2m0bJk2UB_MgBDnes"/>
+</div>
+<span class="text-sm font-medium">Sarah Smith</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-bold">$89.00</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">Shipped</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">
+<span class="material-symbols-outlined text-slate-500">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-950 transition-colors">
+<td class="px-6 py-4 font-mono text-sm">#ORD-9019</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+<img alt="Customer Initials" data-alt="Customer avatar placeholder initials" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo_kDxWBz93-TAtRlx-v7TYIQXzmrvNoQeBfADPyfeS7eHTdqJc6KYGJMVsRSDqLu28-eABmoprNzgLkSIsTsD-4jh8_aCaKQmUE6LlRbpuzIekcFbU-pL3j91WakgOoJ9Ex0S1zmycM33nMPa-J4fIctFQBqIm-b0HKGfMhwssX41fuIHoqQ5pLK5iAhQc_EG-NMVAcVi-QPSzKfU0JWWIcyG2cIVxLw3p1-Y8ga3LJqVQHDQYUWoOvJnzsZe7fxRBz2L3Z_-0wcp"/>
+</div>
+<span class="text-sm font-medium">Mike Wilson</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-bold">$2,450.00</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400">Pending</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">
+<span class="material-symbols-outlined text-slate-500">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-950 transition-colors">
+<td class="px-6 py-4 font-mono text-sm">#ORD-9018</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+<img alt="Customer Initials" data-alt="Customer avatar placeholder initials" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG2TydWkI1FS8KzFHkaQknec6XEMvP3U20rs_0eYWXmKYuNGdVvAXiyqBv70cNxUuLT50SX9copDm6fb6e6ZcXAgu8aVwZdswQQ8wNqRukM_8SGgnaYJ6hpIyVvqq0yui38mLocaW_jb2v_NSVWoUH-T1h2lP8l9wJbvNGJaXesgXuqiFWVs94d-8nfUCf_Z0rot4Olwk_MWW0HZssrn1nbxRBbE67nKv2tbudc17cnDIBRz67UVKF5N41qLTTbI0T2pAhJToll-y_"/>
+</div>
+<span class="text-sm font-medium">Emma Kane</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-bold">$56.20</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400">Cancelled</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">
+<span class="material-symbols-outlined text-slate-500">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<h3 class="font-bold text-lg">Recent Activity</h3>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">refresh</span>
+</button>
+</div>
+<div class="flex-1 p-6 space-y-6">
+<div class="flex gap-4">
+<div class="relative">
+<div class="size-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</div>
+<div class="absolute top-10 left-1/2 -translate-x-1/2 w-0.5 h-10 bg-slate-100 dark:bg-slate-800"></div>
+</div>
+<div>
+<p class="text-sm font-bold">New Inventory Added</p>
+<p class="text-xs text-slate-500">25 units of "Wireless Headset X1"</p>
+<p class="text-[10px] text-slate-400 mt-1 uppercase font-bold tracking-tight">2 minutes ago</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="relative">
+<div class="size-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined text-xl">person_add</span>
+</div>
+<div class="absolute top-10 left-1/2 -translate-x-1/2 w-0.5 h-10 bg-slate-100 dark:bg-slate-800"></div>
+</div>
+<div>
+<p class="text-sm font-bold">New Customer Registered</p>
+<p class="text-xs text-slate-500">sam.dev@example.com</p>
+<p class="text-[10px] text-slate-400 mt-1 uppercase font-bold tracking-tight">15 minutes ago</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="relative">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">emergency</span>
+</div>
+<div class="absolute top-10 left-1/2 -translate-x-1/2 w-0.5 h-10 bg-slate-100 dark:bg-slate-800"></div>
+</div>
+<div>
+<p class="text-sm font-bold">Return Request Filed</p>
+<p class="text-xs text-slate-500">Order #ORD-8942 - Defective item</p>
+<p class="text-[10px] text-slate-400 mt-1 uppercase font-bold tracking-tight">1 hour ago</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="relative">
+<div class="size-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600">
+<span class="material-symbols-outlined text-xl">stars</span>
+</div>
+</div>
+<div>
+<p class="text-sm font-bold">New Product Review</p>
+<p class="text-xs text-slate-500">5 stars by user mark_99</p>
+<p class="text-[10px] text-slate-400 mt-1 uppercase font-bold tracking-tight">3 hours ago</p>
+</div>
+</div>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+<button class="w-full text-center text-sm font-bold text-slate-600 hover:text-primary transition-colors">View All Activity</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

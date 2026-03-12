@@ -1,7 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
-import { TRENDING_PRODUCTS } from '../data';
 
-type Product = typeof TRENDING_PRODUCTS[0];
+type Product = any;
 
 interface WishlistContextType {
   wishlist: Product[];

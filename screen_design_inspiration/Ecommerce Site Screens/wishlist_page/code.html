@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e31c3d",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211114",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>EchoKart | My Wishlist</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 bg-black px-6 md:px-20 py-4 text-white">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white">shopping_bag</span>
+</div>
+<h2 class="text-white text-xl font-black leading-tight tracking-tight">EchoKart</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-300 hover:text-white text-sm font-medium transition-colors" href="#">Home</a>
+<a class="text-slate-300 hover:text-white text-sm font-medium transition-colors" href="#">Shop</a>
+<a class="text-slate-300 hover:text-white text-sm font-medium transition-colors" href="#">Categories</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4 md:gap-6">
+<label class="hidden md:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full overflow-hidden">
+<div class="text-slate-400 flex bg-slate-800 items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-slate-800 text-white focus:ring-0 h-full placeholder:text-slate-500 px-4 pl-2 text-sm font-normal" placeholder="Search products..." value=""/>
+</div>
+</label>
+<div class="flex items-center gap-3">
+<button class="relative p-2 text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+<span class="absolute top-1 right-1 size-2 bg-primary rounded-full"></span>
+</button>
+<button class="p-2 text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<div class="size-8 rounded-full border border-slate-700 bg-slate-800 bg-cover bg-center" data-alt="User profile avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCRKekOMC7pRKmAThfaJd5wPCga6jjj7Kv-9R21nMxTU6c7CtdlNIKxIT-BHhOjY3qOhW8xB7d2RILI7Q-fOzd7n2cPLGzQXNz0Xc6YvnRLlmT4kHK-dfNFWOgcSKEz6ITe12FO2nE4Oz_LbonCD_aEbLn0vjDbSikFO_qnAbkyb-NBJkVNW6YfzCXw6WDEY-Eo-A8-7dGlG3LohxmtGpll6rYcr9Q4jkgOEqMgRJZPW-IwMtfAX2LJlnjuMlx4P21glwX9XPsImU1c");'></div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col max-w-7xl mx-auto w-full px-6 md:px-10 py-10">
+<div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+<div class="flex flex-col gap-2">
+<nav class="flex items-center gap-2 text-xs font-medium text-slate-500 uppercase tracking-widest mb-2">
+<a class="hover:text-primary transition-colors" href="#">Account</a>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span class="text-slate-900 dark:text-slate-100">Wishlist</span>
+</nav>
+<h1 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-slate-100 tracking-tight">My Wishlist</h1>
+<p class="text-slate-500 dark:text-slate-400 text-lg">You have 12 items saved for later.</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined text-lg">share</span>
+                            Share List
+                        </button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-bold hover:opacity-90 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-lg">shopping_cart_checkout</span>
+                            Add All to Cart
+                        </button>
+</div>
+</div>
+<div class="flex border-b border-slate-200 dark:border-slate-800 mb-8 gap-8 overflow-x-auto no-scrollbar">
+<a class="flex flex-col items-center justify-center border-b-2 border-primary text-primary pb-3 pt-2 whitespace-nowrap" href="#">
+<span class="text-sm font-bold uppercase tracking-wider">All Items (12)</span>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 pb-3 pt-2 transition-all whitespace-nowrap" href="#">
+<span class="text-sm font-bold uppercase tracking-wider">On Sale (4)</span>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 pb-3 pt-2 transition-all whitespace-nowrap" href="#">
+<span class="text-sm font-bold uppercase tracking-wider">Recently Added</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<div class="group flex flex-col bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-800">
+<div class="relative aspect-square overflow-hidden bg-slate-100">
+<div class="absolute top-3 left-3 z-10 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Sale</div>
+<button class="absolute top-3 right-3 z-10 size-8 bg-white/90 dark:bg-slate-800/90 rounded-full flex items-center justify-center text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+<img alt="Wireless Over-Ear Headphones" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Black premium wireless over-ear noise-cancelling headphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGwaZIDwkMwiW5WLmScVf92n_NgwrsBTtRu45wlZUBXYXR6OTSaxpropSXM2ZPdef5X_6GYgEscaL3wcSv22ccLo-PeLkVQnCBcALq-Y00PoDsR2CD00Bb1LAjoVF2h-1zLV4cwrZ1OlZia0xOvK3kbBPar4B5Czyn6xIFKOeKrV1C8-EMob7fOrjU3acLG3XMIxhNg51PuC3VbCgexmnNMAB7mV_f29c9_SI-b_2kVcYW7KG2JVXq8UNNLnPAb6zy1Zuu6vEKMMdy"/>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest mb-1">Electronics</p>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-tight mb-2">EchoPro Wireless Headphones</h3>
+<div class="flex items-center gap-2 mb-4">
+<span class="text-xl font-bold text-slate-900 dark:text-slate-100">$129.00</span>
+<span class="text-sm text-slate-400 line-through">$189.00</span>
+</div>
+<div class="mt-auto flex gap-2">
+<button class="flex-1 bg-primary text-white py-2.5 rounded-lg text-sm font-bold hover:opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                    Add to Cart
+                                </button>
+</div>
+</div>
+</div>
+<div class="group flex flex-col bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-800">
+<div class="relative aspect-square overflow-hidden bg-slate-100">
+<button class="absolute top-3 right-3 z-10 size-8 bg-white/90 dark:bg-slate-800/90 rounded-full flex items-center justify-center text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+<img alt="Minimalist Smart Watch" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Modern minimalist smartwatch with silver band and clean watch face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-KXw2S6Ao3q2Ya715DJsg5WlJkxXZLyL3NW8pAVYwfbsOOSkVhBDux3PTOAmz4VJVTEbcGrdpyK4XHanNconxpAxSx29J0Po0nkrYRvLrhFP4NLZayQa3lSdYG7ohYRtFU-c7dKZHZsKAr_GEOt0lJujgnJGYPHahc7T3G5riRXIl2u3dQy9rIpv7JpJe1vaS655dI3Wqz3nxQvOrO5zg6CEZcZJOaw2zuNy55FQaalV4hLZEi8PQUuN447X8Nkp38EmwbcO4IP21"/>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest mb-1">Wearables</p>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-tight mb-2">EchoWatch Series 5</h3>
+<div class="flex items-center gap-2 mb-4">
+<span class="text-xl font-bold text-slate-900 dark:text-slate-100">$299.00</span>
+</div>
+<div class="mt-auto flex gap-2">
+<button class="flex-1 bg-primary text-white py-2.5 rounded-lg text-sm font-bold hover:opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                    Add to Cart
+                                </button>
+</div>
+</div>
+</div>
+<div class="group flex flex-col bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-800">
+<div class="relative aspect-square overflow-hidden bg-slate-100">
+<div class="absolute top-3 left-3 z-10 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Out of Stock</div>
+<button class="absolute top-3 right-3 z-10 size-8 bg-white/90 dark:bg-slate-800/90 rounded-full flex items-center justify-center text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+<img alt="Mechanical Gaming Keyboard" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 grayscale opacity-60" data-alt="RGB backlit mechanical gaming keyboard with aluminum frame" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4-mRC3p4VVDsvw542onZWesWoMd2uA-_V1n9k8y9bKaAsawH7PxzAAoGsLcDTMA8mGIK0MFWR373DSdJEs3jw8-Anbmyo-TM-x5qglGz6i1a3gu1aP81IQcCjYNf5eSX0aPmE9RKajT4YKE-S_wsV3_cIRu4d4l7YYOKhrFRTC-1BFdjS7Rzo9rbMFjRW9pqYqXirvAtNkQwvoUhrCv0qhTf1SQe7pdDavC3jy4rXFqBL5JkRxF9pssa-7koZWEg8Nk2uxv5x_HwZ"/>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Accessories</p>
+<h3 class="text-lg font-bold text-slate-400 dark:text-slate-500 leading-tight mb-2 line-through">Tactile-X Mechanical Keyboard</h3>
+<div class="flex items-center gap-2 mb-4">
+<span class="text-xl font-bold text-slate-400 dark:text-slate-500">$149.00</span>
+</div>
+<div class="mt-auto flex gap-2">
+<button class="flex-1 bg-slate-200 dark:bg-slate-800 text-slate-500 py-2.5 rounded-lg text-sm font-bold cursor-not-allowed flex items-center justify-center gap-2" disabled="">
+<span class="material-symbols-outlined text-lg">notifications</span>
+                                    Notify Me
+                                </button>
+</div>
+</div>
+</div>
+<div class="group flex flex-col bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-800">
+<div class="relative aspect-square overflow-hidden bg-slate-100">
+<div class="absolute top-3 left-3 z-10 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Limited</div>
+<button class="absolute top-3 right-3 z-10 size-8 bg-white/90 dark:bg-slate-800/90 rounded-full flex items-center justify-center text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+<img alt="Noise Cancelling Earbuds" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Compact white noise-cancelling earbuds in their charging case" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0JDuyZw0s0N82oitcjCC4j-MZBz7BEzPGdqfkWRVh58S0ImtVTCFI2xT_r7n7JGIyEwVLtqEdrjnFW6zk_qUZ_iVHpzE7PG1_h-eYOxxLEtSAfqLfprsQcA9LHoCPbkoTOvJEZVbuRQytHOWTX94Jko9XYB0DOgpgwN2XgVbvhA0drnkIbGIAlfdc4ezYuruT7-NUz5_CIFyYt1gqyx8qQBwvXfOBTC4azbxi2rVnyIFo-_Q_aiTiE2iO43q1APc4KGUCKKmqDZ-d"/>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest mb-1">Electronics</p>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-tight mb-2">EchoPods Pro 2</h3>
+<div class="flex items-center gap-2 mb-4">
+<span class="text-xl font-bold text-slate-900 dark:text-slate-100">$89.00</span>
+<span class="text-sm text-slate-400 line-through">$129.00</span>
+</div>
+<div class="mt-auto flex gap-2">
+<button class="flex-1 bg-primary text-white py-2.5 rounded-lg text-sm font-bold hover:opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                    Add to Cart
+                                </button>
+</div>
+</div>
+</div>
+<div class="group flex flex-col bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-800">
+<div class="relative aspect-square overflow-hidden bg-slate-100">
+<button class="absolute top-3 right-3 z-10 size-8 bg-white/90 dark:bg-slate-800/90 rounded-full flex items-center justify-center text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+<img alt="Desktop Coffee Mug Warmer" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Electric mug warmer with a minimalist black ceramic cup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyibRrcNeXaMKUOGVyAdCM5KPeIeRZnDIVvjVfDm1FQBcSYr7ny41jGYGrquwyhjE-wZdh3WrCNznkM46ZXP_09cHOiqCx3U9-VAVSb6Na9w_IUN4hWmdzJewPJaULB4O_7iQlQ9-wMBMN_V4pppAhfH6lSARt0tfpCKsRmPBrTl3vgXkxr2_6sWZpaDiNtvxDMoYNj_6yfVauvCJeZgaWpXKdLze-8un_q7t1Ff3xN3QXmWbOc8-poqtT4ABoPIKudy6iNvOzfzd2"/>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest mb-1">Lifestyle</p>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-tight mb-2">Smart Desk Warmer</h3>
+<div class="flex items-center gap-2 mb-4">
+<span class="text-xl font-bold text-slate-900 dark:text-slate-100">$45.00</span>
+</div>
+<div class="mt-auto flex gap-2">
+<button class="flex-1 bg-primary text-white py-2.5 rounded-lg text-sm font-bold hover:opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                    Add to Cart
+                                </button>
+</div>
+</div>
+</div>
+<div class="group flex flex-col bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-800">
+<div class="relative aspect-square overflow-hidden bg-slate-100">
+<button class="absolute top-3 right-3 z-10 size-8 bg-white/90 dark:bg-slate-800/90 rounded-full flex items-center justify-center text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+<img alt="Leather Tablet Sleeve" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Tan leather tablet sleeve with elegant stitching and button closure" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZEeiFjM1jZUn2QL-GquRWyOizzB2kYu2REXzBtikWAOM9GqNVg5Gm7fBMVAyysayF90YSXX6PvTrHv3eYmYkWfVY_ZX7qhclpjLpUj399jo2r-VUut4NNIAFsldyX70u_0DK861KZ5g4LiRoQuL0mrdAxG5W3B_uUZtPxpx8Gkizn36vuIy3jPzqy0QShaW6ArtJklkFf0bQ_X5_wDxSK5VZLYHBrrZYW72YZvhnLFvS0-sPqx3-9cI3xkoTWxu6wpCue2po8GAj4"/>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest mb-1">Accessories</p>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-tight mb-2">Genuine Leather Sleeve</h3>
+<div class="flex items-center gap-2 mb-4">
+<span class="text-xl font-bold text-slate-900 dark:text-slate-100">$65.00</span>
+</div>
+<div class="mt-auto flex gap-2">
+<button class="flex-1 bg-primary text-white py-2.5 rounded-lg text-sm font-bold hover:opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                    Add to Cart
+                                </button>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center justify-center border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-8 bg-slate-50 dark:bg-slate-800/50 min-h-[350px]">
+<span class="material-symbols-outlined text-5xl text-slate-400 mb-4">search</span>
+<p class="text-slate-500 dark:text-slate-400 font-medium text-center mb-6">Want to add more items to your wishlist?</p>
+<button class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-2.5 rounded-lg font-bold text-sm hover:opacity-80 transition-all">
+                            Browse Collection
+                        </button>
+</div>
+</div>
+</main>
+<footer class="bg-black text-white py-12 px-6 md:px-20 mt-20">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-3 mb-6">
+<div class="size-6 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm">shopping_bag</span>
+</div>
+<h2 class="text-white text-lg font-black tracking-tight">EchoKart</h2>
+</div>
+<p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            The ultimate destination for premium tech and lifestyle products curated for your modern life.
+                        </p>
+<div class="flex gap-4">
+<a class="size-8 rounded-full border border-slate-800 flex items-center justify-center text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">public</span>
+</a>
+<a class="size-8 rounded-full border border-slate-800 flex items-center justify-center text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">share</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Quick Links</h4>
+<ul class="flex flex-col gap-3">
+<li><a class="text-slate-400 text-sm hover:text-white transition-colors" href="#">Shop All</a></li>
+<li><a class="text-slate-400 text-sm hover:text-white transition-colors" href="#">New Arrivals</a></li>
+<li><a class="text-slate-400 text-sm hover:text-white transition-colors" href="#">Gift Cards</a></li>
+<li><a class="text-slate-400 text-sm hover:text-white transition-colors" href="#">Sustainability</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Customer Care</h4>
+<ul class="flex flex-col gap-3">
+<li><a class="text-slate-400 text-sm hover:text-white transition-colors" href="#">Support Center</a></li>
+<li><a class="text-slate-400 text-sm hover:text-white transition-colors" href="#">Shipping &amp; Returns</a></li>
+<li><a class="text-slate-400 text-sm hover:text-white transition-colors" href="#">Track Order</a></li>
+<li><a class="text-slate-400 text-sm hover:text-white transition-colors" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Newsletter</h4>
+<p class="text-slate-400 text-sm mb-4">Join for early access to sales and new products.</p>
+<div class="flex">
+<input class="bg-slate-900 border-none rounded-l-lg text-sm w-full focus:ring-primary" placeholder="Email address" type="email"/>
+<button class="bg-primary px-4 rounded-r-lg hover:opacity-90">
+<span class="material-symbols-outlined text-white text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto pt-12 mt-12 border-t border-slate-900 flex flex-col md:flex-row justify-between gap-6 text-slate-500 text-xs">
+<p>© 2024 EchoKart Inc. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-white transition-colors" href="#">Cookie Policy</a>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>
