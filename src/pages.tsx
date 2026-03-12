@@ -25,8 +25,7 @@ export const ContactUsPage = () => (
   <motion.div {...fadeInUpProps} className="max-w-4xl mx-auto px-4 py-16">
     <h1 className="text-4xl font-bold mb-8">Contact Us</h1>
     <p className="mb-4">Have questions? Reach out to us!</p>
-    <p className="font-bold">Email: support@echokart.com</p>
-    <p className="font-bold">WhatsApp: +91 98765 43210</p>
+    <p className="font-bold">Email: vaibhavdhiman39@gmail.com</p>
   </motion.div>
 );
 
