@@ -64,9 +64,9 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
       <div 
         className={`w-full transition-all duration-500 border-b ${
           isScrolled 
-            ? 'bg-black/90 backdrop-blur-xl border-white/10 py-1.5 md:py-0.5' 
-            : 'bg-black border-transparent py-3 md:py-1.5'
-        }`}
+            ? 'bg-black/90 backdrop-blur-xl border-white/10' 
+            : 'bg-black border-transparent'
+        } py-3 md:py-1.5`}
       >
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-full gap-2 md:gap-8">

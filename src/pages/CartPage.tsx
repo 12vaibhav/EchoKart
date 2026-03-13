@@ -73,43 +73,43 @@ export const CartPage = ({ onNavigate }: { onNavigate: (path: string, id?: numbe
           </div>
 
           {cart.map((item) => (
-            <div key={`${item.id}-${item.variant}`} className="flex flex-col sm:flex-row gap-6 py-6 border-b last:border-b-0">
-              <div className="w-full sm:w-32 h-32 bg-slate-50 rounded-xl overflow-hidden shrink-0 border border-slate-100">
-                <img className="w-full h-full object-contain p-2 mix-blend-multiply" alt={item.title} src={item.image} />
+            <div key={`${item.id}-${item.variant}`} className="flex flex-col sm:flex-row gap-4 sm:gap-6 py-6 border-b last:border-b-0">
+              <div className="w-full sm:w-32 aspect-square bg-slate-50 rounded-xl overflow-hidden shrink-0 border border-slate-100 p-2">
+                <img className="w-full h-full object-contain mix-blend-multiply" alt={item.title} src={item.image} />
               </div>
               
-              <div className="flex flex-col flex-1">
-                <div className="flex justify-between items-start">
+              <div className="flex flex-col flex-1 min-w-0">
+                <div className="flex flex-col sm:flex-row justify-between items-start gap-2">
                   <div className="pr-4">
-                    <h3 className="text-lg font-bold text-slate-900 line-clamp-1">{item.title}</h3>
-                    <p className="text-xs font-black text-[#e31c3d] uppercase tracking-widest mt-1">{item.brand}</p>
-                    {item.variant && <p className="text-sm text-slate-500 mt-1">Variant: {item.variant}</p>}
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900 line-clamp-2">{item.title}</h3>
+                    <p className="text-[10px] font-black text-[#e31c3d] uppercase tracking-widest mt-1">{item.brand}</p>
+                    {item.variant && <p className="text-xs text-slate-500 mt-1">Variant: {item.variant}</p>}
                   </div>
-                  <div className="text-right shrink-0">
+                  <div className="sm:text-right shrink-0">
                     <p className="text-lg font-black text-slate-900">₹{item.price.toLocaleString('en-IN')}</p>
                     {item.oldPrice && <p className="text-sm text-slate-400 line-through">₹{item.oldPrice.toLocaleString('en-IN')}</p>}
                   </div>
                 </div>
                 
-                <div className="flex items-center justify-between mt-auto pt-6">
-                  <div className="flex items-center bg-slate-50 border border-slate-100 rounded-xl p-1">
+                <div className="flex items-center justify-between mt-6 sm:mt-auto">
+                  <div className="flex items-center bg-slate-50 border border-slate-100 rounded-xl p-1 shadow-sm">
                     <button 
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                      className="w-9 h-9 flex items-center justify-center text-slate-500 hover:text-[#e31c3d] hover:bg-white transition-all rounded-lg"
+                      className="w-8 h-8 flex items-center justify-center text-slate-500 hover:text-[#e31c3d] hover:bg-white transition-all rounded-lg"
                     >
-                      <Minus className="w-4 h-4" />
+                      <Minus className="w-3.5 h-3.5" />
                     </button>
-                    <span className="w-10 text-center font-black text-slate-900 text-sm">{item.quantity}</span>
+                    <span className="w-8 text-center font-black text-slate-900 text-sm">{item.quantity}</span>
                     <button 
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                      className="w-9 h-9 flex items-center justify-center text-slate-500 hover:text-[#e31c3d] hover:bg-white transition-all rounded-lg"
+                      className="w-8 h-8 flex items-center justify-center text-slate-500 hover:text-[#e31c3d] hover:bg-white transition-all rounded-lg"
                     >
-                      <Plus className="w-4 h-4" />
+                      <Plus className="w-3.5 h-3.5" />
                     </button>
                   </div>
                   <button 
                     onClick={() => removeFromCart(item.id)}
-                    className="text-slate-400 hover:text-rose-600 transition-all flex items-center gap-2 text-xs uppercase font-black"
+                    className="text-slate-400 hover:text-rose-600 transition-all flex items-center gap-2 text-[10px] uppercase font-black"
                   >
                     <Trash2 className="w-4 h-4" />
                     Remove

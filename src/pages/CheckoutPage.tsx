@@ -294,13 +294,13 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
               <h2 className="text-2xl font-bold">Payment Method</h2>
             </div>
             
-            <div className="bg-white border-2 border-slate-100 rounded-[2rem] p-4 md:p-8 shadow-sm overflow-hidden">
+            <div className="bg-white border-2 border-slate-100 rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-8 shadow-sm overflow-hidden">
               {/* Premium Tabs */}
-              <div className="flex p-1.5 bg-slate-100 rounded-2xl mb-8">
+              <div className="flex flex-col sm:flex-row p-1.5 bg-slate-100 rounded-2xl mb-8 gap-1.5 sm:gap-0">
                 <button
                   type="button"
                   onClick={() => setFormData(prev => ({ ...prev, paymentMethod: 'upi' }))}
-                  className={`flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-300 ${
+                  className={`flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 ${
                     formData.paymentMethod === 'upi' 
                       ? 'bg-white text-[#e31c3d] shadow-sm' 
                       : 'text-slate-400 hover:text-slate-600'
@@ -312,7 +312,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                 <button
                   type="button"
                   onClick={() => setFormData(prev => ({ ...prev, paymentMethod: 'cod' }))}
-                  className={`flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-300 ${
+                  className={`flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 ${
                     formData.paymentMethod === 'cod' 
                       ? 'bg-white text-[#e31c3d] shadow-sm' 
                       : 'text-slate-400 hover:text-slate-600'
