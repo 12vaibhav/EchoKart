@@ -64,7 +64,7 @@ export const ProductCarouselSection = ({ title, products, onNavigate }: { title:
           </div>
 
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-3">
               <button 
                 aria-label="Scroll left" 
                 onClick={() => scroll('left')} 
@@ -95,25 +95,24 @@ export const ProductCarouselSection = ({ title, products, onNavigate }: { title:
         </div>
         
         <div className="relative">
-
           <motion.div 
             ref={scrollRef}
             variants={containerVariants}
             initial="initial"
             whileInView="animate"
             viewport={{ once: true, margin: "-50px" }}
-            className="flex overflow-x-auto gap-6 md:gap-8 pb-12 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth"
+            className="grid grid-cols-2 md:flex md:overflow-x-auto gap-3 md:gap-8 pb-12 md:pb-12 snap-x snap-mandatory md:[&::-webkit-scrollbar]:hidden md:[-ms-overflow-style:none] md:[scrollbar-width:none] scroll-smooth"
           >
             {products.map(product => (
               <motion.div 
                 key={product.id} 
                 variants={itemVariants} 
-                className="shrink-0 snap-start"
+                className="shrink-0 md:snap-start h-full"
               >
                 <ProductCard 
                   product={product} 
                   onNavigate={onNavigate} 
-                  className="w-[260px] md:w-[320px] transition-transform duration-500 hover:-translate-y-2" 
+                  className="w-full md:w-[320px] transition-transform duration-500 hover:-translate-y-2" 
                 />
               </motion.div>
             ))}

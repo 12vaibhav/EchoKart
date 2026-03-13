@@ -71,7 +71,7 @@ export const NewArrivals = ({ products: propProducts, onNavigate }: { products?:
             <div className="absolute -bottom-4 left-0 w-24 h-1.5 bg-[#e31c3d] rounded-full" />
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-4">
             <button 
               onClick={() => scroll('left')} 
               className="w-14 h-14 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:text-[#e31c3d] hover:border-[#e31c3d] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#e31c3d]/10 active:scale-95 group"
@@ -94,7 +94,7 @@ export const NewArrivals = ({ products: propProducts, onNavigate }: { products?:
             initial="initial"
             whileInView="animate"
             viewport={{ once: true, margin: "-50px" }}
-            className="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth"
+            className="grid grid-cols-2 md:flex md:overflow-x-auto gap-3 md:gap-8 pb-12 md:pb-12 snap-x snap-mandatory md:[&::-webkit-scrollbar]:hidden md:[-ms-overflow-style:none] md:[scrollbar-width:none] scroll-smooth"
           >
             {displayProducts.map((item: any, idx) => {
               const title = item.title || item.name;
@@ -106,9 +106,9 @@ export const NewArrivals = ({ products: propProducts, onNavigate }: { products?:
                   key={item.id || idx} 
                   variants={itemVariants}
                   onClick={() => onNavigate('product', item.id)} 
-                  className="bg-white rounded-[2rem] p-5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-slate-100 group hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col cursor-pointer shrink-0 w-[260px] md:w-[320px] snap-start h-full relative overflow-hidden"
+                  className="bg-white rounded-[1rem] md:rounded-[2rem] p-3 md:p-5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-slate-100 group hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col cursor-pointer shrink-0 w-full md:w-[320px] md:snap-start h-full relative overflow-hidden"
                 >
-                  <div className="relative aspect-square mb-6 rounded-2xl overflow-hidden group/img">
+                  <div className="relative aspect-square mb-3 md:mb-6 rounded-xl md:rounded-2xl overflow-hidden group/img">
                     <button 
                       onClick={(e) => { e.stopPropagation(); toggleWishlist(item); }}
                       className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all z-20 backdrop-blur-md ${isWishlisted ? 'bg-[#e31c3d] text-white' : 'bg-white/80 text-slate-400 hover:text-[#e31c3d] hover:bg-white'}`}
