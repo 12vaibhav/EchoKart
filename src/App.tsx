@@ -416,7 +416,7 @@ export default function App() {
   return (
     <div className="font-sans text-[#333333] bg-[#ffffff] min-h-screen selection:bg-[#e31c3d] selection:text-white">
       <Header products={products} onNavigate={navigate} />
-      <main className="pt-20 md:pt-28">
+      <main className="pt-[72px] md:pt-28">
         {route.path === 'home' && <HomePage products={products} categories={categories} customizations={customizations} onNavigate={navigate} />}
         {route.path === 'category' && <CategoryPage categories={categories} onNavigate={navigate} />}
             {route.path === 'category-products' && <CategoryProductsPage products={products} categories={categories} categoryName={route.categoryName || 'All Products'} initialSearchQuery={route.searchQuery} onNavigate={navigate} />}

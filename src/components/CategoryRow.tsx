@@ -111,7 +111,7 @@ export const CategoryRow = ({ categories = [], onNavigate }: { categories: any[]
   }, [displayCategories.length]);
 
   return (
-    <motion.section {...fadeInUpProps} className="w-full bg-white pt-3 pb-0 select-none overflow-x-hidden">
+    <motion.section {...fadeInUpProps} className="w-full bg-white pt-1 md:pt-3 pb-0 select-none overflow-x-hidden">
       <div 
         className="max-w-[1400px] mx-auto px-4 md:px-8 relative" 
         ref={containerRef}
@@ -130,7 +130,7 @@ export const CategoryRow = ({ categories = [], onNavigate }: { categories: any[]
             dragMomentum={true}
             dragTransition={{ power: 0.3, timeConstant: 200 }}
             style={{ x }}
-            className="flex items-start gap-4 md:gap-8 lg:gap-10 py-4 cursor-grab active:cursor-grabbing will-change-transform"
+            className="flex items-start gap-4 md:gap-8 lg:gap-10 py-1 md:py-4 cursor-grab active:cursor-grabbing will-change-transform"
           >
             {displayCategories.map((cat, idx) => (
               <CategoryCard 
