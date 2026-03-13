@@ -182,13 +182,13 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
               {/* Action Icons */}
               <div className="flex items-center gap-0.5 md:gap-2 lg:gap-3">
                 {user ? (
-                  <button onClick={() => onNavigate('account')} className="p-1.5 sm:p-2 text-white hover:text-[#e31c3d] hover:bg-white/5 rounded-full transition-all group drop-shadow-sm">
+                  <button onClick={() => onNavigate('account')} className="hidden md:flex p-1.5 sm:p-2 text-white hover:text-[#e31c3d] hover:bg-white/5 rounded-full transition-all group drop-shadow-sm">
                     <User className="w-5 h-5 md:w-5.5 md:h-5.5 transition-colors" />
                   </button>
                 ) : (
                   <button 
                     onClick={() => onNavigate('auth')} 
-                    className="p-1.5 sm:p-2 md:px-5 md:py-2 bg-white/10 md:bg-white/10 hover:bg-white text-white hover:text-black rounded-full flex items-center justify-center transition-all duration-300 backdrop-blur-md"
+                    className="hidden md:flex p-1.5 sm:p-2 md:px-5 md:py-2 bg-white/10 md:bg-white/10 hover:bg-white text-white hover:text-black rounded-full items-center justify-center transition-all duration-300 backdrop-blur-md"
                   >
                     <User className="w-5 h-5 md:hidden" />
                     <span className="hidden md:block text-[10px] font-black tracking-widest uppercase">Sign In</span>
@@ -204,7 +204,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                 </button>
                 <button 
                   onClick={() => onNavigate('cart')} 
-                  className="p-1.5 sm:p-2 bg-[#e31c3d] hover:bg-white text-white hover:text-black rounded-full transition-all relative group hover:scale-105 active:scale-95 shadow-[0_4px_12px_rgba(227,28,61,0.2)] md:shadow-[0_8px_20px_rgba(227,28,61,0.3)] drop-shadow-lg"
+                  className="hidden md:flex p-1.5 sm:p-2 bg-[#e31c3d] hover:bg-white text-white hover:text-black rounded-full transition-all relative group hover:scale-105 active:scale-95 shadow-[0_4px_12px_rgba(227,28,61,0.2)] md:shadow-[0_8px_20px_rgba(227,28,61,0.3)] drop-shadow-lg"
                 >
                   <ShoppingCart className="w-5 h-5 md:w-5.5 md:h-5.5 transition-colors" />
                   {cartCount > 0 && (
@@ -223,8 +223,6 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                 {isMobileMenuOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Menu className="w-5 h-5 md:w-6 md:h-6" />}
               </button>
             </div>
-
-
           </div>
         </div>
       </div>
@@ -245,12 +243,39 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-black border-l border-white/10 z-50 lg:hidden flex flex-col p-10"
+              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-black border-l border-white/10 z-50 lg:hidden flex flex-col p-8 md:p-10"
             >
-              <div className="flex justify-between items-center mb-10">
-                <BrandLogo className="w-12 h-12" />
+              <div className="flex justify-between items-center mb-8">
+                <BrandLogo className="w-10 h-10" />
                 <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 bg-white/5 rounded-full">
-                  <X className="w-7 h-7" />
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              {/* Mobile Actions Grid (Profile & Cart) */}
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                <button 
+                  onClick={() => { onNavigate(user ? 'account' : 'auth'); setIsMobileMenuOpen(false); }}
+                  className="flex flex-col items-center justify-center gap-2 p-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-colors"
+                >
+                  <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
+                    <User className="w-5 h-5" />
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-widest">{user ? 'Account' : 'Sign In'}</span>
+                </button>
+                <button 
+                  onClick={() => { onNavigate('cart'); setIsMobileMenuOpen(false); }}
+                  className="flex flex-col items-center justify-center gap-2 p-4 bg-[#e31c3d]/10 border border-[#e31c3d]/20 rounded-2xl hover:bg-[#e31c3d]/20 transition-colors relative"
+                >
+                  <div className="w-10 h-10 bg-[#e31c3d] rounded-full flex items-center justify-center">
+                    <ShoppingCart className="w-5 h-5" />
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-widest">Bag</span>
+                  {cartCount > 0 && (
+                    <span className="absolute top-3 right-8 bg-black text-white text-[9px] font-black h-4 w-4 rounded-full flex items-center justify-center border border-white">
+                      {cartCount}
+                    </span>
+                  )}
                 </button>
               </div>
 
@@ -271,7 +296,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                     }
                   }}
                   placeholder="Search products..."
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-5 pr-12 text-sm text-white focus:bg-white/10 focus:border-[#e31c3d] outline-none transition-all"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3.5 pl-5 pr-12 text-sm text-white focus:bg-white/10 focus:border-[#e31c3d] outline-none transition-all"
                 />
                 <button 
                   onClick={() => {
@@ -319,7 +344,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                 </AnimatePresence>
               </div>
 
-              <div className="flex flex-col gap-10 text-3xl font-light tracking-[0.2em] uppercase">
+              <div className="flex flex-col gap-8 text-2xl font-light tracking-[0.2em] uppercase">
                 {['Shop', 'Track Order'].map((item, i) => (
                   <motion.button
                     initial={{ opacity: 0, x: 20 }}
@@ -343,21 +368,22 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                 ))}
               </div>
 
-              <div className="mt-auto pt-12 border-t border-white/10">
+              <div className="mt-auto pt-8 border-t border-white/10">
                 <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-4">Customer Care</p>
-                <div className="flex flex-col gap-4 text-sm text-white/70">
-                  <a href="#" className="flex items-center justify-between group">
+                <div className="flex flex-col gap-4 text-xs text-white/70">
+                  <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('track'); setIsMobileMenuOpen(false); }} className="flex items-center justify-between group">
                     Track My Order <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </a>
-                  <a href="#" className="flex items-center justify-between group">
+                  <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('return-policy'); setIsMobileMenuOpen(false); }} className="flex items-center justify-between group">
                     Returns Policy <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </a>
-                  <a href="#" className="flex items-center justify-between group">
+                  <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('contact'); setIsMobileMenuOpen(false); }} className="flex items-center justify-between group">
                     Contact Support <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </a>
                 </div>
               </div>
             </motion.div>
+
           </>
         )}
       </AnimatePresence>
