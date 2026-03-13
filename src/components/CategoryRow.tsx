@@ -35,7 +35,7 @@ const CategoryCard = ({
       }} 
       className="flex flex-col items-center gap-3 shrink-0 
                  w-24 md:w-28 lg:w-32 
-                 cursor-pointer group/card py-2"
+                 cursor-pointer group/card pt-2 pb-0 md:py-2"
     >
       <div className="relative">
         <div className="absolute -inset-1.5 rounded-full border border-slate-200 opacity-0 group-hover/card:opacity-100 transition-all duration-500" />
@@ -130,7 +130,7 @@ export const CategoryRow = ({ categories = [], onNavigate }: { categories: any[]
             dragMomentum={true}
             dragTransition={{ power: 0.3, timeConstant: 200 }}
             style={{ x }}
-            className="flex items-start gap-2.5 md:gap-8 lg:gap-10 py-1 md:py-4 cursor-grab active:cursor-grabbing will-change-transform"
+            className="flex items-start gap-2.5 md:gap-8 lg:gap-10 pt-1 pb-0 md:py-4 cursor-grab active:cursor-grabbing will-change-transform"
           >
             {displayCategories.map((cat, idx) => (
               <CategoryCard 
