@@ -356,10 +356,10 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
         </div>
 
         {/* Frequently Bought Together Section */}
-        <div className="mt-16 bg-gray-50/50 rounded-[2rem] p-6 sm:p-8 lg:p-10 border border-gray-100 relative group/fbt">
+        <div className="mt-20 relative group/fbt">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Frequently Bought Together</h2>
-            <div className="hidden sm:flex items-center gap-2">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Frequently Bought Together</h2>
+            <div className="hidden md:flex items-center gap-2">
               <button aria-label="Scroll left" onClick={() => scrollFBT('left')} className="w-10 h-10 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 hover:border-gray-300 hover:shadow-sm transition-all shadow-sm">
                 <ChevronLeft className="w-5 h-5 pointer-events-none" />
               </button>
