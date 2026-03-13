@@ -61,18 +61,18 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
         </div>
       </div>
 
-      <motion.div {...fadeInUpProps} className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <motion.div {...fadeInUpProps} className="max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8 py-6 md:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           
           {/* Left: Image Gallery (Side-by-Side Reference Design) */}
-          <div className="flex flex-col-reverse sm:flex-row gap-4 lg:gap-6 lg:h-[600px] h-auto">
+          <div className="flex flex-col-reverse md:flex-row gap-4 lg:gap-6 lg:h-[600px] h-auto">
             {/* Vertical Thumbnails (Bottom on mobile, Left on desktop) */}
-            <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-auto gap-3 w-full sm:w-20 md:w-24 shrink-0 pb-2 sm:pb-0 pr-2 sm:pr-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <div className="flex md:flex-col overflow-x-auto md:overflow-y-auto gap-2 md:gap-3 w-full md:w-20 lg:w-24 shrink-0 pb-2 md:pb-0 pr-2 md:pr-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {images.map((img: string, i: number) => (
                 <div 
                   key={i} 
                   onClick={() => setActiveImage(i)}
-                  className={`aspect-square w-20 sm:w-full rounded-2xl p-0 cursor-pointer flex items-center justify-center shrink-0 overflow-hidden box-border transition-all duration-300 ${i === activeImage ? 'bg-white border-2 border-[#e31c3d] shadow-sm scale-[1.02]' : 'bg-gray-50 border border-transparent hover:border-gray-200 hover:bg-white'}`}
+                  className={`aspect-square w-16 md:w-full rounded-xl md:rounded-2xl p-0 cursor-pointer flex items-center justify-center shrink-0 overflow-hidden box-border transition-all duration-300 ${i === activeImage ? 'bg-white border-2 border-[#e31c3d] shadow-sm scale-[1.02]' : 'bg-gray-50 border border-transparent hover:border-gray-200 hover:bg-white'}`}
                 >
                   <img src={img} alt="" className="w-full h-full object-cover drop-shadow-sm" />
                 </div>
@@ -80,7 +80,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             </div>
 
             {/* Main Image Viewport */}
-            <div className="relative flex-1 bg-gradient-to-br from-gray-50 to-white rounded-3xl border border-gray-100 shadow-sm flex items-center justify-center p-0 group overflow-hidden min-h-[400px]">
+            <div className="relative flex-1 bg-gradient-to-br from-gray-50 to-white rounded-2xl md:rounded-3xl border border-gray-100 shadow-sm flex items-center justify-center p-0 group overflow-hidden min-h-[350px] md:min-h-[400px]">
               {tags && tags.length > 0 && (
                 <div className="absolute top-6 left-6 flex flex-col gap-2 z-10">
                   {tags.map((tag: any, idx: number) => (
@@ -153,14 +153,14 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                   </span>
                 </div>
 
-                <div className="flex items-baseline gap-4 mb-8 p-6 rounded-[2rem] bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-sm relative overflow-hidden group max-w-md">
+                <div className="flex items-baseline gap-3 md:gap-4 mb-6 md:mb-8 p-4 md:p-6 rounded-2xl md:rounded-[2rem] bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-sm relative overflow-hidden group max-w-md">
                    <div className="absolute -right-4 -top-4 w-24 h-24 bg-[#e31c3d] opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.05] transition-opacity"></div>
-                    <span className="text-3xl sm:text-4xl font-black text-[#e31c3d] tracking-tighter">₹{price.toLocaleString('en-IN')}</span>
+                    <span className="text-2xl md:text-4xl font-black text-[#e31c3d] tracking-tighter">₹{price.toLocaleString('en-IN')}</span>
                    {oldPrice && (
-                     <span className="text-xl text-gray-400 line-through decoration-[1.5px] font-medium decoration-gray-300">₹{oldPrice.toLocaleString('en-IN')}</span>
+                     <span className="text-lg md:text-xl text-gray-400 line-through decoration-[1.5px] font-medium decoration-gray-300">₹{oldPrice.toLocaleString('en-IN')}</span>
                    )}
                    {oldPrice && (
-                     <div className="bg-red-50 text-[#e31c3d] text-xs font-extrabold px-3 py-1.5 rounded-full border border-red-100 shadow-sm">
+                     <div className="bg-red-50 text-[#e31c3d] text-[10px] md:text-xs font-extrabold px-2 md:px-3 py-1 md:py-1.5 rounded-full border border-red-100 shadow-sm">
                        SAVE {Math.round(((oldPrice - price) / oldPrice) * 100)}%
                      </div>
                    )}
@@ -205,48 +205,48 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             </div>
 
             {/* Important Highlights */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-3 md:gap-4 mb-10">
+              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
                 <div className="absolute -right-6 -top-6 w-24 h-24 bg-[#e31c3d] opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
                 <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-[#e31c3d] group-hover:scale-110 transition-transform z-10 shrink-0">
                   <Truck className="w-5 h-5" />
                 </div>
-                <div className="z-10 mt-0.5">
-                  <h4 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Express Delivery</h4>
-                  <p className="text-xs text-gray-500 leading-snug">Free shipping on all prepaid orders across the country.</p>
+                <div className="z-10 w-full">
+                  <h4 className="font-bold text-gray-900 text-[10px] md:text-sm mb-0.5 md:mb-1 line-clamp-1">Express Delivery</h4>
+                  <p className="text-[9px] md:text-xs text-gray-500 leading-snug hidden md:block">Free shipping on all prepaid orders across the country.</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
+              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
                 <div className="absolute -right-6 -top-6 w-24 h-24 bg-blue-500 opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
                 <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform z-10 shrink-0">
                   <RotateCcw className="w-5 h-5" />
                 </div>
-                <div className="z-10 mt-0.5">
-                  <h4 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">7-Day Returns</h4>
-                  <p className="text-xs text-gray-500 leading-snug">Hassle-free exchange policy, no questions asked.</p>
+                <div className="z-10 w-full">
+                  <h4 className="font-bold text-gray-900 text-[10px] md:text-sm mb-0.5 md:mb-1 line-clamp-1">7-Day Returns</h4>
+                  <p className="text-[9px] md:text-xs text-gray-500 leading-snug hidden md:block">Hassle-free exchange policy, no questions asked.</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
+              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
                 <div className="absolute -right-6 -top-6 w-24 h-24 bg-amber-500 opacity-[0.04] rounded-full blur-2xl group-hover:opacity-[0.08] transition-opacity"></div>
                 <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform z-10 shrink-0">
                   <Award className="w-5 h-5" />
                 </div>
-                <div className="z-10 mt-0.5">
-                  <h4 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">Top-Rated Quality</h4>
-                  <p className="text-xs text-gray-500 leading-snug">Crafted from premium durable materials and finishes.</p>
+                <div className="z-10 w-full">
+                  <h4 className="font-bold text-gray-900 text-[10px] md:text-sm mb-0.5 md:mb-1 line-clamp-1">Top-Rated Quality</h4>
+                  <p className="text-[9px] md:text-xs text-gray-500 leading-snug hidden md:block">Crafted from premium durable materials and finishes.</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
+              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
                 <div className="absolute -right-6 -top-6 w-24 h-24 bg-green-500 opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
                 <div className="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform z-10 shrink-0">
                   <Shield className="w-5 h-5" />
                 </div>
-                <div className="z-10 mt-0.5">
-                  <h4 className="font-bold text-gray-900 text-sm mb-1 line-clamp-1">100% Genuine</h4>
-                  <p className="text-xs text-gray-500 leading-snug">Verified and authenticated direct from the manufacturer.</p>
+                <div className="z-10 w-full">
+                  <h4 className="font-bold text-gray-900 text-[10px] md:text-sm mb-0.5 md:mb-1 line-clamp-1">100% Genuine</h4>
+                  <p className="text-[9px] md:text-xs text-gray-500 leading-snug hidden md:block">Verified and authenticated direct from the manufacturer.</p>
                 </div>
               </div>
             </div>
@@ -271,34 +271,32 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
 
             {/* Actions */}
             <div className="flex flex-col gap-4 mb-8">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex items-center border border-gray-200 bg-gray-50 rounded-xl h-14 w-full sm:w-36 overflow-hidden">
-                  <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="w-12 h-full flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors">
-                    <Minus className="w-4 h-4" />
+              <div className="flex flex-row gap-3">
+                <div className="flex items-center border border-gray-200 bg-gray-50 rounded-xl h-14 w-28 md:w-36 overflow-hidden shrink-0">
+                  <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="w-full h-full flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors">
+                    <Minus className="w-3.5 h-3.5" />
                   </button>
-                  <span className="flex-1 text-center font-bold text-gray-900 bg-white h-full flex items-center justify-center border-x border-gray-200">{quantity}</span>
-                  <button onClick={() => setQuantity(quantity + 1)} className="w-12 h-full flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors">
-                    <Plus className="w-4 h-4" />
-                  </button>
-                </div>
-                <div className="flex-1 flex gap-3">
-                  <button 
-                    onClick={() => addToCart(product, quantity, selectedSwatch || undefined)}
-                    className="flex-1 bg-white border border-gray-200 text-gray-900 font-bold h-14 rounded-xl flex items-center justify-center gap-2 hover:border-gray-300 hover:shadow-sm transition-all"
-                  >
-                    <ShoppingBag className="w-5 h-5" /> Cart
-                  </button>
-                  <button 
-                    onClick={() => {
-                      addToCart(product, quantity, selectedSwatch || undefined);
-                      onNavigate?.('checkout');
-                    }}
-                    className="flex-[1.5] bg-[#e31c3d] text-white font-bold h-14 rounded-xl hover:bg-[#c91532] hover:shadow-[0_8px_20px_rgba(227,28,61,0.25)] hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
-                  >
-                    Buy Now
+                  <span className="flex-1 text-center font-bold text-gray-900 bg-white h-full flex items-center justify-center border-x border-gray-200 text-sm">{quantity}</span>
+                  <button onClick={() => setQuantity(quantity + 1)} className="w-full h-full flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors">
+                    <Plus className="w-3.5 h-3.5" />
                   </button>
                 </div>
+                <button 
+                  onClick={() => addToCart(product, quantity, selectedSwatch || undefined)}
+                  className="flex-1 bg-white border border-gray-200 text-gray-900 font-bold h-14 rounded-xl flex items-center justify-center gap-2 hover:border-gray-300 hover:shadow-sm transition-all text-xs uppercase tracking-widest"
+                >
+                  <ShoppingBag className="w-4 h-4 md:w-5 md:h-5" /> Cart
+                </button>
               </div>
+              <button 
+                onClick={() => {
+                  addToCart(product, quantity, selectedSwatch || undefined);
+                  onNavigate?.('checkout');
+                }}
+                className="w-full bg-[#e31c3d] text-white font-black h-14 rounded-xl hover:bg-[#c91532] hover:shadow-[0_8px_20px_rgba(227,28,61,0.25)] hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 text-sm md:text-base uppercase tracking-widest"
+              >
+                Buy Now
+              </button>
               <button 
                 onClick={() => onNavigate?.('checkout')}
                 className="relative w-full overflow-hidden h-14 rounded-xl flex items-center justify-center gap-3 shadow-[0_8px_30px_rgba(255,152,0,0.3)] hover:shadow-[0_8px_40px_rgba(255,152,0,0.5)] transition-all duration-300 hover:-translate-y-1 border border-orange-400"
