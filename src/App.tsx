@@ -21,10 +21,8 @@ import { CartPage } from './pages/CartPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { AboutUsPage } from './pages/AboutUsPage';
 import { ContactUsPage } from './pages/ContactUsPage';
-import { DeliveryReturnsPage } from './pages/DeliveryReturnsPage';
 import { TrackOrderPage } from './pages/TrackOrderPage';
 import { HelpFAQPage } from './pages/HelpFAQPage';
-import { ImportantPage } from './pages/ImportantPage';
 import { PrivacyPolicyPage } from './pages/policies/PrivacyPolicyPage';
 import { TermsConditionsPage } from './pages/policies/TermsConditionsPage';
 import { RefundCancellationPage } from './pages/policies/RefundCancellationPage';
@@ -430,10 +428,8 @@ export default function App() {
         {route.path === 'wishlist' && <AccountPage onNavigate={navigate} initialTab={'wishlist' as any} />}
         {route.path === 'about' && <AboutUsPage />}
         {route.path === 'contact' && <ContactUsPage />}
-        {route.path === 'delivery' && <DeliveryReturnsPage />}
         {route.path === 'track' && <TrackOrderPage initialOrderId={route.id} />}
         {route.path === 'help' && <HelpFAQPage />}
-        {route.path === 'important' && <ImportantPage />}
         {route.path === 'privacy-policy' && <PrivacyPolicyPage />}
         {route.path === 'terms-conditions' && <TermsConditionsPage />}
         {route.path === 'refund-cancellation' && <RefundCancellationPage />}
