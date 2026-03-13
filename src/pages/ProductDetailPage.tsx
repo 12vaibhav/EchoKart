@@ -269,34 +269,40 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               </div>
             )}
 
-            {/* Actions */}
+            {/* Actions (Product Unit Element) */}
             <div className="flex flex-col gap-4 mb-8">
-              <div className="flex flex-row gap-3">
-                <div className="flex items-center border border-gray-200 bg-gray-50 rounded-xl h-14 w-28 md:w-36 overflow-hidden shrink-0">
-                  <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="w-full h-full flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors">
-                    <Minus className="w-3.5 h-3.5" />
+              <div className="bg-gray-50 p-2 rounded-2xl border border-gray-100 flex flex-col gap-3">
+                <div className="flex items-center justify-between px-2 py-1">
+                  <span className="text-sm font-bold text-gray-900 uppercase tracking-tight">Quantity</span>
+                  <div className="flex items-center bg-white border border-gray-200 rounded-xl h-11 w-32 overflow-hidden shadow-sm">
+                    <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="w-10 h-full flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors">
+                      <Minus className="w-3.5 h-3.5" />
+                    </button>
+                    <span className="flex-1 text-center font-bold text-gray-900 h-full flex items-center justify-center border-x border-gray-200 text-sm">{quantity}</span>
+                    <button onClick={() => setQuantity(quantity + 1)} className="w-10 h-full flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors">
+                      <Plus className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+                
+                <div className="flex gap-3">
+                  <button 
+                    onClick={() => addToCart(product, quantity, selectedSwatch || undefined)}
+                    className="flex-1 bg-white border border-gray-200 text-gray-900 font-bold h-12 rounded-xl flex items-center justify-center gap-2 hover:border-gray-300 hover:shadow-sm transition-all text-xs uppercase tracking-widest"
+                  >
+                    <ShoppingBag className="w-4 h-4" /> Cart
                   </button>
-                  <span className="flex-1 text-center font-bold text-gray-900 bg-white h-full flex items-center justify-center border-x border-gray-200 text-sm">{quantity}</span>
-                  <button onClick={() => setQuantity(quantity + 1)} className="w-full h-full flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors">
-                    <Plus className="w-3.5 h-3.5" />
+                  <button 
+                    onClick={() => {
+                      addToCart(product, quantity, selectedSwatch || undefined);
+                      onNavigate?.('checkout');
+                    }}
+                    className="flex-[2] bg-slate-900 text-white font-black h-12 rounded-xl hover:bg-black transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-lg"
+                  >
+                    Buy Now
                   </button>
                 </div>
-                <button 
-                  onClick={() => addToCart(product, quantity, selectedSwatch || undefined)}
-                  className="flex-1 bg-white border border-gray-200 text-gray-900 font-bold h-14 rounded-xl flex items-center justify-center gap-2 hover:border-gray-300 hover:shadow-sm transition-all text-xs uppercase tracking-widest"
-                >
-                  <ShoppingBag className="w-4 h-4 md:w-5 md:h-5" /> Cart
-                </button>
               </div>
-              <button 
-                onClick={() => {
-                  addToCart(product, quantity, selectedSwatch || undefined);
-                  onNavigate?.('checkout');
-                }}
-                className="w-full bg-[#e31c3d] text-white font-black h-14 rounded-xl hover:bg-[#c91532] hover:shadow-[0_8px_20px_rgba(227,28,61,0.25)] hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 text-sm md:text-base uppercase tracking-widest"
-              >
-                Buy Now
-              </button>
               <button 
                 onClick={() => onNavigate?.('checkout')}
                 className="relative w-full overflow-hidden h-14 rounded-xl flex items-center justify-center gap-3 shadow-[0_8px_30px_rgba(255,152,0,0.3)] hover:shadow-[0_8px_40px_rgba(255,152,0,0.5)] transition-all duration-300 hover:-translate-y-1 border border-orange-400"
@@ -362,9 +368,9 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               </button>
             </div>
           </div>
-          <div ref={fbtScrollRef} className="flex overflow-x-auto gap-6 pb-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth">
-            {products.filter(p => p.id !== product.id).slice(-6).map((fbtProduct) => (
-              <div key={fbtProduct.id} className="min-w-[280px] sm:min-w-[300px] max-w-[300px] snap-start shrink-0">
+          <div ref={fbtScrollRef} className="grid grid-rows-2 grid-flow-col md:flex md:overflow-x-auto gap-3 md:gap-6 pb-6 md:pb-4 overflow-x-auto snap-x snap-mandatory md:[&::-webkit-scrollbar]:hidden md:[-ms-overflow-style:none] md:[scrollbar-width:none] scroll-smooth">
+            {products.filter(p => p.id !== product.id).slice(-8).map((fbtProduct) => (
+              <div key={fbtProduct.id} className="w-[180px] md:w-[300px] snap-start shrink-0">
                 <ProductCard 
                   product={fbtProduct} 
                   onNavigate={onNavigate || (() => {})} 
@@ -386,14 +392,15 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               View All <ChevronRight className="w-4 h-4" />
             </button>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.filter(p => p.id !== product.id).slice(0, 4).map((relatedProduct) => (
-              <ProductCard 
-                key={relatedProduct.id} 
-                product={relatedProduct} 
-                onNavigate={onNavigate || (() => {})} 
-                className="h-full"
-              />
+          <div className="grid grid-rows-2 grid-flow-col md:grid md:grid-cols-4 md:grid-rows-1 gap-3 md:gap-6 overflow-x-auto md:overflow-visible pb-6 md:pb-0 snap-x snap-mandatory md:[&::-webkit-scrollbar]:hidden md:[-ms-overflow-style:none] md:[scrollbar-width:none]">
+            {products.filter(p => p.id !== product.id).slice(0, 8).map((relatedProduct) => (
+              <div key={relatedProduct.id} className="w-[180px] md:w-auto snap-start shrink-0">
+                <ProductCard 
+                  product={relatedProduct} 
+                  onNavigate={onNavigate || (() => {})} 
+                  className="h-full"
+                />
+              </div>
             ))}
           </div>
         </div>
