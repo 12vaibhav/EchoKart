@@ -122,42 +122,46 @@ export const CartPage = ({ onNavigate }: { onNavigate: (path: string, id?: numbe
 
         {/* Right Column: Order Summary */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-2xl p-8 sticky top-28 border border-slate-100 shadow-sm">
-            <h2 className="text-xl font-black text-slate-900 mb-8 uppercase tracking-tight">Order Summary</h2>
+          <div className="bg-white rounded-[2rem] p-5 sm:p-8 sticky top-28 border border-slate-100 shadow-sm">
+            <h2 className="text-xl font-black text-slate-900 mb-6 sm:mb-8 uppercase tracking-tight">Order Summary</h2>
             
-            <div className="space-y-4 mb-8 border-b pb-8 border-slate-100">
-              <div className="flex justify-between text-slate-500 font-medium">
+            <div className="space-y-4 mb-6 sm:mb-8 border-b pb-6 sm:pb-8 border-slate-100">
+              <div className="flex justify-between text-slate-500 font-medium text-sm sm:text-base">
                 <span>Subtotal</span>
                 <span className="text-slate-900">₹{cartTotal.toLocaleString('en-IN')}</span>
               </div>
-              <div className="flex justify-between text-slate-500 font-medium">
+              <div className="flex justify-between text-slate-500 font-medium text-sm sm:text-base">
                 <span>Shipping</span>
-                <span className="text-green-600 font-bold uppercase text-xs tracking-widest bg-green-50 px-2 py-1 rounded">Free</span>
+                <span className="text-green-600 font-bold uppercase text-[10px] tracking-widest bg-green-50 px-2 py-1 rounded">Free</span>
               </div>
-              <div className="flex justify-between text-slate-500 font-medium">
+              <div className="flex justify-between text-slate-500 font-medium text-sm sm:text-base">
                 <span>Estimated GST</span>
                 <span className="text-slate-900">₹{tax.toLocaleString('en-IN')}</span>
               </div>
             </div>
             
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex justify-between items-center mb-6 sm:mb-8">
               <span className="text-lg font-black text-slate-900 uppercase tracking-tight">Total</span>
-              <span className="text-3xl font-black text-[#e31c3d]">₹{finalTotal.toLocaleString('en-IN')}</span>
+              <span className="text-2xl sm:text-3xl font-black text-[#e31c3d]">₹{finalTotal.toLocaleString('en-IN')}</span>
             </div>
             
             <button 
               onClick={() => onNavigate('checkout')}
-              className="w-full bg-[#e31c3d] hover:bg-[#c81935] text-white font-black py-4.5 rounded-xl flex items-center justify-center gap-3 transition-all transform hover:shadow-lg hover:shadow-[#e31c3d]/25 active:scale-[0.98] mb-6 uppercase tracking-widest text-sm"
+              className="w-full bg-[#e31c3d] hover:bg-[#c81935] text-white font-black py-4 rounded-xl flex items-center justify-center gap-3 transition-all transform hover:shadow-lg hover:shadow-[#e31c3d]/25 active:scale-[0.98] mb-6 uppercase tracking-widest text-xs sm:text-sm"
             >
               Proceed to Checkout
               <ArrowRight className="w-5 h-5" />
             </button>
             
-            <div className="mt-10">
-              <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">Promo Code</h3>
+            <div className="mt-8">
+              <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3">Promo Code</h3>
               <div className="flex gap-2">
-                <input className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#e31c3d]/20 focus:border-[#e31c3d] transition-all" placeholder="Enter code" type="text" />
-                <button className="bg-slate-900 text-white px-6 py-3 rounded-xl text-sm font-bold hover:bg-slate-800 transition-all">Apply</button>
+                <input 
+                  className="flex-1 min-w-0 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#e31c3d]/20 focus:border-[#e31c3d] transition-all" 
+                  placeholder="Enter code" 
+                  type="text" 
+                />
+                <button className="bg-slate-900 text-white px-5 sm:px-6 py-3 rounded-xl text-xs sm:text-sm font-bold hover:bg-slate-800 transition-all shrink-0">Apply</button>
               </div>
             </div>
           </div>
