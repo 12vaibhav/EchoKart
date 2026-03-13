@@ -152,7 +152,7 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
               </div>
 
               {/* Progress Indicators */}
-              <div className="absolute bottom-8 left-0 right-0 flex items-center justify-center space-x-4 text-white pointer-events-none z-30">
+              <div className="absolute top-6 bottom-auto md:top-auto md:bottom-8 left-0 right-0 flex items-center justify-center space-x-4 text-white pointer-events-none z-30">
                 {SLIDES.map((_, i) => (
                   <button 
                     key={i}
@@ -184,7 +184,7 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
           
           {/* Mobile Quick Nav */}
           {SLIDES.length > 1 && (
-            <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex justify-between md:hidden pointer-events-none z-20">
+            <div className="absolute inset-x-4 top-8 md:top-1/2 md:-translate-y-1/2 flex justify-between md:hidden pointer-events-none z-20">
                <button onClick={handlePrev} className="p-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full pointer-events-auto active:scale-90 transition-transform"><ChevronLeft className="w-5 h-5 text-white" /></button>
                <button onClick={handleNext} className="p-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full pointer-events-auto active:scale-90 transition-transform"><ChevronRight className="w-5 h-5 text-white" /></button>
             </div>

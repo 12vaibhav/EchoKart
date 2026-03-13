@@ -111,7 +111,7 @@ export const CategoryRow = ({ categories = [], onNavigate }: { categories: any[]
   }, [displayCategories.length]);
 
   return (
-    <motion.section {...fadeInUpProps} className="w-full bg-white pt-1 md:pt-3 pb-0 md:pb-2 select-none overflow-x-hidden">
+    <motion.section {...fadeInUpProps} className="w-full bg-white pt-1 md:pt-3 pb-0 select-none overflow-x-hidden">
       <div 
         className="max-w-[1400px] mx-auto px-4 md:px-8 relative" 
         ref={containerRef}

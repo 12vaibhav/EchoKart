@@ -45,7 +45,7 @@ export const ProductCarouselSection = ({ title, products, onNavigate }: { title:
       {/* Decorative background element */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-radial-gradient from-red-50 to-transparent opacity-40 pointer-events-none" />
       
-      <div className="max-w-[1700px] mx-auto px-8 sm:px-12 lg:px-24">
+      <div className="max-w-[1700px] mx-auto px-4 md:px-12 lg:px-24">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="relative">
             <motion.div 
