@@ -15,7 +15,7 @@ export const VideoShowcase = ({ videos: propVideos, onNavigate }: { videos?: any
   if (displayVideos.length === 0) return null;
   return (
     <motion.section {...fadeInUpProps} className="py-12 md:py-16 bg-black text-white relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">Trending on Socials</h2>
           <p className="text-gray-400 max-w-2xl mx-auto">Watch our top trending products in action. Experience the viral sensations before you buy.</p>

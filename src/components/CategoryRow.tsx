@@ -113,7 +113,7 @@ export const CategoryRow = ({ categories = [], onNavigate }: { categories: any[]
   return (
     <motion.section {...fadeInUpProps} className="w-full bg-white pt-1 md:pt-2 pb-0 select-none overflow-x-hidden">
       <div 
-        className="max-w-[1400px] mx-auto px-4 md:px-8 relative" 
+        className="max-w-[1400px] mx-auto px-3 md:px-8 relative" 
         ref={containerRef}
         style={{
           maskImage: 'linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent)',

@@ -57,7 +57,7 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1700px] mx-auto px-3 sm:px-6 lg:px-8">
         <div 
           onClick={handleSlideClick}
           className="relative w-full h-[480px] md:h-[580px] lg:h-[680px] rounded-[2rem] sm:rounded-[3.5rem] overflow-hidden group shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] border border-gray-100 cursor-pointer will-change-transform"

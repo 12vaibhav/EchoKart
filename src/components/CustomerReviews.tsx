@@ -15,7 +15,7 @@ export const CustomerReviews = ({ reviews: propReviews }: { reviews?: any[] }) =
   const displayReviews = propReviews && propReviews.length > 0 ? propReviews : ORIGINAL_REVIEWS;
   return (
     <motion.section {...fadeInUpProps} className="pt-10 pb-12 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 tracking-tight">Loved by Thousands</h2>
           <p className="text-gray-500 max-w-2xl mx-auto">See what our customers are saying about their trending finds from echokart.</p>

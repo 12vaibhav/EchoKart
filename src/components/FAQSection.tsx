@@ -19,7 +19,7 @@ export const FAQSection = () => {
 
   return (
     <motion.section {...fadeInUpProps} className="pt-4 pb-12 md:pb-16 bg-gray-50">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto px-3 sm:px-6 lg:px-8">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-10">Help & Advice</h2>
         
         <div className="space-y-6 md:space-y-8">
