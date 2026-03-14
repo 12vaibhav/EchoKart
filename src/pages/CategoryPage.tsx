@@ -1,100 +1,120 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
-
 import { ChevronRight, ArrowRight } from 'lucide-react';
 
 const fadeInUpProps = {
-  initial: { opacity: 0, y: 40 },
+  initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-50px" },
-  transition: { duration: 0.7, ease: "easeOut" }
+  transition: { duration: 0.6, ease: "easeOut" }
 };
 
 export const CategoryPage = ({ categories = [], onNavigate }: { categories: any[], onNavigate: (path: string, id?: any, categoryName?: string | null) => void }) => {
   const displayCategories = categories.filter(c => c.visible !== false);
+  
   return (
-    <motion.div {...fadeInUpProps} className="flex-1 px-6 py-8 md:px-16 lg:px-40 max-w-[1920px] mx-auto w-full">
-      {/* Breadcrumbs */}
-      <nav className="flex items-center gap-2 mb-8 text-sm text-slate-500">
+    <motion.div {...fadeInUpProps} className="flex-1 px-4 py-6 md:px-16 lg:px-40 max-w-[1920px] mx-auto w-full bg-white">
+      {/* Breadcrumbs - Compact for mobile */}
+      <nav className="flex items-center gap-1.5 mb-6 text-[11px] md:text-sm text-slate-400 uppercase tracking-widest font-bold">
         <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('home'); }} className="hover:text-[#e31c3d] transition-colors">Home</a>
-        <ChevronRight className="w-4 h-4" />
-        <span className="text-slate-900 font-medium">Categories</span>
+        <ChevronRight className="w-3 h-3" />
+        <span className="text-slate-900">Categories</span>
       </nav>
 
-      {/* Page Title */}
-      <div className="mb-10">
-        <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">Shop by category</h1>
-        <p className="mt-2 text-slate-600 max-w-2xl">
+      {/* Page Title - Optimized for mobile */}
+      <div className="mb-8 md:mb-12">
+        <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-none mb-3">
+          SHOP BY <span className="text-[#e31c3d]">CATEGORY</span>
+        </h1>
+        <div className="h-1.5 w-20 bg-[#e31c3d] rounded-full mb-4"></div>
+        <p className="text-slate-500 text-sm md:text-lg max-w-2xl leading-relaxed">
           Discover our curated selection of premium products across top categories. Quality guaranteed from worldwide brands.
         </p>
       </div>
 
-      {/* Categories Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Categories Grid - 2 columns on mobile, 4 on desktop */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
         {displayCategories.map((cat, idx) => (
-          <a 
+          <motion.a 
             key={idx}
+            whileTap={{ scale: 0.98 }}
             href="#" 
             onClick={(e) => { e.preventDefault(); onNavigate('category-products', null, cat.title || cat.name); }}
-            className="group relative block overflow-hidden rounded-xl bg-slate-200 aspect-square"
+            className="group relative block overflow-hidden rounded-2xl bg-slate-100 aspect-[4/5] shadow-sm hover:shadow-xl transition-all duration-500"
           >
             {cat.image ? (
               <img 
                 src={cat.image} 
                 alt={cat.name} 
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" 
                 loading="lazy"
               />
             ) : (
-              <div className={`h-full w-full flex items-center justify-center ${cat.isSale ? 'bg-[#e31c3d]' : 'bg-[#f8f9fb]'}`}>
-                 {cat.isSale && <span className="font-bold text-4xl text-white">Sale</span>}
+              <div className={`h-full w-full flex items-center justify-center ${cat.isSale ? 'bg-[#e31c3d]' : 'bg-slate-50 border border-slate-100'}`}>
+                 {cat.isSale && <span className="font-black text-3xl text-white tracking-tighter">SALE</span>}
               </div>
             )}
             
-            <div className="absolute inset-0 bg-black/30 transition-colors duration-300 group-hover:bg-black/50"></div>
+            {/* Gradient Overlay - Optimized for mobile readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100"></div>
             
-            <div className="absolute bottom-0 left-0 p-6 w-full">
-              <h3 className="text-xl font-bold text-white mb-1">{cat.title || cat.name}</h3>
-              <p className="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                Explore {(cat.title || cat.name).toLowerCase()}
-              </p>
+            <div className="absolute bottom-0 left-0 p-4 md:p-8 w-full z-10">
+              <span className="text-[10px] md:text-xs font-black text-[#e31c3d] uppercase tracking-[0.2em] mb-1 block">Explore</span>
+              <h3 className="text-lg md:text-2xl font-black text-white leading-tight uppercase tracking-tight group-hover:translate-x-1 transition-transform duration-300">
+                {cat.title || cat.name}
+              </h3>
             </div>
             
-            <div className="absolute top-4 right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-              <div className="bg-[#e31c3d] rounded-full p-2 text-white">
-                <ArrowRight className="w-5 h-5" />
+            {/* Visual Indicator for Desktop/Tablet */}
+            <div className="absolute top-4 right-4 hidden md:block translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+              <div className="bg-white rounded-full p-2.5 shadow-xl">
+                <ArrowRight className="w-5 h-5 text-[#e31c3d]" />
               </div>
             </div>
-          </a>
+          </motion.a>
         ))}
       </div>
 
-      {/* Promotion Banner */}
-      <div className="mt-16 bg-[#e31c3d] rounded-2xl overflow-hidden flex flex-col md:flex-row items-center justify-between text-white shadow-xl shadow-[#e31c3d]/20 relative">
-        <div className="p-8 md:p-12 lg:w-1/2 z-10 relative">
-          <span className="bg-white/20 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest inline-block mb-4">
-            Limited Offer
-          </span>
-          <h2 className="text-3xl md:text-4xl font-black mb-4 leading-tight">
-            Flash sale on all categories
+      {/* Promotion Banner - Re-engineered for mobile */}
+      <div className="mt-12 md:mt-24 bg-[#e31c3d] rounded-3xl overflow-hidden flex flex-col md:flex-row items-center justify-between text-white shadow-2xl shadow-[#e31c3d]/25 border border-white/10">
+        <div className="p-8 md:p-16 lg:w-3/5 z-10">
+          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full mb-6 border border-white/10">
+            <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+            <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-white">Limited Season Offer</span>
+          </div>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-6 leading-[0.9] tracking-tighter uppercase italic">
+            FLASH SALE ON <br/> <span className="text-black/20">ALL</span> CATEGORIES
           </h2>
-          <p className="text-white/90 text-lg mb-8 leading-relaxed max-w-md">
-            Join our membership today and get up to 40% off on your first purchase across all categories.
+          <p className="text-white/80 text-base md:text-xl mb-10 leading-relaxed max-w-lg font-medium">
+            Join our membership today and get up to <span className="text-white font-bold underline decoration-white/30 underline-offset-4">40% OFF</span> on your first purchase across all premium categories.
           </p>
           <button 
             onClick={() => onNavigate('home')}
-            className="bg-white text-[#e31c3d] font-bold px-8 py-3 rounded-lg hover:bg-slate-100 transition-all flex items-center gap-2 w-fit shadow-lg"
+            className="group bg-white text-[#e31c3d] font-black text-sm uppercase tracking-widest px-10 py-4 rounded-xl hover:bg-black hover:text-white transition-all duration-500 flex items-center gap-3 w-full md:w-fit justify-center shadow-xl shadow-black/10"
           >
-            Shop Now <ArrowRight className="w-5 h-5" />
+            Start Shopping <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-500" />
           </button>
         </div>
         
-        <div className="hidden md:block absolute right-0 top-0 bottom-0 w-1/2 before:absolute before:inset-0 before:bg-gradient-to-r before:from-[#e31c3d] before:to-transparent before:z-10">
+        <div className="hidden lg:block relative w-2/5 h-[450px]">
+          <div className="absolute inset-y-0 -left-px w-32 bg-gradient-to-r from-[#e31c3d] to-transparent z-10"></div>
           <img 
             src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1200&q=80" 
             alt="Fashion store interior" 
-            className="w-full h-full object-cover opacity-80"
+            className="w-full h-full object-cover grayscale brightness-75 mix-blend-multiply opacity-60"
           />
+        </div>
+      </div>
+
+      {/* Customer Trust Badges for Mobile */}
+      <div className="mt-12 md:hidden grid grid-cols-2 gap-4 border-t border-slate-100 pt-8">
+        <div className="text-center">
+            <h4 className="text-3xl font-black text-slate-200 leading-none mb-2">01</h4>
+            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Secure Payments</p>
+        </div>
+        <div className="text-center">
+            <h4 className="text-3xl font-black text-slate-200 leading-none mb-2">02</h4>
+            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Fast Delivery</p>
         </div>
       </div>
     </motion.div>
