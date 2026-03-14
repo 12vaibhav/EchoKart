@@ -18,9 +18,9 @@ export const WhyChooseUs = () => {
   ];
 
   return (
-    <motion.section {...fadeInUpProps} className="py-10 md:py-16 bg-white border-t border-gray-100">
+    <motion.section {...fadeInUpProps} className="py-8 md:py-12 bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl md:text-3xl font-black text-center mb-10 md:mb-12 tracking-tight">Why Shop With Us</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-center mb-8 md:mb-10 tracking-tight">Why Shop With Us</h2>
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
           {features.map((f, idx) => (
             <div key={idx} className="flex flex-col items-center text-center p-4 md:p-6 rounded-2xl bg-gray-50/50 md:bg-transparent hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-gray-100 group">

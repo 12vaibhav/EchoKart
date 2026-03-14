@@ -60,30 +60,30 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
       <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8">
         <div 
           onClick={handleSlideClick}
-          className="relative w-full h-[380px] md:h-[580px] lg:h-[680px] rounded-[1.5rem] sm:rounded-[3.5rem] overflow-hidden group shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] border border-gray-100 cursor-pointer will-change-transform"
+          className="relative w-full h-[480px] md:h-[580px] lg:h-[680px] rounded-[2rem] sm:rounded-[3.5rem] overflow-hidden group shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] border border-gray-100 cursor-pointer will-change-transform"
         >
           {/* Slides Container */}
           <AnimatePresence mode="popLayout" initial={false}>
             <motion.div 
               key={currentSlide}
-              initial={{ scale: 1.05, opacity: 0 }}
+              initial={{ scale: 1.08, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.98, opacity: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-0 bg-cover bg-center will-change-transform"
               style={{ backgroundImage: `url(${current.image})` }}
             >
-              {/* Complex Overlay System */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-black/90 via-black/40 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              {/* Complex Overlay System - Enhanced for mobile readability */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-black/30 to-transparent md:from-black/90" />
+              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
               
               {/* Noble Noise Texture */}
-              <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`}} />
+              <div className="absolute inset-0 opacity-[0.04] pointer-events-none mix-blend-overlay" style={{backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`}} />
             </motion.div>
           </AnimatePresence>
 
           {/* Staggered Content Area */}
-          <div className="absolute inset-0 flex flex-col items-center justify-end pb-12 md:pb-28 text-center px-6 sm:px-12 pointer-events-none">
+          <div className="absolute inset-0 flex flex-col items-center justify-end pb-16 md:pb-28 text-center px-6 sm:px-12 pointer-events-none">
             <div className="max-w-4xl flex flex-col items-center">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -92,26 +92,16 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
                   animate="animate"
                   exit="exit"
                   variants={{
-                    animate: { transition: { staggerChildren: 0.1 } }
+                    animate: { transition: { staggerChildren: 0.12 } }
                   }}
                   className="flex flex-col items-center"
                 >
-                  {current.badge && (
-                    <motion.span 
-                      variants={itemVariants}
-                      className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-xl border border-white/20 text-white font-black text-[10px] md:text-xs tracking-[0.25em] mb-6 py-2 px-6 rounded-full uppercase shadow-xl"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#e31c3d] animate-pulse" />
-                      {current.badge}
-                    </motion.span>
-                  )}
-
                   <motion.h1 
                     variants={itemVariants}
-                    className="text-white text-3xl sm:text-6xl md:text-7xl lg:text-[90px] font-black tracking-tight mb-6 md:mb-10 drop-shadow-[0_10px_35px_rgba(0,0,0,0.5)] leading-[0.95] md:leading-[1]"
+                    className="text-white text-4xl sm:text-6xl md:text-7xl lg:text-[90px] font-black tracking-tight mb-8 md:mb-10 drop-shadow-[0_10px_35px_rgba(0,0,0,0.6)] leading-[1.1] md:leading-[1]"
                   >
                     {current.title.split(' ').map((word: string, i: number) => (
-                      <span key={i} className="inline-block mr-[0.2em] last:mr-0">
+                      <span key={i} className="inline-block mr-[0.25em] last:mr-0">
                         {word}
                       </span>
                     ))}
@@ -120,10 +110,10 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
                   <motion.div variants={itemVariants} className="pointer-events-auto">
                     <button 
                       onClick={(e) => { e.stopPropagation(); handleSlideClick(); }}
-                      className="group/btn relative overflow-hidden bg-white text-black hover:text-white font-black py-3 px-8 md:py-4 md:px-12 rounded-full transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(0,0,0,0.3)] text-xs md:text-base tracking-widest uppercase flex items-center justify-center gap-3"
+                      className="group/btn relative overflow-hidden bg-white text-black hover:text-white font-black py-4 px-10 md:py-5 md:px-14 rounded-full transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_25px_50px_rgba(0,0,0,0.4)] text-[11px] md:text-base tracking-widest uppercase flex items-center justify-center gap-3"
                     >
-                      <span className="relative z-10">Explore Collection</span>
-                      <ArrowRight className="w-5 h-5 relative z-10 group-hover/btn:translate-x-1 transition-transform" />
+                      <span className="relative z-10">Explore Now</span>
+                      <ArrowRight className="w-4 h-4 md:w-5 md:h-5 relative z-10 group-hover/btn:translate-x-1 transition-transform" />
                       <div className="absolute inset-0 bg-[#e31c3d] -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500 ease-[0.22,1,0.36,1]" />
                     </button>
                   </motion.div>
