@@ -199,8 +199,14 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             )}
 
 
-            {/* Premium Trust Badges (Local Assets) */}
-            <div className="relative grid grid-cols-3 items-center bg-gradient-to-r from-gray-50/80 to-white py-3 md:py-6 rounded-lg border border-gray-100 shadow-[inset_0_0_20px_rgba(0,0,0,0.01)] mb-4 md:mb-8 max-w-md order-9 md:order-0">
+            {/* Mobile: Compact Delivery Trust Line */}
+            <div className="flex items-center gap-2 mb-4 order-9 md:order-0 md:hidden bg-gray-50 border border-gray-100 rounded-lg px-3 py-2.5 max-w-md">
+              <Star className="w-4 h-4 fill-[#e31c3d] text-[#e31c3d] shrink-0" />
+              <span className="text-xs font-bold text-gray-700">Delivered by <span className="text-[#e31c3d]">EchoKart Partners</span></span>
+            </div>
+
+            {/* Desktop: Premium Trust Badges (Local Assets) */}
+            <div className="hidden md:grid relative grid-cols-3 items-center bg-gradient-to-r from-gray-50/80 to-white py-3 md:py-6 rounded-lg border border-gray-100 shadow-[inset_0_0_20px_rgba(0,0,0,0.01)] mb-4 md:mb-8 max-w-md md:order-0">
               <div className="flex justify-center">
                 <img src={paymentBadge} alt="Secure Payments" className="h-12 sm:h-14 w-auto object-contain hover:scale-110 hover:drop-shadow-md transition-transform duration-300" />
               </div>
