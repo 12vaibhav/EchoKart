@@ -79,8 +79,8 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
         </div>
       </div>
 
-      <motion.div {...fadeInUpProps} className="max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8 py-6 md:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+      <motion.div {...fadeInUpProps} className="max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8 py-2 md:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-20">
           
           {/* Left: Image Gallery (Side-by-Side Reference Design) */}
           <div className="flex flex-col-reverse md:flex-row gap-4 lg:gap-6 lg:h-[600px] h-auto">
