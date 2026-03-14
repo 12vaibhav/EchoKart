@@ -38,7 +38,25 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
   const [quantity, setQuantity] = useState(1);
   const [selectedSwatch, setSelectedSwatch] = useState(product.swatches?.[0] || null);
   const [activeImage, setActiveImage] = useState(0);
+  const galleryRef = useRef<HTMLDivElement>(null);
   const fbtScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollToImage = (index: number) => {
+    setActiveImage(index);
+    if (galleryRef.current) {
+      const scrollAmount = galleryRef.current.offsetWidth * index;
+      galleryRef.current.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  const handleGalleryScroll = () => {
+    if (galleryRef.current) {
+      const index = Math.round(galleryRef.current.scrollLeft / galleryRef.current.offsetWidth);
+      if (index !== activeImage) {
+        setActiveImage(index);
+      }
+    }
+  };
 
   const scrollFBT = (direction: 'left' | 'right') => {
     if (fbtScrollRef.current) {
@@ -71,7 +89,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               {images.map((img: string, i: number) => (
                 <div 
                   key={i} 
-                  onClick={() => setActiveImage(i)}
+                  onClick={() => scrollToImage(i)}
                   className={`aspect-square w-16 md:w-full rounded-md md:rounded-lg p-0 cursor-pointer flex items-center justify-center shrink-0 overflow-hidden box-border transition-all duration-300 ${i === activeImage ? 'bg-white border-2 border-[#e31c3d] shadow-sm scale-[1.02]' : 'bg-gray-50 border border-transparent hover:border-gray-200 hover:bg-white'}`}
                 >
                   <img src={img} alt="" className="w-full h-full object-cover drop-shadow-sm" />
@@ -79,8 +97,8 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               ))}
             </div>
 
-            {/* Main Image Viewport */}
-            <div className="relative flex-1 bg-gradient-to-br from-gray-50 to-white rounded-lg md:rounded-xl border border-gray-100 shadow-sm flex items-center justify-center p-0 group overflow-hidden min-h-[350px] md:min-h-[400px]">
+            {/* Main Image Viewport (Now Swipeable) */}
+            <div className="relative flex-1 bg-gradient-to-br from-gray-50 to-white rounded-lg md:rounded-xl border border-gray-100 shadow-sm group overflow-hidden min-h-[350px] md:min-h-[400px]">
               {tags && tags.length > 0 && (
                 <div className="absolute top-6 left-6 flex flex-col gap-2 z-10">
                   {tags.map((tag: any, idx: number) => (
@@ -93,39 +111,35 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               
               <button 
                 onClick={() => toggleWishlist(product)}
-                className={`absolute top-6 right-6 w-11 h-11 bg-white rounded-full flex items-center justify-center border border-gray-100 transition-all z-10 hover:scale-110 ${isWishlisted ? 'text-[#e31c3d] shadow-md' : 'text-gray-400 hover:text-[#e31c3d] hover:shadow-md'}`}
+                className={`absolute top-6 right-6 w-11 h-11 bg-white rounded-full flex items-center justify-center border border-gray-100 transition-all z-20 hover:scale-110 ${isWishlisted ? 'text-[#e31c3d] shadow-md' : 'text-gray-400 hover:text-[#e31c3d] hover:shadow-md'}`}
               >
                 <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-current' : ''}`} />
               </button>
 
-              <img 
-                src={images[activeImage]} 
-                alt={title} 
-                className="w-full h-full object-cover transform transition-transform duration-700 ease-out group-hover:scale-105 drop-shadow-2xl" 
-              />
+              <div 
+                ref={galleryRef}
+                onScroll={handleGalleryScroll}
+                className="w-full h-full flex overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth"
+              >
+                {images.map((img: string, i: number) => (
+                  <div key={i} className="min-w-full h-full snap-center flex items-center justify-center">
+                    <img 
+                      src={img} 
+                      alt={`${title} - image ${i + 1}`} 
+                      className="w-full h-full object-cover transform transition-transform duration-700 ease-out group-hover:scale-105 select-none" 
+                    />
+                  </div>
+                ))}
+              </div>
 
-              {/* Minimalist Navigation Arrows (Bottom Right) */}
-              <div className="absolute bottom-6 right-6 flex gap-2 z-10">
-                <button 
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setActiveImage((prev) => (prev - 1 + images.length) % images.length);
-                  }}
-                  className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-900 hover:bg-white hover:shadow-md hover:scale-105 active:scale-95 border border-gray-200 transition-all"
-                  aria-label="Previous image"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button 
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setActiveImage((prev) => (prev + 1) % images.length);
-                  }}
-                  className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-900 hover:bg-white hover:shadow-md hover:scale-105 active:scale-95 border border-gray-200 transition-all"
-                  aria-label="Next image"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
+              {/* Progress Indicator for Mobile */}
+              <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 z-10 md:hidden">
+                {images.map((_: any, i: number) => (
+                  <div 
+                    key={i} 
+                    className={`h-1 rounded-full transition-all duration-300 ${i === activeImage ? 'w-6 bg-[#e31c3d]' : 'w-2 bg-gray-300'}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
