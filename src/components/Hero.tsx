@@ -53,7 +53,7 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
       initial="initial"
       animate="animate"
       variants={containerVariants}
-      className="w-full bg-white pb-4 md:pb-8 pt-0 select-none"
+      className="w-full bg-white pb-3 md:pb-6 pt-0 select-none"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >

@@ -14,7 +14,7 @@ export const VideoShowcase = ({ videos: propVideos, onNavigate }: { videos?: any
   const displayVideos = propVideos && propVideos.length > 0 ? propVideos : ORIGINAL_VIDEOS;
   if (displayVideos.length === 0) return null;
   return (
-    <motion.section {...fadeInUpProps} className="py-20 bg-black text-white relative overflow-hidden">
+    <motion.section {...fadeInUpProps} className="py-12 md:py-16 bg-black text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">Trending on Socials</h2>

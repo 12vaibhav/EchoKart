@@ -40,7 +40,7 @@ export const ProductCarouselSection = ({ title, products, onNavigate }: { title:
   return (
     <motion.section 
       {...fadeInUpProps} 
-      className="py-8 bg-white relative overflow-hidden"
+      className="py-6 md:py-8 bg-white relative overflow-hidden"
     >
       {/* Decorative background element */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-radial-gradient from-red-50 to-transparent opacity-40 pointer-events-none" />
