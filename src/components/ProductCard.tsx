@@ -50,7 +50,7 @@ export const ProductCard = ({
   return (
     <div 
       onClick={() => onNavigate('product', product.id)} 
-      className={`bg-white rounded-[1.2rem] md:rounded-[1.5rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 group hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col cursor-pointer h-full relative overflow-hidden ${className || 'w-full'}`}
+      className={`bg-white rounded-md md:rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 group hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col cursor-pointer h-full relative overflow-hidden ${className || 'w-full'}`}
     >
       <div className="relative aspect-square bg-[#f8f9fb] overflow-hidden group/img">
         {/* Wishlist Button - Only for Category Variant */}
@@ -103,7 +103,7 @@ export const ProductCard = ({
             <button 
               disabled={isAdding || isOutOfStock || showSuccess}
               onClick={handleAddToCart}
-              className={`w-full font-black py-2 md:py-2.5 rounded md:rounded-lg text-[9px] md:text-[10px] uppercase tracking-[0.15em] flex items-center justify-center gap-2 transition-all shadow-xl relative overflow-hidden
+              className={`w-full font-black py-2 md:py-2.5 rounded-sm md:rounded text-[9px] md:text-[10px] uppercase tracking-[0.15em] flex items-center justify-center gap-2 transition-all shadow-xl relative overflow-hidden
                 ${showSuccess 
                   ? 'bg-green-500 text-white' 
                   : isOutOfStock 
@@ -181,7 +181,7 @@ export const ProductCard = ({
               <button 
                 disabled={isAdding || isOutOfStock || showSuccess}
                 onClick={handleAddToCart}
-                className={`flex-1 py-2 rounded-lg text-[9px] font-black uppercase tracking-tight flex items-center justify-center gap-1 transition-all
+                className={`flex-1 py-2 rounded text-[9px] font-black uppercase tracking-tight flex items-center justify-center gap-1 transition-all
                   ${showSuccess 
                     ? 'bg-green-500 text-white' 
                     : isOutOfStock 
@@ -195,7 +195,7 @@ export const ProductCard = ({
               <button 
                 disabled={isOutOfStock}
                 onClick={(e) => { e.stopPropagation(); if(!isOutOfStock) onNavigate('checkout', product.id); }}
-                className={`flex-1 py-2 rounded-lg text-[9px] font-black uppercase tracking-tight flex items-center justify-center gap-1 transition-all
+                className={`flex-1 py-2 rounded text-[9px] font-black uppercase tracking-tight flex items-center justify-center gap-1 transition-all
                   ${isOutOfStock 
                     ? 'bg-slate-100 text-slate-400 cursor-not-allowed' 
                     : 'bg-[#e31c3d] text-white hover:bg-black shadow-md shadow-red-50'

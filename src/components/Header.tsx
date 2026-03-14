@@ -141,7 +141,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                           initial={{ opacity: 0, y: 10, scale: 0.95 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                          className="absolute top-full left-0 right-0 mt-3 bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-2xl overflow-hidden min-w-[320px] z-[100]"
+                          className="absolute top-full left-0 right-0 mt-3 bg-white/95 backdrop-blur-xl border border-slate-200 rounded-lg shadow-2xl overflow-hidden min-w-[320px] z-[100]"
                         >
                           <div className="p-2">
                             <p className="px-3 py-2 text-[10px] uppercase tracking-widest text-slate-400 font-bold">Suggested Products</p>
@@ -153,9 +153,9 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                                   setShowSuggestions(false);
                                   setSearchTemp('');
                                 }}
-                                className="w-full flex items-center gap-3 p-2 hover:bg-slate-50 rounded-xl transition-all group text-left"
+                                className="w-full flex items-center gap-3 p-2 hover:bg-slate-50 rounded-md transition-all group text-left"
                               >
-                                <div className="w-12 h-12 bg-slate-100 rounded-lg overflow-hidden flex-shrink-0">
+                                <div className="w-12 h-12 bg-slate-100 rounded-sm overflow-hidden flex-shrink-0">
                                   <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                 </div>
                                 <div className="flex-1 min-w-0">
@@ -167,7 +167,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                             ))}
                             <button
                               onClick={handleSearch}
-                              className="w-full mt-1 p-2.5 text-center text-[10px] font-bold uppercase tracking-widest text-[#e31c3d] hover:bg-slate-50 rounded-xl transition-all border-t border-slate-100"
+                              className="w-full mt-1 p-2.5 text-center text-[10px] font-bold uppercase tracking-widest text-[#e31c3d] hover:bg-slate-50 rounded-md transition-all border-t border-slate-100"
                             >
                               See all results for "{searchTemp}"
                             </button>
@@ -256,7 +256,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <button 
                   onClick={() => { onNavigate(user ? 'account' : 'auth'); setIsMobileMenuOpen(false); }}
-                  className="flex flex-col items-center justify-center gap-2 p-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-colors"
+                  className="flex flex-col items-center justify-center gap-2 p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors"
                 >
                   <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
                     <User className="w-5 h-5" />
@@ -265,7 +265,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                 </button>
                 <button 
                   onClick={() => { onNavigate('cart'); setIsMobileMenuOpen(false); }}
-                  className="flex flex-col items-center justify-center gap-2 p-4 bg-[#e31c3d]/10 border border-[#e31c3d]/20 rounded-2xl hover:bg-[#e31c3d]/20 transition-colors relative"
+                  className="flex flex-col items-center justify-center gap-2 p-4 bg-[#e31c3d]/10 border border-[#e31c3d]/20 rounded-lg hover:bg-[#e31c3d]/20 transition-colors relative"
                 >
                   <div className="w-10 h-10 bg-[#e31c3d] rounded-full flex items-center justify-center">
                     <ShoppingCart className="w-5 h-5" />
@@ -296,7 +296,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                     }
                   }}
                   placeholder="Search products..."
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3.5 pl-5 pr-12 text-sm text-white focus:bg-white/10 focus:border-[#e31c3d] outline-none transition-all"
+                  className="w-full bg-white/5 border border-white/10 rounded-md py-3.5 pl-5 pr-12 text-sm text-white focus:bg-white/10 focus:border-[#e31c3d] outline-none transition-all"
                 />
                 <button 
                   onClick={() => {
@@ -315,7 +315,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      className="mt-4 bg-white/95 backdrop-blur-md rounded-2xl border border-white/20 overflow-hidden shadow-xl"
+                      className="mt-4 bg-white/95 backdrop-blur-md rounded-lg border border-white/20 overflow-hidden shadow-xl"
                     >
                       <div className="p-2 space-y-1">
                         {suggestions.map((p) => (
@@ -327,9 +327,9 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                               setShowSuggestions(false);
                               setSearchTemp('');
                             }}
-                            className="w-full flex items-center gap-4 p-3 hover:bg-slate-50 rounded-xl transition-all"
+                            className="w-full flex items-center gap-4 p-3 hover:bg-slate-50 rounded-md transition-all"
                           >
-                            <div className="w-10 h-10 bg-slate-100 rounded-lg overflow-hidden flex-shrink-0">
+                            <div className="w-10 h-10 bg-slate-100 rounded-sm overflow-hidden flex-shrink-0">
                               <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 min-w-0 text-left">

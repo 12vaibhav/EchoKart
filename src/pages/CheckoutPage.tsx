@@ -142,7 +142,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
         </div>
         <button 
           onClick={() => setIsSummaryExpanded(!isSummaryExpanded)}
-          className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-full border border-slate-100 active:scale-95 transition-all"
+          className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-lg border border-slate-100 active:scale-95 transition-all"
         >
           <span className="text-xs font-black uppercase tracking-widest text-slate-600">Review Items</span>
           {isSummaryExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
@@ -160,7 +160,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
           >
             <div className="pt-4 space-y-4">
                {cart.map((item: any, idx: number) => (
-                <div key={idx} className="flex gap-4 bg-white p-3 rounded-xl border border-slate-100 shadow-sm">
+                <div key={idx} className="flex gap-4 bg-white p-3 rounded-lg border border-slate-100 shadow-sm">
                   <div className="relative size-14 bg-slate-100 rounded-lg overflow-hidden border border-slate-100 shrink-0">
                     <img className="w-full h-full object-cover mix-blend-multiply" alt={item.name} src={item.image} />
                     <span className="absolute -top-1 -right-1 size-5 bg-black text-white text-[10px] flex items-center justify-center rounded-full font-black">{item.quantity}</span>
@@ -171,7 +171,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   </div>
                 </div>
               ))}
-              <div className="p-4 bg-white rounded-xl border border-slate-100 space-y-2">
+              <div className="p-4 bg-white rounded-lg border border-slate-100 space-y-2">
                  <div className="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-widest">
                     <span>Subtotal</span>
                     <span>₹{subtotal.toLocaleString()}</span>
@@ -194,10 +194,10 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
         {/* Left Column: Forms */}
         <div className="lg:col-span-7 space-y-8 md:space-y-12">
           
-          <div className="bg-slate-50 rounded-[2rem] p-6 md:p-10 border border-slate-100 shadow-sm">
+          <div className="bg-slate-50 rounded-xl p-6 md:p-10 border border-slate-100 shadow-sm">
             <section className="mb-10">
               <div className="flex items-center gap-3 mb-8">
-                <div className="bg-[#e31c3d] p-2.5 rounded-xl shadow-lg shadow-[#e31c3d]/20">
+                <div className="bg-[#e31c3d] p-2.5 rounded-lg shadow-lg shadow-[#e31c3d]/20">
                   <Mail className="text-white w-5 h-5 md:w-6 md:h-6" />
                 </div>
                 <div>
@@ -216,7 +216,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full h-14 pl-12 pr-4 rounded-2xl border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                      className="w-full h-14 pl-12 pr-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                       placeholder="email@example.com" 
                       type="email" 
                     />
@@ -232,7 +232,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                       value={formData.phone}
                       onChange={handleInputChange}
                       required
-                      className="w-full h-14 pl-12 pr-4 rounded-2xl border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                      className="w-full h-14 pl-12 pr-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                       placeholder="e.g. 9876543210" 
                       type="tel" 
                     />
@@ -259,7 +259,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-2xl border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-14 px-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="John" 
                     type="text" 
                   />
@@ -270,7 +270,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-2xl border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-14 px-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="Doe" 
                     type="text" 
                   />
@@ -281,7 +281,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="houseNumber"
                     value={formData.houseNumber}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-2xl border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-14 px-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="e.g. Flat 402, Echo Enclave" 
                     type="text" 
                   />
@@ -292,7 +292,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="roadName"
                     value={formData.roadName}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-2xl border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-14 px-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="e.g. MG Road, Near City Center" 
                     type="text" 
                   />
@@ -303,7 +303,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="city"
                     value={formData.city}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-2xl border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-14 px-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="New Delhi" 
                     type="text" 
                   />
@@ -314,7 +314,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="pincode"
                     value={formData.pincode}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-2xl border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-14 px-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="110001" 
                     type="text" 
                   />
@@ -323,7 +323,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
             </section>
           </div>
 
-          <section className="bg-white border-4 border-slate-50 rounded-[2.5rem] p-6 md:p-10 shadow-xl shadow-slate-200/50">
+          <section className="bg-white border-4 border-slate-50 rounded-2xl p-6 md:p-10 shadow-xl shadow-slate-200/50">
             <div className="flex items-center gap-3 mb-8">
               <div className="bg-[#e31c3d] p-2.5 rounded-xl shadow-lg shadow-[#e31c3d]/20">
                 <QrCode className="text-white w-5 h-5 md:w-6 md:h-6" />
@@ -331,11 +331,11 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
               <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Choose Payment</h2>
             </div>
             
-            <div className="flex flex-col sm:flex-row p-2 bg-slate-50 rounded-3xl mb-8 gap-2">
+            <div className="flex flex-col sm:flex-row p-2 bg-slate-50 rounded-xl mb-8 gap-2">
               <button
                 type="button"
                 onClick={() => setFormData(prev => ({ ...prev, paymentMethod: 'upi' }))}
-                className={`flex-1 flex items-center justify-center gap-2.5 py-4 rounded-2xl text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-500 active:scale-95 ${
+                className={`flex-1 flex items-center justify-center gap-2.5 py-4 rounded-lg text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-500 active:scale-95 ${
                   formData.paymentMethod === 'upi' 
                     ? 'bg-white text-[#e31c3d] shadow-xl shadow-slate-200/50 scale-[1.02]' 
                     : 'text-slate-400 hover:text-slate-600'
@@ -347,7 +347,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
               <button
                 type="button"
                 onClick={() => setFormData(prev => ({ ...prev, paymentMethod: 'cod' }))}
-                className={`flex-1 flex items-center justify-center gap-2.5 py-4 rounded-2xl text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-500 active:scale-95 ${
+                className={`flex-1 flex items-center justify-center gap-2.5 py-4 rounded-lg text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-500 active:scale-95 ${
                   formData.paymentMethod === 'cod' 
                     ? 'bg-white text-[#e31c3d] shadow-xl shadow-slate-200/50 scale-[1.02]' 
                     : 'text-slate-400 hover:text-slate-600'
@@ -367,8 +367,8 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   exit={{ opacity: 0, y: -20 }}
                   className="space-y-8"
                 >
-                  <div className="flex flex-col items-center justify-center p-6 md:p-10 bg-[#fef2f2] rounded-3xl border border-red-50 gap-6">
-                    <div className="size-48 md:size-64 bg-white p-5 rounded-[2.5rem] shadow-2xl shadow-[#e31c3d]/10 flex items-center justify-center relative group overflow-hidden border border-red-50/50">
+                  <div className="flex flex-col items-center justify-center p-6 md:p-10 bg-[#fef2f2] rounded-xl border border-red-50 gap-6">
+                    <div className="size-48 md:size-64 bg-white p-5 rounded-2xl shadow-2xl shadow-[#e31c3d]/10 flex items-center justify-center relative group overflow-hidden border border-red-50/50">
                        <img 
                          src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=store@upi%26pn=EchoKart%26am=${total}%26cu=INR`} 
                          alt="Payment QR"
@@ -392,7 +392,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   </div>
 
                   <div className="space-y-4">
-                    <div className="flex items-center gap-4 bg-black text-white p-5 rounded-3xl shadow-xl shadow-black/10">
+                    <div className="flex items-center gap-4 bg-black text-white p-5 rounded-xl shadow-xl shadow-black/10">
                       <Shield size={24} className="shrink-0 text-[#00c853]" />
                       <p className="text-[10px] md:text-xs font-black uppercase tracking-widest leading-relaxed">Safety Note: Enter 12-digit UTR after payment</p>
                     </div>
@@ -402,7 +402,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                         name="utrNumber"
                         value={formData.utrNumber}
                         onChange={handleInputChange}
-                        className="w-full h-18 md:h-20 rounded-3xl border-slate-100 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 p-6 bg-slate-50 font-black tracking-[0.2em] text-xl md:text-3xl text-center text-slate-900 placeholder:text-slate-200 outline-none transition-all" 
+                        className="w-full h-18 md:h-20 rounded-xl border-slate-100 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 p-6 bg-slate-50 font-black tracking-[0.2em] text-xl md:text-3xl text-center text-slate-900 placeholder:text-slate-200 outline-none transition-all" 
                         placeholder="0000 0000 0000" 
                         type="text" 
                         maxLength={12}
@@ -418,9 +418,9 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   exit={{ opacity: 0, y: -20 }}
                   className="flex flex-col items-center justify-center p-10 md:p-16 text-center"
                 >
-                  <div className="size-24 md:size-32 bg-[#e31c3d]/5 rounded-[2.5rem] flex items-center justify-center text-[#e31c3d] mb-8 relative">
+                  <div className="size-24 md:size-32 bg-[#e31c3d]/5 rounded-2xl flex items-center justify-center text-[#e31c3d] mb-8 relative">
                     <Truck size={48} md-size={70} />
-                    <div className="absolute inset-0 border-4 border-dashed border-[#e31c3d]/20 rounded-[2.5rem] animate-[spin_10s_linear_infinite]"></div>
+                    <div className="absolute inset-0 border-4 border-dashed border-[#e31c3d]/20 rounded-2xl animate-[spin_10s_linear_infinite]"></div>
                   </div>
                   <h3 className="text-2xl md:text-4xl font-black text-slate-900 mb-3 tracking-tighter uppercase italic">Pay on Delivery</h3>
                   <p className="text-slate-400 font-bold text-sm md:text-base max-w-xs mx-auto mb-10 leading-relaxed uppercase tracking-tight">Pay securely at your doorstep when your order arrives.</p>
@@ -435,13 +435,13 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
 
         {/* Right Column: Desktop Sidebar */}
         <div className="lg:col-span-5 hidden lg:block">
-          <div className="bg-white border-2 border-slate-50 rounded-[3rem] p-8 md:p-12 sticky top-28 shadow-2xl shadow-slate-200/30">
+          <div className="bg-white border-2 border-slate-50 rounded-2xl p-8 md:p-12 sticky top-28 shadow-2xl shadow-slate-200/30">
             <h3 className="text-4xl font-black text-slate-900 mb-8 tracking-tighter uppercase leading-none italic">Review <span className="text-[#e31c3d]">Order</span></h3>
             
             <div className="space-y-6 mb-12 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
               {cart.map((item: any, idx: number) => (
                 <div key={idx} className="flex gap-6 group">
-                  <div className="relative size-20 bg-slate-50 rounded-3xl overflow-hidden border border-slate-100 shrink-0 shadow-sm transition-all group-hover:scale-105">
+                  <div className="relative size-20 bg-slate-50 rounded-xl overflow-hidden border border-slate-100 shrink-0 shadow-sm transition-all group-hover:scale-105">
                     <img className="w-full h-full object-cover mix-blend-multiply" alt={item.name} src={item.image} />
                     <span className="absolute -top-1 -right-1 size-6 bg-[#e31c3d] text-white text-xs flex items-center justify-center rounded-full font-black border-2 border-white">{item.quantity}</span>
                   </div>
@@ -476,7 +476,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
             <button 
               onClick={handleCompletePurchase}
               disabled={isSubmitting || cart.length === 0}
-              className="w-full bg-[#e31c3d] hover:bg-black text-white font-black text-xs uppercase tracking-[0.25em] py-6 rounded-[2rem] shadow-2xl shadow-[#e31c3d]/30 transition-all duration-500 flex items-center justify-center gap-3 group disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-[#e31c3d] hover:bg-black text-white font-black text-xs uppercase tracking-[0.25em] py-6 rounded-xl shadow-2xl shadow-[#e31c3d]/30 transition-all duration-500 flex items-center justify-center gap-3 group disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
                 <>
@@ -514,7 +514,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
           <button 
             onClick={handleCompletePurchase}
             disabled={isSubmitting || cart.length === 0}
-            className="w-full bg-[#e31c3d] text-white font-black py-4 rounded-2xl shadow-xl shadow-[#e31c3d]/20 active:scale-95 transition-all text-xs uppercase tracking-widest flex items-center justify-center gap-3"
+            className="w-full bg-[#e31c3d] text-white font-black py-4 rounded-lg shadow-xl shadow-[#e31c3d]/20 active:scale-95 transition-all text-xs uppercase tracking-widest flex items-center justify-center gap-3"
           >
             {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : "Complete Purchase"}
             {!isSubmitting && <ArrowRight size={18} />}

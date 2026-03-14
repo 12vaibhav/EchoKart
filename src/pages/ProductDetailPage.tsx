@@ -72,7 +72,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                 <div 
                   key={i} 
                   onClick={() => setActiveImage(i)}
-                  className={`aspect-square w-16 md:w-full rounded-xl md:rounded-2xl p-0 cursor-pointer flex items-center justify-center shrink-0 overflow-hidden box-border transition-all duration-300 ${i === activeImage ? 'bg-white border-2 border-[#e31c3d] shadow-sm scale-[1.02]' : 'bg-gray-50 border border-transparent hover:border-gray-200 hover:bg-white'}`}
+                  className={`aspect-square w-16 md:w-full rounded-md md:rounded-lg p-0 cursor-pointer flex items-center justify-center shrink-0 overflow-hidden box-border transition-all duration-300 ${i === activeImage ? 'bg-white border-2 border-[#e31c3d] shadow-sm scale-[1.02]' : 'bg-gray-50 border border-transparent hover:border-gray-200 hover:bg-white'}`}
                 >
                   <img src={img} alt="" className="w-full h-full object-cover drop-shadow-sm" />
                 </div>
@@ -80,7 +80,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             </div>
 
             {/* Main Image Viewport */}
-            <div className="relative flex-1 bg-gradient-to-br from-gray-50 to-white rounded-2xl md:rounded-3xl border border-gray-100 shadow-sm flex items-center justify-center p-0 group overflow-hidden min-h-[350px] md:min-h-[400px]">
+            <div className="relative flex-1 bg-gradient-to-br from-gray-50 to-white rounded-lg md:rounded-xl border border-gray-100 shadow-sm flex items-center justify-center p-0 group overflow-hidden min-h-[350px] md:min-h-[400px]">
               {tags && tags.length > 0 && (
                 <div className="absolute top-6 left-6 flex flex-col gap-2 z-10">
                   {tags.map((tag: any, idx: number) => (
@@ -137,7 +137,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                   {title}
                 </h1>
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="flex items-center bg-green-50 px-3 py-1.5 rounded-xl border border-green-100">
+                  <div className="flex items-center bg-green-50 px-3 py-1.5 rounded-md border border-green-100">
                     <div className="flex gap-0.5 mr-2">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} className={`w-3.5 h-3.5 ${i < Math.floor(Number(product.rating || 5)) ? 'fill-yellow-400 text-yellow-400' : 'fill-gray-200 text-gray-200'}`} />
@@ -153,7 +153,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                   </span>
                 </div>
 
-                <div className="flex items-baseline gap-3 md:gap-4 mb-6 md:mb-8 p-4 md:p-6 rounded-2xl md:rounded-[2rem] bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-sm relative overflow-hidden group max-w-md">
+                <div className="flex items-baseline gap-3 md:gap-4 mb-6 md:mb-8 p-4 md:p-6 rounded-lg md:rounded-xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-sm relative overflow-hidden group max-w-md">
                    <div className="absolute -right-4 -top-4 w-24 h-24 bg-[#e31c3d] opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.05] transition-opacity"></div>
                     <span className="text-2xl md:text-4xl font-black text-[#e31c3d] tracking-tighter">₹{price.toLocaleString('en-IN')}</span>
                    {oldPrice && (
@@ -186,7 +186,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
 
 
             {/* Premium Trust Badges (Local Assets) */}
-            <div className="relative grid grid-cols-3 items-center bg-gradient-to-r from-gray-50/80 to-white py-5 sm:py-6 rounded-2xl border border-gray-100 shadow-[inset_0_0_20px_rgba(0,0,0,0.01)] mb-8 max-w-md">
+            <div className="relative grid grid-cols-3 items-center bg-gradient-to-r from-gray-50/80 to-white py-5 sm:py-6 rounded-lg border border-gray-100 shadow-[inset_0_0_20px_rgba(0,0,0,0.01)] mb-8 max-w-md">
               <div className="flex justify-center">
                 <img src={paymentBadge} alt="Secure Payments" className="h-12 sm:h-14 w-auto object-contain hover:scale-110 hover:drop-shadow-md transition-transform duration-300" />
               </div>
@@ -206,9 +206,9 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
 
             {/* Important Highlights */}
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-3 md:gap-4 mb-10">
-              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
+              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-lg bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
                 <div className="absolute -right-6 -top-6 w-24 h-24 bg-[#e31c3d] opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
-                <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-[#e31c3d] group-hover:scale-110 transition-transform z-10 shrink-0">
+                <div className="w-10 h-10 rounded-md bg-red-50 flex items-center justify-center text-[#e31c3d] group-hover:scale-110 transition-transform z-10 shrink-0">
                   <Truck className="w-5 h-5" />
                 </div>
                 <div className="z-10 w-full">
@@ -217,9 +217,9 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                 </div>
               </div>
 
-              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
+              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-lg bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
                 <div className="absolute -right-6 -top-6 w-24 h-24 bg-blue-500 opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
-                <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform z-10 shrink-0">
+                <div className="w-10 h-10 rounded-md bg-blue-50 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform z-10 shrink-0">
                   <RotateCcw className="w-5 h-5" />
                 </div>
                 <div className="z-10 w-full">
@@ -228,9 +228,9 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                 </div>
               </div>
 
-              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
+              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-lg bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
                 <div className="absolute -right-6 -top-6 w-24 h-24 bg-amber-500 opacity-[0.04] rounded-full blur-2xl group-hover:opacity-[0.08] transition-opacity"></div>
-                <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform z-10 shrink-0">
+                <div className="w-10 h-10 rounded-md bg-amber-50 flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform z-10 shrink-0">
                   <Award className="w-5 h-5" />
                 </div>
                 <div className="z-10 w-full">
@@ -239,9 +239,9 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                 </div>
               </div>
 
-              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
+              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-lg bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
                 <div className="absolute -right-6 -top-6 w-24 h-24 bg-green-500 opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
-                <div className="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform z-10 shrink-0">
+                <div className="w-10 h-10 rounded-md bg-green-50 flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform z-10 shrink-0">
                   <Shield className="w-5 h-5" />
                 </div>
                 <div className="z-10 w-full">
@@ -271,10 +271,10 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
 
             {/* Actions (Product Unit Element) */}
             <div className="flex flex-col gap-4 mb-8">
-              <div className="bg-gray-50 p-2 rounded-2xl border border-gray-100 flex flex-col gap-3">
+              <div className="bg-gray-50 p-2 rounded-lg border border-gray-100 flex flex-col gap-3">
                 <div className="flex items-center justify-between px-2 py-1">
                   <span className="text-sm font-bold text-gray-900 uppercase tracking-tight">Quantity</span>
-                  <div className="flex items-center bg-white border border-gray-200 rounded-xl h-11 w-32 overflow-hidden shadow-sm">
+                  <div className="flex items-center bg-white border border-gray-200 rounded-md h-11 w-32 overflow-hidden shadow-sm">
                     <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="w-10 h-full flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors">
                       <Minus className="w-3.5 h-3.5" />
                     </button>
@@ -288,7 +288,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                 <div className="flex gap-3">
                   <button 
                     onClick={() => addToCart(product, quantity, selectedSwatch || undefined)}
-                    className="flex-1 bg-white border border-gray-200 text-gray-900 font-bold h-12 rounded-xl flex items-center justify-center gap-2 hover:border-gray-300 hover:shadow-sm transition-all text-xs uppercase tracking-widest"
+                    className="flex-1 bg-white border border-gray-200 text-gray-900 font-bold h-12 rounded-md flex items-center justify-center gap-2 hover:border-gray-300 hover:shadow-sm transition-all text-xs uppercase tracking-widest"
                   >
                     <ShoppingBag className="w-4 h-4" /> Cart
                   </button>
@@ -297,7 +297,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                       addToCart(product, quantity, selectedSwatch || undefined);
                       onNavigate?.('checkout');
                     }}
-                    className="flex-[2] bg-slate-900 text-white font-black h-12 rounded-xl hover:bg-black transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-lg"
+                    className="flex-[2] bg-slate-900 text-white font-black h-12 rounded-md hover:bg-black transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-lg"
                   >
                     Buy Now
                   </button>
@@ -305,7 +305,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               </div>
               <button 
                 onClick={() => onNavigate?.('checkout')}
-                className="relative w-full overflow-hidden h-14 rounded-xl flex items-center justify-center gap-3 shadow-[0_8px_30px_rgba(255,152,0,0.3)] hover:shadow-[0_8px_40px_rgba(255,152,0,0.5)] transition-all duration-300 hover:-translate-y-1 border border-orange-400"
+                className="relative w-full overflow-hidden h-14 rounded-md flex items-center justify-center gap-3 shadow-[0_8px_30px_rgba(255,152,0,0.3)] hover:shadow-[0_8px_40px_rgba(255,152,0,0.5)] transition-all duration-300 hover:-translate-y-1 border border-orange-400"
               >
                 <style>{`
                   @keyframes shimmer {
@@ -334,7 +334,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             </div>
 
             {/* Trust Badge Seals & Quality Badges */}
-            <div className="bg-gray-50 rounded-2xl p-4 sm:p-5 mb-8 border border-gray-100">
+            <div className="bg-gray-50 rounded-lg p-4 sm:p-5 mb-8 border border-gray-100">
               <div className="flex items-center justify-center gap-2 mb-4 pb-4 border-b border-gray-200">
                 <ShieldCheck className="w-5 h-5 text-green-600" />
                 <span className="text-sm font-bold text-gray-900 uppercase tracking-widest">Guaranteed Safe & Secure Checkout</span>
@@ -432,7 +432,7 @@ const ProductDetailsAndReviews = ({ product }: { product: any }) => {
               dangerouslySetInnerHTML={{ __html: fullCopy }}
             />
           ) : (
-            <div className="py-12 flex flex-col items-center justify-center text-gray-400 border-2 border-dashed border-gray-100 rounded-3xl">
+            <div className="py-12 flex flex-col items-center justify-center text-gray-400 border-2 border-dashed border-gray-100 rounded-xl">
               <p className="font-medium">Product description is coming soon.</p>
             </div>
           )}
@@ -455,7 +455,7 @@ const ProductDetailsAndReviews = ({ product }: { product: any }) => {
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Customer Reviews</h2>
         
         {/* Rating Summary */}
-        <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm mb-8">
+        <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm mb-8">
           <div className="flex items-center gap-6 mb-6">
             <div className="text-center">
               <div className="text-5xl font-bold text-gray-900 mb-2">4.0</div>
@@ -486,7 +486,7 @@ const ProductDetailsAndReviews = ({ product }: { product: any }) => {
         {/* Reviews List */}
         <div className="space-y-4">
           {reviews.slice(0, visibleReviews).map((review: any, idx: number) => (
-            <div key={idx} className="bg-gray-50 p-5 rounded-2xl border border-gray-100 transition-all hover:bg-white hover:shadow-sm">
+            <div key={idx} className="bg-gray-50 p-5 rounded-lg border border-gray-100 transition-all hover:bg-white hover:shadow-sm">
               {/* Enlarged Review Image Gallery */}
               {review.images && review.images.length > 0 && (
                 <div className="flex gap-3 mb-4">
@@ -538,7 +538,7 @@ const ProductDetailsAndReviews = ({ product }: { product: any }) => {
           {visibleReviews < reviews.length && (
             <button 
               onClick={() => setVisibleReviews(prev => prev + 3)}
-              className="w-full mt-4 py-3.5 border-2 border-dashed border-gray-200 rounded-xl text-gray-600 font-bold hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 transition-all text-sm uppercase tracking-wider flex items-center justify-center gap-2"
+              className="w-full mt-4 py-3.5 border-2 border-dashed border-gray-200 rounded-md text-gray-600 font-bold hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 transition-all text-sm uppercase tracking-wider flex items-center justify-center gap-2"
             >
               Load More Reviews
               <ChevronRight className="w-4 h-4 opacity-50" />

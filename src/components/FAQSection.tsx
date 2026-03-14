@@ -31,7 +31,7 @@ export const FAQSection = () => {
                   const id = `${section.category}-${iIdx}`;
                   const isOpen = openIndex === id;
                   return (
-                    <div key={iIdx} className="bg-white border border-gray-100 rounded-xl md:rounded-2xl overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
+                    <div key={iIdx} className="bg-white border border-gray-100 rounded-md md:rounded-lg overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
                       <button 
                         onClick={() => toggleFAQ(id)}
                         className="w-full flex items-center justify-between p-4 md:p-5 text-left focus:outline-none"

@@ -26,7 +26,7 @@ export const CustomerReviews = ({ reviews: propReviews }: { reviews?: any[] }) =
               key={review.id}
               whileHover={{ y: -10, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="bg-gray-50 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 cursor-pointer border border-gray-100 flex flex-col justify-between shrink-0 w-[280px] md:w-auto snap-start"
+              className="bg-gray-50 rounded-lg p-6 md:p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 cursor-pointer border border-gray-100 flex flex-col justify-between shrink-0 w-[280px] md:w-auto snap-start"
             >
               <div>
                 <div className="flex items-center space-x-1 mb-6 text-[#e31c3d]">

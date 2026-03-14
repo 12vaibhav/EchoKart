@@ -18,10 +18,10 @@ export const Newsletter = () => {
           <input 
             type="email" 
             placeholder="Your email address" 
-            className="flex-grow bg-white text-black px-6 py-4 rounded-full focus:outline-none focus:ring-2 focus:ring-[#e31c3d]"
+            className="flex-grow bg-white text-black px-6 py-4 rounded focus:outline-none focus:ring-2 focus:ring-[#e31c3d]"
             required
           />
-          <button type="submit" className="bg-[#e31c3d] hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full transition-colors whitespace-nowrap">
+          <button type="submit" className="bg-[#e31c3d] hover:bg-red-700 text-white font-bold py-4 px-8 rounded transition-colors whitespace-nowrap">
             Subscribe
           </button>
         </form>

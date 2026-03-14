@@ -55,7 +55,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
         transition={{ duration: 0.5 }}
         className="w-full max-w-md"
       >
-        <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] border border-slate-100 relative overflow-hidden group">
+        <div className="bg-white rounded-xl p-8 md:p-12 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] border border-slate-100 relative overflow-hidden group">
           {/* Decorative background accent */}
           <div className="absolute -right-12 -top-12 w-48 h-48 bg-[#e31c3d] opacity-[0.03] rounded-full blur-3xl group-hover:opacity-[0.05] transition-opacity duration-700" />
           
@@ -77,7 +77,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="mb-6 p-4 rounded-2xl bg-red-50 border border-red-100 flex items-start gap-3 text-red-600 text-sm font-bold"
+                  className="mb-6 p-4 rounded-lg bg-red-50 border border-red-100 flex items-start gap-3 text-red-600 text-sm font-bold"
                 >
                   <AlertCircle className="w-5 h-5 shrink-0" />
                   <span>{error}</span>
@@ -92,7 +92,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-start gap-3 text-emerald-700 text-sm font-bold"
+                  className="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-100 flex items-start gap-3 text-emerald-700 text-sm font-bold"
                 >
                   <CheckCircle2 className="w-5 h-5 shrink-0" />
                   <span>Check your email for the confirmation link!</span>
@@ -114,7 +114,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="John Doe"
-                      className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 pl-14 pr-6 outline-none focus:bg-white focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 transition-all font-medium"
+                      className="w-full bg-slate-50 border border-slate-100 rounded-md py-4 pl-14 pr-6 outline-none focus:bg-white focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 transition-all font-medium"
                     />
                   </div>
                 </div>
@@ -132,7 +132,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@example.com"
-                    className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 pl-14 pr-6 outline-none focus:bg-white focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 transition-all font-medium"
+                    className="w-full bg-slate-50 border border-slate-100 rounded-md py-4 pl-14 pr-6 outline-none focus:bg-white focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 transition-all font-medium"
                   />
                 </div>
               </div>
@@ -149,7 +149,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 pl-14 pr-14 outline-none focus:bg-white focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 transition-all font-medium"
+                    className="w-full bg-slate-50 border border-slate-100 rounded-md py-4 pl-14 pr-14 outline-none focus:bg-white focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 transition-all font-medium"
                   />
                   <button 
                     type="button"
@@ -169,7 +169,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
               <button 
                 type="submit" 
                 disabled={loading}
-                className="w-full bg-[#e31c3d] text-white font-black py-4 rounded-2xl shadow-xl shadow-red-100 hover:shadow-red-200 hover:-translate-y-1 active:scale-95 transition-all text-sm uppercase tracking-widest flex items-center justify-center gap-3 disabled:opacity-50 disabled:translate-y-0 disabled:shadow-none"
+                className="w-full bg-[#e31c3d] text-white font-black py-4 rounded-md shadow-xl shadow-red-100 hover:shadow-red-200 hover:-translate-y-1 active:scale-95 transition-all text-sm uppercase tracking-widest flex items-center justify-center gap-3 disabled:opacity-50 disabled:translate-y-0 disabled:shadow-none"
               >
                 {loading ? (
                   <Loader2 className="w-5 h-5 animate-spin" />

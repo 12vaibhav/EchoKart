@@ -40,7 +40,7 @@ export const CategoryPage = ({ categories = [], onNavigate }: { categories: any[
             whileTap={{ scale: 0.98 }}
             href="#" 
             onClick={(e) => { e.preventDefault(); onNavigate('category-products', null, cat.title || cat.name); }}
-            className="group relative block overflow-hidden rounded-2xl bg-slate-100 aspect-[4/5] shadow-sm hover:shadow-xl transition-all duration-500"
+            className="group relative block overflow-hidden rounded-lg bg-slate-100 aspect-[4/5] shadow-sm hover:shadow-xl transition-all duration-500"
           >
             {cat.image ? (
               <img 
@@ -76,7 +76,7 @@ export const CategoryPage = ({ categories = [], onNavigate }: { categories: any[
       </div>
 
       {/* Promotion Banner - Re-engineered for mobile */}
-      <div className="mt-12 md:mt-24 bg-[#e31c3d] rounded-3xl overflow-hidden flex flex-col md:flex-row items-center justify-between text-white shadow-2xl shadow-[#e31c3d]/25 border border-white/10">
+      <div className="mt-12 md:mt-24 bg-[#e31c3d] rounded-xl overflow-hidden flex flex-col md:flex-row items-center justify-between text-white shadow-2xl shadow-[#e31c3d]/25 border border-white/10">
         <div className="p-8 md:p-16 lg:w-3/5 z-10">
           <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full mb-6 border border-white/10">
             <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
@@ -90,7 +90,7 @@ export const CategoryPage = ({ categories = [], onNavigate }: { categories: any[
           </p>
           <button 
             onClick={() => onNavigate('home')}
-            className="group bg-white text-[#e31c3d] font-black text-sm uppercase tracking-widest px-10 py-4 rounded-xl hover:bg-black hover:text-white transition-all duration-500 flex items-center gap-3 w-full md:w-fit justify-center shadow-xl shadow-black/10"
+            className="group bg-white text-[#e31c3d] font-black text-sm uppercase tracking-widest px-10 py-4 rounded-md hover:bg-black hover:text-white transition-all duration-500 flex items-center gap-3 w-full md:w-fit justify-center shadow-xl shadow-black/10"
           >
             Start Shopping <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-500" />
           </button>

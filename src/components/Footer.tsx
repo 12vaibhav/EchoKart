@@ -21,7 +21,7 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
           </div>
           <div 
             onClick={() => onNavigate('track')}
-            className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 md:gap-4 cursor-pointer group hover:bg-white/10 p-2 -m-2 rounded-xl transition-all"
+            className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 md:gap-4 cursor-pointer group hover:bg-white/10 p-2 -m-2 rounded-md transition-all"
           >
             <Package className="w-8 h-8 md:w-10 md:h-10 font-light opacity-90 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
             <div>
@@ -93,7 +93,7 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
           </div>
 
           {/* Trust Badges - Optimized for Mobile */}
-          <div className="border border-white/[0.08] mb-8 md:mb-12 py-4 md:py-6 px-4 md:px-6 bg-[#1a1a1a] rounded-xl grid grid-cols-3 gap-3 md:flex flex-wrap items-center justify-center lg:justify-between md:gap-6">
+          <div className="border border-white/[0.08] mb-8 md:mb-12 py-4 md:py-6 px-4 md:px-6 bg-[#1a1a1a] rounded-md grid grid-cols-3 gap-3 md:flex flex-wrap items-center justify-center lg:justify-between md:gap-6">
             <div className="flex flex-col md:flex-row items-center text-center md:text-left md:space-x-3 group">
               <ShieldCheck className="w-5 h-5 md:w-6 md:h-6 text-[#00c853] mb-2 md:mb-0" />
               <div>
@@ -123,7 +123,7 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
               <div className="relative">
                 <select 
                   defaultValue="India (INR ₹)"
-                  className="appearance-none bg-white/10 hover:bg-white/20 text-white font-semibold border border-white/10 rounded-full pl-5 pr-10 py-2 text-[12px] md:text-[13px] focus:outline-none cursor-pointer transition-colors"
+                  className="appearance-none bg-white/10 hover:bg-white/20 text-white font-semibold border border-white/10 rounded-md pl-5 pr-10 py-2 text-[12px] md:text-[13px] focus:outline-none cursor-pointer transition-colors"
                 >
                   <option className="bg-[#151515]">United States (USD $)</option>
                   <option className="bg-[#151515]">India (INR ₹)</option>
@@ -133,7 +133,7 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
                 </div>
               </div>
               <div className="relative">
-                <select className="appearance-none bg-white/10 hover:bg-white/20 text-white font-semibold border border-white/10 rounded-full pl-5 pr-10 py-2 text-[12px] md:text-[13px] focus:outline-none cursor-pointer transition-colors">
+                <select className="appearance-none bg-white/10 hover:bg-white/20 text-white font-semibold border border-white/10 rounded-md pl-5 pr-10 py-2 text-[12px] md:text-[13px] focus:outline-none cursor-pointer transition-colors">
                   <option className="bg-[#151515]">English</option>
                   <option className="bg-[#151515]">Hindi</option>
                 </select>

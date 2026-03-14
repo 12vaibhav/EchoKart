@@ -117,7 +117,7 @@ export const CategoryProductsPage = ({
           
           {/* Sidebar Filters */}
           <div className={`w-full lg:w-72 flex-shrink-0 space-y-4 md:space-y-8 ${isFilterOpen ? 'block' : 'hidden lg:block'}`}>
-            <div className="bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-gray-100">
+            <div className="bg-white rounded-lg p-5 md:p-6 shadow-sm border border-gray-100">
               <div className="flex items-center justify-between lg:justify-start gap-2 mb-6">
                 <div className="flex items-center gap-2">
                   <Filter className="w-4 h-4 md:w-5 md:h-5 text-gray-900" />
@@ -144,7 +144,7 @@ export const CategoryProductsPage = ({
                   step="500"
                   value={maxPrice} 
                   onChange={(e) => setMaxPrice(parseInt(e.target.value))}
-                  className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#e31c3d]"
+                  className="w-full h-1.5 bg-gray-200 rounded-md appearance-none cursor-pointer accent-[#e31c3d]"
                 />
                 <div className="flex justify-between text-[10px] font-bold text-gray-400 mt-2 uppercase tracking-wider">
                   <span>₹0</span>
@@ -246,7 +246,7 @@ export const CategoryProductsPage = ({
           {/* Main Content */}
           <div className="flex-1 min-w-0">
             {/* Top Bar */}
-            <div className="bg-white rounded-2xl p-3 md:p-4 shadow-sm border border-gray-100 mb-4 md:mb-8">
+            <div className="bg-white rounded-lg p-3 md:p-4 shadow-sm border border-gray-100 mb-4 md:mb-8">
               <div className="flex flex-col gap-4">
                 
                 <div className="flex items-center justify-between gap-4">
@@ -273,7 +273,7 @@ export const CategoryProductsPage = ({
                   {/* Filter Toggle (Mobile Only) */}
                   <button 
                     onClick={() => setIsFilterOpen(true)}
-                    className="lg:hidden flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-xl text-gray-900 font-bold text-xs border border-gray-100 active:scale-95 transition-all"
+                    className="lg:hidden flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-md text-gray-900 font-bold text-xs border border-gray-100 active:scale-95 transition-all"
                   >
                     <Filter className="w-3.5 h-3.5" /> Filters
                   </button>
@@ -286,7 +286,7 @@ export const CategoryProductsPage = ({
                       <button
                         key={opt}
                         onClick={() => setSortBy(opt.toLowerCase().replace(' ', '-'))}
-                        className={`px-3 py-1.5 rounded-lg text-[10px] md:text-xs font-black uppercase tracking-widest transition-all whitespace-nowrap ${
+                        className={`px-3 py-1.5 rounded-md text-[10px] md:text-xs font-black uppercase tracking-widest transition-all whitespace-nowrap ${
                           sortBy === opt.toLowerCase().replace(' ', '-') 
                             ? 'bg-[#e31c3d] text-white shadow-md shadow-red-100' 
                             : 'bg-gray-50 text-gray-400 hover:text-gray-900 border border-gray-100'
@@ -320,7 +320,7 @@ export const CategoryProductsPage = ({
                   <button 
                     key={i}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`w-10 h-10 flex items-center justify-center rounded-xl font-medium transition-all ${
+                    className={`w-10 h-10 flex items-center justify-center rounded-md font-medium transition-all ${
                       currentPage === i + 1 
                         ? 'bg-[#e31c3d] text-white shadow-lg shadow-[#e31c3d]/20' 
                         : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'

@@ -23,7 +23,7 @@ export const WhyChooseUs = () => {
         <h2 className="text-2xl md:text-3xl font-black text-center mb-8 md:mb-10 tracking-tight">Why Shop With Us</h2>
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
           {features.map((f, idx) => (
-            <div key={idx} className="flex flex-col items-center text-center p-4 md:p-6 rounded-2xl bg-gray-50/50 md:bg-transparent hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-gray-100 group">
+            <div key={idx} className="flex flex-col items-center text-center p-4 md:p-6 rounded-lg bg-gray-50/50 md:bg-transparent hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-gray-100 group">
               <div className="text-[#e31c3d] mb-3 md:mb-4 bg-red-50 p-3 md:p-4 rounded-full group-hover:scale-110 transition-transform">
                 {React.cloneElement(f.icon as React.ReactElement, { className: "w-6 h-6 md:w-8 md:h-8" })}
               </div>

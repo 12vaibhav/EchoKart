@@ -23,7 +23,7 @@ export const VideoShowcase = ({ videos: propVideos, onNavigate }: { videos?: any
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {displayVideos.map((video: any) => (
-            <div key={video.id} className="relative rounded-3xl overflow-hidden aspect-[9/16] shadow-2xl group border border-gray-800 bg-gray-900">
+            <div key={video.id} className="relative rounded-xl overflow-hidden aspect-[9/16] shadow-2xl group border border-gray-800 bg-gray-900">
               <video
                 className="w-full h-full object-cover"
                 autoPlay
@@ -38,7 +38,7 @@ export const VideoShowcase = ({ videos: propVideos, onNavigate }: { videos?: any
                   <p className="text-sm text-gray-200 mb-4">{video.product}</p>
                   <button 
                     onClick={() => onNavigate('category-products', null, 'Sale Item')}
-                    className="w-full bg-white hover:bg-[#e31c3d] hover:text-white text-black font-extrabold py-3.5 px-6 rounded-full transition-all shadow-lg text-sm uppercase tracking-widest active:scale-95"
+                    className="w-full bg-white hover:bg-[#e31c3d] hover:text-white text-black font-extrabold py-3.5 px-6 rounded-md transition-all shadow-lg text-sm uppercase tracking-widest active:scale-95"
                   >
                     Shop Now
                   </button>
