@@ -1,17 +1,36 @@
-import React from 'react';
-import { Star, ShoppingBag } from 'lucide-react';
+import React, { useState } from 'react';
+import { Star, ShoppingBag, Check, Loader2 } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
+import { motion, AnimatePresence } from 'motion/react';
 
 export const ProductCard = ({ product, onNavigate, onQuickView, className }: { key?: React.Key, product: any, onNavigate: (path: string, id?: any, categoryName?: string | null) => void, onQuickView?: (product: any) => void, className?: string }) => {
   const { addToCart } = useCart();
+  const [isAdding, setIsAdding] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = async (e: React.MouseEvent) => {
     e.stopPropagation();
+    
+    // Validation: Check stock if available
+    if (product.stock === 0) return;
+
+    setIsAdding(true);
+    
+    // Simulate a brief delay for a better premium feel and to handle "Adding" state
+    await new Promise(resolve => setTimeout(resolve, 600));
+    
     addToCart(product);
+    
+    setIsAdding(false);
+    setShowSuccess(true);
+    
+    // Reset success state after 2 seconds
+    setTimeout(() => setShowSuccess(false), 2000);
   };
 
   const itemPrice = Number(product.price || 0);
   const itemOldPrice = product.oldPrice ? Number(product.oldPrice) : null;
+  const isOutOfStock = product.stock === 0;
 
   return (
     <div 
@@ -19,10 +38,11 @@ export const ProductCard = ({ product, onNavigate, onQuickView, className }: { k
       className={`bg-white rounded-[1.2rem] md:rounded-[1.5rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 group hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col cursor-pointer h-full relative overflow-hidden ${className || 'w-full'}`}
     >
       <div className="relative aspect-square bg-[#f8f9fb] overflow-hidden group/img">
-
-
         {/* Product Tags/Badges */}
         <div className="absolute top-2 left-2 md:top-3 md:left-3 flex flex-col gap-1 z-20">
+          {isOutOfStock && (
+            <span className="bg-slate-800 text-white text-[7px] md:text-[8px] font-black uppercase tracking-wider px-1.5 md:px-2 py-0.5 md:py-1 rounded-sm md:rounded shadow-lg">Out of Stock</span>
+          )}
           {(product.badges || product.tags) ? (
             <>
               {product.badges && product.badges.slice(0, 1).map((badge: any, i: number) => (
@@ -37,7 +57,7 @@ export const ProductCard = ({ product, onNavigate, onQuickView, className }: { k
               ))}
             </>
           ) : (
-            product.sale && (
+            product.sale && !isOutOfStock && (
                <span className="bg-[#e31c3d] text-white text-[7px] md:text-[8px] font-black uppercase tracking-wider px-1.5 md:px-2 py-0.5 md:py-1 rounded-sm md:rounded shadow-lg">Sale</span>
             )
           )}
@@ -46,23 +66,62 @@ export const ProductCard = ({ product, onNavigate, onQuickView, className }: { k
         <img 
           src={product.image} 
           alt={product.title} 
-          className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105"
+          className={`w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105 ${isOutOfStock ? 'grayscale opacity-60' : ''}`}
           loading="lazy"
         />
 
-        {/* Quick Add Overlay */}
-        <div className="absolute inset-x-2 bottom-2 md:inset-x-3 md:bottom-3 z-20 md:translate-y-4 md:opacity-0 md:group-hover/img:translate-y-0 md:group-hover/img:opacity-100 transition-all duration-300">
+        {/* Quick Add Overlay - Optimized for Mobile Feedback */}
+        <div className="absolute inset-x-2 bottom-2 md:inset-x-3 md:bottom-3 z-30 md:translate-y-4 md:opacity-0 md:group-hover/img:translate-y-0 md:group-hover/img:opacity-100 transition-all duration-300">
           <button 
+            disabled={isAdding || isOutOfStock || showSuccess}
             onClick={handleAddToCart}
-            className="w-full bg-white/95 md:bg-white text-black font-black py-1.5 md:py-2.5 rounded md:rounded-lg text-[8px] md:text-[9px] uppercase tracking-widest flex items-center justify-center gap-1.5 hover:bg-[#e31c3d] hover:text-white transition-all shadow-xl"
+            className={`w-full font-black py-2 md:py-2.5 rounded md:rounded-lg text-[9px] md:text-[10px] uppercase tracking-[0.15em] flex items-center justify-center gap-2 transition-all shadow-xl relative overflow-hidden
+              ${showSuccess 
+                ? 'bg-green-500 text-white' 
+                : isOutOfStock 
+                  ? 'bg-slate-200 text-slate-500 cursor-not-allowed opacity-80' 
+                  : 'bg-white/95 md:bg-white text-black hover:bg-[#e31c3d] hover:text-white'
+              }`}
           >
-             <ShoppingBag size={10} className="md:w-3 md:h-3" /> Quick Add
+            <AnimatePresence mode="wait">
+              {isAdding ? (
+                <motion.div
+                  key="adding"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="flex items-center gap-1.5"
+                >
+                  <Loader2 className="w-3 h-3 animate-spin" /> Adding
+                </motion.div>
+              ) : showSuccess ? (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="flex items-center gap-1.5"
+                >
+                  <Check className="w-3 h-3" /> Added!
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="default"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="flex items-center gap-1.5"
+                >
+                  <ShoppingBag size={11} /> {isOutOfStock ? 'Sold Out' : 'Quick Add'}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </button>
         </div>
       </div>
       
       <div className="flex flex-col flex-1 p-2.5 md:p-4">
-        <h3 className="font-bold text-slate-800 text-[11px] md:text-base mb-1 md:mb-1.5 line-clamp-1 group-hover:text-[#e31c3d] transition-colors leading-tight">
+        <h3 className="font-bold text-slate-800 text-[11px] md:text-base mb-1 md:mb-1.5 line-clamp-1 group-hover:text-[#e31c3d] transition-colors leading-tight uppercase tracking-tight">
           {product.title || product.name || 'Product'}
         </h3>
         
