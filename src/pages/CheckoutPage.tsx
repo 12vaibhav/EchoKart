@@ -134,6 +134,31 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
 
   return (
     <motion.div {...fadeInUpProps} className="max-w-7xl mx-auto px-4 py-4 md:py-12 bg-white">
+      {/* Progress Indicator - Mirrored from CartPage */}
+      <div className="mb-12 pt-4">
+        <div className="flex items-center justify-between mb-4 max-w-2xl mx-auto relative px-4">
+          <div className="absolute top-[1.25rem] left-0 w-full h-[2px] bg-slate-100 z-0"></div>
+          <div className="absolute top-[1.25rem] left-0 w-1/2 h-[2px] bg-[#e31c3d] z-0 transition-all duration-700"></div>
+          
+          <div className="z-10 flex flex-col items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-[#151515] text-white flex items-center justify-center font-black text-sm shadow-lg shadow-black/20 ring-4 ring-white">
+              <Check className="w-5 h-5 text-green-400" />
+            </div>
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Cart</span>
+          </div>
+          
+          <div className="z-10 flex flex-col items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-[#e31c3d] text-white flex items-center justify-center font-black text-sm shadow-lg shadow-[#e31c3d]/20 ring-4 ring-white">2</div>
+            <span className="text-[10px] font-black text-slate-900 uppercase tracking-[0.2em]">Review</span>
+          </div>
+          
+          <div className="z-10 flex flex-col items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-black text-sm ring-4 ring-white">3</div>
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Checkout</span>
+          </div>
+        </div>
+      </div>
+
       {/* Mini Summary Mobile Header - Sticky */}
       <div className="lg:hidden sticky top-0 z-40 bg-white border-b border-slate-100 -mx-4 px-4 py-3 flex items-center justify-between mb-6 shadow-sm">
         <div className="flex flex-col">
@@ -142,7 +167,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
         </div>
         <button 
           onClick={() => setIsSummaryExpanded(!isSummaryExpanded)}
-          className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-lg border border-slate-100 active:scale-95 transition-all"
+          className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-md border border-slate-100 active:scale-95 transition-all outline-none"
         >
           <span className="text-xs font-black uppercase tracking-widest text-slate-600">Review Items</span>
           {isSummaryExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
@@ -160,8 +185,8 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
           >
             <div className="pt-4 space-y-4">
                {cart.map((item: any, idx: number) => (
-                <div key={idx} className="flex gap-4 bg-white p-3 rounded-lg border border-slate-100 shadow-sm">
-                  <div className="relative size-14 bg-slate-100 rounded-lg overflow-hidden border border-slate-100 shrink-0">
+                <div key={idx} className="flex gap-4 bg-white p-3 rounded-md border border-slate-100 shadow-sm">
+                  <div className="relative size-14 bg-slate-100 rounded-md overflow-hidden border border-slate-100 shrink-0">
                     <img className="w-full h-full object-cover mix-blend-multiply" alt={item.name} src={item.image} />
                     <span className="absolute -top-1 -right-1 size-5 bg-black text-white text-[10px] flex items-center justify-center rounded-full font-black">{item.quantity}</span>
                   </div>
@@ -171,7 +196,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   </div>
                 </div>
               ))}
-              <div className="p-4 bg-white rounded-lg border border-slate-100 space-y-2">
+              <div className="p-4 bg-white rounded-md border border-slate-100 space-y-2">
                  <div className="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-widest">
                     <span>Subtotal</span>
                     <span>₹{subtotal.toLocaleString()}</span>
@@ -190,14 +215,14 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
         )}
       </AnimatePresence>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         {/* Left Column: Forms */}
-        <div className="lg:col-span-7 space-y-8 md:space-y-12">
+        <div className="lg:col-span-2 space-y-8 md:space-y-12">
           
-          <div className="bg-slate-50 rounded-xl p-6 md:p-10 border border-slate-100 shadow-sm">
+          <div className="bg-slate-50 rounded-lg p-6 md:p-10 border border-slate-100 shadow-sm">
             <section className="mb-10">
               <div className="flex items-center gap-3 mb-8">
-                <div className="bg-[#e31c3d] p-2.5 rounded-lg shadow-lg shadow-[#e31c3d]/20">
+                <div className="bg-[#e31c3d] p-2.5 rounded-md shadow-lg shadow-[#e31c3d]/20">
                   <Mail className="text-white w-5 h-5 md:w-6 md:h-6" />
                 </div>
                 <div>
@@ -216,7 +241,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full h-14 pl-12 pr-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                      className="w-full h-14 pl-12 pr-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                       placeholder="email@example.com" 
                       type="email" 
                     />
@@ -232,7 +257,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                       value={formData.phone}
                       onChange={handleInputChange}
                       required
-                      className="w-full h-14 pl-12 pr-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                      className="w-full h-14 pl-12 pr-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                       placeholder="e.g. 9876543210" 
                       type="tel" 
                     />
@@ -243,7 +268,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
 
             <section>
               <div className="flex items-center gap-3 mb-8">
-                <div className="bg-[#e31c3d] p-2.5 rounded-xl shadow-lg shadow-[#e31c3d]/20">
+                <div className="bg-[#e31c3d] p-2.5 rounded-md shadow-lg shadow-[#e31c3d]/20">
                   <Truck className="text-white w-5 h-5 md:w-6 md:h-6" />
                 </div>
                 <div>
@@ -259,7 +284,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="John" 
                     type="text" 
                   />
@@ -270,7 +295,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="Doe" 
                     type="text" 
                   />
@@ -281,7 +306,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="houseNumber"
                     value={formData.houseNumber}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="e.g. Flat 402, Echo Enclave" 
                     type="text" 
                   />
@@ -292,7 +317,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="roadName"
                     value={formData.roadName}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="e.g. MG Road, Near City Center" 
                     type="text" 
                   />
@@ -303,7 +328,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="city"
                     value={formData.city}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="New Delhi" 
                     type="text" 
                   />
@@ -314,7 +339,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="pincode"
                     value={formData.pincode}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-lg border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="110001" 
                     type="text" 
                   />
@@ -323,19 +348,19 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
             </section>
           </div>
 
-          <section className="bg-white border-4 border-slate-50 rounded-2xl p-6 md:p-10 shadow-xl shadow-slate-200/50">
+          <section className="bg-white border-4 border-slate-50 rounded-lg p-6 md:p-10 shadow-xl shadow-slate-200/50">
             <div className="flex items-center gap-3 mb-8">
-              <div className="bg-[#e31c3d] p-2.5 rounded-xl shadow-lg shadow-[#e31c3d]/20">
+              <div className="bg-[#e31c3d] p-2.5 rounded-md shadow-lg shadow-[#e31c3d]/20">
                 <QrCode className="text-white w-5 h-5 md:w-6 md:h-6" />
               </div>
               <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Choose Payment</h2>
             </div>
             
-            <div className="flex flex-col sm:flex-row p-2 bg-slate-50 rounded-xl mb-8 gap-2">
+            <div className="flex flex-col sm:flex-row p-2 bg-slate-50 rounded-md mb-8 gap-2">
               <button
                 type="button"
                 onClick={() => setFormData(prev => ({ ...prev, paymentMethod: 'upi' }))}
-                className={`flex-1 flex items-center justify-center gap-2.5 py-4 rounded-lg text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-500 active:scale-95 ${
+                className={`flex-1 flex items-center justify-center gap-2.5 py-4 rounded-md text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-500 active:scale-95 ${
                   formData.paymentMethod === 'upi' 
                     ? 'bg-white text-[#e31c3d] shadow-xl shadow-slate-200/50 scale-[1.02]' 
                     : 'text-slate-400 hover:text-slate-600'
@@ -367,8 +392,8 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   exit={{ opacity: 0, y: -20 }}
                   className="space-y-8"
                 >
-                  <div className="flex flex-col items-center justify-center p-6 md:p-10 bg-[#fef2f2] rounded-xl border border-red-50 gap-6">
-                    <div className="size-48 md:size-64 bg-white p-5 rounded-2xl shadow-2xl shadow-[#e31c3d]/10 flex items-center justify-center relative group overflow-hidden border border-red-50/50">
+                  <div className="flex flex-col items-center justify-center p-6 md:p-10 bg-[#fef2f2] rounded-lg border border-red-50 gap-6">
+                    <div className="size-48 md:size-64 bg-white p-5 rounded-lg shadow-2xl shadow-[#e31c3d]/10 flex items-center justify-center relative group overflow-hidden border border-red-50/50">
                        <img 
                          src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=store@upi%26pn=EchoKart%26am=${total}%26cu=INR`} 
                          alt="Payment QR"
@@ -392,7 +417,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   </div>
 
                   <div className="space-y-4">
-                    <div className="flex items-center gap-4 bg-black text-white p-5 rounded-xl shadow-xl shadow-black/10">
+                    <div className="flex items-center gap-4 bg-black text-white p-5 rounded-lg shadow-xl shadow-black/10">
                       <Shield size={24} className="shrink-0 text-[#00c853]" />
                       <p className="text-[10px] md:text-xs font-black uppercase tracking-widest leading-relaxed">Safety Note: Enter 12-digit UTR after payment</p>
                     </div>
@@ -402,7 +427,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                         name="utrNumber"
                         value={formData.utrNumber}
                         onChange={handleInputChange}
-                        className="w-full h-18 md:h-20 rounded-xl border-slate-100 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 p-6 bg-slate-50 font-black tracking-[0.2em] text-xl md:text-3xl text-center text-slate-900 placeholder:text-slate-200 outline-none transition-all" 
+                        className="w-full h-18 md:h-20 rounded-lg border-slate-100 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 p-6 bg-slate-50 font-black tracking-[0.2em] text-xl md:text-3xl text-center text-slate-900 placeholder:text-slate-200 outline-none transition-all" 
                         placeholder="0000 0000 0000" 
                         type="text" 
                         maxLength={12}
@@ -418,9 +443,9 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   exit={{ opacity: 0, y: -20 }}
                   className="flex flex-col items-center justify-center p-10 md:p-16 text-center"
                 >
-                  <div className="size-24 md:size-32 bg-[#e31c3d]/5 rounded-2xl flex items-center justify-center text-[#e31c3d] mb-8 relative">
+                  <div className="size-24 md:size-32 bg-[#e31c3d]/5 rounded-lg flex items-center justify-center text-[#e31c3d] mb-8 relative">
                     <Truck size={48} md-size={70} />
-                    <div className="absolute inset-0 border-4 border-dashed border-[#e31c3d]/20 rounded-2xl animate-[spin_10s_linear_infinite]"></div>
+                    <div className="absolute inset-0 border-4 border-dashed border-[#e31c3d]/20 rounded-lg animate-[spin_10s_linear_infinite]"></div>
                   </div>
                   <h3 className="text-2xl md:text-4xl font-black text-slate-900 mb-3 tracking-tighter uppercase italic">Pay on Delivery</h3>
                   <p className="text-slate-400 font-bold text-sm md:text-base max-w-xs mx-auto mb-10 leading-relaxed uppercase tracking-tight">Pay securely at your doorstep when your order arrives.</p>
@@ -433,60 +458,59 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
           </section>
         </div>
 
-        {/* Right Column: Desktop Sidebar */}
-        <div className="lg:col-span-5 hidden lg:block">
-          <div className="bg-white border-2 border-slate-50 rounded-2xl p-8 md:p-12 sticky top-28 shadow-2xl shadow-slate-200/30">
-            <h3 className="text-4xl font-black text-slate-900 mb-8 tracking-tighter uppercase leading-none italic">Review <span className="text-[#e31c3d]">Order</span></h3>
+        {/* Right Column: Order Summary - Mirrored Layout from CartPage */}
+        <div className="lg:col-span-1">
+          <div className="bg-white rounded-lg p-5 sm:p-8 sticky top-28 border border-slate-100 shadow-sm">
+            <h2 className="text-xl font-black text-slate-900 mb-6 sm:mb-8 uppercase tracking-tight">Order Review</h2>
             
-            <div className="space-y-6 mb-12 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+            <div className="space-y-6 mb-8 border-b pb-8 border-slate-100">
               {cart.map((item: any, idx: number) => (
-                <div key={idx} className="flex gap-6 group">
-                  <div className="relative size-20 bg-slate-50 rounded-xl overflow-hidden border border-slate-100 shrink-0 shadow-sm transition-all group-hover:scale-105">
+                <div key={idx} className="flex gap-4 group">
+                  <div className="relative size-16 bg-slate-50 rounded-md overflow-hidden border border-slate-100 shrink-0 shadow-sm transition-all group-hover:scale-105">
                     <img className="w-full h-full object-cover mix-blend-multiply" alt={item.name} src={item.image} />
-                    <span className="absolute -top-1 -right-1 size-6 bg-[#e31c3d] text-white text-xs flex items-center justify-center rounded-full font-black border-2 border-white">{item.quantity}</span>
+                    <span className="absolute -top-1 -right-1 size-5 bg-black text-white text-[10px] flex items-center justify-center rounded-full font-black">{item.quantity}</span>
                   </div>
                   <div className="flex-1 py-1">
-                    <h4 className="text-sm font-black text-slate-900 uppercase tracking-tight mb-1">{item.name}</h4>
-                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{item.category}</span>
-                    <p className="text-lg font-black text-[#e31c3d] mt-2">₹{(item.price * item.quantity).toLocaleString()}</p>
+                    <h4 className="text-xs font-bold text-slate-900 uppercase tracking-tight mb-1 line-clamp-1">{item.name}</h4>
+                    <p className="text-sm font-black text-[#e31c3d]">₹{(item.price * item.quantity).toLocaleString()}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="space-y-4 pt-10 border-t-2 border-slate-50 mb-10">
-              <div className="flex justify-between text-[11px] font-black uppercase tracking-widest text-slate-400">
+            <div className="space-y-4 mb-8">
+              <div className="flex justify-between text-slate-500 font-medium text-sm">
                 <span>Subtotal</span>
-                <span>₹{subtotal.toLocaleString()}</span>
+                <span className="text-slate-900">₹{subtotal.toLocaleString()}</span>
               </div>
-              <div className="flex justify-between text-[11px] font-black uppercase tracking-widest text-slate-400">
+              <div className="flex justify-between text-slate-500 font-medium text-sm">
                 <span>Shipping</span>
-                <span className="text-[#00c853]">Free</span>
+                <span className="text-green-600 font-extrabold uppercase text-[10px] tracking-widest bg-green-50 px-2 py-1 rounded">Free</span>
               </div>
-              <div className="flex justify-between text-[11px] font-black uppercase tracking-widest text-slate-400">
+              <div className="flex justify-between text-slate-500 font-medium text-sm">
                 <span>GST (18%)</span>
-                <span>₹{tax.toLocaleString()}</span>
+                <span className="text-slate-900">₹{tax.toLocaleString()}</span>
               </div>
-              <div className="flex justify-between text-2xl font-black pt-6 border-t-4 border-slate-50 mt-4 text-slate-900 leading-none italic">
-                <span>TOTAL</span>
-                <span className="text-[#e31c3d]">₹{total.toLocaleString()}</span>
+              <div className="flex justify-between items-center pt-6 border-t border-slate-100 mt-4">
+                <span className="text-lg font-black text-slate-900 uppercase tracking-tight">Total</span>
+                <span className="text-2xl font-black text-[#e31c3d]">₹{total.toLocaleString()}</span>
               </div>
             </div>
 
             <button 
               onClick={handleCompletePurchase}
               disabled={isSubmitting || cart.length === 0}
-              className="w-full bg-[#e31c3d] hover:bg-black text-white font-black text-xs uppercase tracking-[0.25em] py-6 rounded-xl shadow-2xl shadow-[#e31c3d]/30 transition-all duration-500 flex items-center justify-center gap-3 group disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-[#e31c3d] hover:bg-[#c81935] text-white font-black py-4 rounded-md flex items-center justify-center gap-3 transition-all transform hover:shadow-lg active:scale-[0.98] uppercase tracking-widest text-sm disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="w-6 h-6 animate-spin" />
-                  Processing
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Processing...
                 </>
               ) : (
                 <>
-                  Complete Purchase
-                  <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-500" />
+                  Complete Order
+                  <ArrowRight className="w-5 h-5" />
                 </>
               )}
             </button>
@@ -514,7 +538,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
           <button 
             onClick={handleCompletePurchase}
             disabled={isSubmitting || cart.length === 0}
-            className="w-full bg-[#e31c3d] text-white font-black py-4 rounded-lg shadow-xl shadow-[#e31c3d]/20 active:scale-95 transition-all text-xs uppercase tracking-widest flex items-center justify-center gap-3"
+            className="w-full bg-[#e31c3d] text-white font-black py-4 rounded-md shadow-xl shadow-[#e31c3d]/20 active:scale-95 transition-all text-xs uppercase tracking-widest flex items-center justify-center gap-3"
           >
             {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : "Complete Purchase"}
             {!isSubmitting && <ArrowRight size={18} />}

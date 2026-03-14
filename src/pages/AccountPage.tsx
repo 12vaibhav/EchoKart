@@ -167,7 +167,7 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
               </button>
             </div>
 
-            <div className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-lg border border-slate-100 shadow-sm overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse min-w-[600px]">
                   <thead>
@@ -225,14 +225,14 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
       case 'address':
         return (
           <div className="flex flex-col gap-8">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-6 mb-8 gap-4">
               <div>
-                <h2 className="text-3xl font-black tracking-tight text-slate-900">Manage Addresses</h2>
-                <p className="text-slate-500 mt-1">Set your default shipping and billing addresses.</p>
+                <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight">Manage Addresses</h2>
+                <p className="text-[10px] font-black text-[#e31c3d] uppercase tracking-[0.2em] mt-1">Set your default shipping & billing details</p>
               </div>
               <button 
                 onClick={() => { setEditingAddress(null); setShowAddressForm(true); }}
-                className="bg-[#e31c3d] hover:bg-[#c81935] text-white px-6 py-2.5 rounded-lg font-bold text-sm shadow-lg shadow-[#e31c3d]/20 transition-all flex items-center justify-center gap-2"
+                className="bg-[#e31c3d] hover:bg-[#c81935] text-white px-6 py-3 rounded-md font-black text-[10px] uppercase tracking-widest shadow-lg shadow-[#e31c3d]/20 transition-all flex items-center justify-center gap-2 active:scale-95"
               >
                 <PlusCircle className="w-4 h-4" />
                 Add New Address
@@ -241,17 +241,17 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {addresses.map((addr) => (
-                <div key={addr.id} className={`p-6 bg-white rounded-xl border-2 transition-all shadow-sm flex flex-col gap-4 ${addr.isDefault ? 'border-[#e31c3d]' : 'border-slate-100'}`}>
+                <div key={addr.id} className={`p-6 bg-white rounded-md border-2 transition-all shadow-sm flex flex-col gap-4 ${addr.isDefault ? 'border-[#e31c3d]' : 'border-slate-100'}`}>
                   <div className="flex justify-between items-start">
                     <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded ${addr.isDefault ? 'bg-[#e31c3d] text-white' : 'bg-slate-100 text-slate-500'}`}>
                       {addr.type} {addr.isDefault && '(Default)'}
                     </span>
                     <div className="flex gap-4">
-                       <button onClick={() => { setEditingAddress(addr); setShowAddressForm(true); }} className="text-slate-400 hover:text-[#e31c3d] flex items-center gap-1 text-xs font-bold uppercase tracking-wider">
+                       <button onClick={() => { setEditingAddress(addr); setShowAddressForm(true); }} className="text-slate-400 hover:text-slate-900 flex items-center gap-1 text-[10px] font-black uppercase tracking-widest transition-colors">
                          <Edit2 className="w-4 h-4" />
                          Edit
                        </button>
-                       <button onClick={() => deleteAddress(addr.id)} className="text-slate-300 hover:text-rose-500 flex items-center gap-1 text-xs font-bold uppercase tracking-wider">
+                       <button onClick={() => deleteAddress(addr.id)} className="text-slate-300 hover:text-rose-500 flex items-center gap-1 text-[10px] font-black uppercase tracking-widest transition-colors">
                          <Trash2 className="w-4 h-4" />
                          Delete
                        </button>
@@ -283,7 +283,7 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
                     initial={{ opacity: 0, scale: 0.95, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                    className="relative bg-white w-full max-w-lg rounded-3xl p-8 shadow-2xl overflow-hidden"
+                    className="relative bg-white w-full max-w-lg rounded-xl p-8 shadow-2xl overflow-hidden"
                   >
                     <div className="flex justify-between items-center mb-6">
                       <h3 className="text-2xl font-black">{editingAddress ? 'Edit Address' : 'Add New Address'}</h3>
@@ -295,7 +295,7 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-1">
                           <label className="text-xs font-black uppercase tracking-widest text-slate-500">Address Type</label>
-                          <select name="type" defaultValue={editingAddress?.type || 'Home'} className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl px-4 py-2.5 outline-none focus:border-[#e31c3d] font-bold">
+                          <select name="type" defaultValue={editingAddress?.type || 'Home'} className="w-full bg-slate-50 border-2 border-slate-100 rounded-md px-4 py-2.5 outline-none focus:border-[#e31c3d] font-bold">
                             <option>Home</option>
                             <option>Office</option>
                             <option>Other</option>
@@ -303,34 +303,34 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
                         </div>
                         <div className="space-y-1">
                           <label className="text-xs font-black uppercase tracking-widest text-slate-500">Full Name</label>
-                          <input name="name" type="text" defaultValue={editingAddress?.name} className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl px-4 py-2.5 outline-none focus:border-[#e31c3d] font-bold" required />
+                          <input name="name" type="text" defaultValue={editingAddress?.name} className="w-full bg-slate-50 border-2 border-slate-100 rounded-md px-4 py-2.5 outline-none focus:border-[#e31c3d] font-bold" required />
                         </div>
                       </div>
                       <div className="space-y-4">
                         <div className="space-y-1">
                           <label className="text-xs font-black uppercase tracking-widest text-slate-500">House number / Building name</label>
-                          <input name="houseNumber" type="text" defaultValue={editingAddress?.houseNumber} className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl px-4 py-2.5 outline-none focus:border-[#e31c3d] font-bold" required />
+                          <input name="houseNumber" type="text" defaultValue={editingAddress?.houseNumber} className="w-full bg-slate-50 border-2 border-slate-100 rounded-md px-4 py-2.5 outline-none focus:border-[#e31c3d] font-bold" required />
                         </div>
                         <div className="space-y-1">
                           <label className="text-xs font-black uppercase tracking-widest text-slate-500">Road name / Area / Colony</label>
-                          <input name="roadName" type="text" defaultValue={editingAddress?.roadName} className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl px-4 py-2.5 outline-none focus:border-[#e31c3d] font-bold" required />
+                          <input name="roadName" type="text" defaultValue={editingAddress?.roadName} className="w-full bg-slate-50 border-2 border-slate-100 rounded-md px-4 py-2.5 outline-none focus:border-[#e31c3d] font-bold" required />
                         </div>
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-1">
                           <label className="text-xs font-black uppercase tracking-widest text-slate-500">City / Pincode</label>
-                          <input name="city" type="text" defaultValue={editingAddress?.city} className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl px-4 py-2.5 outline-none focus:border-[#e31c3d] font-bold" required />
+                          <input name="city" type="text" defaultValue={editingAddress?.city} className="w-full bg-slate-50 border-2 border-slate-100 rounded-md px-4 py-2.5 outline-none focus:border-[#e31c3d] font-bold" required />
                         </div>
                         <div className="space-y-1">
                           <label className="text-xs font-black uppercase tracking-widest text-slate-500">Phone Number</label>
-                          <input name="phone" type="tel" defaultValue={editingAddress?.phone} className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl px-4 py-2.5 outline-none focus:border-[#e31c3d] font-bold" required />
+                          <input name="phone" type="tel" defaultValue={editingAddress?.phone} className="w-full bg-slate-50 border-2 border-slate-100 rounded-md px-4 py-2.5 outline-none focus:border-[#e31c3d] font-bold" required />
                         </div>
                       </div>
                       <div className="flex items-center gap-2 py-4">
                         <input name="isDefault" type="checkbox" id="isDefault" defaultChecked={editingAddress?.isDefault} className="accent-[#e31c3d] w-4 h-4" />
                         <label htmlFor="isDefault" className="text-sm font-bold text-slate-700">Set as default address</label>
                       </div>
-                      <button type="submit" className="w-full bg-[#151515] hover:bg-black text-white font-black py-4 rounded-2xl transition-all shadow-lg tracking-widest uppercase text-xs">
+                      <button type="submit" className="w-full bg-[#151515] hover:bg-black text-white font-black py-4 rounded-md transition-all shadow-lg tracking-widest uppercase text-xs">
                         {editingAddress ? 'Update Address' : 'Save Address'}
                       </button>
                     </form>
@@ -364,7 +364,7 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
             </div>
 
             {wishlist.length === 0 ? (
-              <div className="bg-white rounded-2xl p-12 text-center shadow-sm border border-slate-100">
+              <div className="bg-white rounded-xl p-12 text-center shadow-sm border border-slate-100">
                 <div className="w-20 h-20 bg-rose-50 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Heart className="w-10 h-10 text-[#e31c3d]" />
                 </div>
@@ -421,7 +421,7 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
             </div>
 
             <div className="grid grid-cols-1 gap-6">
-              <div className="bg-white p-6 md:p-8 rounded-xl border border-slate-100 shadow-sm flex flex-col gap-6">
+              <div className="bg-white p-6 md:p-8 rounded-lg border border-slate-100 shadow-sm flex flex-col gap-6">
                 <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
                   <User className="w-5 h-5 text-[#e31c3d]" />
                   Personal Details
@@ -458,7 +458,7 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
               </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-lg border border-slate-100 shadow-sm overflow-hidden">
               <div className="p-6 border-b border-slate-100 flex items-center justify-between">
                 <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
                   <Package className="w-5 h-5 text-[#e31c3d]" />
@@ -498,7 +498,7 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
               </div>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 {wishlist.slice(0, 3).map((product) => (
-                  <div key={product.id} className="bg-white p-3 rounded-xl border border-slate-100 shadow-sm group">
+                  <div key={product.id} className="bg-white p-3 rounded-md border border-slate-100 shadow-sm group">
                     <div className="aspect-square bg-slate-100 rounded-lg mb-3 overflow-hidden border border-slate-200">
                       <img src={product.image} alt={product.name} className="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform" />
                     </div>
@@ -507,7 +507,7 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
                   </div>
                 ))}
                 <div 
-                  className="bg-slate-50 p-3 rounded-xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-slate-100 transition-colors min-h-[150px]"
+                  className="bg-slate-50 p-3 rounded-md border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-slate-100 transition-colors min-h-[150px]"
                   onClick={() => setActiveTab('wishlist')}
                 >
                   <PlusCircle className="text-slate-400 w-8 h-8 mb-2" />
@@ -526,7 +526,7 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
         <div className="flex flex-col md:flex-row gap-8">
           
           <aside className="w-full md:w-72 shrink-0">
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden sticky top-28">
+            <div className="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden sticky top-28">
               <div className="p-6 pb-2">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="size-14 rounded-full bg-slate-100 border border-slate-200 overflow-hidden flex items-center justify-center">
@@ -548,7 +548,7 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
                     <button
                       key={item.id}
                       onClick={() => setActiveTab(item.id as any)}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm transition-all ${activeTab === item.id ? 'bg-[#e31c3d] text-white shadow-lg shadow-[#e31c3d]/20' : 'text-slate-600 hover:bg-slate-50'}`}
+                      className={`flex items-center gap-3 px-4 py-3 rounded-md font-bold text-sm transition-all ${activeTab === item.id ? 'bg-[#e31c3d] text-white shadow-lg shadow-[#e31c3d]/20' : 'text-slate-600 hover:bg-slate-50'}`}
                     >
                       <item.icon className="w-5 h-5" />
                       {item.label}
@@ -560,7 +560,7 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
               <div className="mt-4 p-6 border-t border-slate-50 bg-slate-50/50">
                 <button 
                   onClick={handleSignOut}
-                  className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-rose-500 hover:bg-rose-50 hover:text-rose-600 transition-all font-bold text-sm"
+                  className="flex items-center gap-3 w-full px-4 py-3 rounded-md text-rose-500 hover:bg-rose-50 hover:text-rose-600 transition-all font-bold text-sm"
                 >
                   <LogOut className="w-5 h-5" />
                   Sign Out

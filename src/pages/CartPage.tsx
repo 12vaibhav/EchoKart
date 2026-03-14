@@ -12,7 +12,7 @@ const fadeInUpProps = {
 
 export const CartPage = ({ onNavigate }: { onNavigate: (path: string, id?: number | null) => void }) => {
   const { cart, removeFromCart, updateQuantity, cartTotal, cartCount } = useCart();
-  const tax = cartTotal * 0.08; // 8% tax
+  const tax = cartTotal * 0.18; // 18% GST for consistency
   const finalTotal = cartTotal + tax;
 
   if (cart.length === 0) {
