@@ -126,46 +126,46 @@ export const CartPage = ({ onNavigate }: { onNavigate: (path: string, id?: numbe
 
         {/* Right Column: Order Summary */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg p-5 sm:p-8 sticky top-28 border border-slate-100 shadow-sm">
-            <h2 className="text-xl font-black text-slate-900 mb-6 sm:mb-8 uppercase tracking-tight">Order Summary</h2>
+          <div className="bg-white rounded-lg p-3 sm:p-8 sticky top-28 border border-slate-100 shadow-sm">
+            <h2 className="text-sm md:text-xl font-black text-slate-900 mb-3 md:mb-8 uppercase tracking-tight">Order Summary</h2>
             
-            <div className="space-y-4 mb-6 sm:mb-8 border-b pb-6 sm:pb-8 border-slate-100">
-              <div className="flex justify-between text-slate-500 font-medium text-sm sm:text-base">
+            <div className="space-y-2 md:space-y-4 mb-3 md:mb-8 border-b pb-3 md:pb-8 border-slate-100">
+              <div className="flex justify-between text-slate-500 font-medium text-xs md:text-base">
                 <span>Subtotal</span>
-                <span className="text-slate-900">₹{cartTotal.toLocaleString('en-IN')}</span>
+                <span className="text-slate-900 font-bold">₹{cartTotal.toLocaleString('en-IN')}</span>
               </div>
-              <div className="flex justify-between text-slate-500 font-medium text-sm sm:text-base">
+              <div className="flex justify-between text-slate-500 font-medium text-xs md:text-base">
                 <span>Shipping</span>
-                <span className="text-green-600 font-bold uppercase text-[10px] tracking-widest bg-green-50 px-2 py-1 rounded">Free</span>
+                <span className="text-green-600 font-bold uppercase text-[9px] md:text-[10px] tracking-widest bg-green-50 px-2 py-0.5 md:py-1 rounded">Free</span>
               </div>
-              <div className="flex justify-between text-slate-500 font-medium text-sm sm:text-base">
+              <div className="flex justify-between text-slate-500 font-medium text-xs md:text-base">
                 <span>Estimated GST</span>
-                <span className="text-slate-900">₹{tax.toLocaleString('en-IN')}</span>
+                <span className="text-slate-900 font-bold">₹{tax.toLocaleString('en-IN')}</span>
               </div>
             </div>
             
-            <div className="flex justify-between items-center mb-4 md:mb-8">
-              <span className="text-lg font-black text-slate-900 uppercase tracking-tight">Total</span>
-              <span className="text-2xl md:text-3xl font-black text-[#e31c3d]">₹{finalTotal.toLocaleString('en-IN')}</span>
+            <div className="flex justify-between items-center mb-3 md:mb-8">
+              <span className="text-sm md:text-lg font-black text-slate-900 uppercase tracking-tight">Total</span>
+              <span className="text-lg md:text-3xl font-black text-[#e31c3d]">₹{finalTotal.toLocaleString('en-IN')}</span>
             </div>
             
             <button 
               onClick={() => onNavigate('checkout')}
-              className="w-full bg-[#e31c3d] hover:bg-[#c81935] text-white font-black py-4 rounded-md flex items-center justify-center gap-3 transition-all transform hover:shadow-lg hover:shadow-[#e31c3d]/25 active:scale-[0.98] mb-6 uppercase tracking-widest text-xs sm:text-sm"
+              className="w-full bg-[#e31c3d] hover:bg-[#c81935] text-white font-black py-2.5 md:py-4 rounded-md flex items-center justify-center gap-2 transition-all transform hover:shadow-lg hover:shadow-[#e31c3d]/25 active:scale-[0.98] mb-3 md:mb-6 uppercase tracking-widest text-[10px] md:text-sm"
             >
               Proceed to Checkout
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-3.5 h-3.5 md:w-5 md:h-5" />
             </button>
             
-            <div className="mt-8">
-              <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3">Promo Code</h3>
-              <div className="flex gap-2">
+            <div className="mt-3 md:mt-8">
+              <h3 className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 md:mb-3">Promo Code</h3>
+              <div className="flex gap-1.5 md:gap-2">
                 <input 
-                  className="flex-1 min-w-0 bg-slate-50 border border-slate-200 rounded-md px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#e31c3d]/20 focus:border-[#e31c3d] transition-all" 
+                  className="flex-1 min-w-0 bg-slate-50 border border-slate-200 rounded-md px-2.5 md:px-4 py-2 md:py-3 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[#e31c3d]/20 focus:border-[#e31c3d] transition-all" 
                   placeholder="Enter code" 
                   type="text" 
                 />
-                <button className="bg-slate-900 text-white px-5 sm:px-6 py-3 rounded-md text-xs sm:text-sm font-bold hover:bg-slate-800 transition-all shrink-0">Apply</button>
+                <button className="bg-slate-900 text-white px-3 md:px-6 py-2 md:py-3 rounded-md text-[10px] md:text-sm font-bold hover:bg-slate-800 transition-all shrink-0">Apply</button>
               </div>
             </div>
           </div>
