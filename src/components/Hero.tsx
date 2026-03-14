@@ -75,7 +75,6 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
             >
               {/* Complex Overlay System - Enhanced for mobile readability */}
               <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-black/30 to-transparent md:from-black/90" />
-              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
               
               {/* Noble Noise Texture */}
               <div className="absolute inset-0 opacity-[0.04] pointer-events-none mix-blend-overlay" style={{backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`}} />
@@ -83,7 +82,7 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
           </AnimatePresence>
 
           {/* Staggered Content Area */}
-          <div className="absolute inset-0 flex flex-col items-center justify-end pb-16 md:pb-28 text-center px-6 sm:px-12 pointer-events-none">
+          <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 md:pb-28 text-center px-6 sm:px-12 pointer-events-none">
             <div className="max-w-4xl flex flex-col items-center">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -96,17 +95,6 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
                   }}
                   className="flex flex-col items-center"
                 >
-                  <motion.h1 
-                    variants={itemVariants}
-                    className="text-white text-4xl sm:text-6xl md:text-7xl lg:text-[90px] font-black tracking-tight mb-8 md:mb-10 drop-shadow-[0_10px_35px_rgba(0,0,0,0.6)] leading-[1.1] md:leading-[1]"
-                  >
-                    {current.title.split(' ').map((word: string, i: number) => (
-                      <span key={i} className="inline-block mr-[0.25em] last:mr-0">
-                        {word}
-                      </span>
-                    ))}
-                  </motion.h1>
-
                   <motion.div variants={itemVariants} className="pointer-events-auto">
                     <button 
                       onClick={(e) => { e.stopPropagation(); handleSlideClick(); }}
