@@ -402,12 +402,12 @@ export const CategoryProductsPage = ({
 
                 {/* Actions */}
                 <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 border-t border-gray-50 pt-4 md:pt-0 md:border-t-0">
-                  <div className="flex items-center gap-3 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0 scrollbar-hide">
+                  <div className="flex flex-wrap items-center gap-2 md:gap-3 w-full sm:w-auto">
                     {['Top Rated', 'Popular', 'Newest', 'Price'].map((opt) => (
                       <button
                         key={opt}
                         onClick={() => setSortBy(opt.toLowerCase().replace(' ', '-'))}
-                        className={`px-3 py-1.5 rounded-lg text-[10px] md:text-xs font-black uppercase tracking-widest transition-all whitespace-nowrap ${
+                        className={`px-3 py-1.5 rounded-lg text-[10px] md:text-xs font-black uppercase tracking-widest transition-all ${
                           sortBy === opt.toLowerCase().replace(' ', '-') 
                             ? 'bg-[#e31c3d] text-white shadow-md shadow-red-100' 
                             : 'bg-gray-50 text-gray-400 hover:text-gray-900 border border-gray-100'
