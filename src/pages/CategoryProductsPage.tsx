@@ -308,6 +308,7 @@ export const CategoryProductsPage = ({
                     key={product.id + '-' + idx} 
                     product={product} 
                     onNavigate={onNavigate} 
+                    variant="category"
                   />
                 ))}
               </div>
