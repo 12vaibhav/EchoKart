@@ -73,45 +73,49 @@ export const CartPage = ({ onNavigate }: { onNavigate: (path: string, id?: numbe
           </div>
 
           {cart.map((item) => (
-            <div key={`${item.id}-${item.variant}`} className="flex flex-col sm:flex-row gap-4 sm:gap-6 py-6 border-b last:border-b-0">
-              <div className="w-full sm:w-32 aspect-square bg-slate-50 rounded-md overflow-hidden shrink-0 border border-slate-100 p-2">
+            <div key={`${item.id}-${item.variant}`} className="flex flex-row gap-3 py-3 md:py-6 border-b last:border-b-0">
+              {/* Thumbnail */}
+              <div className="size-20 md:w-32 md:h-32 bg-slate-50 rounded-md overflow-hidden shrink-0 border border-slate-100 p-1.5 md:p-2">
                 <img className="w-full h-full object-contain mix-blend-multiply" alt={item.title} src={item.image} />
               </div>
               
-              <div className="flex flex-col flex-1 min-w-0">
-                <div className="flex flex-col sm:flex-row justify-between items-start gap-2">
-                  <div className="pr-4">
-                    <h3 className="text-base sm:text-lg font-bold text-slate-900 line-clamp-2">{item.title}</h3>
-                    <p className="text-[10px] font-black text-[#e31c3d] uppercase tracking-widest mt-1">{item.brand}</p>
-                    {item.variant && <p className="text-xs text-slate-500 mt-1">Variant: {item.variant}</p>}
+              {/* Details */}
+              <div className="flex flex-col flex-1 min-w-0 justify-between">
+                {/* Top: Name, brand, price */}
+                <div className="flex justify-between items-start gap-1">
+                  <div className="min-w-0">
+                    <h3 className="text-xs md:text-lg font-bold text-slate-900 line-clamp-2 leading-tight">{item.title}</h3>
+                    <p className="text-[9px] md:text-[10px] font-black text-[#e31c3d] uppercase tracking-widest mt-0.5">{item.brand}</p>
+                    {item.variant && <p className="text-[9px] md:text-xs text-slate-400 mt-0.5">Variant: {item.variant}</p>}
                   </div>
-                  <div className="sm:text-right shrink-0">
-                    <p className="text-lg font-black text-slate-900">₹{item.price.toLocaleString('en-IN')}</p>
-                    {item.oldPrice && <p className="text-sm text-slate-400 line-through">₹{item.oldPrice.toLocaleString('en-IN')}</p>}
+                  <div className="text-right shrink-0 pl-1">
+                    <p className="text-sm md:text-lg font-black text-slate-900">₹{item.price.toLocaleString('en-IN')}</p>
+                    {item.oldPrice && <p className="text-[10px] md:text-sm text-slate-400 line-through">₹{item.oldPrice.toLocaleString('en-IN')}</p>}
                   </div>
                 </div>
                 
-                <div className="flex items-center justify-between mt-6 sm:mt-auto">
-                  <div className="flex items-center bg-slate-50 border border-slate-100 rounded-md p-1 shadow-sm">
+                {/* Bottom: Qty controls + Remove */}
+                <div className="flex items-center justify-between mt-2 md:mt-6">
+                  <div className="flex items-center bg-slate-50 border border-slate-100 rounded-md p-0.5 md:p-1 shadow-sm">
                     <button 
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                      className="w-8 h-8 flex items-center justify-center text-slate-500 hover:text-[#e31c3d] hover:bg-white transition-all rounded-lg"
+                      className="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center text-slate-500 hover:text-[#e31c3d] hover:bg-white transition-all rounded"
                     >
-                      <Minus className="w-3.5 h-3.5" />
+                      <Minus className="w-3 h-3 md:w-3.5 md:h-3.5" />
                     </button>
-                    <span className="w-8 text-center font-black text-slate-900 text-sm">{item.quantity}</span>
+                    <span className="w-6 md:w-8 text-center font-black text-slate-900 text-xs md:text-sm">{item.quantity}</span>
                     <button 
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                      className="w-8 h-8 flex items-center justify-center text-slate-500 hover:text-[#e31c3d] hover:bg-white transition-all rounded-lg"
+                      className="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center text-slate-500 hover:text-[#e31c3d] hover:bg-white transition-all rounded"
                     >
-                      <Plus className="w-3.5 h-3.5" />
+                      <Plus className="w-3 h-3 md:w-3.5 md:h-3.5" />
                     </button>
                   </div>
                   <button 
                     onClick={() => removeFromCart(item.id)}
-                    className="text-slate-400 hover:text-rose-600 transition-all flex items-center gap-2 text-[10px] uppercase font-black"
+                    className="text-slate-400 hover:text-rose-600 transition-all flex items-center gap-1.5 text-[9px] md:text-[10px] uppercase font-black"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-3.5 h-3.5 md:w-4 md:h-4" />
                     Remove
                   </button>
                 </div>
