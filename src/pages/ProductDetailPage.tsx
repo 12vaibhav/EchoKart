@@ -202,7 +202,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             {/* Mobile: Compact Delivery Trust Line */}
             <div className="flex items-center gap-2 mb-4 order-9 md:order-0 md:hidden bg-gray-50 border border-gray-100 rounded-lg px-3 py-2.5 max-w-md">
               <Star className="w-4 h-4 fill-[#e31c3d] text-[#e31c3d] shrink-0" />
-              <span className="text-xs font-bold text-gray-700">Delivered by <span className="text-[#e31c3d]">EchoKart Partners</span></span>
+              <span className="text-xs font-bold text-gray-700">Delivered by <span className="text-[#e31c3d]">Meesho Partners</span></span>
             </div>
 
             {/* Desktop: Premium Trust Badges (Local Assets) */}
