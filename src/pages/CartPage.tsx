@@ -36,24 +36,24 @@ export const CartPage = ({ onNavigate }: { onNavigate: (path: string, id?: numbe
   return (
     <motion.div {...fadeInUpProps} className="max-w-7xl mx-auto px-4 py-8">
       {/* Progress Indicator */}
-      <div className="mb-12 pt-4">
-        <div className="flex items-center justify-between mb-4 max-w-2xl mx-auto relative px-4">
-          <div className="absolute top-[1.25rem] left-0 w-full h-[2px] bg-slate-100 z-0"></div>
-          <div className="absolute top-[1.25rem] left-0 w-0 h-[2px] bg-[#e31c3d] z-0 transition-all duration-700"></div>
+      <div className="mb-6 md:mb-12 pt-0 md:pt-4">
+        <div className="flex items-center justify-between mb-2 md:mb-4 max-w-2xl mx-auto relative px-4">
+          <div className="absolute top-[1.25rem] left-0 w-full h-[1px] md:h-[2px] bg-slate-100 z-0"></div>
+          <div className="absolute top-[1.25rem] left-0 w-0 h-[1px] md:h-[2px] bg-[#e31c3d] z-0 transition-all duration-700"></div>
           
-          <div className="z-10 flex flex-col items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#e31c3d] text-white flex items-center justify-center font-black text-sm shadow-lg shadow-[#e31c3d]/20 ring-4 ring-white">1</div>
-            <span className="text-[10px] font-black text-slate-900 uppercase tracking-[0.2em]">Cart</span>
+          <div className="z-10 flex flex-col items-center gap-2 md:gap-3">
+            <div className="size-8 md:size-10 rounded-full bg-[#e31c3d] text-white flex items-center justify-center font-black text-[10px] md:text-sm shadow-lg shadow-[#e31c3d]/20 ring-4 ring-white">1</div>
+            <span className="text-[8px] md:text-[10px] font-black text-slate-900 uppercase tracking-[0.2em]">Cart</span>
           </div>
           
-          <div className="z-10 flex flex-col items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-black text-sm ring-4 ring-white transition-all">2</div>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Review</span>
+          <div className="z-10 flex flex-col items-center gap-2 md:gap-3">
+            <div className="size-8 md:size-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-black text-[10px] md:text-sm ring-4 ring-white transition-all">2</div>
+            <span className="text-[8px] md:text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Review</span>
           </div>
           
-          <div className="z-10 flex flex-col items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-black text-sm ring-4 ring-white">3</div>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Checkout</span>
+          <div className="z-10 flex flex-col items-center gap-2 md:gap-3">
+            <div className="size-8 md:size-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-black text-[10px] md:text-sm ring-4 ring-white">3</div>
+            <span className="text-[8px] md:text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Checkout</span>
           </div>
         </div>
       </div>
@@ -140,9 +140,9 @@ export const CartPage = ({ onNavigate }: { onNavigate: (path: string, id?: numbe
               </div>
             </div>
             
-            <div className="flex justify-between items-center mb-6 sm:mb-8">
+            <div className="flex justify-between items-center mb-4 md:mb-8">
               <span className="text-lg font-black text-slate-900 uppercase tracking-tight">Total</span>
-              <span className="text-2xl sm:text-3xl font-black text-[#e31c3d]">₹{finalTotal.toLocaleString('en-IN')}</span>
+              <span className="text-2xl md:text-3xl font-black text-[#e31c3d]">₹{finalTotal.toLocaleString('en-IN')}</span>
             </div>
             
             <button 

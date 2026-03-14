@@ -460,40 +460,40 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
 
         {/* Right Column: Order Summary - Mirrored Layout from CartPage */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg p-5 sm:p-8 sticky top-28 border border-slate-100 shadow-sm">
+          <div className="bg-white rounded-lg p-5 sm:p-8 pb-4 md:pb-8 sticky top-28 border border-slate-100 shadow-sm">
             <h2 className="text-xl font-black text-slate-900 mb-6 sm:mb-8 uppercase tracking-tight">Order Review</h2>
             
-            <div className="space-y-6 mb-8 border-b pb-8 border-slate-100">
+            <div className="space-y-4 md:space-y-6 mb-4 md:mb-8 border-b pb-4 md:pb-8 border-slate-100">
               {cart.map((item: any, idx: number) => (
                 <div key={idx} className="flex gap-4 group">
-                  <div className="relative size-16 bg-slate-50 rounded-md overflow-hidden border border-slate-100 shrink-0 shadow-sm transition-all group-hover:scale-105">
+                  <div className="relative size-14 md:size-16 bg-slate-50 rounded-md overflow-hidden border border-slate-100 shrink-0 shadow-sm transition-all group-hover:scale-105">
                     <img className="w-full h-full object-cover mix-blend-multiply" alt={item.name} src={item.image} />
                     <span className="absolute -top-1 -right-1 size-5 bg-black text-white text-[10px] flex items-center justify-center rounded-full font-black">{item.quantity}</span>
                   </div>
                   <div className="flex-1 py-1">
-                    <h4 className="text-xs font-bold text-slate-900 uppercase tracking-tight mb-1 line-clamp-1">{item.name}</h4>
+                    <h4 className="text-xs font-bold text-slate-900 uppercase tracking-tight mb-0.5 md:mb-1 line-clamp-1">{item.name}</h4>
                     <p className="text-sm font-black text-[#e31c3d]">₹{(item.price * item.quantity).toLocaleString()}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="space-y-4 mb-8">
-              <div className="flex justify-between text-slate-500 font-medium text-sm">
+            <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
+              <div className="flex justify-between text-slate-500 font-medium text-xs md:text-sm">
                 <span>Subtotal</span>
-                <span className="text-slate-900">₹{subtotal.toLocaleString()}</span>
+                <span className="text-slate-900 font-bold">₹{subtotal.toLocaleString()}</span>
               </div>
-              <div className="flex justify-between text-slate-500 font-medium text-sm">
+              <div className="flex justify-between text-slate-500 font-medium text-xs md:text-sm">
                 <span>Shipping</span>
-                <span className="text-green-600 font-extrabold uppercase text-[10px] tracking-widest bg-green-50 px-2 py-1 rounded">Free</span>
+                <span className="text-green-600 font-extrabold uppercase text-[9px] md:text-[10px] tracking-widest bg-green-50 px-2 py-0.5 md:py-1 rounded">Free</span>
               </div>
-              <div className="flex justify-between text-slate-500 font-medium text-sm">
+              <div className="flex justify-between text-slate-500 font-medium text-xs md:text-sm">
                 <span>GST (18%)</span>
-                <span className="text-slate-900">₹{tax.toLocaleString()}</span>
+                <span className="text-slate-900 font-bold">₹{tax.toLocaleString()}</span>
               </div>
-              <div className="flex justify-between items-center pt-6 border-t border-slate-100 mt-4">
-                <span className="text-lg font-black text-slate-900 uppercase tracking-tight">Total</span>
-                <span className="text-2xl font-black text-[#e31c3d]">₹{total.toLocaleString()}</span>
+              <div className="flex justify-between items-center pt-4 md:pt-6 border-t border-slate-100 mt-2 md:mt-4">
+                <span className="text-base md:text-lg font-black text-slate-900 uppercase tracking-tight">Total</span>
+                <span className="text-xl md:text-2xl font-black text-[#e31c3d]">₹{total.toLocaleString()}</span>
               </div>
             </div>
 
