@@ -60,12 +60,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
       {/* Moving Announcement Bar */}
       <AnnouncementBar />
 
-      {/* Main Navigation Bar */}
-        className={`w-full transition-all duration-500 border-b ${
-          isScrolled 
-            ? 'bg-black/90 backdrop-blur-xl border-white/10' 
-            : 'bg-black border-transparent'
-        } py-4 md:py-3`}
+        } py-6 md:py-3`}
       >
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-full gap-2 md:gap-8">
@@ -77,11 +72,10 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                 onClick={(e) => { e.preventDefault(); onNavigate('home'); }} 
                 className="flex items-center space-x-2 md:space-x-3 lg:space-x-4 group relative"
               >
-                <div className="relative flex items-center">
                   <div className="absolute inset-0 bg-[#e31c3d] blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-700" />
-                  <BrandLogo className="h-10 md:h-16 lg:h-20 w-auto transition-transform duration-500 group-hover:scale-105" />
+                  <BrandLogo className="h-14 md:h-16 lg:h-20 w-auto transition-transform duration-500 group-hover:scale-105" />
                 </div>
-                <BrandTitle className="h-10 md:h-16 lg:h-20 transition-all duration-500 group-hover:brightness-110" />
+                <BrandTitle className="h-14 md:h-16 lg:h-20 transition-all duration-500 group-hover:brightness-110" />
               </a>
             </div>
 
@@ -185,16 +179,15 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                     <User className="w-6 h-6 md:w-6.5 md:h-6.5 transition-colors" />
                   </button>
                 ) : (
-                  <button 
                     onClick={() => onNavigate('auth')} 
                     className="hidden md:flex p-1.5 sm:p-2 md:px-5 md:py-2 bg-white/10 md:bg-white/10 hover:bg-white text-white hover:text-black rounded-full items-center justify-center transition-all duration-300 backdrop-blur-md"
                   >
-                    <User className="w-5 h-5 md:hidden" />
+                    <User className="w-7 h-7 md:hidden" />
                     <span className="hidden md:block text-[10px] font-black tracking-widest uppercase">Sign In</span>
                   </button>
                 )}
                 <button onClick={() => onNavigate('wishlist')} className="p-1.5 sm:p-2 text-white hover:text-[#e31c3d] hover:bg-white/5 rounded-full transition-all relative group drop-shadow-sm">
-                  <Heart className="w-6 h-6 md:w-6.5 md:h-6.5 transition-colors" />
+                  <Heart className="w-7 h-7 md:w-6.5 md:h-6.5 transition-colors" />
                   {wishlist.length > 0 && (
                     <span className="absolute top-0 right-0 sm:-top-0.5 sm:-right-0.5 bg-[#e31c3d] text-white text-[8px] sm:text-[9px] font-black h-3.5 w-3.5 sm:h-4 sm:w-4 rounded-full flex items-center justify-center border border-black animate-pulse shadow-xl">
                       {wishlist.length}
@@ -205,7 +198,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                   onClick={() => onNavigate('cart')} 
                   className="hidden md:flex p-1.5 sm:p-2 bg-[#e31c3d] hover:bg-white text-white hover:text-black rounded-full transition-all relative group hover:scale-105 active:scale-95 shadow-[0_4px_12px_rgba(227,28,61,0.2)] md:shadow-[0_8px_20px_rgba(227,28,61,0.3)] drop-shadow-lg"
                 >
-                  <ShoppingCart className="w-6 h-6 md:w-6.5 md:h-6.5 transition-colors" />
+                  <ShoppingCart className="w-7 h-7 md:w-6.5 md:h-6.5 transition-colors" />
                   {cartCount > 0 && (
                     <span className="absolute -top-1 -right-1 bg-black text-white text-[8px] sm:text-[9px] font-black h-3.5 w-3.5 sm:h-4 sm:w-4 rounded-full flex items-center justify-center border-2 border-white shadow-md group-hover:border-black transition-colors">
                       {cartCount}
@@ -215,11 +208,10 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
               </div>
 
               {/* Mobile Menu Trigger */}
-              <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
                 className="xl:hidden p-1.5 sm:p-2 text-white bg-white/5 rounded-full hover:text-[#e31c3d] transition-colors"
               >
-                {isMobileMenuOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Menu className="w-5 h-5 md:w-6 md:h-6" />}
+                {isMobileMenuOpen ? <X className="w-8 h-8 md:w-6 md:h-6" /> : <Menu className="w-8 h-8 md:w-6 md:h-6" />}
               </button>
             </div>
           </div>
