@@ -8,7 +8,11 @@ import { useWishlist } from '../contexts/WishlistContext';
 import { useCart } from '../contexts/CartContext';
 import { supabase } from '../lib/supabase';
 
-export const Header = ({ products = [], onNavigate }: { products?: any[], onNavigate: (path: string, id?: any, categoryName?: string | null, searchQuery?: string | null) => void }) => {
+export const Header = ({ products = [], onNavigate, isMinimal = false }: { 
+  products?: any[], 
+  onNavigate: (path: string, id?: any, categoryName?: string | null, searchQuery?: string | null) => void,
+  isMinimal?: boolean
+}) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
@@ -58,7 +62,12 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
       {/* Moving Announcement Bar */}
-      <AnnouncementBar />
+      {!isMinimal && <AnnouncementBar />}
+      {isMinimal && (
+        <div className="md:block hidden">
+          <AnnouncementBar />
+        </div>
+      )}
 
       {/* Main Navigation Bar */}
       <div 
@@ -69,16 +78,16 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
         } py-3 md:py-2.5`}
       >
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-full gap-2 md:gap-8">
+          <div className={`flex justify-between items-center h-full gap-2 md:gap-8 ${isMinimal ? 'justify-center md:justify-between' : ''}`}>
             
             {/* 1. Branding Section */}
-            <div className="flex items-center min-w-0 flex-shrink-1">
+            <div className={`flex items-center min-w-0 flex-shrink-1 ${isMinimal ? 'mx-auto md:mx-0' : ''}`}>
               <a 
                 href="#" 
                 onClick={(e) => { e.preventDefault(); onNavigate('home'); }} 
                 className="flex items-center space-x-2 md:space-x-3 lg:space-x-4 group relative"
               >
-                <div className="relative flex items-center">
+                <div className={`relative items-center ${isMinimal ? 'hidden md:flex' : 'flex'}`}>
                   <div className="absolute inset-0 bg-[#e31c3d] blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-700" />
                   <BrandLogo className="h-10 md:h-14 lg:h-18 w-auto transition-transform duration-500 group-hover:scale-105" />
                 </div>
@@ -109,7 +118,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
             </nav>
 
             {/* 3. Actions Section (Search & Icons) */}
-            <div className="flex items-center gap-2 lg:gap-6 ml-auto">
+            <div className={`items-center gap-2 lg:gap-6 ml-auto ${isMinimal ? 'hidden md:flex' : 'flex'}`}>
               {/* Refined Integrated Search Bar - Better Spacing */}
               <div className="hidden md:flex items-center relative group">
                 <div className="relative flex items-center">

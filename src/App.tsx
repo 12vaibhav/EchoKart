@@ -415,7 +415,11 @@ export default function App() {
 
   return (
     <div className="font-sans text-[#333333] bg-[#ffffff] min-h-screen selection:bg-[#e31c3d] selection:text-white">
-      <Header products={products} onNavigate={navigate} />
+      <Header 
+        products={products} 
+        onNavigate={navigate} 
+        isMinimal={['cart', 'checkout'].includes(route.path)}
+      />
       <main className="pt-24 md:pt-28">
         {route.path === 'home' && <HomePage products={products} categories={categories} customizations={customizations} onNavigate={navigate} />}
         {route.path === 'category' && <CategoryPage categories={categories} onNavigate={navigate} />}
