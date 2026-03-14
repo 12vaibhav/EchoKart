@@ -21,7 +21,7 @@ const FireSparkBurst = () => {
           filter: ["blur(0px)", "blur(40px)", "blur(100px)"]
         }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="absolute w-32 h-32 rounded-full bg-gradient-to-tr from-orange-600 via-yellow-400 to-white"
+        className="absolute w-32 h-32 rounded-full bg-gradient-to-tr from-[#e31c3d] via-[#ff4d6d] to-white"
       />
       {[...Array(3)].map((_, i) => (
         <motion.div
@@ -118,102 +118,107 @@ export const OrderConfirmationPage = ({ onNavigate, orderId: passedOrderId }: { 
             initial={{ scale: 0, rotate: -20 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", damping: 12, stiffness: 200, delay: 0.2 }}
-            className="relative z-10 w-24 h-24 bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,128,0,0.15)] flex items-center justify-center border border-green-50"
+            className="relative z-10 w-24 h-24 bg-white rounded-xl shadow-[0_20px_50px_rgba(0,128,0,0.1)] flex items-center justify-center border border-green-50"
           >
             <CheckCircle className="text-[#00c853] w-14 h-14" />
           </motion.div>
         </div>
         
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
-          <h1 className="text-5xl font-black text-slate-900 mb-4 tracking-tight">Success!</h1>
-          <p className="text-slate-500 text-xl font-medium max-w-md mx-auto leading-relaxed">
-            Your order <span className="text-[#e31c3d] font-black">#EK-{displayId}</span> has been placed successfully.
+          <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-4 tracking-tighter uppercase italic">Success!</h1>
+          <p className="text-slate-500 text-lg md:text-xl font-bold max-w-md mx-auto leading-relaxed border-t border-slate-100 pt-4 uppercase tracking-tight">
+            Order <span className="text-[#e31c3d] font-black">#EK-{displayId}</span> placed successfully.
           </p>
         </motion.div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-8">
-          <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-            <div className="flex items-center gap-4 mb-4">
-              <Truck className="text-[#e31c3d] w-6 h-6" />
-              <h2 className="text-xl font-semibold">Estimated Delivery</h2>
+        <div className="lg:col-span-2 space-y-6 md:space-y-8">
+          <div className="bg-slate-50 rounded-lg p-6 md:p-8 border border-slate-100 shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-4 opacity-10">
+              <Truck size={64} className="text-[#e31c3d]" />
             </div>
-            <p className="text-2xl font-bold text-slate-900">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-[#e31c3d] rounded-md text-white">
+                <Truck className="w-5 h-5" />
+              </div>
+              <h2 className="text-lg font-black uppercase tracking-tight">Estimated Delivery</h2>
+            </div>
+            <p className="text-2xl md:text-4xl font-black text-slate-900 tracking-tighter">
               {new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - {new Date(Date.now() + 8 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
             </p>
-            <p className="text-slate-500 mt-1">Standard Shipping (5-8 business days)</p>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2">Standard Shipping (5-8 business days)</p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-            <h2 className="text-xl font-semibold mb-6">Order Summary</h2>
+          <div className="bg-white rounded-lg border border-slate-100 p-6 md:p-8 shadow-sm">
+            <h2 className="text-lg font-black uppercase tracking-tight mb-8 border-b pb-4">Order Summary</h2>
             <div className="space-y-6">
               {items.map((item, idx) => (
-                <div key={idx} className="flex gap-4">
-                  <div className="w-24 h-24 bg-slate-100 rounded-lg overflow-hidden flex-shrink-0">
-                    <img alt={item.products?.name} className="w-full h-full object-cover mix-blend-multiply" src={item.products?.main_image_url} />
+                <div key={idx} className="flex gap-4 md:gap-6 group">
+                  <div className="size-20 bg-slate-50 rounded-md overflow-hidden flex-shrink-0 border border-slate-100">
+                    <img alt={item.products?.name} className="w-full h-full object-cover mix-blend-multiply group-hover:scale-110 transition-transform duration-500" src={item.products?.main_image_url} />
                   </div>
-                  <div className="flex-grow">
-                    <div className="flex justify-between">
-                      <h3 className="font-medium text-slate-900">{item.products?.name}</h3>
-                      <p className="font-bold text-slate-900">₹{item.price_at_purchase.toLocaleString()}</p>
+                  <div className="flex-grow py-1">
+                    <div className="flex justify-between items-start">
+                      <h3 className="text-xs font-black text-slate-900 uppercase tracking-tight line-clamp-1">{item.products?.name}</h3>
+                      <p className="text-sm font-black text-[#e31c3d]">₹{item.price_at_purchase.toLocaleString()}</p>
                     </div>
-                    <p className="text-sm text-slate-500">Quantity: {item.quantity}</p>
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">Quantity: {item.quantity}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-8 pt-6 border-t border-slate-100 space-y-3">
-              <div className="flex justify-between text-slate-600">
+            <div className="mt-10 pt-8 border-t border-slate-50 space-y-4">
+              <div className="flex justify-between text-[11px] font-black uppercase tracking-widest text-slate-500">
                 <span>Subtotal</span>
-                <span>₹{(displayOrder.total_amount / 1.18).toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
+                <span className="text-slate-900">₹{(displayOrder.total_amount / 1.18).toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
               </div>
-              <div className="flex justify-between text-slate-600">
+              <div className="flex justify-between text-[11px] font-black uppercase tracking-widest text-slate-500">
                 <span>Shipping</span>
-                <span className="text-[#00c853] font-medium">Free</span>
+                <span className="text-[#00c853] bg-green-50 px-2 py-1 rounded">Free</span>
               </div>
-              <div className="flex justify-between text-slate-600">
-                <span>Estimated GST</span>
-                <span>₹{(displayOrder.total_amount - (displayOrder.total_amount / 1.18)).toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
+              <div className="flex justify-between text-[11px] font-black uppercase tracking-widest text-slate-500">
+                <span>Estimated GST (18%)</span>
+                <span className="text-slate-900">₹{(displayOrder.total_amount - (displayOrder.total_amount / 1.18)).toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
               </div>
-              <div className="flex justify-between text-xl font-bold text-slate-900 pt-3 border-t border-slate-100">
-                <span>Total Paid</span>
-                <span>₹{displayOrder.total_amount.toLocaleString()}</span>
+              <div className="flex justify-between items-center text-2xl font-black text-slate-900 pt-6 border-t-2 border-slate-50 italic">
+                <span className="uppercase tracking-tighter">Total Paid</span>
+                <span className="text-[#e31c3d]">₹{displayOrder.total_amount.toLocaleString()}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="space-y-8">
-          <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-            <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <MapPin className="text-slate-400 w-5 h-5" />
-              Shipping Details
+        <div className="space-y-6 md:space-y-8">
+          <div className="bg-white rounded-lg border border-slate-100 p-6 md:p-8 shadow-sm">
+            <h2 className="text-xs font-black uppercase tracking-widest text-[#e31c3d] mb-6 flex items-center gap-2">
+              <MapPin className="w-4 h-4" />
+              Delivery Destination
             </h2>
-            <div className="text-slate-600 text-sm leading-relaxed">
+            <div className="text-slate-800 text-sm font-bold leading-relaxed bg-slate-50 p-4 rounded-md border border-slate-100">
               {displayOrder.shipping_address}
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-            <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <CreditCard className="text-slate-400 w-5 h-5" />
-              Payment Status
+          <div className="bg-white rounded-lg border border-slate-100 p-6 md:p-8 shadow-sm">
+            <h2 className="text-xs font-black uppercase tracking-widest text-[#e31c3d] mb-6 flex items-center gap-2">
+              <CreditCard className="w-4 h-4" />
+              Payment Verification
             </h2>
             <div className="flex items-center gap-3">
-              <div className={`px-3 py-1 rounded-full text-xs font-bold ${displayOrder.payment_status === 'Paid' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
+              <div className={`px-4 py-2 rounded-md text-[10px] font-black uppercase tracking-widest ${displayOrder.payment_status === 'Paid' ? 'bg-green-50 text-[#00c853] border border-green-100' : 'bg-yellow-50 text-yellow-700 border border-yellow-100'}`}>
                 {displayOrder.payment_status}
               </div>
             </div>
           </div>
 
           <div className="space-y-4 pt-4">
-            <button onClick={() => onNavigate('home')} className="w-full py-4 bg-[#e31c3d] text-white font-bold rounded-xl hover:bg-[#c81935] transition-all shadow-lg shadow-[#e31c3d]/20">
+            <button onClick={() => onNavigate('home')} className="w-full py-4 bg-[#151515] hover:bg-black text-white font-black rounded-md transition-all shadow-xl shadow-black/10 uppercase tracking-widest text-xs active:scale-95">
               Continue Shopping
             </button>
-            <button onClick={() => onNavigate('track', displayOrder.id)} className="w-full py-4 bg-white text-slate-900 border border-slate-200 font-bold rounded-xl hover:bg-slate-50 transition-all">
-              Track Order
+            <button onClick={() => onNavigate('track', displayOrder.id)} className="w-full py-4 bg-white text-slate-900 border-2 border-slate-100 font-black rounded-md hover:bg-slate-50 transition-all uppercase tracking-widest text-xs flex items-center justify-center gap-2 active:scale-95">
+              Track Status <ArrowRight size={16} />
             </button>
           </div>
         </div>
