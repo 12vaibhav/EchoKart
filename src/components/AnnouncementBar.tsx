@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
 import { Zap } from 'lucide-react';
 import { ANNOUNCEMENTS as staticAnnouncements } from '../data';
 import { supabase } from '../lib/supabase';
@@ -44,36 +43,47 @@ export const AnnouncementBar = () => {
     fetchData();
   }, []);
 
-  // Only show static announcements if we've finished loading and found no data in DB
   const displayItems = isLoading ? [] : (announcements.length > 0 ? announcements : staticAnnouncements);
 
   if (isLoading) {
     return (
-      <div className="bg-[#e31c3d] h-[36px] md:h-[40px] border-b border-black/10 flex items-center justify-center">
-        {/* Simple subtle loading indicator if needed, or just a blank bar */}
-      </div>
+      <div className="bg-[#e31c3d] h-[36px] md:h-[40px] border-b border-black/10" />
     );
   }
 
   if (displayItems.length === 0) return null;
 
+  // Duplicate items 4× so there's always content filling the viewport during the loop
+  const loopItems = [...displayItems, ...displayItems, ...displayItems, ...displayItems];
+
   return (
-    <div className="bg-[#e31c3d] text-white py-2 px-4 overflow-hidden relative border-b border-black/10">
-      <motion.div
-        className="flex items-center whitespace-nowrap"
-        animate={{ x: [0, "-50%"] }}
-        transition={{ repeat: Infinity, duration: speed, ease: "linear" }}
+    <div className="bg-[#e31c3d] text-white py-2 overflow-hidden relative border-b border-black/10">
+      <style>{`
+        @keyframes marquee-scroll {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .marquee-track {
+          display: flex;
+          width: max-content;
+          animation: marquee-scroll linear infinite;
+          will-change: transform;
+        }
+      `}</style>
+
+      <div
+        className="marquee-track"
+        style={{ animationDuration: `${speed}s` }}
       >
-        {[...displayItems, ...displayItems].map((announcement, index) => (
-          <div key={index} className="flex items-center gap-4 mx-12">
-            <Zap className="w-3.5 h-3.5 fill-current" />
-            <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em]">
+        {loopItems.map((announcement, index) => (
+          <div key={index} className="flex items-center gap-4 mx-10 md:mx-12">
+            <Zap className="w-3.5 h-3.5 fill-current shrink-0" />
+            <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] whitespace-nowrap">
               {announcement}
             </span>
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };
-
