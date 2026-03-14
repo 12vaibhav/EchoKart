@@ -60,6 +60,12 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
       {/* Moving Announcement Bar */}
       <AnnouncementBar />
 
+      {/* Main Navigation Bar */}
+      <div 
+        className={`w-full transition-all duration-500 border-b ${
+          isScrolled 
+            ? 'bg-black/90 backdrop-blur-xl border-white/10' 
+            : 'bg-black border-transparent'
         } py-6 md:py-3`}
       >
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -72,6 +78,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                 onClick={(e) => { e.preventDefault(); onNavigate('home'); }} 
                 className="flex items-center space-x-2 md:space-x-3 lg:space-x-4 group relative"
               >
+                <div className="relative flex items-center">
                   <div className="absolute inset-0 bg-[#e31c3d] blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-700" />
                   <BrandLogo className="h-14 md:h-16 lg:h-20 w-auto transition-transform duration-500 group-hover:scale-105" />
                 </div>
@@ -179,6 +186,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                     <User className="w-6 h-6 md:w-6.5 md:h-6.5 transition-colors" />
                   </button>
                 ) : (
+                  <button 
                     onClick={() => onNavigate('auth')} 
                     className="hidden md:flex p-1.5 sm:p-2 md:px-5 md:py-2 bg-white/10 md:bg-white/10 hover:bg-white text-white hover:text-black rounded-full items-center justify-center transition-all duration-300 backdrop-blur-md"
                   >
@@ -208,6 +216,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
               </div>
 
               {/* Mobile Menu Trigger */}
+              <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
                 className="xl:hidden p-1.5 sm:p-2 text-white bg-white/5 rounded-full hover:text-[#e31c3d] transition-colors"
               >
@@ -374,7 +383,6 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                 </div>
               </div>
             </motion.div>
-
           </>
         )}
       </AnimatePresence>
