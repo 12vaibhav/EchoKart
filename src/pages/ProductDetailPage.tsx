@@ -146,11 +146,11 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
 
           {/* Right: Product Info */}
           <div className="flex flex-col">
-            <div className="mb-1 md:mb-3 text-xs font-black text-[#e31c3d] uppercase tracking-[0.2em]">{product.brand}</div>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 leading-[1.1] mb-2 md:mb-4 tracking-tight drop-shadow-sm">
+            <div className="mb-1 md:mb-3 text-xs font-black text-[#e31c3d] uppercase tracking-[0.2em] order-1 md:order-0">{product.brand}</div>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 leading-[1.1] mb-2 md:mb-4 tracking-tight drop-shadow-sm order-2 md:order-0">
                   {title}
                 </h1>
-                <div className="flex items-center gap-3 mb-3 md:mb-6">
+                <div className="flex items-center gap-3 mb-3 md:mb-6 order-3 md:order-0">
                   <div className="flex items-center bg-green-50 px-3 py-1.5 rounded-md border border-green-100">
                     <div className="flex gap-0.5 mr-2">
                       {[...Array(5)].map((_, i) => (
@@ -167,7 +167,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                   </span>
                 </div>
 
-                <div className="flex items-baseline gap-3 md:gap-4 mb-3 md:mb-8 p-3 md:p-6 rounded-lg md:rounded-xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-sm relative overflow-hidden group max-w-md">
+                <div className="flex items-baseline gap-3 md:gap-4 mb-3 md:mb-8 p-3 md:p-6 rounded-lg md:rounded-xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-sm relative overflow-hidden group max-w-md order-4 md:order-0">
                    <div className="absolute -right-4 -top-4 w-24 h-24 bg-[#e31c3d] opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.05] transition-opacity"></div>
                     <span className="text-2xl md:text-4xl font-black text-[#e31c3d] tracking-tighter">₹{price.toLocaleString('en-IN')}</span>
                    {oldPrice && (
@@ -180,13 +180,13 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                    )}
                 </div>
 
-                <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-3 md:mb-6">
+                <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-3 md:mb-6 order-5 md:order-0">
                   {shortDesc}
                 </p>
 
             {/* ONLY X PIECES LEFT INDICATOR */}
             {(product.stock > 0 && product.stock <= 20) && (
-              <div className="mb-4 md:mb-8 bg-orange-50/50 border border-orange-100 p-3 md:p-4 rounded-xl">
+              <div className="mb-4 md:mb-8 bg-orange-50/50 border border-orange-100 p-3 md:p-4 rounded-xl order-6 md:order-0">
                 <div className="flex items-center gap-2 mb-3">
                   <Flame className="w-5 h-5 text-orange-500 animate-pulse" />
                   <span className="font-bold text-orange-700">High Demand!</span>
@@ -200,7 +200,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
 
 
             {/* Premium Trust Badges (Local Assets) */}
-            <div className="relative grid grid-cols-3 items-center bg-gradient-to-r from-gray-50/80 to-white py-3 md:py-6 rounded-lg border border-gray-100 shadow-[inset_0_0_20px_rgba(0,0,0,0.01)] mb-4 md:mb-8 max-w-md">
+            <div className="relative grid grid-cols-3 items-center bg-gradient-to-r from-gray-50/80 to-white py-3 md:py-6 rounded-lg border border-gray-100 shadow-[inset_0_0_20px_rgba(0,0,0,0.01)] mb-4 md:mb-8 max-w-md order-9 md:order-0">
               <div className="flex justify-center">
                 <img src={paymentBadge} alt="Secure Payments" className="h-12 sm:h-14 w-auto object-contain hover:scale-110 hover:drop-shadow-md transition-transform duration-300" />
               </div>
@@ -219,7 +219,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             </div>
 
             {/* Important Highlights */}
-            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-2 md:gap-4 mb-4 md:mb-10">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-2 md:gap-4 mb-4 md:mb-10 order-10 md:order-0">
               <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-lg bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
                 <div className="absolute -right-6 -top-6 w-24 h-24 bg-[#e31c3d] opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
                 <div className="w-10 h-10 rounded-md bg-red-50 flex items-center justify-center text-[#e31c3d] group-hover:scale-110 transition-transform z-10 shrink-0">
@@ -267,7 +267,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
 
             {/* Swatches */}
             {product.swatches && product.swatches.length > 0 && (
-              <div className="mb-4 md:mb-8">
+              <div className="mb-4 md:mb-8 order-7 md:order-0">
                 <h3 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide">Select Color</h3>
                 <div className="flex gap-3">
                   {product.swatches.map((color, idx) => (
@@ -284,7 +284,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             )}
 
             {/* Actions (Product Unit Element) */}
-            <div className="flex flex-col gap-2 md:gap-4 mb-4 md:mb-8">
+            <div className="flex flex-col gap-2 md:gap-4 mb-4 md:mb-8 order-8 md:order-0">
               <div className="bg-gray-50 p-2 rounded-lg border border-gray-100 flex flex-col gap-3">
                 <div className="flex items-center justify-between px-2 py-1">
                   <span className="text-sm font-bold text-gray-900 uppercase tracking-tight">Quantity</span>
@@ -348,7 +348,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             </div>
 
             {/* Trust Badge Seals & Quality Badges */}
-            <div className="bg-gray-50 rounded-lg p-3 md:p-5 mb-4 md:mb-8 border border-gray-100">
+            <div className="bg-gray-50 rounded-lg p-3 md:p-5 mb-4 md:mb-8 border border-gray-100 order-11 md:order-0">
               <div className="flex items-center justify-center gap-2 mb-4 pb-4 border-b border-gray-200">
                 <ShieldCheck className="w-5 h-5 text-green-600" />
                 <span className="text-sm font-bold text-gray-900 uppercase tracking-widest">Guaranteed Safe & Secure Checkout</span>
