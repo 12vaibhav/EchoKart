@@ -299,55 +299,59 @@ export const CategoryProductsPage = ({
           {/* Main Content */}
           <div className="flex-1 min-w-0">
             {/* Top Bar */}
-            <div className="bg-white rounded-lg p-3 md:p-4 shadow-sm border border-gray-100 mb-4 md:mb-8">
-              <div className="flex flex-col gap-3">
-                
-                <div className="flex items-center justify-between gap-4">
-                  {/* Category Name / Search Result */}
-                  <div className="flex flex-col min-w-0">
-                    {searchQuery ? (
-                      <div className="flex items-center gap-2">
-                         <h1 className="text-lg md:text-2xl font-bold text-gray-900 truncate">Result: "{searchQuery}"</h1>
-                         <button 
-                          onClick={() => { setSearchQuery(''); onNavigate('category-products'); }}
-                          className="p-1 hover:bg-gray-100 rounded-full text-gray-400 hover:text-[#e31c3d] transition-colors shrink-0"
-                         >
-                           <X size={14} />
-                         </button>
-                      </div>
-                    ) : (
-                      <h1 className="text-xl md:text-2xl font-black text-gray-900 truncate tracking-tight">{selectedCategory || propCategoryName || 'All Products'}</h1>
-                    )}
-                    <span className="text-gray-400 text-[10px] md:text-sm font-bold uppercase tracking-widest mt-0.5">
-                      {filteredProducts.length} Results
-                    </span>
-                  </div>
-
-                  {/* Filter Toggle Button (Mobile Only) */}
-                  <button 
-                    onClick={() => setIsFilterOpen(true)}
-                    className="lg:hidden flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg text-gray-900 font-bold text-xs border border-gray-200 active:scale-95 transition-all shrink-0"
-                  >
-                    <Filter className="w-3.5 h-3.5" />
-                    Filters
-                  </button>
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100 mb-4 md:mb-8 overflow-hidden">
+              {/* Row 1: Title + Filter button */}
+              <div className="flex items-center justify-between gap-4 p-3 md:p-4">
+                <div className="flex flex-col min-w-0">
+                  {searchQuery ? (
+                    <div className="flex items-center gap-2">
+                       <h1 className="text-lg md:text-2xl font-bold text-gray-900 truncate">Result: "{searchQuery}"</h1>
+                       <button 
+                        onClick={() => { setSearchQuery(''); onNavigate('category-products'); }}
+                        className="p-1 hover:bg-gray-100 rounded-full text-gray-400 hover:text-[#e31c3d] transition-colors shrink-0"
+                       >
+                         <X size={14} />
+                       </button>
+                    </div>
+                  ) : (
+                    <h1 className="text-xl md:text-2xl font-black text-gray-900 truncate tracking-tight">{selectedCategory || propCategoryName || 'All Products'}</h1>
+                  )}
+                  <span className="text-gray-400 text-[10px] md:text-sm font-bold uppercase tracking-widest mt-0.5">
+                    {filteredProducts.length} Results
+                  </span>
                 </div>
 
-                {/* Sort Pills — horizontally scrollable row */}
-                <div className="flex items-center gap-2 w-full overflow-x-auto hide-scrollbar pb-0.5">
+                {/* Filter Toggle Button (Mobile Only) */}
+                <button 
+                  onClick={() => setIsFilterOpen(true)}
+                  className="lg:hidden flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg text-gray-900 font-bold text-xs border border-gray-200 active:scale-95 transition-all shrink-0"
+                >
+                  <Filter className="w-3.5 h-3.5" />
+                  Filters
+                </button>
+              </div>
+
+              {/* Row 2: Sort Pills — edge-to-edge scrollable strip */}
+              <div className="border-t border-gray-50">
+                <div
+                  style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}
+                  className="flex flex-row flex-nowrap items-center gap-2 overflow-x-auto px-3 md:px-4 py-2.5 hide-scrollbar snap-x"
+                >
                   {['Top Rated', 'Popular', 'Newest', 'Price'].map((opt) => (
                     <button
                       key={opt}
                       onClick={() => setSortBy(opt.toLowerCase().replace(' ', '-'))}
-                      className={`flex-shrink-0 px-3 py-1.5 rounded-md text-[10px] md:text-xs font-black uppercase tracking-widest transition-all whitespace-nowrap ${
+                      className={`flex-none snap-start px-4 py-1.5 rounded-md text-[10px] md:text-xs font-black uppercase tracking-widest transition-all whitespace-nowrap ${
                         sortBy === opt.toLowerCase().replace(' ', '-') 
                           ? 'bg-[#e31c3d] text-white shadow-md shadow-red-100' 
-                          : 'bg-gray-50 text-gray-400 hover:text-gray-900 border border-gray-100'
+                          : 'bg-gray-50 text-gray-500 hover:text-gray-900 border border-gray-200'
                       }`}
                     >
                       {opt}
                     </button>
                   ))}
+                  {/* Trailing spacer so last pill isn't flush to edge */}
+                  <div className="flex-none w-1" />
                 </div>
               </div>
             </div>
