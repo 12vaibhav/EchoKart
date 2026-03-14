@@ -106,6 +106,36 @@ export const CategoryProductsPage = ({
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
+  // Drag-scroll ref for sort pill row (bypasses button touch capture)
+  const sortScrollRef = React.useRef<HTMLDivElement>(null);
+  const sortDragState = React.useRef({ isDragging: false, startX: 0, scrollLeft: 0, moved: false });
+
+  const onSortTouchStart = (e: React.TouchEvent) => {
+    const el = sortScrollRef.current;
+    if (!el) return;
+    sortDragState.current = {
+      isDragging: true,
+      startX: e.touches[0].clientX,
+      scrollLeft: el.scrollLeft,
+      moved: false,
+    };
+  };
+
+  const onSortTouchMove = (e: React.TouchEvent) => {
+    const state = sortDragState.current;
+    const el = sortScrollRef.current;
+    if (!state.isDragging || !el) return;
+    const dx = e.touches[0].clientX - state.startX;
+    if (Math.abs(dx) > 5) {
+      state.moved = true;
+      el.scrollLeft = state.scrollLeft - dx;
+    }
+  };
+
+  const onSortTouchEnd = () => {
+    sortDragState.current.isDragging = false;
+  };
+
   // Filter panel contents - shared between desktop sidebar and mobile drawer
   const FilterPanel = () => (
     <div className="space-y-6">
@@ -331,11 +361,15 @@ export const CategoryProductsPage = ({
                 </button>
               </div>
 
-              {/* Row 2: Sort Pills — edge-to-edge scrollable strip */}
+              {/* Row 2: Sort Pills — edge-to-edge drag-scroll strip */}
               <div className="border-t border-gray-50">
                 <div
-                  style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}
-                  className="flex flex-row flex-nowrap items-center gap-2 overflow-x-auto px-3 md:px-4 py-2.5 hide-scrollbar"
+                  ref={sortScrollRef}
+                  onTouchStart={onSortTouchStart}
+                  onTouchMove={onSortTouchMove}
+                  onTouchEnd={onSortTouchEnd}
+                  style={{ WebkitOverflowScrolling: 'touch' }}
+                  className="flex flex-row flex-nowrap items-center gap-2 overflow-x-auto px-3 md:px-4 py-2.5 hide-scrollbar select-none"
                 >
                   {['Top Rated', 'Popular', 'Newest', 'Price'].map((opt) => (
                     <button
