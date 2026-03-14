@@ -69,7 +69,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
   return (
     <div className="bg-white min-h-screen pb-20">
       {/* Breadcrumbs */}
-      <div className="bg-white py-4 border-b border-gray-100">
+      <div className="hidden md:block bg-white py-4 border-b border-gray-100">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center text-sm text-gray-500 font-medium">
           <button onClick={() => onNavigate?.('home')} className="hover:text-gray-900 transition-colors">Home</button>
           <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />
