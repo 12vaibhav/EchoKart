@@ -241,7 +241,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full h-14 pl-12 pr-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                      className="w-full h-11 md:h-14 pl-12 pr-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                       placeholder="email@example.com" 
                       type="email" 
                     />
@@ -257,7 +257,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                       value={formData.phone}
                       onChange={handleInputChange}
                       required
-                      className="w-full h-14 pl-12 pr-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                      className="w-full h-11 md:h-14 pl-12 pr-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                       placeholder="e.g. 9876543210" 
                       type="tel" 
                     />
@@ -284,7 +284,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-11 md:h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="John" 
                     type="text" 
                   />
@@ -295,7 +295,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-11 md:h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="Doe" 
                     type="text" 
                   />
@@ -306,7 +306,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="houseNumber"
                     value={formData.houseNumber}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-11 md:h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="e.g. Flat 402, Echo Enclave" 
                     type="text" 
                   />
@@ -317,7 +317,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="roadName"
                     value={formData.roadName}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-11 md:h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="e.g. MG Road, Near City Center" 
                     type="text" 
                   />
@@ -328,7 +328,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="city"
                     value={formData.city}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-11 md:h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="New Delhi" 
                     type="text" 
                   />
@@ -339,7 +339,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     name="pincode"
                     value={formData.pincode}
                     onChange={handleInputChange}
-                    className="w-full h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
+                    className="w-full h-11 md:h-14 px-4 rounded-md border-slate-200 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 bg-white font-bold text-sm md:text-base transition-all outline-none" 
                     placeholder="110001" 
                     type="text" 
                   />
@@ -427,7 +427,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                         name="utrNumber"
                         value={formData.utrNumber}
                         onChange={handleInputChange}
-                        className="w-full h-14 md:h-20 rounded-lg border-slate-100 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 p-4 md:p-6 bg-slate-50 font-black tracking-[0.2em] text-lg md:text-3xl text-center text-slate-900 placeholder:text-slate-200 outline-none transition-all" 
+                        className="w-full h-11 md:h-20 rounded-lg border-slate-100 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 p-4 md:p-6 bg-slate-50 font-black tracking-[0.2em] text-lg md:text-3xl text-center text-slate-900 placeholder:text-slate-200 outline-none transition-all" 
                         placeholder="0000 0000 0000" 
                         type="text" 
                         maxLength={12}
