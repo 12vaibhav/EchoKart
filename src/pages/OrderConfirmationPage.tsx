@@ -110,7 +110,7 @@ export const OrderConfirmationPage = ({ onNavigate, orderId: passedOrderId }: { 
   const displayId = typeof displayOrder.id === 'string' ? displayOrder.id.split('-')[0].toUpperCase() : displayOrder.id;
 
   return (
-    <motion.div {...fadeInUpProps} className="max-w-4xl mx-auto px-4 py-12 relative">
+    <motion.div {...fadeInUpProps} className="max-w-4xl mx-auto px-4 py-12 relative overflow-x-hidden">
       <div className="text-center mb-16 relative">
         <div className="relative inline-flex items-center justify-center mb-8">
           <FireSparkBurst />
