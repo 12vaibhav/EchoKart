@@ -14,7 +14,7 @@ const ORIGINAL_REVIEWS: any[] = [];
 export const CustomerReviews = ({ reviews: propReviews }: { reviews?: any[] }) => {
   const displayReviews = propReviews && propReviews.length > 0 ? propReviews : ORIGINAL_REVIEWS;
   return (
-    <motion.section {...fadeInUpProps} className="py-20 bg-white">
+    <motion.section {...fadeInUpProps} className="pt-10 pb-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 tracking-tight">Loved by Thousands</h2>
