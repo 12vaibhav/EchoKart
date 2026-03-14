@@ -459,7 +459,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
         </div>
 
         {/* Right Column: Order Summary - Mirrored Layout from CartPage */}
-        <div className="lg:col-span-1">
+        <div className="hidden lg:block lg:col-span-1">
           <div className="bg-white rounded-lg p-5 sm:p-8 pb-4 md:pb-8 sticky top-28 border border-slate-100 shadow-sm">
             <h2 className="text-xl font-black text-slate-900 mb-6 sm:mb-8 uppercase tracking-tight">Order Review</h2>
             
