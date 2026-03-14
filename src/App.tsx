@@ -420,7 +420,7 @@ export default function App() {
         onNavigate={navigate} 
         isMinimal={['cart', 'checkout'].includes(route.path)}
       />
-      <main className="pt-24 md:pt-28">
+      <main className={`${['cart', 'checkout'].includes(route.path) ? 'pt-14 md:pt-28' : 'pt-24 md:pt-28'}`}>
         {route.path === 'home' && <HomePage products={products} categories={categories} customizations={customizations} onNavigate={navigate} />}
         {route.path === 'category' && <CategoryPage categories={categories} onNavigate={navigate} />}
             {route.path === 'category-products' && <CategoryProductsPage products={products} categories={categories} categoryName={route.categoryName || 'All Products'} initialSearchQuery={route.searchQuery} onNavigate={navigate} />}
