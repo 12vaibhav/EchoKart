@@ -135,26 +135,26 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
   return (
     <motion.div {...fadeInUpProps} className="max-w-7xl mx-auto px-4 py-4 md:py-12 bg-white">
       {/* Progress Indicator - Mirrored from CartPage */}
-      <div className="mb-12 pt-4">
-        <div className="flex items-center justify-between mb-4 max-w-2xl mx-auto relative px-4">
-          <div className="absolute top-[1.25rem] left-0 w-full h-[2px] bg-slate-100 z-0"></div>
-          <div className="absolute top-[1.25rem] left-0 w-1/2 h-[2px] bg-[#e31c3d] z-0 transition-all duration-700"></div>
+      <div className="mb-6 md:mb-12 pt-0 md:pt-4">
+        <div className="flex items-center justify-between mb-2 md:mb-4 max-w-2xl mx-auto relative px-4">
+          <div className="absolute top-[1.25rem] left-0 w-full h-[1px] md:h-[2px] bg-slate-100 z-0"></div>
+          <div className="absolute top-[1.25rem] left-0 w-1/2 h-[1px] md:h-[2px] bg-[#e31c3d] z-0 transition-all duration-700"></div>
           
-          <div className="z-10 flex flex-col items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#151515] text-white flex items-center justify-center font-black text-sm shadow-lg shadow-black/20 ring-4 ring-white">
-              <Check className="w-5 h-5 text-green-400" />
+          <div className="z-10 flex flex-col items-center gap-2 md:gap-3">
+            <div className="size-8 md:size-10 rounded-full bg-[#151515] text-white flex items-center justify-center font-black text-[10px] md:text-sm shadow-lg shadow-black/20 ring-4 ring-white">
+              <Check className="w-4 h-4 md:w-5 md:h-5 text-green-400" />
             </div>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Cart</span>
+            <span className="text-[8px] md:text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Cart</span>
           </div>
           
-          <div className="z-10 flex flex-col items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#e31c3d] text-white flex items-center justify-center font-black text-sm shadow-lg shadow-[#e31c3d]/20 ring-4 ring-white">2</div>
-            <span className="text-[10px] font-black text-slate-900 uppercase tracking-[0.2em]">Review</span>
+          <div className="z-10 flex flex-col items-center gap-2 md:gap-3">
+            <div className="size-8 md:size-10 rounded-full bg-[#e31c3d] text-white flex items-center justify-center font-black text-[10px] md:text-sm shadow-lg shadow-[#e31c3d]/20 ring-4 ring-white">2</div>
+            <span className="text-[8px] md:text-[10px] font-black text-slate-900 uppercase tracking-[0.2em]">Review</span>
           </div>
           
-          <div className="z-10 flex flex-col items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-black text-sm ring-4 ring-white">3</div>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Checkout</span>
+          <div className="z-10 flex flex-col items-center gap-2 md:gap-3">
+            <div className="size-8 md:size-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-black text-[10px] md:text-sm ring-4 ring-white">3</div>
+            <span className="text-[8px] md:text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Checkout</span>
           </div>
         </div>
       </div>
@@ -217,17 +217,17 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         {/* Left Column: Forms */}
-        <div className="lg:col-span-2 space-y-8 md:space-y-12">
+        <div className="lg:col-span-2 space-y-6 md:space-y-12">
           
-          <div className="bg-slate-50 rounded-lg p-6 md:p-10 border border-slate-100 shadow-sm">
-            <section className="mb-10">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="bg-[#e31c3d] p-2.5 rounded-md shadow-lg shadow-[#e31c3d]/20">
+          <div className="bg-transparent md:bg-slate-50 rounded-lg p-0 md:p-10 border-0 md:border border-slate-100 shadow-none md:shadow-sm">
+            <section className="mb-8 md:mb-10 bg-slate-50 md:bg-transparent p-6 md:p-0 rounded-lg border md:border-0 border-slate-100">
+              <div className="flex items-center gap-3 mb-6 md:mb-8">
+                <div className="bg-[#e31c3d] p-2 md:p-2.5 rounded-md shadow-lg shadow-[#e31c3d]/20">
                   <Mail className="text-white w-5 h-5 md:w-6 md:h-6" />
                 </div>
                 <div>
-                  <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Contact Details</h2>
-                  <p className="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Where should we send your receipt?</p>
+                  <h2 className="text-lg md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Contact Details</h2>
+                  <p className="text-[9px] md:text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Where should we send your receipt?</p>
                 </div>
               </div>
               
@@ -266,14 +266,14 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
               </div>
             </section>
 
-            <section>
-              <div className="flex items-center gap-3 mb-8">
-                <div className="bg-[#e31c3d] p-2.5 rounded-md shadow-lg shadow-[#e31c3d]/20">
+            <section className="bg-slate-50 md:bg-transparent p-6 md:p-0 rounded-lg border md:border-0 border-slate-100">
+              <div className="flex items-center gap-3 mb-6 md:mb-8">
+                <div className="bg-[#e31c3d] p-2 md:p-2.5 rounded-md shadow-lg shadow-[#e31c3d]/20">
                   <Truck className="text-white w-5 h-5 md:w-6 md:h-6" />
                 </div>
                 <div>
-                  <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Shipping Info</h2>
-                  <p className="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Tell us where to deliver your product</p>
+                  <h2 className="text-lg md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Shipping Info</h2>
+                  <p className="text-[9px] md:text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Tell us where to deliver your product</p>
                 </div>
               </div>
 
@@ -348,37 +348,37 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
             </section>
           </div>
 
-          <section className="bg-white border-4 border-slate-50 rounded-lg p-6 md:p-10 shadow-xl shadow-slate-200/50">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="bg-[#e31c3d] p-2.5 rounded-md shadow-lg shadow-[#e31c3d]/20">
+          <section className="bg-white border-2 md:border-4 border-slate-50 rounded-lg p-6 md:p-10 shadow-xl shadow-slate-200/50">
+            <div className="flex items-center gap-3 mb-6 md:mb-8">
+              <div className="bg-[#e31c3d] p-2 md:p-2.5 rounded-md shadow-lg shadow-[#e31c3d]/20">
                 <QrCode className="text-white w-5 h-5 md:w-6 md:h-6" />
               </div>
-              <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Choose Payment</h2>
+              <h2 className="text-lg md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Choose Payment</h2>
             </div>
             
-            <div className="flex flex-col sm:flex-row p-2 bg-slate-50 rounded-md mb-8 gap-2">
+            <div className="flex flex-col sm:flex-row p-1.5 bg-slate-50 rounded-md mb-6 md:mb-8 gap-1.5 md:gap-2">
               <button
                 type="button"
                 onClick={() => setFormData(prev => ({ ...prev, paymentMethod: 'upi' }))}
-                className={`flex-1 flex items-center justify-center gap-2.5 py-4 rounded-md text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-500 active:scale-95 ${
+                className={`flex-1 flex items-center justify-center gap-2 py-3 md:py-4 rounded-md text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-500 active:scale-95 ${
                   formData.paymentMethod === 'upi' 
-                    ? 'bg-white text-[#e31c3d] shadow-xl shadow-slate-200/50 scale-[1.02]' 
+                    ? 'bg-white text-[#e31c3d] shadow-xl shadow-slate-200/50' 
                     : 'text-slate-400 hover:text-slate-600'
                 }`}
               >
-                <QrCode size={18} />
+                <QrCode size={16} />
                 Instant UPI
               </button>
               <button
                 type="button"
                 onClick={() => setFormData(prev => ({ ...prev, paymentMethod: 'cod' }))}
-                className={`flex-1 flex items-center justify-center gap-2.5 py-4 rounded-lg text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-500 active:scale-95 ${
+                className={`flex-1 flex items-center justify-center gap-2 py-3 md:py-4 rounded-md text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-500 active:scale-95 ${
                   formData.paymentMethod === 'cod' 
-                    ? 'bg-white text-[#e31c3d] shadow-xl shadow-slate-200/50 scale-[1.02]' 
+                    ? 'bg-white text-[#e31c3d] shadow-xl shadow-slate-200/50' 
                     : 'text-slate-400 hover:text-slate-600'
                 }`}
               >
-                <Truck size={18} />
+                <Truck size={16} />
                 Pay on Delivery
               </button>
             </div>
@@ -392,8 +392,8 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   exit={{ opacity: 0, y: -20 }}
                   className="space-y-8"
                 >
-                  <div className="flex flex-col items-center justify-center p-6 md:p-10 bg-[#fef2f2] rounded-lg border border-red-50 gap-6">
-                    <div className="size-48 md:size-64 bg-white p-5 rounded-lg shadow-2xl shadow-[#e31c3d]/10 flex items-center justify-center relative group overflow-hidden border border-red-50/50">
+                  <div className="flex flex-col items-center justify-center p-4 md:p-10 bg-[#fef2f2] rounded-lg border border-red-50 gap-4 md:gap-6">
+                    <div className="size-40 md:size-64 bg-white p-3 md:p-5 rounded-lg shadow-2xl shadow-[#e31c3d]/10 flex items-center justify-center relative group overflow-hidden border border-red-50/50">
                        <img 
                          src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=store@upi%26pn=EchoKart%26am=${total}%26cu=INR`} 
                          alt="Payment QR"
@@ -402,32 +402,32 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                        <div className="absolute inset-0 bg-gradient-to-tr from-[#e31c3d]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
                     <div className="text-center">
-                      <p className="text-sm md:text-xl font-black text-slate-800 tracking-tight mb-3">VPA ID: <span className="text-[#e31c3d]">store@upi</span></p>
+                      <p className="text-xs md:text-xl font-black text-slate-800 tracking-tight mb-2 md:mb-3">VPA ID: <span className="text-[#e31c3d]">store@upi</span></p>
                       <button 
                         type="button"
                         onClick={() => {
                           navigator.clipboard.writeText('store@upi');
                           alert('UPI ID copied to clipboard!');
                         }}
-                        className="text-[10px] font-black uppercase tracking-widest text-[#e31c3d] py-3 px-6 rounded-full bg-white border border-red-100 shadow-sm hover:shadow-md transition-all flex items-center gap-2 mx-auto active:scale-90"
+                        className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-[#e31c3d] py-2 md:py-3 px-4 md:px-6 rounded-full bg-white border border-red-100 shadow-sm hover:shadow-md transition-all flex items-center gap-2 mx-auto active:scale-90"
                       >
-                        <Copy size={12} /> Copy ID
+                        <Copy size={10} /> Copy ID
                       </button>
                     </div>
                   </div>
 
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-4 bg-black text-white p-5 rounded-lg shadow-xl shadow-black/10">
-                      <Shield size={24} className="shrink-0 text-[#00c853]" />
-                      <p className="text-[10px] md:text-xs font-black uppercase tracking-widest leading-relaxed">Safety Note: Enter 12-digit UTR after payment</p>
+                  <div className="space-y-4 md:space-y-6">
+                    <div className="flex items-center gap-3 md:gap-4 bg-black text-white p-4 md:p-5 rounded-lg shadow-xl shadow-black/10">
+                      <Shield size={20} className="shrink-0 text-[#00c853]" />
+                      <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest leading-relaxed">Safety Note: Enter 12-digit UTR after payment</p>
                     </div>
                     <div>
-                      <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-6 mb-3">Transaction ID (UTR)*</label>
+                      <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-6 mb-2 md:mb-3">Transaction ID (UTR)*</label>
                       <input 
                         name="utrNumber"
                         value={formData.utrNumber}
                         onChange={handleInputChange}
-                        className="w-full h-18 md:h-20 rounded-lg border-slate-100 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 p-6 bg-slate-50 font-black tracking-[0.2em] text-xl md:text-3xl text-center text-slate-900 placeholder:text-slate-200 outline-none transition-all" 
+                        className="w-full h-14 md:h-20 rounded-lg border-slate-100 focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 p-4 md:p-6 bg-slate-50 font-black tracking-[0.2em] text-lg md:text-3xl text-center text-slate-900 placeholder:text-slate-200 outline-none transition-all" 
                         placeholder="0000 0000 0000" 
                         type="text" 
                         maxLength={12}
