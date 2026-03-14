@@ -5,6 +5,7 @@ import { ProductCarouselSection } from '../components/ProductCarouselSection';
 import { NewArrivals } from '../components/NewArrivals';
 import { VideoShowcase } from '../components/VideoShowcase';
 import { CustomerReviews } from '../components/CustomerReviews';
+import { WhyChooseUs } from '../components/WhyChooseUs';
 import { FAQSection } from '../components/FAQSection';
 
 
@@ -23,6 +24,7 @@ export const HomePage = ({ products, categories, customizations, onNavigate }: {
       <NewArrivals products={arrivalProducts} onNavigate={onNavigate} />
       <VideoShowcase videos={customizations.videos} onNavigate={onNavigate} />
       <CustomerReviews reviews={customizations.reviews} />
+      <WhyChooseUs />
       <FAQSection />
     </>
   );

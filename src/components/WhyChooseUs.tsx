@@ -18,15 +18,17 @@ export const WhyChooseUs = () => {
   ];
 
   return (
-    <motion.section {...fadeInUpProps} className="py-16 bg-white border-t border-gray-100">
+    <motion.section {...fadeInUpProps} className="py-10 md:py-16 bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-12">Why Shop With Us</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <h2 className="text-2xl md:text-3xl font-black text-center mb-10 md:mb-12 tracking-tight">Why Shop With Us</h2>
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
           {features.map((f, idx) => (
-            <div key={idx} className="flex flex-col items-center text-center p-6 rounded-2xl hover:bg-gray-50 transition-colors">
-              <div className="text-[#e31c3d] mb-4 bg-red-50 p-4 rounded-full">{f.icon}</div>
-              <h3 className="font-bold text-lg mb-2">{f.title}</h3>
-              <p className="text-gray-600">{f.desc}</p>
+            <div key={idx} className="flex flex-col items-center text-center p-4 md:p-6 rounded-2xl bg-gray-50/50 md:bg-transparent hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-gray-100 group">
+              <div className="text-[#e31c3d] mb-3 md:mb-4 bg-red-50 p-3 md:p-4 rounded-full group-hover:scale-110 transition-transform">
+                {React.cloneElement(f.icon as React.ReactElement, { className: "w-6 h-6 md:w-8 md:h-8" })}
+              </div>
+              <h3 className="font-bold text-sm md:text-lg mb-1 md:mb-2 text-slate-800">{f.title}</h3>
+              <p className="text-[10px] md:text-sm text-gray-500 leading-tight md:leading-normal">{f.desc}</p>
             </div>
           ))}
         </div>
