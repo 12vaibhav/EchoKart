@@ -10,7 +10,7 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
   return (
     <footer className="w-full">
       {/* Top Banner - Redesigned for 2x2 grid on mobile */}
-      <div className="bg-[#ff5a00] text-white py-6 md:py-8 px-4 sm:px-6 lg:px-8">
+      <div className="hidden md:block bg-[#ff5a00] text-white py-6 md:py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
           <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 md:gap-4 group">
             <MessageCircle className="w-8 h-8 md:w-10 md:h-10 font-light opacity-90 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
