@@ -13,126 +13,11 @@ import {
 
 import { useWishlist } from '../contexts/WishlistContext';
 import { useCart } from '../contexts/CartContext';
+import { ProductCard } from '../components/ProductCard';
 
 
 
-const CategoryProductCard = ({ product, onNavigate, viewMode }: { product: any, onNavigate: any, viewMode: 'grid' | 'list', key?: any }) => {
-  const { wishlist, toggleWishlist } = useWishlist();
-  const { addToCart } = useCart();
-  
-  const isWishlisted = wishlist.some(item => item.id === product.id);
-  const title = product.name || product.title;
-  const image = product.image || (product.images && product.images[0]);
-  const oldPrice = product.oldPrice || (product.price * 2);
 
-  const handleBuyNow = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    addToCart(product);
-    onNavigate('product', product.id);
-  };
-
-  return (
-    <div 
-      className={`bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 group cursor-pointer overflow-hidden ${
-        viewMode === 'list' ? 'flex gap-3 md:gap-6 items-center p-2.5 md:p-4' : 'flex flex-col'
-      }`}
-      onClick={() => onNavigate('product', product.id)}
-    >
-      {/* Image Container */}
-      <div className={`relative bg-[#f8f9fb] overflow-hidden flex items-center justify-center p-0 ${
-        viewMode === 'list' 
-          ? 'w-24 h-24 md:w-48 md:h-48 flex-shrink-0 rounded-lg md:rounded-xl' 
-          : 'aspect-square w-full border-b border-gray-50'
-      }`}>
-        <button 
-          onClick={(e) => { e.stopPropagation(); toggleWishlist(product); }}
-          className="absolute top-2 right-2 md:top-3 md:right-3 w-7 h-7 md:w-8 md:h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm transition-all z-10 hover:bg-white"
-        >
-          <Heart className={`w-3.5 h-3.5 md:w-4 md:h-4 ${isWishlisted ? 'fill-[#e31c3d] text-[#e31c3d]' : 'text-gray-400'}`} />
-        </button>
-
-        {/* Product Tags/Badges */}
-        {(product.badges || product.tags) && (
-          <div className="absolute top-2 left-2 md:top-3 md:left-3 flex flex-col gap-1 z-10">
-            {product.badges && product.badges.slice(0, 1).map((badge: any, i: number) => (
-              <span key={i} className={`${badge.color || 'bg-[#e31c3d]'} text-white text-[7px] md:text-[9px] uppercase font-black px-1.5 py-0.5 rounded shadow-sm`}>
-                {badge.text}
-              </span>
-            ))}
-            {!product.badges && product.tags && product.tags.slice(0, 1).map((tag: string, i: number) => (
-              <span key={`tag-${i}`} className="bg-[#e31c3d] text-white text-[7px] md:text-[9px] uppercase font-black px-1.5 py-0.5 rounded shadow-sm">
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-        <img 
-          src={image} 
-          alt={title} 
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-        />
-      </div>
-
-      {/* Content */}
-      <div className={`flex flex-col ${viewMode === 'list' ? 'flex-1 min-w-0' : 'p-2.5 md:p-4'}`}>
-        <h3 className="font-bold text-gray-900 text-xs md:text-lg mb-1 md:mb-2 line-clamp-1 group-hover:text-[#e31c3d] transition-colors">
-          {title}
-        </h3>
-
-        <div className="flex items-center flex-wrap gap-1.5 md:gap-3 mb-1 md:mb-2">
-          <span className="text-[#e31c3d] font-black text-sm md:text-lg">
-            ₹{(product.price || 0).toLocaleString('en-IN')}
-          </span>
-          {product.oldPrice && (
-            <div className="flex items-center gap-1">
-              <span className="text-gray-400 text-[10px] md:text-sm line-through decoration-gray-300">
-                ₹{oldPrice.toLocaleString('en-IN')}
-              </span>
-              <span className="text-[#e31c3d] text-[8px] md:text-sm font-bold bg-red-50 px-1 py-0.5 rounded">
-                -{Math.round(((oldPrice - (product.price || 0)) / oldPrice) * 100)}%
-              </span>
-            </div>
-          )}
-        </div>
-
-        <div className="flex items-center gap-1.5 mb-3 md:mb-4">
-          <div className="flex gap-0.5">
-            {[...Array(5)].map((_, i) => (
-              <Star 
-                key={i} 
-                className={`w-2.5 h-2.5 md:w-3.5 md:h-3.5 ${i < Math.floor(Number(product.rating || 5)) ? 'fill-[#ff9c1a] text-[#ff9c1a]' : 'fill-gray-200 text-gray-200'}`} 
-              />
-            ))}
-          </div>
-          <span className="text-[10px] md:text-sm text-gray-400 font-bold">
-            ({product.reviewsCount !== undefined ? product.reviewsCount : (Array.isArray(product.reviews) ? product.reviews.length : (product.reviews || 0))})
-          </span>
-        </div>
-
-        {viewMode === 'list' && (
-          <p className="text-gray-500 text-[11px] md:text-sm mb-4 line-clamp-2 hidden md:block">
-            {product.description || "Experience premium quality with our latest collection. Designed for comfort and style."}
-          </p>
-        )}
-
-        <div className="flex gap-2 mt-auto">
-          <button 
-            onClick={(e) => { e.stopPropagation(); addToCart(product); }}
-            className="flex-1 border border-gray-200 text-gray-600 font-bold py-1.5 md:py-2.5 rounded-lg md:rounded-xl text-[9px] md:text-sm hover:bg-gray-50 transition-all flex items-center justify-center gap-1 md:gap-2 active:scale-95"
-          >
-            <ShoppingBag className="w-3 h-3 md:w-4 md:h-4" /> Add
-          </button>
-          <button 
-            onClick={handleBuyNow}
-            className="flex-1 bg-[#e31c3d] text-white font-bold py-1.5 md:py-2.5 rounded-lg md:rounded-xl text-[9px] md:text-sm hover:bg-[#c41835] transition-all shadow-sm hover:shadow-md active:scale-95 uppercase tracking-wider"
-          >
-            Buy
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 
 export const CategoryProductsPage = ({ 
@@ -423,11 +308,10 @@ export const CategoryProductsPage = ({
             <div className="flex-1">
               <div className={viewMode === 'grid' ? 'grid grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-6' : 'flex flex-col gap-4 md:gap-6'}>
                 {paginatedProducts.map((product: any, idx: number) => (
-                  <CategoryProductCard 
+                  <ProductCard 
                     key={product.id + '-' + idx} 
                     product={product} 
                     onNavigate={onNavigate} 
-                    viewMode={viewMode}
                   />
                 ))}
               </div>

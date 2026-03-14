@@ -26,34 +26,34 @@ export const ProductCard = ({ product, onNavigate, onQuickView, className }: { k
   return (
     <div 
       onClick={() => onNavigate('product', product.id)} 
-      className={`bg-white rounded-[1.5rem] md:rounded-[2rem] p-3 md:p-5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-slate-100 group hover:shadow-[0_24px_48px_rgba(0,0,0,0.1)] transition-all duration-500 flex flex-col cursor-pointer h-full relative overflow-hidden ${className || 'w-full md:min-w-[320px]'}`}
+      className={`bg-white rounded-[1.2rem] md:rounded-[1.5rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 group hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col cursor-pointer h-full relative overflow-hidden ${className || 'w-full'}`}
     >
-      <div className="relative aspect-square mb-3 md:mb-6 bg-[#f8f9fb] rounded-xl md:rounded-2xl overflow-hidden group/img">
+      <div className="relative aspect-square bg-[#f8f9fb] overflow-hidden group/img">
         <button 
           onClick={(e) => { e.stopPropagation(); toggleWishlist(product); }}
-          className={`absolute top-3 right-3 md:top-4 md:right-4 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shadow-lg transition-all z-20 backdrop-blur-md ${isWishlisted ? 'bg-[#e31c3d] text-white' : 'bg-white/80 text-slate-400 hover:text-[#e31c3d] hover:bg-whiteScale-110'}`}
+          className={`absolute top-2 right-2 md:top-3 md:right-3 w-7 h-7 md:w-9 md:h-9 rounded-full flex items-center justify-center shadow-lg transition-all z-20 backdrop-blur-md ${isWishlisted ? 'bg-[#e31c3d] text-white' : 'bg-white/80 text-slate-400 hover:text-[#e31c3d] hover:bg-whiteScale-110'}`}
         >
-          <Heart className={`w-3.5 h-3.5 md:w-4 md:h-4 ${isWishlisted ? 'fill-current' : ''}`} />
+          <Heart className={`w-3 h-3 md:w-4 md:h-4 ${isWishlisted ? 'fill-current' : ''}`} />
         </button>
 
         {/* Product Tags/Badges */}
-        <div className="absolute top-3 left-3 md:top-4 md:left-4 flex flex-col gap-1.5 md:gap-2 z-20">
+        <div className="absolute top-2 left-2 md:top-3 md:left-3 flex flex-col gap-1 z-20">
           {(product.badges || product.tags) ? (
             <>
-              {product.badges && product.badges.map((badge: any, i: number) => (
-                <span key={i} className={`bg-black text-white text-[8px] md:text-[9px] font-black uppercase tracking-wider px-2 md:px-3 py-1 md:py-1.5 rounded-md md:rounded-lg shadow-lg`}>
+              {product.badges && product.badges.slice(0, 1).map((badge: any, i: number) => (
+                <span key={i} className={`bg-black text-white text-[7px] md:text-[8px] font-black uppercase tracking-wider px-1.5 md:px-2 py-0.5 md:py-1 rounded-sm md:rounded shadow-lg`}>
                   {badge.text}
                 </span>
               ))}
-              {product.tags && product.tags.map((tag: string, i: number) => (
-                <span key={`tag-${i}`} className="bg-[#e31c3d] text-white text-[8px] md:text-[9px] font-black uppercase tracking-wider px-2 md:px-3 py-1 md:py-1.5 rounded-md md:rounded-lg shadow-lg">
+              {product.tags && product.tags.slice(0, 1).map((tag: string, i: number) => (
+                <span key={`tag-${i}`} className="bg-[#e31c3d] text-white text-[7px] md:text-[8px] font-black uppercase tracking-wider px-1.5 md:px-2 py-0.5 md:py-1 rounded-sm md:rounded shadow-lg">
                   {tag}
                 </span>
               ))}
             </>
           ) : (
             product.sale && (
-               <span className="bg-[#e31c3d] text-white text-[8px] md:text-[9px] font-black uppercase tracking-wider px-2 md:px-3 py-1 md:py-1.5 rounded-md md:rounded-lg shadow-lg">Sale</span>
+               <span className="bg-[#e31c3d] text-white text-[7px] md:text-[8px] font-black uppercase tracking-wider px-1.5 md:px-2 py-0.5 md:py-1 rounded-sm md:rounded shadow-lg">Sale</span>
             )
           )}
         </div>
@@ -61,50 +61,49 @@ export const ProductCard = ({ product, onNavigate, onQuickView, className }: { k
         <img 
           src={product.image} 
           alt={product.title} 
-          className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-110"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105"
           loading="lazy"
         />
 
         {/* Quick Add Overlay */}
-        <div className="absolute inset-x-3 bottom-3 md:inset-x-4 md:bottom-4 z-20 md:translate-y-4 md:opacity-0 md:group-hover/img:translate-y-0 md:group-hover/img:opacity-100 transition-all duration-300">
+        <div className="absolute inset-x-2 bottom-2 md:inset-x-3 md:bottom-3 z-20 md:translate-y-4 md:opacity-0 md:group-hover/img:translate-y-0 md:group-hover/img:opacity-100 transition-all duration-300">
           <button 
             onClick={handleAddToCart}
-            className="w-full bg-white/95 md:bg-white text-black font-black py-2.5 md:py-3 rounded-lg md:rounded-xl text-[9px] md:text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-[#e31c3d] hover:text-white transition-all shadow-xl"
+            className="w-full bg-white/95 md:bg-white text-black font-black py-1.5 md:py-2.5 rounded md:rounded-lg text-[8px] md:text-[9px] uppercase tracking-widest flex items-center justify-center gap-1.5 hover:bg-[#e31c3d] hover:text-white transition-all shadow-xl"
           >
-             <ShoppingBag size={12} className="md:w-3.5 md:h-3.5" /> Quick Add
+             <ShoppingBag size={10} className="md:w-3 md:h-3" /> Quick Add
           </button>
         </div>
       </div>
       
-      <div className="flex flex-col flex-1">
-        <h3 className="font-black text-slate-900 text-sm md:text-lg mb-1.5 md:mb-2 line-clamp-2 md:line-clamp-1 group-hover:text-[#e31c3d] transition-colors leading-tight">
+      <div className="flex flex-col flex-1 p-2.5 md:p-4">
+        <h3 className="font-bold text-slate-800 text-[11px] md:text-base mb-1 md:mb-1.5 line-clamp-1 group-hover:text-[#e31c3d] transition-colors leading-tight">
           {product.title || product.name || 'Product'}
         </h3>
         
-        <div className="flex items-center justify-between mb-3 md:mb-4">
+        <div className="flex items-center justify-between mb-2 md:mb-3">
           <div className="flex flex-col">
-            <span className="text-[#e31c3d] font-black text-lg md:text-xl">
+            <span className="text-[#e31c3d] font-black text-sm md:text-lg">
               ₹{itemPrice.toLocaleString('en-IN')}
             </span>
             {itemOldPrice && (
-              <span className="text-slate-400 text-[10px] md:text-xs line-through font-medium">
+              <span className="text-slate-400 text-[8px] md:text-[10px] line-through font-medium">
                 ₹{itemOldPrice.toLocaleString('en-IN')}
               </span>
             )}
           </div>
           
-          <div className="flex items-center gap-1 bg-slate-50 px-2 py-1 md:px-2.5 md:py-1.5 rounded-lg md:rounded-xl border border-slate-100">
-             <Star className="w-3 md:w-3.5 h-3 md:h-3.5 fill-amber-400 text-amber-400" />
-             <span className="text-[10px] md:text-xs font-black text-slate-900">
+          <div className="flex items-center gap-0.5 md:gap-1 bg-amber-50/50 px-1.5 py-0.5 md:px-2 md:py-1 rounded md:rounded-lg border border-amber-100/50">
+             <Star className="w-2 md:w-3 h-2 md:h-3 fill-amber-400 text-amber-400" />
+             <span className="text-[8px] md:text-[10px] font-black text-slate-900">
                 {Number(product.rating || 5).toFixed(1)}
              </span>
           </div>
         </div>
-
-        <div className="mt-auto pt-3 md:pt-4 border-t border-slate-50 flex gap-2 md:gap-3">
+        <div className="mt-auto pt-2 md:pt-3 border-t border-slate-50">
           <button 
             onClick={handleBuyNow}
-            className="flex-1 bg-slate-900 text-white font-black py-3 md:py-3.5 rounded-lg md:rounded-xl text-[9px] md:text-[11px] uppercase tracking-widest hover:bg-[#e31c3d] transition-all shadow-lg active:scale-95"
+            className="w-full bg-slate-900 text-white font-black py-2 md:py-2.5 rounded md:rounded-lg text-[8px] md:text-[10px] uppercase tracking-widest hover:bg-[#e31c3d] transition-all shadow-md active:scale-95"
           >
             Buy Now
           </button>

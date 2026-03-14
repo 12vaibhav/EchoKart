@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Heart, Star, ShoppingBag, ArrowRight, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import { useWishlist } from '../contexts/WishlistContext';
+import { ProductCard } from './ProductCard';
 
 const fadeInUpProps = {
   initial: { opacity: 0, y: 20 },
@@ -96,90 +97,19 @@ export const NewArrivals = ({ products: propProducts, onNavigate }: { products?:
             viewport={{ once: true, margin: "-50px" }}
             className="grid grid-cols-2 md:flex md:overflow-x-auto gap-3 md:gap-8 pb-12 md:pb-12 snap-x snap-mandatory md:[&::-webkit-scrollbar]:hidden md:[-ms-overflow-style:none] md:[scrollbar-width:none] scroll-smooth"
           >
-            {displayProducts.map((item: any, idx) => {
-              const title = item.title || item.name;
-              const img = item.img || item.image;
-              const isWishlisted = isInWishlist(item.id);
-              
-              return (
-                <motion.div 
-                  key={item.id || idx} 
-                  variants={itemVariants}
-                  onClick={() => onNavigate('product', item.id)} 
-                  className="bg-white rounded-[1rem] md:rounded-[2rem] p-3 md:p-5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-slate-100 group hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col cursor-pointer shrink-0 w-full md:w-[320px] md:snap-start h-full relative overflow-hidden"
-                >
-                  <div className="relative aspect-square mb-3 md:mb-6 rounded-xl md:rounded-2xl overflow-hidden group/img">
-                    <button 
-                      onClick={(e) => { e.stopPropagation(); toggleWishlist(item); }}
-                      className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all z-20 backdrop-blur-md ${isWishlisted ? 'bg-[#e31c3d] text-white' : 'bg-white/80 text-slate-400 hover:text-[#e31c3d] hover:bg-white'}`}
-                    >
-                      <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
-                    </button>
-                    
-                    {/* Discount/Badge */}
-                    {item.oldPrice && item.price && item.oldPrice > item.price && (
-                      <div className="absolute top-4 left-4 z-20">
-                        <span className="bg-[#e31c3d] text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-lg shadow-lg">
-                          -{Math.round(((item.oldPrice - item.price) / item.oldPrice) * 100)}%
-                        </span>
-                      </div>
-                    )}
-
-                    <img 
-                      src={img} 
-                      alt={title} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-110" 
-                      loading="lazy" 
-                    />
-                    
-                    {/* Quick Add Overlay */}
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                      <button 
-                        onClick={(e) => { e.stopPropagation(); addToCart(item); }}
-                        className="w-full bg-white text-black font-black py-3 rounded-xl text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-[#e31c3d] hover:text-white transition-all shadow-xl"
-                      >
-                         <ShoppingBag size={14} /> Quick Add
-                      </button>
-                    </div>
-                  </div>
-                  
-                  <div className="flex flex-col flex-1">
-                    <h3 className="font-black text-slate-900 text-lg mb-2 line-clamp-1 group-hover:text-[#e31c3d] transition-colors">
-                      {title}
-                    </h3>
-                    
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex flex-col">
-                        <span className="text-[#e31c3d] font-black text-xl">
-                          ₹{Number(item.price || 0).toLocaleString('en-IN')}
-                        </span>
-                        {item.oldPrice && (
-                          <span className="text-slate-400 text-xs line-through font-medium">
-                            ₹{Number(item.oldPrice).toLocaleString('en-IN')}
-                          </span>
-                        )}
-                      </div>
-                      
-                      <div className="flex items-center gap-1 bg-amber-50 px-2 py-1 rounded-lg">
-                        <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                        <span className="text-xs font-black text-amber-900">
-                          {Number(item.rating || 4.5).toFixed(1)}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="mt-auto pt-4 border-t border-slate-50 flex gap-3">
-                      <button 
-                        onClick={(e) => { e.stopPropagation(); onNavigate('product', item.id); }}
-                        className="flex-1 bg-slate-900 text-white font-black py-3 rounded-xl text-[10px] uppercase tracking-widest hover:bg-[#e31c3d] transition-all shadow-lg active:scale-95"
-                      >
-                        Buy Now
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+            {displayProducts.map((item: any, idx) => (
+              <motion.div 
+                key={item.id || idx} 
+                variants={itemVariants} 
+                className="shrink-0 md:snap-start h-full"
+              >
+                <ProductCard 
+                  product={item} 
+                  onNavigate={onNavigate} 
+                  className="w-full md:w-[320px]" 
+                />
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </div>
