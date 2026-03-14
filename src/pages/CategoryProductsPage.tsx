@@ -335,13 +335,13 @@ export const CategoryProductsPage = ({
               <div className="border-t border-gray-50">
                 <div
                   style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}
-                  className="flex flex-row flex-nowrap items-center gap-2 overflow-x-auto px-3 md:px-4 py-2.5 hide-scrollbar snap-x"
+                  className="flex flex-row flex-nowrap items-center gap-2 overflow-x-auto px-3 md:px-4 py-2.5 hide-scrollbar"
                 >
                   {['Top Rated', 'Popular', 'Newest', 'Price'].map((opt) => (
                     <button
                       key={opt}
                       onClick={() => setSortBy(opt.toLowerCase().replace(' ', '-'))}
-                      className={`flex-none snap-start px-4 py-1.5 rounded-md text-[10px] md:text-xs font-black uppercase tracking-widest transition-all whitespace-nowrap ${
+                      className={`flex-none px-4 py-1.5 rounded-md text-[10px] md:text-xs font-black uppercase tracking-widest transition-all whitespace-nowrap ${
                         sortBy === opt.toLowerCase().replace(' ', '-') 
                           ? 'bg-[#e31c3d] text-white shadow-md shadow-red-100' 
                           : 'bg-gray-50 text-gray-500 hover:text-gray-900 border border-gray-200'
