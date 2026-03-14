@@ -1,6 +1,8 @@
+import React, { useState } from 'react';
+import { Star, ShoppingBag, Check, Loader2, Heart } from 'lucide-react';
+import { useCart } from '../contexts/CartContext';
 import { useWishlist } from '../contexts/WishlistContext';
 import { motion, AnimatePresence } from 'motion/react';
-import { Heart } from 'lucide-react';
 
 export const ProductCard = ({ 
   product, 
