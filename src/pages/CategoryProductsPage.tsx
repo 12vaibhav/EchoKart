@@ -3,16 +3,12 @@ import { motion } from 'motion/react';
 import { 
   Filter, 
   Search, 
-  Grid, 
-  List, 
   ChevronDown, 
   Heart, 
   Star, 
   ShoppingBag, 
   X, 
-  Check,
-  LayoutGrid,
-  List as ListIcon
+  Check
 } from 'lucide-react';
 
 import { useWishlist } from '../contexts/WishlistContext';
@@ -150,7 +146,7 @@ export const CategoryProductsPage = ({
   initialSearchQuery?: string | null,
   onNavigate: (path: string, id?: any, categoryName?: string | null) => void 
 }) => {
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const viewMode = 'grid'; // Defaulting to grid view
   const [sortBy, setSortBy] = useState('popular');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(propCategoryName && propCategoryName !== 'All Products' ? propCategoryName : null);
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
@@ -416,25 +412,6 @@ export const CategoryProductsPage = ({
                         {opt}
                       </button>
                     ))}
-                  </div>
-
-                  <div className="flex bg-gray-50 p-1 rounded-xl ml-auto border border-gray-100">
-                    <button 
-                      onClick={() => setViewMode('grid')}
-                      className={`p-2 rounded-lg transition-all ${
-                        viewMode === 'grid' ? 'bg-white text-[#e31c3d] shadow-sm' : 'text-gray-400 hover:text-gray-600'
-                      }`}
-                    >
-                      <LayoutGrid className="w-4 h-4 md:w-5 md:h-5" />
-                    </button>
-                    <button 
-                      onClick={() => setViewMode('list')}
-                      className={`p-2 rounded-lg transition-all ${
-                        viewMode === 'list' ? 'bg-white text-[#e31c3d] shadow-sm' : 'text-gray-400 hover:text-gray-600'
-                      }`}
-                    >
-                      <ListIcon className="w-4 h-4 md:w-5 md:h-5" />
-                    </button>
                   </div>
                 </div>
               </div>
