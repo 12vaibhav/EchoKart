@@ -4,15 +4,11 @@ import {
   Filter, 
   Search, 
   ChevronDown, 
-  Heart, 
   Star, 
-  ShoppingBag, 
   X, 
   Check
 } from 'lucide-react';
 
-import { useWishlist } from '../contexts/WishlistContext';
-import { useCart } from '../contexts/CartContext';
 import { ProductCard } from '../components/ProductCard';
 
 

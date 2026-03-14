@@ -1,8 +1,6 @@
 import React, { useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Heart, Star, ShoppingBag, ArrowRight, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
-import { useCart } from '../contexts/CartContext';
-import { useWishlist } from '../contexts/WishlistContext';
+import { motion } from 'motion/react';
+import { ArrowRight, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 import { ProductCard } from './ProductCard';
 
 const fadeInUpProps = {
@@ -33,8 +31,6 @@ const itemVariants = {
 
 export const NewArrivals = ({ products: propProducts, onNavigate }: { products?: any[], onNavigate: (path: string, id?: any, categoryName?: string | null) => void }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { addToCart } = useCart();
-  const { isInWishlist, toggleWishlist } = useWishlist();
   
   if (!propProducts || propProducts.length === 0) return null;
   const displayProducts = propProducts;

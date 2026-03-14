@@ -1,23 +1,13 @@
 import React from 'react';
-import { Heart, Star, ShoppingBag, ShoppingCart } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import { useWishlist } from '../contexts/WishlistContext';
+import { Star, ShoppingBag } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 
 export const ProductCard = ({ product, onNavigate, onQuickView, className }: { key?: React.Key, product: any, onNavigate: (path: string, id?: any, categoryName?: string | null) => void, onQuickView?: (product: any) => void, className?: string }) => {
-  const { isInWishlist, toggleWishlist } = useWishlist();
   const { addToCart } = useCart();
-  const isWishlisted = isInWishlist(product.id);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
     addToCart(product);
-  };
-
-  const handleBuyNow = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    addToCart(product);
-    onNavigate('checkout');
   };
 
   const itemPrice = Number(product.price || 0);
@@ -29,12 +19,7 @@ export const ProductCard = ({ product, onNavigate, onQuickView, className }: { k
       className={`bg-white rounded-[1.2rem] md:rounded-[1.5rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 group hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col cursor-pointer h-full relative overflow-hidden ${className || 'w-full'}`}
     >
       <div className="relative aspect-square bg-[#f8f9fb] overflow-hidden group/img">
-        <button 
-          onClick={(e) => { e.stopPropagation(); toggleWishlist(product); }}
-          className={`absolute top-2 right-2 md:top-3 md:right-3 w-7 h-7 md:w-9 md:h-9 rounded-full flex items-center justify-center shadow-lg transition-all z-20 backdrop-blur-md ${isWishlisted ? 'bg-[#e31c3d] text-white' : 'bg-white/80 text-slate-400 hover:text-[#e31c3d] hover:bg-whiteScale-110'}`}
-        >
-          <Heart className={`w-3 h-3 md:w-4 md:h-4 ${isWishlisted ? 'fill-current' : ''}`} />
-        </button>
+
 
         {/* Product Tags/Badges */}
         <div className="absolute top-2 left-2 md:top-3 md:left-3 flex flex-col gap-1 z-20">
@@ -99,14 +84,6 @@ export const ProductCard = ({ product, onNavigate, onQuickView, className }: { k
                 {Number(product.rating || 5).toFixed(1)}
              </span>
           </div>
-        </div>
-        <div className="mt-auto pt-2 md:pt-3 border-t border-slate-50">
-          <button 
-            onClick={handleBuyNow}
-            className="w-full bg-slate-900 text-white font-black py-2 md:py-2.5 rounded md:rounded-lg text-[8px] md:text-[10px] uppercase tracking-widest hover:bg-[#e31c3d] transition-all shadow-md active:scale-95"
-          >
-            Buy Now
-          </button>
         </div>
       </div>
     </div>
