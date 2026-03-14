@@ -10,8 +10,8 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
   return (
     <footer className="w-full">
       {/* Top Banner - Redesigned for 2x2 grid on mobile */}
-      <div className="bg-[#ff5a00] text-white py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+      <div className="bg-[#ff5a00] text-white py-6 md:py-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
           <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 md:gap-4 group">
             <MessageCircle className="w-8 h-8 md:w-10 md:h-10 font-light opacity-90 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
             <div>
@@ -47,18 +47,18 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
       </div>
 
       {/* Main Footer Background */}
-      <div className="bg-[#151515] text-white pt-12 md:pt-16 pb-8 px-4 sm:px-6 lg:px-8">
+      <div className="bg-[#151515] text-white pt-8 md:pt-16 pb-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Main Footer Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-12 lg:gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 md:gap-12 lg:gap-8 mb-8 md:mb-12">
             
             {/* Column 1: Brand Info */}
             <div className="lg:col-span-6 pr-0 lg:pr-12 flex flex-col items-center md:items-start text-center md:text-left">
-              <a href="/" onClick={(e) => { e.preventDefault(); onNavigate('home'); }} className="flex items-center space-x-2 group mb-6 inline-flex">
+              <a href="/" onClick={(e) => { e.preventDefault(); onNavigate('home'); }} className="flex items-center space-x-2 group mb-4 md:mb-6 inline-flex">
                 <BrandLogo className="w-14 h-14 md:w-20 md:h-20" />
                 <BrandTitle className="h-10 md:h-16 transition-all duration-500 group-hover:brightness-110 italic font-black tracking-widest" />
               </a>
-              <p className="text-gray-400 text-[13px] leading-[1.6] mb-8 font-medium max-w-lg">
+              <p className="text-gray-400 text-[13px] leading-[1.6] mb-6 md:mb-8 font-medium max-w-lg">
                 Your ultimate destination for trending, high-quality products. We handpick top-tier items from trusted global suppliers to bring you unbeatable deals, direct to your doorstep.
               </p>
               <div className="flex space-x-5 text-white">
@@ -69,8 +69,8 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
 
             {/* Column 2: Delivery & returns */}
             <div className="lg:col-span-3 text-center md:text-left">
-              <h4 className="font-bold text-[15px] mb-6 uppercase tracking-wider text-white/50">Delivery & returns</h4>
-              <ul className="space-y-4 text-gray-400 text-[13.5px] font-medium">
+              <h4 className="font-bold text-[15px] mb-3 md:mb-6 uppercase tracking-wider text-white/50">Delivery & returns</h4>
+              <ul className="space-y-3 md:space-y-4 text-gray-400 text-[13.5px] font-medium">
                 <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('shipping-policy'); }} className="hover:text-white transition-colors">Shipping policy</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('return-policy'); }} className="hover:text-white transition-colors">Return policy</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('refund-cancellation'); }} className="hover:text-white transition-colors">Refund policy</a></li>
@@ -80,9 +80,9 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
             </div>
 
             {/* Column 3: About Us */}
-            <div className="lg:col-span-3 text-center md:text-left mt-8 md:mt-0">
-              <h4 className="font-bold text-[15px] mb-6 uppercase tracking-wider text-white/50">About Us</h4>
-              <ul className="space-y-4 text-gray-400 text-[13.5px] font-medium">
+            <div className="lg:col-span-3 text-center md:text-left mt-6 md:mt-0">
+              <h4 className="font-bold text-[15px] mb-3 md:mb-6 uppercase tracking-wider text-white/50">About Us</h4>
+              <ul className="space-y-3 md:space-y-4 text-gray-400 text-[13.5px] font-medium">
                 <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('about'); }} className="hover:text-white transition-colors">Our Story</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('contact'); }} className="hover:text-white transition-colors">Contact us</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('privacy-policy'); }} className="hover:text-white transition-colors">Privacy policy</a></li>
@@ -93,7 +93,7 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
           </div>
 
           {/* Trust Badges - Optimized for Mobile */}
-          <div className="border border-white/[0.08] mb-12 py-6 px-4 md:px-6 bg-[#1a1a1a] rounded-xl grid grid-cols-3 gap-4 md:flex flex-wrap items-center justify-center lg:justify-between md:gap-6">
+          <div className="border border-white/[0.08] mb-8 md:mb-12 py-4 md:py-6 px-4 md:px-6 bg-[#1a1a1a] rounded-xl grid grid-cols-3 gap-3 md:flex flex-wrap items-center justify-center lg:justify-between md:gap-6">
             <div className="flex flex-col md:flex-row items-center text-center md:text-left md:space-x-3 group">
               <ShieldCheck className="w-5 h-5 md:w-6 md:h-6 text-[#00c853] mb-2 md:mb-0" />
               <div>
@@ -118,8 +118,8 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
           </div>
 
           {/* Options & Payment Icons */}
-          <div className="flex flex-col lg:flex-row justify-between items-center pb-8 border-b border-white/[0.08] gap-8">
-            <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-col lg:flex-row justify-between items-center pb-6 md:pb-8 border-b border-white/[0.08] gap-6 md:gap-8">
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4">
               <div className="relative">
                 <select 
                   defaultValue="India (INR ₹)"
@@ -156,7 +156,7 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
             </div>
           </div>
 
-          <p className="text-gray-500 text-[11px] font-medium text-center lg:hidden mt-8 pt-6 border-t border-white/[0.05]">&copy; {new Date().getFullYear()} www.echokart.in. All rights reserved.</p>
+          <p className="text-gray-500 text-[11px] font-medium text-center lg:hidden mt-6 pt-4 border-t border-white/[0.05]">&copy; {new Date().getFullYear()} www.echokart.in. All rights reserved.</p>
         </div>
       </div>
     </footer>
