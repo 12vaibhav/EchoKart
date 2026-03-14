@@ -33,18 +33,20 @@ const CategoryProductCard = ({ product, onNavigate, viewMode }: { product: any, 
 
   return (
     <div 
-      className={`bg-white rounded-xl md:rounded-2xl p-2.5 md:p-4 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 group cursor-pointer ${
-        viewMode === 'list' ? 'flex gap-3 md:gap-6 items-center' : 'flex flex-col'
+      className={`bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 group cursor-pointer overflow-hidden ${
+        viewMode === 'list' ? 'flex gap-3 md:gap-6 items-center p-2.5 md:p-4' : 'flex flex-col'
       }`}
       onClick={() => onNavigate('product', product.id)}
     >
       {/* Image Container */}
-      <div className={`relative bg-[#f8f9fb] rounded-lg md:rounded-xl overflow-hidden flex items-center justify-center p-0 ${
-        viewMode === 'list' ? 'w-24 h-24 md:w-48 md:h-48 flex-shrink-0' : 'aspect-square mb-2 md:mb-4'
+      <div className={`relative bg-[#f8f9fb] overflow-hidden flex items-center justify-center p-0 ${
+        viewMode === 'list' 
+          ? 'w-24 h-24 md:w-48 md:h-48 flex-shrink-0 rounded-lg md:rounded-xl' 
+          : 'aspect-square w-full border-b border-gray-50'
       }`}>
         <button 
           onClick={(e) => { e.stopPropagation(); toggleWishlist(product); }}
-          className="absolute top-2 right-2 md:top-3 md:right-3 w-7 h-7 md:w-8 md:h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm transition-all z-10 hover:bg-white"
+          className="absolute top-2 right-2 md:top-3 md:right-3 w-7 h-7 md:w-8 md:h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm transition-all z-10 hover:bg-white"
         >
           <Heart className={`w-3.5 h-3.5 md:w-4 md:h-4 ${isWishlisted ? 'fill-[#e31c3d] text-[#e31c3d]' : 'text-gray-400'}`} />
         </button>
@@ -72,7 +74,7 @@ const CategoryProductCard = ({ product, onNavigate, viewMode }: { product: any, 
       </div>
 
       {/* Content */}
-      <div className={`flex flex-col ${viewMode === 'list' ? 'flex-1 min-w-0' : ''}`}>
+      <div className={`flex flex-col ${viewMode === 'list' ? 'flex-1 min-w-0' : 'p-2.5 md:p-4'}`}>
         <h3 className="font-bold text-gray-900 text-xs md:text-lg mb-1 md:mb-2 line-clamp-1 group-hover:text-[#e31c3d] transition-colors">
           {title}
         </h3>
