@@ -126,18 +126,18 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
           {SLIDES.length > 1 && (
             <>
               {/* Desktop Side Controls */}
-              <div className="absolute inset-x-10 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div className="absolute inset-x-4 md:inset-x-10 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none z-30">
                 <button 
                   onClick={handlePrev}
-                  className="p-5 bg-white/5 hover:bg-white backdrop-blur-md rounded-full transition-all duration-500 border border-white/10 hover:border-white text-white hover:text-black pointer-events-auto hover:scale-110 shadow-2xl group/nav"
+                  className="p-3 md:p-5 bg-white/5 hover:bg-white backdrop-blur-md rounded-full transition-all duration-500 border border-white/10 hover:border-white text-white hover:text-black pointer-events-auto hover:scale-110 shadow-2xl group/nav"
                 >
-                  <ChevronLeft className="w-7 h-7 group-hover/nav:-translate-x-0.5 transition-transform" />
+                  <ChevronLeft className="w-5 h-5 md:w-7 md:h-7 group-hover/nav:-translate-x-0.5 transition-transform" />
                 </button>
                 <button 
                   onClick={handleNext}
-                  className="p-5 bg-white/5 hover:bg-white backdrop-blur-md rounded-full transition-all duration-500 border border-white/10 hover:border-white text-white hover:text-black pointer-events-auto hover:scale-110 shadow-2xl group/nav"
+                  className="p-3 md:p-5 bg-white/5 hover:bg-white backdrop-blur-md rounded-full transition-all duration-500 border border-white/10 hover:border-white text-white hover:text-black pointer-events-auto hover:scale-110 shadow-2xl group/nav"
                 >
-                  <ChevronRight className="w-7 h-7 group-hover/nav:translate-x-0.5 transition-transform" />
+                  <ChevronRight className="w-5 h-5 md:w-7 md:h-7 group-hover/nav:translate-x-0.5 transition-transform" />
                 </button>
               </div>
 
@@ -172,13 +172,7 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
             </>
           )}
           
-          {/* Mobile Quick Nav */}
-          {SLIDES.length > 1 && (
-            <div className="absolute inset-x-4 top-8 md:top-1/2 md:-translate-y-1/2 flex justify-between md:hidden pointer-events-none z-20">
-               <button onClick={handlePrev} className="p-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full pointer-events-auto active:scale-90 transition-transform"><ChevronLeft className="w-5 h-5 text-white" /></button>
-               <button onClick={handleNext} className="p-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full pointer-events-auto active:scale-90 transition-transform"><ChevronRight className="w-5 h-5 text-white" /></button>
-            </div>
-          )}
+          {/* Mobile Quick Nav - Integrated into Main Controls for consistency */}
         </div>
       </div>
     </motion.section>
