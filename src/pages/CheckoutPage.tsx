@@ -133,7 +133,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
   };
 
   return (
-    <motion.div {...fadeInUpProps} className="max-w-7xl mx-auto px-4 py-4 md:py-12 bg-white">
+    <motion.div {...fadeInUpProps} className="max-w-7xl mx-auto px-4 pt-4 pb-0 md:py-12 bg-white">
       {/* Progress Indicator - Mirrored from CartPage */}
       <div className="mb-6 md:mb-12 pt-0 md:pt-4">
         <div className="flex items-center justify-between mb-2 md:mb-4 max-w-2xl mx-auto relative px-4">
@@ -544,7 +544,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
             {!isSubmitting && <ArrowRight size={18} />}
           </button>
       </div>
-      <div className="h-24 lg:hidden"></div> {/* Spacer for fixed footer */}
+      <div className="h-16 lg:hidden"></div> {/* Spacer for fixed footer */}
     </motion.div>
   );
 };
