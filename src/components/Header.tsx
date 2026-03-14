@@ -61,12 +61,11 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
       <AnnouncementBar />
 
       {/* Main Navigation Bar */}
-      <div 
         className={`w-full transition-all duration-500 border-b ${
           isScrolled 
             ? 'bg-black/90 backdrop-blur-xl border-white/10' 
             : 'bg-black border-transparent'
-        } py-3 md:py-1.5`}
+        } py-4 md:py-3`}
       >
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-full gap-2 md:gap-8">
@@ -80,9 +79,9 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
               >
                 <div className="relative flex items-center">
                   <div className="absolute inset-0 bg-[#e31c3d] blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-700" />
-                  <BrandLogo className="h-8 md:h-14 lg:h-18 w-auto transition-transform duration-500 group-hover:scale-105" />
+                  <BrandLogo className="h-10 md:h-16 lg:h-20 w-auto transition-transform duration-500 group-hover:scale-105" />
                 </div>
-                <BrandTitle className="h-8 md:h-14 lg:h-18 transition-all duration-500 group-hover:brightness-110" />
+                <BrandTitle className="h-10 md:h-16 lg:h-20 transition-all duration-500 group-hover:brightness-110" />
               </a>
             </div>
 
@@ -100,7 +99,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                       onNavigate(item.toLowerCase());
                     }
                   }}
-                  className="relative text-[13px] lg:text-[14px] font-medium tracking-[0.2em] uppercase text-white hover:text-[#e31c3d] transition-colors group drop-shadow-md whitespace-nowrap"
+                  className="relative text-[15px] lg:text-[16px] font-medium tracking-[0.2em] uppercase text-white hover:text-[#e31c3d] transition-colors group drop-shadow-md whitespace-nowrap"
                 >
                   {item}
                   <span className="absolute -bottom-1.5 left-0 w-0 h-[2px] bg-[#e31c3d] shadow-[0_0_15px_#e31c3d] transition-all duration-300 group-hover:w-full" />
@@ -123,7 +122,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                     onFocus={() => setShowSuggestions(true)}
                     onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                     placeholder="Search premium..."
-                    className="w-32 lg:w-48 xl:w-56 bg-white/5 border border-white/10 rounded-full py-2 pl-4 pr-10 text-[10px] lg:text-[11px] font-medium tracking-wide text-white placeholder:text-white/30 focus:w-48 lg:focus:w-64 focus:bg-white/10 focus:border-[#e31c3d]/60 focus:ring-4 focus:ring-[#e31c3d]/5 outline-none backdrop-blur-md transition-all duration-500"
+                    className="w-32 lg:w-48 xl:w-56 bg-white/5 border border-white/10 rounded-full py-3 pl-5 pr-12 text-[11px] lg:text-[12px] font-medium tracking-wide text-white placeholder:text-white/30 focus:w-48 lg:focus:w-64 focus:bg-white/10 focus:border-[#e31c3d]/60 focus:ring-4 focus:ring-[#e31c3d]/5 outline-none backdrop-blur-md transition-all duration-500"
                   />
                   <button 
                     onClick={handleSearch}
@@ -183,7 +182,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
               <div className="flex items-center gap-0.5 md:gap-2 lg:gap-3">
                 {user ? (
                   <button onClick={() => onNavigate('account')} className="hidden md:flex p-1.5 sm:p-2 text-white hover:text-[#e31c3d] hover:bg-white/5 rounded-full transition-all group drop-shadow-sm">
-                    <User className="w-5 h-5 md:w-5.5 md:h-5.5 transition-colors" />
+                    <User className="w-6 h-6 md:w-6.5 md:h-6.5 transition-colors" />
                   </button>
                 ) : (
                   <button 
@@ -195,7 +194,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                   </button>
                 )}
                 <button onClick={() => onNavigate('wishlist')} className="p-1.5 sm:p-2 text-white hover:text-[#e31c3d] hover:bg-white/5 rounded-full transition-all relative group drop-shadow-sm">
-                  <Heart className="w-5 h-5 md:w-5.5 md:h-5.5 transition-colors" />
+                  <Heart className="w-6 h-6 md:w-6.5 md:h-6.5 transition-colors" />
                   {wishlist.length > 0 && (
                     <span className="absolute top-0 right-0 sm:-top-0.5 sm:-right-0.5 bg-[#e31c3d] text-white text-[8px] sm:text-[9px] font-black h-3.5 w-3.5 sm:h-4 sm:w-4 rounded-full flex items-center justify-center border border-black animate-pulse shadow-xl">
                       {wishlist.length}
@@ -206,7 +205,7 @@ export const Header = ({ products = [], onNavigate }: { products?: any[], onNavi
                   onClick={() => onNavigate('cart')} 
                   className="hidden md:flex p-1.5 sm:p-2 bg-[#e31c3d] hover:bg-white text-white hover:text-black rounded-full transition-all relative group hover:scale-105 active:scale-95 shadow-[0_4px_12px_rgba(227,28,61,0.2)] md:shadow-[0_8px_20px_rgba(227,28,61,0.3)] drop-shadow-lg"
                 >
-                  <ShoppingCart className="w-5 h-5 md:w-5.5 md:h-5.5 transition-colors" />
+                  <ShoppingCart className="w-6 h-6 md:w-6.5 md:h-6.5 transition-colors" />
                   {cartCount > 0 && (
                     <span className="absolute -top-1 -right-1 bg-black text-white text-[8px] sm:text-[9px] font-black h-3.5 w-3.5 sm:h-4 sm:w-4 rounded-full flex items-center justify-center border-2 border-white shadow-md group-hover:border-black transition-colors">
                       {cartCount}

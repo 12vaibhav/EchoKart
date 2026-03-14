@@ -130,7 +130,7 @@ export const CategoryRow = ({ categories = [], onNavigate }: { categories: any[]
             dragMomentum={true}
             dragTransition={{ power: 0.3, timeConstant: 200 }}
             style={{ x }}
-            className="flex items-start gap-2.5 md:gap-8 lg:gap-10 pt-1 pb-0 md:py-4 cursor-grab active:cursor-grabbing will-change-transform"
+            className="flex items-start gap-1.5 md:gap-4 lg:gap-6 pt-1 pb-0 md:py-4 cursor-grab active:cursor-grabbing will-change-transform"
           >
             {displayCategories.map((cat, idx) => (
               <CategoryCard 
