@@ -3,15 +3,24 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Mail, Lock, ArrowRight, CheckCircle2, AlertCircle, Loader2, Eye, EyeOff, X, User } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
-export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (path: string) => void, initialMode?: 'signin' | 'signup' }) => {
-  const [mode, setMode] = useState<'signin' | 'signup'>(initialMode);
+export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (path: string) => void, initialMode?: 'signin' | 'signup' | 'forgot' | 'reset' }) => {
+  const [mode, setMode] = useState<'signin' | 'signup' | 'forgot' | 'reset'>(initialMode);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+
+  React.useEffect(() => {
+    // Check if we are in recovery mode from the URL
+    const hash = window.location.hash;
+    if (hash && hash.includes('type=recovery')) {
+      setMode('reset');
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,6 +28,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
     setError(null);
     setSuccess(false);
 
+    try {
     try {
       if (mode === 'signup') {
         const { error: signUpError } = await supabase.auth.signUp({
@@ -32,12 +42,27 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
         });
         if (signUpError) throw signUpError;
         onNavigate('home');
-      } else {
+      } else if (mode === 'signin') {
         const { error: signInError } = await supabase.auth.signInWithPassword({
           email,
           password,
         });
         if (signInError) throw signInError;
+        onNavigate('home');
+      } else if (mode === 'forgot') {
+        const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: `${window.location.origin}/auth`,
+        });
+        if (resetError) throw resetError;
+        setSuccess(true);
+      } else if (mode === 'reset') {
+        if (password !== confirmPassword) {
+          throw new Error('Passwords do not match');
+        }
+        const { error: updateError } = await supabase.auth.updateUser({
+          password: password
+        });
+        if (updateError) throw updateError;
         onNavigate('home');
       }
     } catch (err: any) {
@@ -62,12 +87,14 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
           <div className="relative z-10">
             <div className="mb-10 text-center">
               <h1 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tighter mb-3">
-                {mode === 'signin' ? 'Welcome Back' : 'Join EchoKart'}
+                {mode === 'signin' ? 'Welcome Back' : 
+                 mode === 'signup' ? 'Join EchoKart' : 
+                 mode === 'forgot' ? 'Reset Password' : 'New Password'}
               </h1>
               <p className="text-slate-500 font-medium">
-                {mode === 'signin' 
-                  ? 'Sign in to access your orders and wishlist' 
-                  : 'Create an account to track orders and more'}
+                {mode === 'signin' ? 'Sign in to access your orders and wishlist' : 
+                 mode === 'signup' ? 'Create an account to track orders and more' :
+                 mode === 'forgot' ? 'Enter your email to receive a reset link' : 'Enter your new secure password'}
               </p>
             </div>
 
@@ -95,7 +122,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
                   className="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-100 flex items-start gap-3 text-emerald-700 text-sm font-bold"
                 >
                   <CheckCircle2 className="w-5 h-5 shrink-0" />
-                  <span>Check your email for the confirmation link!</span>
+                  <span>{mode === 'forgot' ? 'Check your email for the reset link!' : 'Check your email for the confirmation link!'}</span>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -120,51 +147,102 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
                 </div>
               )}
 
-              <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-4">Email Address</label>
-                <div className="relative group">
-                  <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-[#e31c3d] transition-colors">
-                    <Mail size={18} />
+              {mode !== 'forgot' && mode !== 'reset' && (
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-4">Email Address</label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-[#e31c3d] transition-colors">
+                      <Mail size={18} />
+                    </div>
+                    <input 
+                      type="email" 
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="name@example.com"
+                      className="w-full bg-slate-50 border border-slate-100 rounded-md py-4 pl-14 pr-6 outline-none focus:bg-white focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 transition-all font-medium"
+                    />
                   </div>
-                  <input 
-                    type="email" 
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="name@example.com"
-                    className="w-full bg-slate-50 border border-slate-100 rounded-md py-4 pl-14 pr-6 outline-none focus:bg-white focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 transition-all font-medium"
-                  />
                 </div>
-              </div>
+              )}
 
-              <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-4">Password</label>
-                <div className="relative group">
-                  <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-[#e31c3d] transition-colors">
-                    <Lock size={18} />
+              {mode === 'forgot' && (
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-4">Account Email</label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-[#e31c3d] transition-colors">
+                      <Mail size={18} />
+                    </div>
+                    <input 
+                      type="email" 
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your account email"
+                      className="w-full bg-slate-50 border border-slate-100 rounded-md py-4 pl-14 pr-6 outline-none focus:bg-white focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 transition-all font-medium"
+                    />
                   </div>
-                  <input 
-                    type={showPassword ? 'text' : 'password'} 
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••"
-                    className="w-full bg-slate-50 border border-slate-100 rounded-md py-4 pl-14 pr-14 outline-none focus:bg-white focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 transition-all font-medium"
-                  />
+                </div>
+              )}
+
+              {mode !== 'forgot' && (
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-4">
+                    {mode === 'reset' ? 'New Password' : 'Password'}
+                  </label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-[#e31c3d] transition-colors">
+                      <Lock size={18} />
+                    </div>
+                    <input 
+                      type={showPassword ? 'text' : 'password'} 
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="••••••••"
+                      className="w-full bg-slate-50 border border-slate-100 rounded-md py-4 pl-14 pr-14 outline-none focus:bg-white focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 transition-all font-medium"
+                    />
+                    <button 
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-5 flex items-center text-slate-400 hover:text-slate-600 transition-colors"
+                    >
+                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {mode === 'reset' && (
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-4">Confirm New Password</label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-[#e31c3d] transition-colors">
+                      <Lock size={18} />
+                    </div>
+                    <input 
+                      type={showPassword ? 'text' : 'password'} 
+                      required
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      placeholder="••••••••"
+                      className="w-full bg-slate-50 border border-slate-100 rounded-md py-4 pl-14 pr-14 outline-none focus:bg-white focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 transition-all font-medium"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {mode === 'signin' && (
+                <div className="flex justify-end pr-2">
                   <button 
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-5 flex items-center text-slate-400 hover:text-slate-600 transition-colors"
+                    type="button" 
+                    onClick={() => setMode('forgot')}
+                    className="text-xs font-bold text-slate-400 hover:text-[#e31c3d] transition-colors"
                   >
-                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    Forgot Password?
                   </button>
                 </div>
-                {mode === 'signin' && (
-                  <div className="flex justify-end pr-2">
-                    <button type="button" className="text-xs font-bold text-slate-400 hover:text-[#e31c3d] transition-colors">Forgot Password?</button>
-                  </div>
-                )}
-              </div>
+              )}
 
               <button 
                 type="submit" 
@@ -175,7 +253,11 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
                   <Loader2 className="w-5 h-5 animate-spin" />
                 ) : (
                   <>
-                    <span>{mode === 'signin' ? 'Sign In' : 'Create Account'}</span>
+                    <span>
+                      {mode === 'signin' ? 'Sign In' : 
+                       mode === 'signup' ? 'Create Account' : 
+                       mode === 'forgot' ? 'Send Reset Link' : 'Update Password'}
+                    </span>
                     <ArrowRight size={18} />
                   </>
                 )}
@@ -184,9 +266,10 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
 
             <div className="mt-10 pt-8 border-t border-slate-50 text-center">
               <p className="text-slate-400 font-medium">
-                {mode === 'signin' ? "Don't have an account?" : "Already have an account?"}
+                {mode === 'forgot' ? 'Remembered your password?' : 
+                 mode === 'signin' ? "Don't have an account?" : "Already have an account?"}
                 <button 
-                  onClick={() => setMode(mode === 'signin' ? 'signup' : 'signin')}
+                  onClick={() => setMode(mode === 'signin' ? 'signup' : (mode === 'forgot' ? 'signin' : 'signin'))}
                   className="ml-2 text-[#e31c3d] font-black hover:underline underline-offset-4"
                 >
                   {mode === 'signin' ? 'Sign up' : 'Sign in'}
