@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Check, Mail, Truck, QrCode, Lock, Shield, RefreshCw, Headphones, ArrowRight, Loader2, Copy, ChevronDown, ChevronUp } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import { supabase } from '../lib/supabase';
+import paymentQr from '../Image Assets/Payment QR CODE.jpg';
 
 const fadeInUpProps = {
   initial: { opacity: 0, y: 20 },
@@ -404,30 +405,6 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   exit={{ opacity: 0, y: -20 }}
                   className="space-y-4 md:space-y-8"
                 >
-                  <div className="flex flex-col items-center justify-center p-2 md:p-10 bg-[#fef2f2] rounded-lg border border-red-50 gap-2 md:gap-6">
-                    <div className="size-40 md:size-64 bg-white p-3 md:p-5 rounded-lg shadow-2xl shadow-[#e31c3d]/10 flex items-center justify-center relative group overflow-hidden border border-red-50/50">
-                       <img 
-                         src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=store@upi%26pn=EchoKart%26am=${total}%26cu=INR`} 
-                         alt="Payment QR"
-                         className="relative z-10 w-full h-full mix-blend-multiply transition-transform group-hover:scale-110 duration-700"
-                       />
-                       <div className="absolute inset-0 bg-gradient-to-tr from-[#e31c3d]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-xs md:text-xl font-black text-slate-800 tracking-tight mb-2 md:mb-3">VPA ID: <span className="text-[#e31c3d]">store@upi</span></p>
-                      <button 
-                        type="button"
-                        onClick={() => {
-                          navigator.clipboard.writeText('store@upi');
-                          alert('UPI ID copied to clipboard!');
-                        }}
-                        className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-[#e31c3d] py-2 md:py-3 px-4 md:px-6 rounded-full bg-white border border-red-100 shadow-sm hover:shadow-md transition-all flex items-center gap-2 mx-auto active:scale-90"
-                      >
-                        <Copy size={10} /> Copy ID
-                      </button>
-                    </div>
-                  </div>
-
                   <div className="space-y-3 md:space-y-6">
                     <div className="flex items-center gap-3 md:gap-4 bg-black text-white p-4 md:p-5 rounded-lg shadow-xl shadow-black/10">
                       <Shield size={20} className="shrink-0 text-[#00c853]" />
@@ -444,6 +421,30 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                         type="text" 
                         maxLength={12}
                       />
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-center justify-center p-2 md:p-10 bg-[#fef2f2] rounded-lg border border-red-50 gap-2 md:gap-6">
+                    <div className="size-40 md:size-64 bg-white p-3 md:p-5 rounded-lg shadow-2xl shadow-[#e31c3d]/10 flex items-center justify-center relative group overflow-hidden border border-red-50/50">
+                       <img 
+                         src={paymentQr} 
+                         alt="Payment QR"
+                         className="relative z-10 w-full h-full object-contain transition-transform group-hover:scale-110 duration-700"
+                       />
+                       <div className="absolute inset-0 bg-gradient-to-tr from-[#e31c3d]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-xs md:text-xl font-black text-slate-800 tracking-tight mb-2 md:mb-3">VPA ID: <span className="text-[#e31c3d]">8267988955@mbk</span></p>
+                      <button 
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard.writeText('8267988955@mbk');
+                          alert('UPI ID copied to clipboard!');
+                        }}
+                        className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-[#e31c3d] py-2 md:py-3 px-4 md:px-6 rounded-full bg-white border border-red-100 shadow-sm hover:shadow-md transition-all flex items-center gap-2 mx-auto active:scale-90"
+                      >
+                        <Copy size={10} /> Copy ID
+                      </button>
                     </div>
                   </div>
                 </motion.div>
