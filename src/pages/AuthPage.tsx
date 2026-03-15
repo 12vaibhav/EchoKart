@@ -50,7 +50,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
         if (signInError) throw signInError;
         onNavigate('home');
       } else if (mode === 'forgot') {
-        const { data, error: resetError } = await supabase.functions.invoke('send-reset-otp-v1', {
+        const { data, error: resetError } = await supabase.functions.invoke('send-reset-otp-v2', {
           body: { email }
         });
         if (resetError || (data && data.error)) throw (resetError || new Error(data.error));
@@ -59,7 +59,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
         if (password !== confirmPassword) {
           throw new Error('Passwords do not match');
         }
-        const { data, error: verifyError } = await supabase.functions.invoke('verify-reset-otp-v1', {
+        const { data, error: verifyError } = await supabase.functions.invoke('verify-reset-otp-v2', {
           body: { email, code: otp, password }
         });
         if (verifyError || (data && data.error)) throw (verifyError || new Error(data.error));
