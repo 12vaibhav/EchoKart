@@ -64,7 +64,10 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
         });
         if (verifyError || (data && data.error)) throw (verifyError || new Error(data.error));
         setSuccess(true);
-        setTimeout(() => setMode('signin'), 3000);
+        setTimeout(() => {
+          setSuccess(false);
+          setMode('signin');
+        }, 5000);
       } else if (mode === 'reset') {
         if (password !== confirmPassword) {
           throw new Error('Passwords do not match');
@@ -134,7 +137,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
                   className="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-100 flex items-start gap-3 text-emerald-700 text-sm font-bold"
                 >
                   <CheckCircle2 className="w-5 h-5 shrink-0" />
-                  <span>{mode === 'otp' ? 'Password updated! Redirecting to sign in...' : 'Check your email for the code/confirmation link!'}</span>
+                  <span>{mode === 'otp' ? 'Password updated successfully! Please sign in with your new credentials.' : 'Check your email for the code/confirmation link!'}</span>
                 </motion.div>
               )}
             </AnimatePresence>
