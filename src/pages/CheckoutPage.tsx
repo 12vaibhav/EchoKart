@@ -104,7 +104,8 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
           payment_status: formData.paymentMethod === 'cod' ? 'Cash on Delivery' : 'Pending Verification',
           payment_method: formData.paymentMethod,
           utr_number: formData.paymentMethod === 'upi' ? formData.utrNumber : null,
-          shipping_address: shippingAddress
+          shipping_address: shippingAddress,
+          email: formData.email
         }])
         .select()
         .single();
