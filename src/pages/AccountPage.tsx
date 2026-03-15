@@ -167,7 +167,8 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
               </button>
             </div>
 
-            <div className="bg-white rounded-lg border border-slate-100 shadow-sm overflow-hidden">
+            {/* Desktop Table View */}
+            <div className="hidden md:block bg-white rounded-lg border border-slate-100 shadow-sm overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse min-w-[600px]">
                   <thead>
@@ -219,6 +220,51 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
                   </tbody>
                 </table>
               </div>
+            </div>
+
+            {/* Mobile Card View */}
+            <div className="md:hidden flex flex-col gap-4">
+              {loadingOrders ? (
+                <div className="bg-white rounded-xl p-8 border border-slate-100 shadow-sm text-center">
+                  <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2 text-[#e31c3d]" />
+                  <p className="text-slate-500 font-medium">Loading orders...</p>
+                </div>
+              ) : orders.length === 0 ? (
+                <div className="bg-white rounded-xl p-8 border border-slate-100 shadow-sm text-center">
+                  <p className="text-slate-500 font-medium">No orders found yet.</p>
+                </div>
+              ) : orders.map((order: any) => (
+                <div key={order.fullId} className="bg-white rounded-xl border border-slate-100 p-5 shadow-sm active:scale-[0.98] transition-all" onClick={() => onNavigate('track', order.fullId)}>
+                   <div className="flex justify-between items-start mb-4">
+                      <div>
+                         <p className="text-[10px] font-black text-[#e31c3d] uppercase tracking-widest mb-1">Order ID</p>
+                         <h4 className="font-black text-slate-900 text-lg">#{order.id}</h4>
+                      </div>
+                      <span className={`px-2.5 py-1 rounded text-[10px] font-black uppercase tracking-wider ${order.statusColor}`}>
+                        {order.status}
+                      </span>
+                   </div>
+                   
+                   <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-50">
+                      <div>
+                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5">Date</p>
+                        <p className="text-sm font-bold text-slate-700">{order.date}</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5">Total</p>
+                        <p className="text-sm font-black text-[#e31c3d]">{order.total}</p>
+                      </div>
+                   </div>
+
+                   <button 
+                     onClick={(e) => { e.stopPropagation(); onNavigate('track', order.fullId); }}
+                     className="w-full mt-4 bg-slate-50 py-3 rounded-lg flex items-center justify-center gap-2 text-xs font-black uppercase tracking-widest text-slate-600"
+                   >
+                      <Package className="w-4 h-4" />
+                      Track Shipment
+                   </button>
+                </div>
+              ))}
             </div>
           </div>
         );
@@ -471,7 +517,9 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
                   View All
                 </button>
               </div>
-              <div className="overflow-x-auto">
+              
+              {/* Desktop Table View */}
+              <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-left border-collapse min-w-[600px]">
                   <thead>
                     <tr className="bg-slate-50">
@@ -482,9 +530,48 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
-                    {/* No recent orders */}
+                    {orders.slice(0, 3).map((order: any) => (
+                      <tr key={order.fullId} className="hover:bg-slate-50/50 transition-colors">
+                        <td className="px-6 py-4 text-sm font-bold text-slate-900">{order.id}</td>
+                        <td className="px-6 py-4 text-sm text-slate-600">{order.date}</td>
+                        <td className="px-6 py-4">
+                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${order.statusColor}`}>
+                            {order.status}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-right">
+                           <button onClick={() => onNavigate('track', order.fullId)} className="text-[#e31c3d] hover:text-black transition-colors"><Eye size={18}/></button>
+                        </td>
+                      </tr>
+                    ))}
+                    {orders.length === 0 && (
+                      <tr>
+                        <td colSpan={4} className="px-6 py-8 text-center text-slate-400 text-sm">No recent orders found.</td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
+              </div>
+
+              {/* Mobile List View */}
+              <div className="md:hidden flex flex-col divide-y divide-slate-50">
+                 {orders.slice(0, 3).map((order: any) => (
+                   <div key={order.fullId} className="p-4 flex items-center justify-between hover:bg-slate-50 active:bg-slate-100 transition-all" onClick={() => onNavigate('track', order.fullId)}>
+                      <div>
+                         <p className="text-sm font-black text-slate-900">#{order.id}</p>
+                         <p className="text-[10px] text-slate-500">{order.date}</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                         <span className={`px-2 py-0.5 rounded-[4px] text-[9px] font-black uppercase tracking-tight ${order.statusColor}`}>
+                            {order.status}
+                         </span>
+                         <ChevronRight className="w-4 h-4 text-slate-300" />
+                      </div>
+                   </div>
+                 ))}
+                 {orders.length === 0 && (
+                   <div className="p-8 text-center text-slate-400 text-xs">No recent orders found.</div>
+                 )}
               </div>
             </div>
 
@@ -526,7 +613,36 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
         <div className="flex flex-col md:flex-row gap-8">
           
           <aside className="w-full md:w-72 shrink-0">
-            <div className="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden sticky top-28">
+            {/* Mobile Tab Scroller */}
+            <div className="md:hidden bg-white border-b border-slate-100 sticky top-22 z-40 -mx-4 px-4 overflow-x-auto hide-scrollbar py-2">
+              <div className="flex items-center gap-2 min-w-max">
+                {[
+                  { id: 'profile', label: 'Profile', icon: User },
+                  { id: 'orders', label: 'Orders', icon: Package },
+                  { id: 'wishlist', label: 'Wishlist', icon: Heart },
+                  { id: 'address', label: 'Addresses', icon: Settings },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveTab(item.id as any)}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-full font-black text-[10px] uppercase tracking-wider transition-all border ${activeTab === item.id ? 'bg-[#e31c3d] text-white border-[#e31c3d] shadow-lg shadow-[#e31c3d]/20' : 'bg-slate-50 text-slate-500 border-slate-200'}`}
+                  >
+                    <item.icon className="w-3.5 h-3.5" />
+                    {item.label}
+                  </button>
+                ))}
+                <button 
+                  onClick={handleSignOut}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full font-black text-[10px] uppercase tracking-wider transition-all border bg-rose-50 text-rose-500 border-rose-100"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  Exit
+                </button>
+              </div>
+            </div>
+
+            {/* Desktop Sidebar */}
+            <div className="hidden md:block bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden sticky top-28">
               <div className="p-6 pb-2">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="size-14 rounded-full bg-slate-100 border border-slate-200 overflow-hidden flex items-center justify-center">
