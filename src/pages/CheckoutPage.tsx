@@ -406,10 +406,6 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   className="space-y-4 md:space-y-8"
                 >
                   <div className="space-y-3 md:space-y-6">
-                    <div className="flex items-center gap-3 md:gap-4 bg-black text-white p-4 md:p-5 rounded-lg shadow-xl shadow-black/10">
-                      <Shield size={20} className="shrink-0 text-[#00c853]" />
-                      <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest leading-relaxed">Safety Note: Enter 12-digit UTR after payment</p>
-                    </div>
                     <div>
                       <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 ml-6 mb-2 md:mb-3">Transaction ID (UTR)*</label>
                       <input 
@@ -424,7 +420,10 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     </div>
                   </div>
 
-                  <div className="flex flex-col items-center justify-center p-2 md:p-10 bg-[#fef2f2] rounded-lg border border-red-50 gap-2 md:gap-6">
+                  <div className="flex flex-col items-center justify-center p-4 md:p-10 bg-[#fef2f2] rounded-lg border border-red-50 gap-4 md:gap-6 text-center">
+                    <p className="text-[9px] md:text-xs font-black text-slate-600 uppercase tracking-wider leading-relaxed max-w-xs mx-auto">
+                      Pay via QR → Copy Transaction ID / UTR from your app → Paste it in the field above.
+                    </p>
                     <div className="size-40 md:size-64 bg-white p-3 md:p-5 rounded-lg shadow-2xl shadow-[#e31c3d]/10 flex items-center justify-center relative group overflow-hidden border border-red-50/50">
                        <img 
                          src={paymentQr} 
