@@ -564,7 +564,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
       </div>
       <div className="h-16 lg:hidden"></div> {/* Spacer for fixed footer */}
 
-      {/* COD Conversion Modal */}
+      {/* Simplified COD Conversion Modal */}
       <AnimatePresence>
         {showCodModal && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -573,57 +573,38 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowCodModal(false)}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
             />
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="relative bg-white w-full max-w-[340px] rounded-2xl overflow-hidden shadow-2xl p-6 md:p-8"
             >
-              <div className="bg-[#e31c3d] p-8 text-center text-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 -mr-16 -mt-16 size-48 bg-white/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-0 left-0 -ml-16 -mb-16 size-48 bg-black/10 rounded-full blur-3xl"></div>
-                
-                <div className="relative z-10 size-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl text-[#e31c3d]">
-                  <QrCode size={40} />
+              <div className="text-center">
+                <div className="size-14 bg-red-50 text-[#e31c3d] rounded-full flex items-center justify-center mx-auto mb-4">
+                  <QrCode size={28} />
                 </div>
-                <h3 className="text-3xl font-black uppercase tracking-tighter mb-2 italic">Stop Spending More!</h3>
-                <p className="text-white/80 font-bold text-sm uppercase tracking-widest leading-relaxed">
-                  You're missing out on an instant <span className="text-white underline">15% Discount</span> by choosing COD.
+                <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight mb-2">Save 15% Instantly</h3>
+                <p className="text-slate-500 text-sm font-medium leading-relaxed mb-6">
+                  Switch to UPI payment and save <span className="text-[#e31c3d] font-bold">₹{((subtotal+tax)*0.15).toLocaleString()}</span> on this order.
                 </p>
-              </div>
-              
-              <div className="p-8 text-center bg-white">
-                <div className="flex justify-center gap-6 mb-8">
-                  <div className="flex flex-col items-center">
-                    <span className="text-[10px] font-black text-slate-400 uppercase mb-1">COD Price</span>
-                    <span className="text-xl font-black text-slate-400 line-through">₹{(subtotal + tax).toLocaleString()}</span>
-                  </div>
-                  <div className="size-10 bg-slate-50 flex items-center justify-center rounded-full border border-slate-100 mt-2">
-                    <ArrowRight className="text-slate-300" size={20} />
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <span className="text-[10px] font-black text-green-600 uppercase mb-1">UPI Price</span>
-                    <span className="text-2xl font-black text-slate-900">₹{total.toLocaleString()}</span>
-                  </div>
-                </div>
 
-                <div className="flex flex-col gap-3">
+                <div className="space-y-3">
                   <button 
                     onClick={() => {
                       setFormData(prev => ({ ...prev, paymentMethod: 'upi' }));
                       setShowCodModal(false);
                     }}
-                    className="w-full bg-[#151515] text-white font-black py-4 rounded-xl shadow-xl shadow-black/10 transition-all active:scale-95 uppercase tracking-widest text-xs flex items-center justify-center gap-3"
+                    className="w-full bg-[#151515] text-white font-black py-3.5 rounded-xl transition-all active:scale-[0.98] uppercase tracking-widest text-[11px] shadow-lg shadow-black/10"
                   >
-                    Convert to UPI & Save ₹{((subtotal+tax)*0.15).toLocaleString()}
+                    Use UPI & Save
                   </button>
                   <button 
                     onClick={() => setShowCodModal(false)}
-                    className="w-full bg-slate-100 text-slate-400 font-black py-4 rounded-xl transition-all hover:bg-slate-200 uppercase tracking-widest text-[10px]"
+                    className="w-full text-slate-400 font-bold py-2 hover:text-slate-600 transition-all uppercase tracking-widest text-[9px]"
                   >
-                    No, I'll pay more with COD
+                    Continue with COD
                   </button>
                 </div>
               </div>
