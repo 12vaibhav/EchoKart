@@ -29,7 +29,6 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
     setSuccess(false);
 
     try {
-    try {
       if (mode === 'signup') {
         const { error: signUpError } = await supabase.auth.signUp({
           email,
