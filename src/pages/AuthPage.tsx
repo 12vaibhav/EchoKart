@@ -3,9 +3,10 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Mail, Lock, ArrowRight, CheckCircle2, AlertCircle, Loader2, Eye, EyeOff, X, User } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
-export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (path: string) => void, initialMode?: 'signin' | 'signup' | 'forgot' | 'reset' }) => {
-  const [mode, setMode] = useState<'signin' | 'signup' | 'forgot' | 'reset'>(initialMode);
+export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (path: string) => void, initialMode?: 'signin' | 'signup' | 'forgot' | 'otp' | 'reset' }) => {
+  const [mode, setMode] = useState<'signin' | 'signup' | 'forgot' | 'otp' | 'reset'>(initialMode);
   const [email, setEmail] = useState('');
+  const [otp, setOtp] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [fullName, setFullName] = useState('');
@@ -49,11 +50,21 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
         if (signInError) throw signInError;
         onNavigate('home');
       } else if (mode === 'forgot') {
-        const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: `${window.location.origin}/auth`,
+        const { data, error: resetError } = await supabase.functions.invoke('send-reset-otp-v1', {
+          body: { email }
         });
-        if (resetError) throw resetError;
+        if (resetError || (data && data.error)) throw (resetError || new Error(data.error));
+        setMode('otp');
+      } else if (mode === 'otp') {
+        if (password !== confirmPassword) {
+          throw new Error('Passwords do not match');
+        }
+        const { data, error: verifyError } = await supabase.functions.invoke('verify-reset-otp-v1', {
+          body: { email, code: otp, password }
+        });
+        if (verifyError || (data && data.error)) throw (verifyError || new Error(data.error));
         setSuccess(true);
+        setTimeout(() => setMode('signin'), 3000);
       } else if (mode === 'reset') {
         if (password !== confirmPassword) {
           throw new Error('Passwords do not match');
@@ -88,12 +99,14 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
               <h1 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tighter mb-3">
                 {mode === 'signin' ? 'Welcome Back' : 
                  mode === 'signup' ? 'Join EchoKart' : 
-                 mode === 'forgot' ? 'Reset Password' : 'New Password'}
+                 mode === 'forgot' ? 'Reset Password' : 
+                 mode === 'otp' ? 'Verify OTP' : 'New Password'}
               </h1>
               <p className="text-slate-500 font-medium">
                 {mode === 'signin' ? 'Sign in to access your orders and wishlist' : 
                  mode === 'signup' ? 'Create an account to track orders and more' :
-                 mode === 'forgot' ? 'Enter your email to receive a reset link' : 'Enter your new secure password'}
+                 mode === 'forgot' ? 'Enter your email to receive a 4-digit code' : 
+                 mode === 'otp' ? 'Enter the code sent to your email' : 'Enter your new secure password'}
               </p>
             </div>
 
@@ -121,7 +134,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
                   className="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-100 flex items-start gap-3 text-emerald-700 text-sm font-bold"
                 >
                   <CheckCircle2 className="w-5 h-5 shrink-0" />
-                  <span>{mode === 'forgot' ? 'Check your email for the reset link!' : 'Check your email for the confirmation link!'}</span>
+                  <span>{mode === 'otp' ? 'Password updated! Redirecting to sign in...' : 'Check your email for the code/confirmation link!'}</span>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -146,7 +159,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
                 </div>
               )}
 
-              {mode !== 'forgot' && mode !== 'reset' && (
+              {mode !== 'forgot' && mode !== 'reset' && mode !== 'otp' && (
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-4">Email Address</label>
                   <div className="relative group">
@@ -160,6 +173,26 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="name@example.com"
                       className="w-full bg-slate-50 border border-slate-100 rounded-md py-4 pl-14 pr-6 outline-none focus:bg-white focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 transition-all font-medium"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {mode === 'otp' && (
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-4">4-Digit Code</label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-[#e31c3d] transition-colors">
+                      <Lock size={18} />
+                    </div>
+                    <input 
+                      type="text" 
+                      required
+                      maxLength={4}
+                      value={otp}
+                      onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
+                      placeholder="Enter 4-digit code"
+                      className="w-full bg-slate-50 border border-slate-100 rounded-md py-4 pl-14 pr-6 outline-none focus:bg-white focus:border-[#e31c3d] focus:ring-4 focus:ring-[#e31c3d]/5 transition-all font-bold text-center text-xl tracking-[0.5em]"
                     />
                   </div>
                 </div>
@@ -187,7 +220,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
               {mode !== 'forgot' && (
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-4">
-                    {mode === 'reset' ? 'New Password' : 'Password'}
+                    {(mode === 'reset' || mode === 'otp') ? 'New Password' : 'Password'}
                   </label>
                   <div className="relative group">
                     <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-[#e31c3d] transition-colors">
@@ -212,7 +245,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
                 </div>
               )}
 
-              {mode === 'reset' && (
+              {(mode === 'reset' || mode === 'otp') && (
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-4">Confirm New Password</label>
                   <div className="relative group">
@@ -255,7 +288,8 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
                     <span>
                       {mode === 'signin' ? 'Sign In' : 
                        mode === 'signup' ? 'Create Account' : 
-                       mode === 'forgot' ? 'Send Reset Link' : 'Update Password'}
+                       mode === 'forgot' ? 'Send Code' : 
+                       mode === 'otp' ? 'Update & Login' : 'Update Password'}
                     </span>
                     <ArrowRight size={18} />
                   </>
@@ -265,10 +299,10 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
 
             <div className="mt-10 pt-8 border-t border-slate-50 text-center">
               <p className="text-slate-400 font-medium">
-                {mode === 'forgot' ? 'Remembered your password?' : 
+                {(mode === 'forgot' || mode === 'otp') ? 'Remembered your password?' : 
                  mode === 'signin' ? "Don't have an account?" : "Already have an account?"}
                 <button 
-                  onClick={() => setMode(mode === 'signin' ? 'signup' : (mode === 'forgot' ? 'signin' : 'signin'))}
+                  onClick={() => setMode(mode === 'signin' ? 'signup' : 'signin')}
                   className="ml-2 text-[#e31c3d] font-black hover:underline underline-offset-4"
                 >
                   {mode === 'signin' ? 'Sign up' : 'Sign in'}
