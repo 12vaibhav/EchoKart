@@ -336,15 +336,15 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
             </section>
           </div>
 
-          <section className="bg-white border-2 md:border-4 border-slate-50 rounded-lg p-6 md:p-10 shadow-xl shadow-slate-200/50">
-            <div className="flex items-center gap-3 mb-6 md:mb-8">
+          <section className="bg-white border-2 md:border-4 border-slate-50 rounded-lg p-4 md:p-10 shadow-xl shadow-slate-200/50">
+            <div className="flex items-center gap-3 mb-4 md:mb-8">
               <div className="bg-[#e31c3d] p-2 md:p-2.5 rounded-md shadow-lg shadow-[#e31c3d]/20">
                 <QrCode className="text-white w-5 h-5 md:w-6 md:h-6" />
               </div>
               <h2 className="text-lg md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Choose Payment</h2>
             </div>
             
-            <div className="flex bg-slate-100 p-1 rounded-xl mb-8 w-fit">
+            <div className="flex bg-slate-100 p-1 rounded-xl mb-4 md:mb-8 w-fit">
               <button
                 type="button"
                 onClick={() => setFormData(prev => ({ ...prev, paymentMethod: 'upi' }))}
@@ -380,7 +380,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
-                  className="mb-8"
+                  className="mb-4 md:mb-8"
                 >
                   <div className="inline-flex items-center gap-2 bg-green-50 border border-green-200 px-4 py-2 rounded-full shadow-sm">
                     <span className="relative flex h-2 w-2">
@@ -402,9 +402,9 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-8"
+                  className="space-y-4 md:space-y-8"
                 >
-                  <div className="flex flex-col items-center justify-center p-4 md:p-10 bg-[#fef2f2] rounded-lg border border-red-50 gap-4 md:gap-6">
+                  <div className="flex flex-col items-center justify-center p-2 md:p-10 bg-[#fef2f2] rounded-lg border border-red-50 gap-2 md:gap-6">
                     <div className="size-40 md:size-64 bg-white p-3 md:p-5 rounded-lg shadow-2xl shadow-[#e31c3d]/10 flex items-center justify-center relative group overflow-hidden border border-red-50/50">
                        <img 
                          src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=store@upi%26pn=EchoKart%26am=${total}%26cu=INR`} 
@@ -428,7 +428,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     </div>
                   </div>
 
-                  <div className="space-y-4 md:space-y-6">
+                  <div className="space-y-3 md:space-y-6">
                     <div className="flex items-center gap-3 md:gap-4 bg-black text-white p-4 md:p-5 rounded-lg shadow-xl shadow-black/10">
                       <Shield size={20} className="shrink-0 text-[#00c853]" />
                       <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest leading-relaxed">Safety Note: Enter 12-digit UTR after payment</p>
@@ -602,7 +602,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   </button>
                   <button 
                     onClick={() => setShowCodModal(false)}
-                    className="w-full text-slate-400 font-bold py-2 hover:text-slate-600 transition-all uppercase tracking-widest text-[9px]"
+                    className="w-full text-[#e31c3d] font-bold py-2 hover:opacity-80 transition-all uppercase tracking-widest text-[9px]"
                   >
                     Continue with COD
                   </button>
