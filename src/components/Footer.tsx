@@ -62,7 +62,7 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
                 Your ultimate destination for trending, high-quality products. We handpick top-tier items from trusted global suppliers to bring you unbeatable deals, direct to your doorstep.
               </p>
               <div className="flex space-x-5 text-white">
-                <a href="https://www.instagram.com/echokart_official/" className="hover:text-[#e31c3d] hover:scale-110 transition-all"><Instagram className="w-6 h-6" /></a>
+                <a href="https://www.instagram.com/echokart12?igsh=MXY5ZnY5a3gyNGMxcg==" className="hover:text-[#e31c3d] hover:scale-110 transition-all"><Instagram className="w-6 h-6" /></a>
                 <a href="mailto:supportechokart@gmail.com" className="hover:text-[#e31c3d] hover:scale-110 transition-all"><Mail className="w-6 h-6" /></a>
               </div>
             </div>
