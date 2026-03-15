@@ -75,7 +75,7 @@ export const Header = ({ products = [], onNavigate, isMinimal = false }: {
           isScrolled 
             ? 'bg-black/90 backdrop-blur-xl border-white/10' 
             : 'bg-black border-transparent'
-        } py-3 md:py-2.5`}
+        } py-2 md:py-2.5`}
       >
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className={`flex justify-between items-center h-full gap-2 md:gap-8 ${isMinimal ? 'justify-center md:justify-between' : ''}`}>
@@ -89,9 +89,9 @@ export const Header = ({ products = [], onNavigate, isMinimal = false }: {
               >
                 <div className={`relative items-center ${isMinimal ? 'hidden md:flex' : 'flex'}`}>
                   <div className="absolute inset-0 bg-[#e31c3d] blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-700" />
-                  <BrandLogo className="h-10 md:h-14 lg:h-18 w-auto transition-transform duration-500 group-hover:scale-105" />
+                  <BrandLogo className="h-12 md:h-14 lg:h-18 w-auto transition-transform duration-500 group-hover:scale-105" />
                 </div>
-                <BrandTitle className="h-10 md:h-14 lg:h-18 transition-all duration-500 group-hover:brightness-110" />
+                <BrandTitle className="h-12 md:h-14 lg:h-18 transition-all duration-500 group-hover:brightness-110" />
               </a>
             </div>
 
