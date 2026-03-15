@@ -51,7 +51,7 @@ export const HelpFAQPage = () => (
       <h3 className="text-xl font-bold mb-4">Still have questions?</h3>
       <p className="text-slate-500 mb-8">We're here to help you 24/7 with any queries you might have.</p>
       <a 
-        href="mailto:support@echokart.com" 
+        href="mailto:supportechokart@gmail.com" 
         className="inline-flex items-center justify-center px-8 py-4 bg-[#e31c3d] hover:bg-[#c81935] text-white font-black rounded-2xl shadow-lg shadow-[#e31c3d]/20 transition-all uppercase tracking-widest text-xs"
       >
         Contact Support
