@@ -47,7 +47,8 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
   const subtotal = cartTotal;
   const shipping = 0; 
   const tax = subtotal * 0.18; 
-  const total = subtotal + shipping + tax;
+  const upiDiscount = formData.paymentMethod === 'upi' ? (subtotal + tax) * 0.15 : 0;
+  const total = subtotal + shipping + tax - upiDiscount;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -226,8 +227,8 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   <Truck className="text-white w-5 h-5 md:w-6 md:h-6" />
                 </div>
                 <div>
-                  <h2 className="text-lg md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Shipping & Contact Details</h2>
-                  <p className="text-[9px] md:text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Provide your delivery and contact information</p>
+                  <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Checkout Details</h2>
+                  <p className="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Almost there! Just a few details to complete your order.</p>
                 </div>
               </div>
               
@@ -342,32 +343,66 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
               <h2 className="text-lg md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Choose Payment</h2>
             </div>
             
-            <div className="flex flex-col sm:flex-row p-1.5 bg-slate-50 rounded-md mb-6 md:mb-8 gap-1.5 md:gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-6 md:mb-8">
               <button
                 type="button"
                 onClick={() => setFormData(prev => ({ ...prev, paymentMethod: 'upi' }))}
-                className={`flex-1 flex items-center justify-center gap-2 py-3 md:py-4 rounded-md text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-500 active:scale-95 ${
+                className={`relative flex flex-col items-center justify-center p-4 md:p-6 rounded-xl border-2 transition-all duration-300 group ${
                   formData.paymentMethod === 'upi' 
-                    ? 'bg-white text-[#e31c3d] shadow-xl shadow-slate-200/50' 
-                    : 'text-slate-400 hover:text-slate-600'
+                    ? 'border-[#e31c3d] bg-red-50/30' 
+                    : 'border-slate-100 hover:border-slate-200 bg-slate-50'
                 }`}
               >
-                <QrCode size={16} />
-                Instant UPI
+                <div className={`p-2 rounded-lg mb-2 transition-colors ${formData.paymentMethod === 'upi' ? 'bg-[#e31c3d] text-white' : 'bg-slate-200 text-slate-500'}`}>
+                  <QrCode size={24} />
+                </div>
+                <span className={`text-xs md:text-sm font-black uppercase tracking-widest ${formData.paymentMethod === 'upi' ? 'text-[#e31c3d]' : 'text-slate-500'}`}>Pay via UPI</span>
+                <span className="text-[8px] md:text-[10px] font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded-full mt-2 uppercase tracking-tight">Save 15% Extra</span>
+                {formData.paymentMethod === 'upi' && (
+                  <div className="absolute -top-2 -right-2 bg-[#e31c3d] text-white p-1 rounded-full"><Check size={12} /></div>
+                )}
               </button>
+              
               <button
                 type="button"
                 onClick={() => setFormData(prev => ({ ...prev, paymentMethod: 'cod' }))}
-                className={`flex-1 flex items-center justify-center gap-2 py-3 md:py-4 rounded-md text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-500 active:scale-95 ${
+                className={`relative flex flex-col items-center justify-center p-4 md:p-6 rounded-xl border-2 transition-all duration-300 group ${
                   formData.paymentMethod === 'cod' 
-                    ? 'bg-white text-[#e31c3d] shadow-xl shadow-slate-200/50' 
-                    : 'text-slate-400 hover:text-slate-600'
+                    ? 'border-slate-900 bg-slate-100' 
+                    : 'border-slate-100 hover:border-slate-200 bg-slate-50'
                 }`}
               >
-                <Truck size={16} />
-                Pay on Delivery
+                <div className={`p-2 rounded-lg mb-2 transition-colors ${formData.paymentMethod === 'cod' ? 'bg-slate-900 text-white' : 'bg-slate-200 text-slate-500'}`}>
+                  <Truck size={24} />
+                </div>
+                <span className={`text-xs md:text-sm font-black uppercase tracking-widest ${formData.paymentMethod === 'cod' ? 'text-slate-900' : 'text-slate-500'}`}>Cash on Delivery</span>
+                <span className="text-[8px] md:text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-tight">Standard Price</span>
+                {formData.paymentMethod === 'cod' && (
+                  <div className="absolute -top-2 -right-2 bg-slate-900 text-white p-1 rounded-full"><Check size={12} /></div>
+                )}
               </button>
             </div>
+
+            <AnimatePresence>
+              {formData.paymentMethod === 'cod' && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="mb-8"
+                >
+                  <div className="bg-orange-50 border border-orange-200 p-4 rounded-xl flex gap-3 items-center">
+                    <div className="size-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 shrink-0">
+                      <RefreshCw size={16} className="animate-spin-slow" />
+                    </div>
+                    <div>
+                      <h4 className="text-[11px] md:text-xs font-black text-orange-900 uppercase">Wait! You're paying more.</h4>
+                      <p className="text-[10px] md:text-[11px] text-orange-800 font-bold">Switch to UPI now to claim your <span className="text-[#e31c3d] underline">15% Instant Discount</span> (Save ₹{((subtotal+tax)*0.15).toLocaleString()}).</p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <AnimatePresence mode="wait">
               {formData.paymentMethod === 'upi' ? (
@@ -477,8 +512,14 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                 <span>GST (18%)</span>
                 <span className="text-slate-900 font-bold">₹{tax.toLocaleString()}</span>
               </div>
+              {upiDiscount > 0 && (
+                <div className="flex justify-between text-green-600 font-bold text-xs md:text-sm bg-green-50/50 p-2 rounded-lg border border-green-100">
+                  <span>UPI Discount (15%)</span>
+                  <span>-₹{upiDiscount.toLocaleString()}</span>
+                </div>
+              )}
               <div className="flex justify-between items-center pt-4 md:pt-6 border-t border-slate-100 mt-2 md:mt-4">
-                <span className="text-base md:text-lg font-black text-slate-900 uppercase tracking-tight">Total</span>
+                <span className="text-base md:text-lg font-black text-slate-900 uppercase tracking-tight">Total to Pay</span>
                 <span className="text-xl md:text-2xl font-black text-[#e31c3d]">₹{total.toLocaleString()}</span>
               </div>
             </div>
