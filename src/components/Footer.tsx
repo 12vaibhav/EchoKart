@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   MessageCircle, Package, CornerUpLeft, DollarSign, ArrowRight, ShieldCheck, 
-  CreditCard, Award, Facebook, Mail
+  CreditCard, Award, Instagram, Mail
 } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 import { BrandTitle } from './BrandTitle';
@@ -62,8 +62,8 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
                 Your ultimate destination for trending, high-quality products. We handpick top-tier items from trusted global suppliers to bring you unbeatable deals, direct to your doorstep.
               </p>
               <div className="flex space-x-5 text-white">
-                <a href="#" className="hover:text-[#e31c3d] hover:scale-110 transition-all"><Facebook className="w-6 h-6" /></a>
-                <a href="mailto:support@echokart.in" className="hover:text-[#e31c3d] hover:scale-110 transition-all"><Mail className="w-6 h-6" /></a>
+                <a href="https://www.instagram.com/echokart_official/" className="hover:text-[#e31c3d] hover:scale-110 transition-all"><Instagram className="w-6 h-6" /></a>
+                <a href="mailto:supportechokart@gmail.com" className="hover:text-[#e31c3d] hover:scale-110 transition-all"><Mail className="w-6 h-6" /></a>
               </div>
             </div>
 

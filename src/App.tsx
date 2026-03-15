@@ -65,7 +65,7 @@ import {
   Users,
   Award,
   Lock,
-  Facebook,
+  Instagram,
   Chrome,
   Eye,
   EyeOff,

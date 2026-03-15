@@ -35,7 +35,7 @@ export const FAQS = [
       },
       {
         q: 'How do I initiate a return?',
-        a: 'You can initiate a return request by contacting our customer support team via email at support@echokart.com. Please include your order ID for faster assistance.',
+        a: 'You can initiate a return request by contacting our customer support team via email at supportechokart@gmail.com. Please include your order ID for faster assistance.',
         icon: <MessageCircle className="w-5 h-5 text-[#e31c3d]" />,
       },
       {
