@@ -421,7 +421,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   </div>
 
                   <div className="flex flex-col items-center justify-center p-4 md:p-10 bg-[#fef2f2] rounded-lg border border-red-50 gap-4 md:gap-6 text-center">
-                    <p className="text-[9px] md:text-xs font-black text-slate-600 uppercase tracking-wider leading-relaxed max-w-xs mx-auto">
+                    <p className="text-[9px] md:text-xs font-black text-white bg-slate-900 px-6 py-2 rounded-full uppercase tracking-wider leading-relaxed max-w-fit mx-auto shadow-lg shadow-slate-200">
                       Pay via QR → Copy Transaction ID / UTR from your app → Paste it in the field above.
                     </p>
                     <div className="size-40 md:size-64 bg-white p-3 md:p-5 rounded-lg shadow-2xl shadow-[#e31c3d]/10 flex items-center justify-center relative group overflow-hidden border border-red-50/50">
