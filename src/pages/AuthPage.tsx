@@ -31,7 +31,7 @@ export const AuthPage = ({ onNavigate, initialMode = 'signin' }: { onNavigate: (
           }
         });
         if (signUpError) throw signUpError;
-        onNavigate('account');
+        onNavigate('home');
       } else {
         const { error: signInError } = await supabase.auth.signInWithPassword({
           email,
