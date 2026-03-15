@@ -33,7 +33,7 @@ export const CategoriesManagement = ({ categories, onCategoriesChange }: { categ
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
 
-  const [formData, setFormData] = useState({ title: '', image: '', items: 0, isSale: false });
+  const [formData, setFormData] = useState({ title: '', image: '', items: 0 });
 
 
   const toggleVisibility = async (id: string, currentVisible: boolean) => {
@@ -86,12 +86,11 @@ export const CategoriesManagement = ({ categories, onCategoriesChange }: { categ
       setFormData({ 
         title: cat.title || cat.name || '', 
         image: cat.image || cat.image_url || '', 
-        items: cat.items || 0,
-        isSale: cat.isSale || cat.is_sale || false
+        items: cat.items || 0
       });
     } else {
       setEditingId(null);
-      setFormData({ title: '', image: '', items: 0, isSale: false });
+      setFormData({ title: '', image: '', items: 0 });
     }
     setIsModalOpen(true);
   };
@@ -102,8 +101,7 @@ export const CategoriesManagement = ({ categories, onCategoriesChange }: { categ
     const categoryData = {
       name: formData.title,
       image_url: formData.image || 'https://images.unsplash.com/photo-1555529733-0e670560f7e1?w=500&q=80',
-      visible: true,
-      is_sale: formData.isSale || formData.title.toLowerCase().includes('sale')
+      visible: true
     };
 
     if (editingId) {
@@ -268,21 +266,7 @@ export const CategoriesManagement = ({ categories, onCategoriesChange }: { categ
                 <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block">Item Count</label>
                 <input type="number" value={formData.items} onChange={e => setFormData({...formData, items: parseInt(e.target.value) || 0})} className="w-full border border-slate-200 rounded-lg px-4 py-2 text-sm outline-none focus:border-[#e31c3d]" placeholder="0" />
               </div>
-              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-200">
-                <div>
-                  <h4 className="text-sm font-bold text-slate-800">On Sale</h4>
-                  <p className="text-[10px] text-slate-500">Shows a "Sale" badge on this category</p>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input 
-                    type="checkbox" 
-                    className="sr-only peer" 
-                    checked={formData.isSale}
-                    onChange={(e) => setFormData({...formData, isSale: e.target.checked})}
-                  />
-                  <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#e31c3d] rounded-full"></div>
-                </label>
-              </div>
+
             </div>
             <div className="mt-8 flex justify-end gap-3">
               <button onClick={() => setIsModalOpen(false)} className="px-5 py-2 font-bold text-slate-500 hover:text-slate-700 transition-colors">Cancel</button>

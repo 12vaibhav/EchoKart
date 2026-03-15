@@ -50,8 +50,7 @@ export const CategoryPage = ({ categories = [], onNavigate }: { categories: any[
                 loading="lazy"
               />
             ) : (
-              <div className={`h-full w-full flex items-center justify-center ${cat.isSale ? 'bg-[#e31c3d]' : 'bg-slate-50 border border-slate-100'}`}>
-                 {cat.isSale && <span className="font-black text-3xl text-white tracking-tighter">SALE</span>}
+              <div className="h-full w-full flex items-center justify-center bg-slate-50 border border-slate-100">
               </div>
             )}
             

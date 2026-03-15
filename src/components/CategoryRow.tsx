@@ -40,36 +40,20 @@ const CategoryCard = ({
       <div className="relative">
         <div className="absolute -inset-1.5 rounded-full border border-slate-200 opacity-0 group-hover/card:opacity-100 transition-all duration-500" />
         
-        <div className={`size-14 md:size-16 lg:size-20 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 ${cat.isSale && !(cat.image || cat.image_url) ? 'bg-[#e31c3d] shadow-rose-200' : 'bg-white shadow-slate-200'} shadow-md group-hover/card:shadow-lg relative`}>
+        <div className={`size-14 md:size-16 lg:size-20 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 bg-white shadow-slate-200 shadow-md group-hover/card:shadow-lg relative`}>
           { (cat.image || cat.image_url) ? (
-            <>
-              <img 
-                src={cat.image || cat.image_url} 
-                alt={name} 
-                className="w-full h-full object-cover transition-all duration-700" 
-                draggable={false}
-              />
-              {cat.isSale && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/10">
-                  <div className="bg-[#e31c3d] text-white px-1.5 py-0.5 rounded-full shadow-lg">
-                    <span className="text-[8px] font-black uppercase tracking-tighter">Sale</span>
-                  </div>
-                </div>
-              )}
-            </>
+            <img 
+              src={cat.image || cat.image_url} 
+              alt={name} 
+              className="w-full h-full object-cover transition-all duration-700" 
+              draggable={false}
+            />
           ) : (
-            cat.isSale ? (
-              <div className="flex flex-col items-center justify-center text-white">
-                <span className="font-black text-sm lg:text-base uppercase tracking-tighter leading-none">HOT</span>
-                <span className="text-[9px] font-bold opacity-80 uppercase transition-all group-hover/card:tracking-widest">Sale</span>
+            cat.isViewAll ? (
+              <div className="flex items-center justify-center w-full h-full bg-slate-50 border-2 border-dashed border-slate-200 group-hover/card:bg-white group-hover/card:border-[#e31c3d] transition-all duration-500">
+                 <ChevronRight size={24} className="text-slate-300 group-hover/card:text-[#e31c3d] transition-colors" />
               </div>
-            ) : (
-              cat.isViewAll ? (
-                <div className="flex items-center justify-center w-full h-full bg-slate-50 border-2 border-dashed border-slate-200 group-hover/card:bg-white group-hover/card:border-[#e31c3d] transition-all duration-500">
-                   <ChevronRight size={24} className="text-slate-300 group-hover/card:text-[#e31c3d] transition-colors" />
-                </div>
-              ) : null
-            )
+            ) : null
           )}
         </div>
       </div>

@@ -246,7 +246,6 @@ export default function App() {
         name: c.name,
         image: c.image_url,
         visible: c.visible,
-        isSale: c.is_sale,
         items: 0,
         trend: '0%',
         trendUp: null
