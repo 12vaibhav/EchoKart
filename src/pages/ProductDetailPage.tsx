@@ -243,8 +243,8 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                   <RotateCcw className="w-5 h-5" />
                 </div>
                 <div className="z-10 w-full">
-                  <h4 className="font-bold text-gray-900 text-[10px] md:text-sm mb-0.5 md:mb-1 line-clamp-1">7-Day Returns</h4>
-                  <p className="text-[9px] md:text-xs text-gray-500 leading-snug hidden md:block">Hassle-free exchange policy, no questions asked.</p>
+                  <h4 className="font-bold text-gray-900 text-[10px] md:text-sm mb-0.5 md:mb-1 line-clamp-1">7-Day Exchanges</h4>
+                  <p className="text-[9px] md:text-xs text-gray-500 leading-snug hidden md:block">Easy replacement policy for defective items.</p>
                 </div>
               </div>
 

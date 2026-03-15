@@ -32,8 +32,8 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
           <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 md:gap-4 group">
             <CornerUpLeft className="w-8 h-8 md:w-10 md:h-10 font-light opacity-90 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
             <div>
-              <h4 className="font-bold text-[13px] md:text-[15px] leading-tight tracking-wide">Refund Policy</h4>
-              <p className="text-[11px] md:text-[14px] text-white/90">Easy returns</p>
+              <h4 className="font-bold text-[13px] md:text-[15px] leading-tight tracking-wide">Exchange Policy</h4>
+              <p className="text-[11px] md:text-[14px] text-white/90">Easy replacements</p>
             </div>
           </div>
           <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 md:gap-4 group">
@@ -67,13 +67,13 @@ export const Footer = ({ onNavigate }: { onNavigate: (path: string, id?: number 
               </div>
             </div>
 
-            {/* Column 2: Delivery & returns */}
+            {/* Column 2: Delivery & Exchanges */}
             <div className="lg:col-span-3 text-center md:text-left">
-              <h4 className="font-bold text-[15px] mb-3 md:mb-6 uppercase tracking-wider text-white/50">Delivery & returns</h4>
+              <h4 className="font-bold text-[15px] mb-3 md:mb-6 uppercase tracking-wider text-white/50">Delivery & Exchanges</h4>
               <ul className="space-y-3 md:space-y-4 text-gray-400 text-[13.5px] font-medium">
                 <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('shipping-policy'); }} className="hover:text-white transition-colors">Shipping policy</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('return-policy'); }} className="hover:text-white transition-colors">Return policy</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('refund-cancellation'); }} className="hover:text-white transition-colors">Refund policy</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('return-policy'); }} className="hover:text-white transition-colors">Exchange policy</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('refund-cancellation'); }} className="hover:text-white transition-colors">Replacement policy</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('track'); }} className="hover:text-white transition-colors">Track your order</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); onNavigate('help'); }} className="hover:text-white transition-colors">Help & FAQs</a></li>
               </ul>

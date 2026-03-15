@@ -12,7 +12,7 @@ export const TopBar = ({ onMenuClick, onNavigate }: { onMenuClick: () => void, o
     { id: 1, title: 'New Order Received', time: '2 mins ago', unread: true },
     { id: 2, title: 'Low Stock Alert: Echo Pods', time: '15 mins ago', unread: true },
     { id: 3, title: 'Monthly Revenue Report Ready', time: '1 hour ago', unread: false },
-    { id: 4, title: 'Customer Refund Request', time: '3 hours ago', unread: true },
+    { id: 4, title: 'Customer Replacement Request', time: '3 hours ago', unread: true },
     { id: 5, title: 'System Update Completed', time: '5 hours ago', unread: false },
     { id: 6, title: 'New Review on Echo Pro', time: '1 day ago', unread: true },
   ];

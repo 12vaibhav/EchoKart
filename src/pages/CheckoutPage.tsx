@@ -522,7 +522,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                </div>
                <div className="flex flex-col items-center gap-2">
                  <RefreshCw className="text-slate-200 w-8 h-8" />
-                 <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Returns</span>
+                 <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Exchanges</span>
                </div>
                <div className="flex flex-col items-center gap-2">
                  <Headphones className="text-slate-200 w-8 h-8" />

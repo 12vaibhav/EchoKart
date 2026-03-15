@@ -13,7 +13,7 @@ export const WhyChooseUs = () => {
   const features = [
     { icon: <Truck className="w-8 h-8" />, title: 'Free Shipping', desc: 'On all orders.' },
     { icon: <Shield className="w-8 h-8" />, title: 'Secure Payment', desc: '100% secure checkout.' },
-    { icon: <CornerUpLeft className="w-8 h-8" />, title: '7-Day Returns', desc: 'Hassle-free return policy.' },
+    { icon: <CornerUpLeft className="w-8 h-8" />, title: '7-Day Exchanges', desc: 'Hassle-free replacement policy.' },
     { icon: <MessageCircle className="w-8 h-8" />, title: '24/7 Support', desc: 'Dedicated customer service.' },
   ];
 

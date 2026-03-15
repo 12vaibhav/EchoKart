@@ -384,7 +384,7 @@ export const Header = ({ products = [], onNavigate, isMinimal = false }: {
                     Track My Order <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </a>
                   <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('return-policy'); setIsMobileMenuOpen(false); }} className="flex items-center justify-between group">
-                    Returns Policy <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    Exchange Policy <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </a>
                   <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('contact'); setIsMobileMenuOpen(false); }} className="flex items-center justify-between group">
                     Contact Support <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

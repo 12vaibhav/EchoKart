@@ -16,35 +16,34 @@ export const RefundCancellationPage = () => (
       <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
         <XCircle className="text-red-600 w-6 h-6" />
       </div>
-      <h1 className="text-4xl font-bold">Refund and Cancellation Policy</h1>
+      <h1 className="text-4xl font-bold">Replacement and Cancellation Policy</h1>
     </div>
 
     <div className="prose prose-slate max-w-none text-gray-600 space-y-6">
       <p>
-        This refund and cancellation policy outlines how you can cancel or seek a refund for a product / service that you have purchased through the EchoKart Platform.
+        This policy outlines how you can cancel or seek a replacement for a product purchased through EchoKart. Please note: <strong>EchoKart does not provide refunds</strong>. Our commitment is to ensure you receive a high-quality product through our replacement guarantee.
       </p>
 
       <h2 className="text-2xl font-bold text-gray-900 mt-8">Cancellations</h2>
       <ul className="list-disc pl-6 space-y-4">
-        <li>Cancellations will only be considered if the request is made within <strong>7 days</strong> of placing the order.</li>
-        <li>Cancellation requests may not be entertained if the orders have been communicated to sellers/merchants and they have initiated the process of shipping, or the product is out for delivery. In such cases, you may reject the product at the doorstep.</li>
-        <li>EchoKart does not accept cancellation requests for perishable items like flowers, eatables, etc. However, a refund/replacement can be made if the quality is established to be poor.</li>
+        <li>Cancellations are only accepted if the request is made within <strong>24 hours</strong> of placing the order and the product has not been shipped.</li>
+        <li>Once an order is shipped or out for delivery, it cannot be canceled. You may, however, request a replacement if the product arrives damaged or defective.</li>
+        <li>EchoKart does not accept cancellation requests for perishable items. A replacement can be provided if the quality is found to be poor upon arrival.</li>
       </ul>
 
-      <h2 className="text-2xl font-bold text-gray-900 mt-8">Refunds</h2>
+      <h2 className="text-2xl font-bold text-gray-900 mt-8">Replacements (No Refunds)</h2>
       <ul className="list-disc pl-6 space-y-4">
-        <li>In case of damaged or defective items, please report to our customer service team within <strong>7 days</strong> of receipt of products. The request will be entertained after the seller/merchant has checked and determined the issue.</li>
-        <li>If you feel the product received is not as shown on the site or as per your expectations, you must bring it to our notice within <strong>7 days</strong> of receiving the product.</li>
-        <li>For products with a manufacturer's warranty, please refer the issue directly to them.</li>
-        <li>In case of any approved refunds, it will take <strong>2 days</strong> for the refund to be processed to you.</li>
+        <li>In case of damaged or defective items, please report to our customer service team within <strong>7 days</strong> of receipt. We will provide a fresh replacement after verifying the issue.</li>
+        <li>If the product received is not as shown on the site, you must notify us within <strong>7 days</strong>. We will arrange for an exchange with the correct product.</li>
+        <li>All approvals are subject to a quality check by our team. Once approved, the replacement product will be dispatched within 2-3 business days.</li>
       </ul>
 
       <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mt-8 rounded-r-lg">
         <div className="flex items-center gap-2 text-blue-800 font-bold mb-1">
-          <Clock className="w-4 h-4" /> Refund Processing Time
+          <Clock className="w-4 h-4" /> Replacement Timeline
         </div>
         <p className="text-blue-700 text-sm">
-          Once approved, refunds typically take 2 business days to process and reflect in your original payment method.
+          Fresh replacements are typically dispatched within 48 hours after the quality check of the returned item is completed.
         </p>
       </div>
     </div>

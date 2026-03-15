@@ -26,21 +26,21 @@ export const FAQS = [
     ],
   },
   {
-    category: 'Returns & Refunds',
+    category: 'Exchanges & Replacements',
     items: [
       {
         q: 'What is your return policy?',
-        a: 'We offer a hassle-free 7-day return policy. If you are not satisfied with your product, you can initiate a return within 7 days of delivery.',
+        a: 'We offer a hassle-free 7-day exchange and replacement policy for damaged or defective items. Please note that we do not offer full returns or refunds.',
         icon: <CornerUpLeft className="w-5 h-5 text-[#e31c3d]" />,
       },
       {
-        q: 'How do I initiate a return?',
-        a: 'You can initiate a return request by contacting our customer support team via email at supportechokart@gmail.com. Please include your order ID for faster assistance.',
+        q: 'How do I initiate an exchange?',
+        a: 'You can initiate a replacement request by contacting our customer support team via email at supportechokart@gmail.com. Please include your order ID and photos of the issue for faster assistance.',
         icon: <MessageCircle className="w-5 h-5 text-[#e31c3d]" />,
       },
       {
-        q: 'When will I receive my refund?',
-        a: 'Once we receive and inspect your returned item, your refund will be processed within 5-7 business days to your original payment method or bank account.',
+        q: 'When will I receive my replacement?',
+        a: 'Once your request is approved and the original item is picked up, your fresh replacement will be dispatched within 48 hours.',
         icon: <Shield className="w-5 h-5 text-[#e31c3d]" />,
       },
     ],
@@ -58,7 +58,7 @@ export const FAQS = [
 ];
 
 export const ANNOUNCEMENTS = [
-  "Enjoy Hassle-Free Returns & Exchanges",
+  "Seamless Exchanges & Replacements",
   "Complimentary Shipping on All Orders",
   "Secure Cash on Delivery Available"
 ];
