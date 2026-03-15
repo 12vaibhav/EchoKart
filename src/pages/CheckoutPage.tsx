@@ -220,20 +220,20 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
         <div className="lg:col-span-2 space-y-6 md:space-y-12">
           
           <div className="bg-transparent md:bg-slate-50 rounded-lg p-0 md:p-10 border-0 md:border border-slate-100 shadow-none md:shadow-sm">
-            <section className="mb-8 md:mb-10 bg-slate-50 md:bg-transparent p-6 md:p-0 rounded-lg border md:border-0 border-slate-100">
+            <section className="bg-slate-50 md:bg-transparent p-6 md:p-0 rounded-lg border md:border-0 border-slate-100">
               <div className="flex items-center gap-3 mb-6 md:mb-8">
                 <div className="bg-[#e31c3d] p-2 md:p-2.5 rounded-md shadow-lg shadow-[#e31c3d]/20">
-                  <Mail className="text-white w-5 h-5 md:w-6 md:h-6" />
+                  <Truck className="text-white w-5 h-5 md:w-6 md:h-6" />
                 </div>
                 <div>
-                  <h2 className="text-lg md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Contact Details</h2>
-                  <p className="text-[9px] md:text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Where should we send your receipt?</p>
+                  <h2 className="text-lg md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Shipping & Contact Details</h2>
+                  <p className="text-[9px] md:text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Provide your delivery and contact information</p>
                 </div>
               </div>
               
-              <div className="space-y-4">
-                <div className="group">
-                  <label className="block text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-4 transition-colors group-focus-within:text-[#e31c3d]">Email Address*</label>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-6">
+                <div className="col-span-2 group">
+                  <label className="block text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-slate-900 mb-2 ml-4 transition-colors group-focus-within:text-[#e31c3d]">Email Address*</label>
                   <div className="relative">
                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 group-focus-within:text-[#e31c3d] transition-colors" />
                     <input 
@@ -248,10 +248,10 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   </div>
                 </div>
                 
-                <div className="group">
-                  <label className="block text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-4 transition-colors group-focus-within:text-[#e31c3d]">Phone Number*</label>
+                <div className="col-span-2 group">
+                  <label className="block text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-slate-900 mb-2 ml-4 transition-colors group-focus-within:text-[#e31c3d]">Phone Number*</label>
                   <div className="relative">
-                    < Headphones className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 group-focus-within:text-[#e31c3d] transition-colors" />
+                    <Headphones className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 group-focus-within:text-[#e31c3d] transition-colors" />
                     <input 
                       name="phone"
                       value={formData.phone}
@@ -263,23 +263,9 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                     />
                   </div>
                 </div>
-              </div>
-            </section>
 
-            <section className="bg-slate-50 md:bg-transparent p-6 md:p-0 rounded-lg border md:border-0 border-slate-100">
-              <div className="flex items-center gap-3 mb-6 md:mb-8">
-                <div className="bg-[#e31c3d] p-2 md:p-2.5 rounded-md shadow-lg shadow-[#e31c3d]/20">
-                  <Truck className="text-white w-5 h-5 md:w-6 md:h-6" />
-                </div>
-                <div>
-                  <h2 className="text-lg md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Shipping Info</h2>
-                  <p className="text-[9px] md:text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Tell us where to deliver your product</p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-1 group">
-                  <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-4">First Name*</label>
+                  <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 mb-2 ml-4">First Name*</label>
                   <input 
                     name="firstName"
                     value={formData.firstName}
@@ -290,7 +276,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   />
                 </div>
                 <div className="col-span-1 group">
-                  <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-4">Last Name*</label>
+                  <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 mb-2 ml-4">Last Name*</label>
                   <input 
                     name="lastName"
                     value={formData.lastName}
@@ -301,7 +287,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   />
                 </div>
                 <div className="col-span-2 group">
-                  <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-4">House No. / Building*</label>
+                  <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 mb-2 ml-4">House No. / Building*</label>
                   <input 
                     name="houseNumber"
                     value={formData.houseNumber}
@@ -312,7 +298,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   />
                 </div>
                 <div className="col-span-2 group">
-                  <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-4">Area / Road Name*</label>
+                  <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 mb-2 ml-4">Area / Road Name*</label>
                   <input 
                     name="roadName"
                     value={formData.roadName}
@@ -323,7 +309,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   />
                 </div>
                 <div className="col-span-1 group">
-                  <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-4">City*</label>
+                  <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 mb-2 ml-4">City*</label>
                   <input 
                     name="city"
                     value={formData.city}
@@ -334,7 +320,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                   />
                 </div>
                 <div className="col-span-1 group">
-                  <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-4">Pincode*</label>
+                  <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 mb-2 ml-4">Pincode*</label>
                   <input 
                     name="pincode"
                     value={formData.pincode}
@@ -422,7 +408,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
                       <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest leading-relaxed">Safety Note: Enter 12-digit UTR after payment</p>
                     </div>
                     <div>
-                      <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-6 mb-2 md:mb-3">Transaction ID (UTR)*</label>
+                      <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 ml-6 mb-2 md:mb-3">Transaction ID (UTR)*</label>
                       <input 
                         name="utrNumber"
                         value={formData.utrNumber}
