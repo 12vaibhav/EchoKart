@@ -239,24 +239,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               <span className="text-[10px] font-bold text-gray-600">Delivered by <span className="text-[#e31c3d]">Meesho Partners</span></span>
             </div>
 
-            {/* Desktop: Premium Trust Badges (Local Assets) */}
-            <div className="hidden md:grid relative grid-cols-3 items-center bg-gradient-to-r from-gray-50/80 to-white py-3 md:py-6 rounded-lg border border-gray-100 shadow-[inset_0_0_20px_rgba(0,0,0,0.01)] mb-4 md:mb-8 max-w-md md:order-0">
-              <div className="flex justify-center">
-                <img src={paymentBadge} alt="Secure Payments" className="h-12 sm:h-14 w-auto object-contain hover:scale-110 hover:drop-shadow-md transition-transform duration-300" />
-              </div>
-              
-              <div className="absolute left-1/3 top-1/2 -translate-y-1/2 h-8 sm:h-10 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent pointer-events-none"></div>
-              
-              <div className="flex justify-center">
-                <img src={shippingBadge} alt="Fast Shipping" className="h-12 sm:h-14 w-auto object-contain hover:scale-110 hover:drop-shadow-md transition-transform duration-300" />
-              </div>
-              
-              <div className="absolute left-2/3 top-1/2 -translate-y-1/2 h-8 sm:h-10 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent pointer-events-none"></div>
-              
-              <div className="flex justify-center">
-                <img src={qualityBadge} alt="Premium Quality" className="h-12 sm:h-14 w-auto object-contain hover:scale-110 hover:drop-shadow-md transition-transform duration-300" />
-              </div>
-            </div>
+
 
             {/* Important Highlights */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3 md:gap-4 mb-4 md:mb-10 order-10 md:order-0">
@@ -457,19 +440,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               </button>
             </div>
 
-            {/* Trust Badge Seals & Quality Badges */}
-            <div className="bg-gray-50 rounded-lg p-3 md:p-5 mb-4 md:mb-8 border border-gray-100 order-11 md:order-0">
-              <div className="flex items-center justify-center gap-2 mb-4 pb-4 border-b border-gray-200">
-                <ShieldCheck className="w-5 h-5 text-green-600" />
-                <span className="text-sm font-bold text-gray-900 uppercase tracking-widest">Guaranteed Safe & Secure Checkout</span>
-              </div>
-              <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10">
-                <img src={upiIcon} className="h-6 sm:h-8 object-contain transition-all hover:scale-110" alt="UPI" />
-                <img src={paytmIcon} className="h-6 sm:h-8 object-contain transition-all hover:scale-110" alt="Paytm" />
-                <img src={gpayIcon} className="h-6 sm:h-8 object-contain transition-all hover:scale-110" alt="Google Pay" />
-                <img src={codIcon} className="h-6 sm:h-8 object-contain transition-all hover:scale-110" alt="Cash on Delivery" />
-              </div>
-            </div>
+
 
           </div>
         </div>
