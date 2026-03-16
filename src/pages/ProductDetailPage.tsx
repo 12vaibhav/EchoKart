@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'motion/react';
-import { Heart, Star, Truck, Shield, RotateCcw, ChevronRight, ChevronLeft, Minus, Plus, ShoppingBag, Headset, ShieldCheck, Lock, Undo2, ThumbsUp, Flame, Award, Users, X, Upload } from 'lucide-react';
+import { Heart, Star, Truck, Shield, RotateCcw, ChevronRight, ChevronLeft, Minus, Plus, ShoppingBag, Headset, ShieldCheck, Lock, Undo2, ThumbsUp, Flame, Award, Users, X, Upload, Play } from 'lucide-react';
 
 import { useWishlist } from '../contexts/WishlistContext';
 import { useCart } from '../contexts/CartContext';
@@ -35,6 +35,13 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
   const swatchesVisible = product.swatches_visible !== false;
   const packOptions = product.pack_options || [];
   const packsVisible = product.packs_visible || false;
+  const videoUrls = product.video_urls || [];
+
+  // Combine media: videos first, then images
+  const media = [
+    ...videoUrls.map((url: string) => ({ type: 'video', url })),
+    ...images.map((url: string) => ({ type: 'image', url }))
+  ];
 
   // Helper to parse "Name|Color" swatches
   const parseSwatch = (swatchStr: string) => {
@@ -120,13 +127,22 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
           <div className="flex flex-col-reverse md:flex-row gap-4 lg:gap-6 lg:h-[600px] h-auto">
             {/* Vertical Thumbnails (Bottom on mobile, Left on desktop) */}
             <div className="flex md:flex-col overflow-x-auto md:overflow-y-auto gap-2 md:gap-3 w-[calc(100%+2rem)] -mx-4 px-4 md:w-20 lg:w-24 shrink-0 pb-2 md:pb-0 pr-2 md:pr-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory scroll-px-4 scroll-smooth overscroll-x-contain">
-              {images.map((img: string, i: number) => (
+              {media.map((item: any, i: number) => (
                 <div 
                   key={i} 
                   onClick={() => scrollToImage(i)}
-                  className={`aspect-square w-16 md:w-full rounded-md md:rounded-lg p-0 cursor-pointer flex items-center justify-center shrink-0 overflow-hidden box-border snap-start transition-all duration-300 ${i === activeImage ? 'bg-white border-2 border-[#e31c3d] shadow-sm scale-[1.02]' : 'bg-gray-50 border border-transparent hover:border-gray-200 hover:bg-white'}`}
+                  className={`aspect-square w-16 md:w-full rounded-md md:rounded-lg p-0 cursor-pointer flex items-center justify-center shrink-0 overflow-hidden box-border snap-start transition-all duration-300 relative ${i === activeImage ? 'bg-white border-2 border-[#e31c3d] shadow-sm scale-[1.02]' : 'bg-gray-50 border border-transparent hover:border-gray-200 hover:bg-white'}`}
                 >
-                  <img src={img} alt="" className="w-full h-full object-cover drop-shadow-sm" />
+                  {item.type === 'video' ? (
+                    <>
+                      <video src={item.url} className="w-full h-full object-cover grayscale-[0.2]" />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                        <Play className="w-4 h-4 text-white fill-current" />
+                      </div>
+                    </>
+                  ) : (
+                    <img src={item.url} alt="" className="w-full h-full object-cover drop-shadow-sm" />
+                  )}
                 </div>
               ))}
             </div>
@@ -155,20 +171,32 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                 onScroll={handleGalleryScroll}
                 className="w-full h-full flex overflow-x-auto snap-x snap-mandatory overscroll-x-contain [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth"
               >
-                {images.map((img: string, i: number) => (
+                {media.map((item: any, i: number) => (
                   <div key={i} className="min-w-full h-full snap-center snap-normal flex items-center justify-center">
-                    <img 
-                      src={img} 
-                      alt={`${title} - image ${i + 1}`} 
-                      className="w-full h-full object-cover transform transition-transform duration-700 ease-out group-hover:scale-105 select-none" 
-                    />
+                    {item.type === 'video' ? (
+                      <video 
+                        src={item.url} 
+                        controls 
+                        autoPlay 
+                        muted 
+                        loop 
+                        playsInline
+                        className="w-full h-full object-cover" 
+                      />
+                    ) : (
+                      <img 
+                        src={item.url} 
+                        alt={`${title} - image ${i + 1}`} 
+                        className="w-full h-full object-cover transform transition-transform duration-700 ease-out group-hover:scale-105 select-none" 
+                      />
+                    )}
                   </div>
                 ))}
               </div>
 
               {/* Progress Indicator for Mobile */}
               <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 z-10 md:hidden">
-                {images.map((_: any, i: number) => (
+                {media.map((_: any, i: number) => (
                   <div 
                     key={i} 
                     className={`h-1 rounded-full transition-all duration-300 ${i === activeImage ? 'w-6 bg-[#e31c3d]' : 'w-2 bg-gray-300'}`}

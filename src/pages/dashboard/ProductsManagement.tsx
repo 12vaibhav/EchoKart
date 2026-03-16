@@ -43,7 +43,8 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
     swatches: [] as string[],
     swatchesVisible: true,
     packOptions: [] as { label: string, price: number, savings: string }[],
-    packsVisible: false
+    packsVisible: false,
+    videoUrls: [] as string[]
   });
   const [swatchInput, setSwatchInput] = useState('');
   const [swatchName, setSwatchName] = useState('');
@@ -163,7 +164,8 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
         swatches: product.swatches || [],
         swatchesVisible: product.swatches_visible !== false,
         packOptions: product.pack_options || [],
-        packsVisible: product.packs_visible || false
+        packsVisible: product.packs_visible || false,
+        videoUrls: product.video_urls || []
       });
     } else {
       setEditingId(null);
@@ -171,7 +173,8 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
         name: '', category: availableCategories[0] || 'Electronics', price: 0, stock: 0, status: 'In Stock', 
         image: '', images: [], tags: [], productCopy: '', shortDescription: '', featureImages: [], 
         rating: 5, reviewsCount: 0, reviews: [], isTrending: false, isNewArrival: false,
-        swatches: [], swatchesVisible: true, packOptions: [], packsVisible: false
+        swatches: [], swatchesVisible: true, packOptions: [], packsVisible: false,
+        videoUrls: []
       });
     }
     setTagInput('');
@@ -219,6 +222,43 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
       const newImages = prev.images.filter((_, i) => i !== index);
       return { ...prev, images: newImages, image: newImages[0] || '' };
     });
+  };
+
+  const handleVideoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
+    
+    for (const file of files) {
+      if (formData.videoUrls.length >= 2) break;
+      const fileExt = file.name.split('.').pop();
+      const fileName = `v-${Math.random()}.${fileExt}`;
+      const filePath = `videos/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('product-images')
+        .upload(filePath, file);
+
+      if (uploadError) {
+        console.error('Video upload error:', uploadError);
+        continue;
+      }
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('product-images')
+        .getPublicUrl(filePath);
+
+      setFormData(prev => ({ 
+        ...prev, 
+        videoUrls: [...prev.videoUrls, publicUrl] 
+      }));
+    }
+  };
+
+  const handleRemoveVideo = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      videoUrls: prev.videoUrls.filter((_, i) => i !== index)
+    }));
   };
 
   const handleAddTag = (e?: React.KeyboardEvent<HTMLInputElement>, manualValue?: string) => {
@@ -398,7 +438,8 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
       swatches: formData.swatches,
       swatches_visible: formData.swatchesVisible,
       pack_options: formData.packOptions,
-      packs_visible: formData.packsVisible
+      packs_visible: formData.packsVisible,
+      video_urls: formData.videoUrls
     };
 
     if (editingId) {
@@ -881,6 +922,43 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
                     {Array.from({ length: Math.max(0, 6 - formData.images.length) }).map((_, idx) => (
                       <div key={`empty-${idx}`} className="aspect-square rounded-lg bg-slate-50 border-2 border-dashed border-slate-200 flex items-center justify-center text-slate-300">
                         <span className="text-xs font-bold">{formData.images.length + idx + 1}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="col-span-2">
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Product Videos ({formData.videoUrls.length}/2)</label>
+                    <button 
+                      type="button"
+                      disabled={formData.videoUrls.length >= 2} 
+                      onClick={() => document.getElementById('video-upload')?.click()} 
+                      className="flex items-center gap-1 text-xs font-bold text-[#e31c3d] hover:text-[#c81935] disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <Upload size={14} /> Upload Video
+                    </button>
+                    <input type="file" id="video-upload" className="hidden" accept="video/*" multiple onChange={handleVideoUpload} />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {formData.videoUrls.map((video, idx) => (
+                      <div key={idx} className="aspect-video relative rounded-lg overflow-hidden bg-slate-900 border border-slate-200 group">
+                        <video src={video} className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                          <span className="text-[10px] text-white font-bold uppercase">Video {idx + 1}</span>
+                        </div>
+                        <button 
+                          type="button"
+                          onClick={() => handleRemoveVideo(idx)}
+                          className="absolute top-2 right-2 size-6 bg-white/90 hover:bg-white text-rose-500 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg z-10"
+                        >
+                          <X size={14} />
+                        </button>
+                      </div>
+                    ))}
+                    {Array.from({ length: Math.max(0, 2 - formData.videoUrls.length) }).map((_, idx) => (
+                      <div key={`empty-video-${idx}`} className="aspect-video rounded-lg bg-slate-50 border-2 border-dashed border-slate-200 flex items-center justify-center text-slate-300">
+                        <span className="text-xs font-bold">Video {formData.videoUrls.length + idx + 1}</span>
                       </div>
                     ))}
                   </div>

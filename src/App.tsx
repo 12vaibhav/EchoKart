@@ -240,7 +240,8 @@ export default function App() {
         swatches: p.swatches || [],
         swatches_visible: p.swatches_visible ?? true,
         pack_options: p.pack_options || [],
-        packs_visible: p.packs_visible ?? false
+        packs_visible: p.packs_visible ?? false,
+        video_urls: p.video_urls || []
       })) || [];
 
       // Map Supabase category format
