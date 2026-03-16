@@ -259,47 +259,47 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             </div>
 
             {/* Important Highlights */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-1.5 md:gap-4 mb-4 md:mb-10 order-10 md:order-0">
-              <div className="flex flex-row items-start text-left gap-3 md:gap-4 p-2 md:p-4 rounded-lg bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
-                <div className="absolute -right-6 -top-6 w-24 h-24 bg-[#e31c3d] opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
-                <div className="w-10 h-10 rounded-md bg-red-50 flex items-center justify-center text-[#e31c3d] group-hover:scale-110 transition-transform z-10 shrink-0">
-                  <Truck className="w-5 h-5" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3 md:gap-4 mb-4 md:mb-10 order-10 md:order-0">
+              <div className="flex flex-row items-center text-left gap-3 md:gap-4 md:p-4 rounded-lg md:bg-gradient-to-br md:from-white md:to-gray-50 md:border md:border-gray-100 md:shadow-sm group relative overflow-hidden">
+                <div className="hidden md:block absolute -right-6 -top-6 w-24 h-24 bg-[#e31c3d] opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-md bg-red-50 flex items-center justify-center text-[#e31c3d] group-hover:scale-110 transition-transform z-10 shrink-0">
+                  <Truck className="w-4 h-4 md:w-5 md:h-5" />
                 </div>
                 <div className="z-10 w-full">
-                  <h4 className="font-bold text-gray-900 text-[10px] md:text-sm mb-0.5 md:mb-1 line-clamp-1">Express Delivery</h4>
+                  <h4 className="font-bold text-gray-900 text-xs md:text-sm">Express Delivery</h4>
                   <p className="text-[9px] md:text-xs text-gray-500 leading-snug hidden md:block">Free shipping on all prepaid orders across the country.</p>
                 </div>
               </div>
 
-              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-lg bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
-                <div className="absolute -right-6 -top-6 w-24 h-24 bg-blue-500 opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
-                <div className="w-10 h-10 rounded-md bg-blue-50 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform z-10 shrink-0">
-                  <RotateCcw className="w-5 h-5" />
+              <div className="flex flex-row items-center text-left gap-3 md:gap-4 md:p-4 rounded-lg md:bg-gradient-to-br md:from-white md:to-gray-50 md:border md:border-gray-100 md:shadow-sm group relative overflow-hidden">
+                <div className="hidden md:block absolute -right-6 -top-6 w-24 h-24 bg-blue-500 opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-md bg-blue-50 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform z-10 shrink-0">
+                  <RotateCcw className="w-4 h-4 md:w-5 md:h-5" />
                 </div>
                 <div className="z-10 w-full">
-                  <h4 className="font-bold text-gray-900 text-[10px] md:text-sm mb-0.5 md:mb-1 line-clamp-1">7-Day Exchanges</h4>
+                  <h4 className="font-bold text-gray-900 text-xs md:text-sm">7-Day Exchanges</h4>
                   <p className="text-[9px] md:text-xs text-gray-500 leading-snug hidden md:block">Easy replacement policy for defective items.</p>
                 </div>
               </div>
 
-              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-lg bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
-                <div className="absolute -right-6 -top-6 w-24 h-24 bg-amber-500 opacity-[0.04] rounded-full blur-2xl group-hover:opacity-[0.08] transition-opacity"></div>
-                <div className="w-10 h-10 rounded-md bg-amber-50 flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform z-10 shrink-0">
-                  <Award className="w-5 h-5" />
+              <div className="flex flex-row items-center text-left gap-3 md:gap-4 md:p-4 rounded-lg md:bg-gradient-to-br md:from-white md:to-gray-50 md:border md:border-gray-100 md:shadow-sm group relative overflow-hidden">
+                <div className="hidden md:block absolute -right-6 -top-6 w-24 h-24 bg-amber-500 opacity-[0.04] rounded-full blur-2xl group-hover:opacity-[0.08] transition-opacity"></div>
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-md bg-amber-50 flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform z-10 shrink-0">
+                  <Award className="w-4 h-4 md:w-5 md:h-5" />
                 </div>
                 <div className="z-10 w-full">
-                  <h4 className="font-bold text-gray-900 text-[10px] md:text-sm mb-0.5 md:mb-1 line-clamp-1">Top-Rated Quality</h4>
+                  <h4 className="font-bold text-gray-900 text-xs md:text-sm">Top-Rated Quality</h4>
                   <p className="text-[9px] md:text-xs text-gray-500 leading-snug hidden md:block">Crafted from premium durable materials and finishes.</p>
                 </div>
               </div>
 
-              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-lg bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
-                <div className="absolute -right-6 -top-6 w-24 h-24 bg-green-500 opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
-                <div className="w-10 h-10 rounded-md bg-green-50 flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform z-10 shrink-0">
-                  <Shield className="w-5 h-5" />
+              <div className="flex flex-row items-center text-left gap-3 md:gap-4 md:p-4 rounded-lg md:bg-gradient-to-br md:from-white md:to-gray-50 md:border md:border-gray-100 md:shadow-sm group relative overflow-hidden">
+                <div className="hidden md:block absolute -right-6 -top-6 w-24 h-24 bg-green-500 opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-md bg-green-50 flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform z-10 shrink-0">
+                  <Shield className="w-4 h-4 md:w-5 md:h-5" />
                 </div>
                 <div className="z-10 w-full">
-                  <h4 className="font-bold text-gray-900 text-[10px] md:text-sm mb-0.5 md:mb-1 line-clamp-1">100% Genuine</h4>
+                  <h4 className="font-bold text-gray-900 text-xs md:text-sm">100% Genuine</h4>
                   <p className="text-[9px] md:text-xs text-gray-500 leading-snug hidden md:block">Verified and authenticated direct from the manufacturer.</p>
                 </div>
               </div>
