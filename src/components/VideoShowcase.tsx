@@ -21,9 +21,9 @@ export const VideoShowcase = ({ videos: propVideos, onNavigate }: { videos?: any
           <p className="text-gray-400 max-w-2xl mx-auto">Watch our top trending products in action. Experience the viral sensations before you buy.</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto -mx-3 px-3 md:mx-auto md:px-0 pb-6 md:pb-0 snap-x snap-mandatory scroll-smooth overscroll-x-contain hide-scrollbar">
           {displayVideos.map((video: any) => (
-            <div key={video.id} className="relative rounded-xl overflow-hidden aspect-[9/16] shadow-2xl group border border-gray-800 bg-gray-900">
+            <div key={video.id} className="relative rounded-xl overflow-hidden aspect-[9/16] shadow-2xl group border border-gray-800 bg-gray-900 shrink-0 w-[140px] md:w-auto snap-start">
               <video
                 className="w-full h-full object-cover"
                 autoPlay
@@ -32,13 +32,13 @@ export const VideoShowcase = ({ videos: propVideos, onNavigate }: { videos?: any
                 playsInline
                 src={video.src}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6 transition-opacity duration-300">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-3 md:p-6 transition-opacity duration-300">
                 <div className="transform transition-transform duration-500 group-hover:translate-y-0 translate-y-4">
-                  <h3 className="text-xl font-bold text-white mb-1 drop-shadow-md">{video.title}</h3>
-                  <p className="text-sm text-gray-200 mb-4">{video.product}</p>
+                  <h3 className="text-sm md:text-xl font-bold text-white mb-0.5 md:mb-1 drop-shadow-md truncate">{video.title}</h3>
+                  <p className="text-[10px] md:text-sm text-gray-200 mb-2 md:mb-4 truncate">{video.product}</p>
                   <button 
                     onClick={() => onNavigate('category-products', null, 'Sale Item')}
-                    className="w-full bg-white hover:bg-[#e31c3d] hover:text-white text-black font-extrabold py-3.5 px-6 rounded-md transition-all shadow-lg text-sm uppercase tracking-widest active:scale-95"
+                    className="w-full bg-white hover:bg-[#e31c3d] hover:text-white text-black font-black py-2 md:py-3.5 px-3 md:px-6 rounded-md transition-all shadow-lg text-[10px] md:text-sm uppercase tracking-widest active:scale-95"
                   >
                     Shop Now
                   </button>

@@ -91,13 +91,13 @@ export const NewArrivals = ({ products: propProducts, onNavigate }: { products?:
             initial="initial"
             whileInView="animate"
             viewport={{ once: true, margin: "-50px" }}
-            className="flex overflow-x-auto -mx-3 px-3 md:mx-0 md:px-0 gap-3 md:gap-8 pb-12 md:pb-12 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth overscroll-x-contain"
+            className="flex overflow-x-auto gap-3 md:gap-8 pb-12 md:pb-12 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth overscroll-x-contain pl-6 pr-4 md:pl-0 md:pr-0"
           >
             {displayProducts.map((item: any, idx) => (
               <motion.div 
                 key={item.id || idx} 
                 variants={itemVariants} 
-                className="shrink-0 w-[240px] md:w-[320px] snap-start h-full"
+                className="shrink-0 w-[200px] md:w-[320px] snap-start h-full"
               >
                 <ProductCard 
                   product={item} 

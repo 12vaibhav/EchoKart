@@ -60,7 +60,7 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
       <div className="max-w-[1700px] mx-auto px-3 sm:px-6 lg:px-8">
         <div 
           onClick={handleSlideClick}
-          className="relative w-full h-[480px] md:h-[580px] lg:h-[680px] rounded-xl sm:rounded-3xl overflow-hidden group shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] border border-gray-100 cursor-pointer will-change-transform"
+          className="relative w-full h-[240px] md:h-[580px] lg:h-[680px] rounded-xl sm:rounded-3xl overflow-hidden group shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] border border-gray-100 cursor-pointer will-change-transform"
         >
           {/* Slides Container */}
           <AnimatePresence mode="popLayout" initial={false}>
