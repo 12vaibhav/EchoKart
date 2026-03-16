@@ -23,6 +23,8 @@ import {
 } from 'lucide-react';
 
 import { supabase } from '../../lib/supabase';
+import { deleteFileFromStorage } from '../../lib/storage-utils';
+import { useRef } from 'react';
 
 
 const fadeIn = {
@@ -36,6 +38,11 @@ type Section = 'hero' | 'videos' | 'reviews' | 'announcements';
 export const Settings = ({ products = [] }: { products?: any[] }) => {
   const [activeSection, setActiveSection] = useState<Section>('hero');
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+
+  // Refs
+  const bannerInputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
+  const videoInputRef = useRef<HTMLInputElement>(null);
 
   // Hero Banners State
   const [banners, setBanners] = useState<any[]>([]);
@@ -114,7 +121,17 @@ export const Settings = ({ products = [] }: { products?: any[] }) => {
 
   const handleImageUpload = async (id: string, e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
+    if (!file || isUploading) return;
+    
+    setIsUploading(true);
+    if (e.target) e.target.value = '';
+
+    try {
+      const existingBanner = banners.find(b => b.id === id);
+      if (existingBanner?.image_url) {
+        await deleteFileFromStorage(existingBanner.image_url);
+      }
+
       const fileExt = file.name.split('.').pop();
       const fileName = `banner-${Math.random()}.${fileExt}`;
       const filePath = `banners/${fileName}`;
@@ -123,19 +140,33 @@ export const Settings = ({ products = [] }: { products?: any[] }) => {
         .from('product-images')
         .upload(filePath, file);
 
-      if (uploadError) return;
+      if (uploadError) {
+        console.error('Banner upload error:', uploadError);
+        return;
+      }
 
       const { data: { publicUrl } } = supabase.storage
         .from('product-images')
         .getPublicUrl(filePath);
 
       setBanners(banners.map(b => b.id === id ? { ...b, image_url: publicUrl } : b));
+    } finally {
+      setIsUploading(false);
     }
   };
 
   const handleVideoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
+    if (!file || isUploading) return;
+    
+    setIsUploading(true);
+    if (e.target) e.target.value = '';
+
+    try {
+      if (newVideo.video_url) {
+        await deleteFileFromStorage(newVideo.video_url);
+      }
+
       const fileExt = file.name.split('.').pop();
       const fileName = `video-${Math.random()}.${fileExt}`;
       const filePath = `videos/${fileName}`;
@@ -144,13 +175,18 @@ export const Settings = ({ products = [] }: { products?: any[] }) => {
         .from('product-images')
         .upload(filePath, file);
 
-      if (uploadError) return;
+      if (uploadError) {
+        console.error('Settings video upload error:', uploadError);
+        return;
+      }
 
       const { data: { publicUrl } } = supabase.storage
         .from('product-images')
         .getPublicUrl(filePath);
 
       setNewVideo({ ...newVideo, video_url: publicUrl });
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -308,10 +344,13 @@ export const Settings = ({ products = [] }: { products?: any[] }) => {
             {banners.map((banner, idx) => (
               <div key={banner.id} className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                 <div className="flex items-stretch">
-                  <div className="w-48 h-32 bg-slate-100 shrink-0 overflow-hidden relative group cursor-pointer" onClick={() => document.getElementById(`banner-upload-${banner.id}`)?.click()}>
+                  <div 
+                    className={`w-48 h-32 bg-slate-100 shrink-0 overflow-hidden relative group cursor-pointer ${isUploading ? 'pointer-events-none' : ''}`} 
+                    onClick={() => bannerInputRefs.current[banner.id]?.click()}
+                  >
                     <input 
                       type="file" 
-                      id={`banner-upload-${banner.id}`} 
+                      ref={el => bannerInputRefs.current[banner.id] = el}
                       className="hidden" 
                       accept="image/*" 
                       onChange={(e) => handleImageUpload(banner.id, e)} 
@@ -325,8 +364,14 @@ export const Settings = ({ products = [] }: { products?: any[] }) => {
                       </div>
                     )}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
-                      <Upload size={20} className="text-white relative z-10" />
-                      <span className="text-white text-xs font-bold relative z-10">Upload Image</span>
+                      {isUploading ? (
+                        <div className="size-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                      ) : (
+                        <>
+                          <Upload size={20} className="text-white relative z-10" />
+                          <span className="text-white text-xs font-bold relative z-10">Upload Image</span>
+                        </>
+                      )}
                     </div>
                   </div>
                   <div className="flex-1 p-4 space-y-2">
@@ -334,6 +379,9 @@ export const Settings = ({ products = [] }: { products?: any[] }) => {
                       <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Slide {idx + 1}</span>
                       <button 
                         onClick={async () => {
+                          if (banner.image_url) {
+                            await deleteFileFromStorage(banner.image_url);
+                          }
                           if (banner.id.toString().length > 15) {
                             await supabase.from('banners').delete().eq('id', banner.id);
                           }
@@ -502,8 +550,15 @@ export const Settings = ({ products = [] }: { products?: any[] }) => {
                   <input type="text" value={newVideo.title} onChange={(e) => setNewVideo({...newVideo, title: e.target.value})} placeholder="Video title..." className="bg-slate-50 border border-slate-100 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#e31c3d] font-bold transition-colors" />
                   <div className="relative flex items-center col-span-1 md:col-span-1 border border-slate-100 rounded-xl bg-slate-50 transition-colors focus-within:border-[#e31c3d]">
                     <input type="text" value={newVideo.video_url} onChange={(e) => setNewVideo({...newVideo, video_url: e.target.value})} placeholder="Video URL or upload..." className="w-full px-4 py-2.5 text-sm outline-none bg-transparent font-bold" />
-                    <button type="button" onClick={() => document.getElementById('video-upload')?.click()} className="px-3 shrink-0 text-slate-400 hover:text-[#e31c3d] transition-colors"><Upload size={18} /></button>
-                    <input type="file" id="video-upload" className="hidden" accept="video/*" onChange={handleVideoUpload} />
+                    <button 
+                      type="button" 
+                      disabled={isUploading}
+                      onClick={() => videoInputRef.current?.click()} 
+                      className="px-3 shrink-0 text-slate-400 hover:text-[#e31c3d] transition-colors disabled:opacity-50"
+                    >
+                      {isUploading ? <div className="size-4 border-2 border-[#e31c3d] border-t-transparent rounded-full animate-spin"></div> : <Upload size={18} />}
+                    </button>
+                    <input type="file" ref={videoInputRef} className="hidden" accept="video/*" onChange={handleVideoUpload} />
                   </div>
                   <input type="text" value={newVideo.product_name} onChange={(e) => setNewVideo({...newVideo, product_name: e.target.value})} placeholder="Linked product name..." className="bg-slate-50 border border-slate-100 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#e31c3d] font-bold transition-colors" />
                 </div>
@@ -536,6 +591,9 @@ export const Settings = ({ products = [] }: { products?: any[] }) => {
                 </div>
                 <button
                   onClick={async () => {
+                    if (video.video_url) {
+                      await deleteFileFromStorage(video.video_url);
+                    }
                     await supabase.from('videos').delete().eq('id', video.id);
                     setVideos(videos.filter(v => v.id !== video.id));
                   }}

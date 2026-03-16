@@ -18,6 +18,8 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { supabase } from '../../lib/supabase';
+import { deleteFileFromStorage, deleteFilesFromStorage } from '../../lib/storage-utils';
+import { useRef } from 'react';
 
 const fadeInUpProps = {
   initial: { opacity: 0, y: 40 },
@@ -34,6 +36,13 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
   const [filterStatus, setFilterStatus] = useState<string>('All Statuses');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
+  const [isUploading, setIsUploading] = useState(false);
+
+  // File Input Refs
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const videoInputRef = useRef<HTMLInputElement>(null);
+  const featureImageInputRef = useRef<HTMLInputElement>(null);
+  const reviewImageInputRefs = useRef<{ [key: number]: HTMLInputElement | null }>({});
 
   // Modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -188,36 +197,48 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
-    if (files.length === 0) return;
+    if (files.length === 0 || isUploading) return;
     
-    for (const file of files) {
-      if (formData.images.length >= 6) break;
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Math.random()}.${fileExt}`;
-      const filePath = `products/${fileName}`;
+    setIsUploading(true);
+    // Reset input value so the same file selection triggers onChange again if needed
+    if (e.target) e.target.value = '';
 
-      const { error: uploadError } = await supabase.storage
-        .from('product-images')
-        .upload(filePath, file);
+    try {
+      for (const file of files) {
+        if (formData.images.length >= 6) break;
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Math.random()}.${fileExt}`;
+        const filePath = `products/${fileName}`;
 
-      if (uploadError) {
-        console.error('Upload error:', uploadError);
-        continue;
+        const { error: uploadError } = await supabase.storage
+          .from('product-images')
+          .upload(filePath, file);
+
+        if (uploadError) {
+          console.error('Upload error:', uploadError);
+          continue;
+        }
+
+        const { data: { publicUrl } } = supabase.storage
+          .from('product-images')
+          .getPublicUrl(filePath);
+
+        setFormData(prev => {
+          const newImages = [...prev.images, publicUrl];
+          return { ...prev, images: newImages, image: newImages[0] || '' };
+        });
       }
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('product-images')
-        .getPublicUrl(filePath);
-
-      setFormData(prev => {
-        const newImages = [...prev.images, publicUrl];
-        return { ...prev, images: newImages, image: newImages[0] || '' };
-      });
+    } finally {
+      setIsUploading(false);
     }
   };
 
 
-  const handleRemoveImage = (index: number) => {
+  const handleRemoveImage = async (index: number) => {
+    const imageUrl = formData.images[index];
+    if (imageUrl) {
+      await deleteFileFromStorage(imageUrl);
+    }
     setFormData(prev => {
       const newImages = prev.images.filter((_, i) => i !== index);
       return { ...prev, images: newImages, image: newImages[0] || '' };
@@ -226,35 +247,46 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
 
   const handleVideoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
-    if (files.length === 0) return;
+    if (files.length === 0 || isUploading) return;
     
-    for (const file of files) {
-      if (formData.videoUrls.length >= 2) break;
-      const fileExt = file.name.split('.').pop();
-      const fileName = `v-${Math.random()}.${fileExt}`;
-      const filePath = `videos/${fileName}`;
+    setIsUploading(true);
+    if (e.target) e.target.value = '';
 
-      const { error: uploadError } = await supabase.storage
-        .from('product-images')
-        .upload(filePath, file);
+    try {
+      for (const file of files) {
+        if (formData.videoUrls.length >= 2) break;
+        const fileExt = file.name.split('.').pop();
+        const fileName = `v-${Math.random()}.${fileExt}`;
+        const filePath = `videos/${fileName}`;
 
-      if (uploadError) {
-        console.error('Video upload error:', uploadError);
-        continue;
+        const { error: uploadError } = await supabase.storage
+          .from('product-images')
+          .upload(filePath, file);
+
+        if (uploadError) {
+          console.error('Video upload error:', uploadError);
+          continue;
+        }
+
+        const { data: { publicUrl } } = supabase.storage
+          .from('product-images')
+          .getPublicUrl(filePath);
+
+        setFormData(prev => ({ 
+          ...prev, 
+          videoUrls: [...prev.videoUrls, publicUrl] 
+        }));
       }
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('product-images')
-        .getPublicUrl(filePath);
-
-      setFormData(prev => ({ 
-        ...prev, 
-        videoUrls: [...prev.videoUrls, publicUrl] 
-      }));
+    } finally {
+      setIsUploading(false);
     }
   };
 
-  const handleRemoveVideo = (index: number) => {
+  const handleRemoveVideo = async (index: number) => {
+    const videoUrl = formData.videoUrls[index];
+    if (videoUrl) {
+      await deleteFileFromStorage(videoUrl);
+    }
     setFormData(prev => ({
       ...prev,
       videoUrls: prev.videoUrls.filter((_, i) => i !== index)
@@ -280,30 +312,41 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
 
   const handleFeatureImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
-    if (files.length === 0) return;
+    if (files.length === 0 || isUploading) return;
     
-    for (const file of files) {
-      if (formData.featureImages.length >= 6) break;
-      const fileExt = file.name.split('.').pop();
-      const fileName = `feature-${Math.random()}.${fileExt}`;
-      const filePath = `features/${fileName}`;
+    setIsUploading(true);
+    if (e.target) e.target.value = '';
 
-      const { error: uploadError } = await supabase.storage
-        .from('product-images')
-        .upload(filePath, file);
+    try {
+      for (const file of files) {
+        if (formData.featureImages.length >= 6) break;
+        const fileExt = file.name.split('.').pop();
+        const fileName = `feature-${Math.random()}.${fileExt}`;
+        const filePath = `features/${fileName}`;
 
-      if (uploadError) continue;
+        const { error: uploadError } = await supabase.storage
+          .from('product-images')
+          .upload(filePath, file);
 
-      const { data: { publicUrl } } = supabase.storage
-        .from('product-images')
-        .getPublicUrl(filePath);
+        if (uploadError) continue;
 
-      setFormData(prev => ({ ...prev, featureImages: [...prev.featureImages, publicUrl] }));
+        const { data: { publicUrl } } = supabase.storage
+          .from('product-images')
+          .getPublicUrl(filePath);
+
+        setFormData(prev => ({ ...prev, featureImages: [...prev.featureImages, publicUrl] }));
+      }
+    } finally {
+      setIsUploading(false);
     }
   };
 
 
-  const handleRemoveFeatureImage = (index: number) => {
+  const handleRemoveFeatureImage = async (index: number) => {
+    const imageUrl = formData.featureImages[index];
+    if (imageUrl) {
+      await deleteFileFromStorage(imageUrl);
+    }
     setFormData(prev => ({
       ...prev,
       featureImages: prev.featureImages.filter((_, i) => i !== index)
@@ -334,35 +377,46 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
 
   const handleReviewImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, reviewIdx: number) => {
     const files = Array.from(e.target.files || []);
-    if (files.length === 0) return;
+    if (files.length === 0 || isUploading) return;
     
-    for (const file of files) {
-      const fileExt = file.name.split('.').pop();
-      const fileName = `reviews/${Math.random()}.${fileExt}`;
-      const filePath = fileName;
+    setIsUploading(true);
+    if (e.target) e.target.value = '';
 
-      const { error: uploadError } = await supabase.storage
-        .from('product-images')
-        .upload(filePath, file);
+    try {
+      for (const file of files) {
+        const fileExt = file.name.split('.').pop();
+        const fileName = `reviews/${Math.random()}.${fileExt}`;
+        const filePath = fileName;
 
-      if (uploadError) {
-        console.error('Review image upload error:', uploadError);
-        continue;
+        const { error: uploadError } = await supabase.storage
+          .from('product-images')
+          .upload(filePath, file);
+
+        if (uploadError) {
+          console.error('Review image upload error:', uploadError);
+          continue;
+        }
+
+        const { data: { publicUrl } } = supabase.storage
+          .from('product-images')
+          .getPublicUrl(filePath);
+
+        setFormData(prev => {
+          const newReviews = [...prev.reviews];
+          newReviews[reviewIdx].images = [...(newReviews[reviewIdx].images || []), publicUrl];
+          return { ...prev, reviews: newReviews };
+        });
       }
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('product-images')
-        .getPublicUrl(filePath);
-
-      setFormData(prev => {
-        const newReviews = [...prev.reviews];
-        newReviews[reviewIdx].images = [...(newReviews[reviewIdx].images || []), publicUrl];
-        return { ...prev, reviews: newReviews };
-      });
+    } finally {
+      setIsUploading(false);
     }
   };
 
-  const handleRemoveReviewImage = (reviewIdx: number, imgIdx: number) => {
+  const handleRemoveReviewImage = async (reviewIdx: number, imgIdx: number) => {
+    const imageUrl = formData.reviews[reviewIdx].images?.[imgIdx];
+    if (imageUrl) {
+      await deleteFileFromStorage(imageUrl);
+    }
     setFormData(prev => {
       const newReviews = [...prev.reviews];
       newReviews[reviewIdx].images = newReviews[reviewIdx].images.filter((_, i) => i !== imgIdx);
@@ -371,6 +425,33 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
   };
 
   const handleDelete = async (id: string) => {
+    // 1. Fetch product to get all image/video URLs
+    const { data: product } = await supabase.from('products').select('*').eq('id', id).single();
+    
+    if (product) {
+      // 2. Collect all storage URLs
+      const urlsToDelete: string[] = [];
+      if (product.main_image_url) urlsToDelete.push(product.main_image_url);
+      if (Array.isArray(product.images)) urlsToDelete.push(...product.images);
+      if (Array.isArray(product.feature_images)) urlsToDelete.push(...product.feature_images);
+      if (Array.isArray(product.video_urls)) urlsToDelete.push(...product.video_urls);
+      
+      // Also collect review images
+      if (Array.isArray(product.reviews)) {
+        product.reviews.forEach((review: any) => {
+          if (Array.isArray(review.images)) {
+            urlsToDelete.push(...review.images);
+          }
+        });
+      }
+
+      // 3. Delete from storage
+      if (urlsToDelete.length > 0) {
+        await deleteFilesFromStorage(urlsToDelete);
+      }
+    }
+
+    // 4. Delete from database
     const { error } = await supabase.from('products').delete().eq('id', id);
     if (error) {
       console.error('Delete error:', error);
@@ -899,13 +980,14 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
                     <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Product Images ({formData.images.length}/6)</label>
                     <button 
                       type="button"
-                      disabled={formData.images.length >= 6} 
-                      onClick={() => document.getElementById('multi-image-upload')?.click()} 
+                      disabled={formData.images.length >= 6 || isUploading} 
+                      onClick={() => imageInputRef.current?.click()} 
                       className="flex items-center gap-1 text-xs font-bold text-[#e31c3d] hover:text-[#c81935] disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      <Upload size={14} /> Upload Image
+                      {isUploading ? <div className="size-3 border-2 border-[#e31c3d] border-t-transparent rounded-full animate-spin"></div> : <Upload size={14} />}
+                      {isUploading ? 'Uploading...' : 'Upload Image'}
                     </button>
-                    <input type="file" id="multi-image-upload" className="hidden" accept="image/*" multiple onChange={handleImageUpload} />
+                    <input type="file" ref={imageInputRef} className="hidden" accept="image/*" multiple onChange={handleImageUpload} />
                   </div>
                   <div className="grid grid-cols-6 gap-3">
                     {formData.images.map((img, idx) => (
@@ -932,13 +1014,14 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
                     <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Product Videos ({formData.videoUrls.length}/2)</label>
                     <button 
                       type="button"
-                      disabled={formData.videoUrls.length >= 2} 
-                      onClick={() => document.getElementById('video-upload')?.click()} 
+                      disabled={formData.videoUrls.length >= 2 || isUploading} 
+                      onClick={() => videoInputRef.current?.click()} 
                       className="flex items-center gap-1 text-xs font-bold text-[#e31c3d] hover:text-[#c81935] disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      <Upload size={14} /> Upload Video
+                      {isUploading ? <div className="size-3 border-2 border-[#e31c3d] border-t-transparent rounded-full animate-spin"></div> : <Upload size={14} />}
+                      {isUploading ? 'Uploading...' : 'Upload Video'}
                     </button>
-                    <input type="file" id="video-upload" className="hidden" accept="video/*" multiple onChange={handleVideoUpload} />
+                    <input type="file" ref={videoInputRef} className="hidden" accept="video/*" multiple onChange={handleVideoUpload} />
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     {formData.videoUrls.map((video, idx) => (
@@ -1003,13 +1086,14 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
                     <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Feature Showcase Images ({formData.featureImages.length}/6)</label>
                     <button 
                       type="button"
-                      disabled={formData.featureImages.length >= 6} 
-                      onClick={() => document.getElementById('multi-feature-image-upload')?.click()} 
+                      disabled={formData.featureImages.length >= 6 || isUploading} 
+                      onClick={() => featureImageInputRef.current?.click()} 
                       className="flex items-center gap-1 text-xs font-bold text-[#e31c3d] hover:text-[#c81935] disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      <Upload size={14} /> Upload Image
+                      {isUploading ? <div className="size-3 border-2 border-[#e31c3d] border-t-transparent rounded-full animate-spin"></div> : <Upload size={14} />}
+                      {isUploading ? 'Uploading...' : 'Upload Image'}
                     </button>
-                    <input type="file" id="multi-feature-image-upload" className="hidden" accept="image/*" multiple onChange={handleFeatureImageUpload} />
+                    <input type="file" ref={featureImageInputRef} className="hidden" accept="image/*" multiple onChange={handleFeatureImageUpload} />
                   </div>
                   <div className="grid grid-cols-6 gap-3">
                     {formData.featureImages.map((img, idx) => (
@@ -1067,10 +1151,11 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
                         <div>
                           <div className="flex items-center justify-between mb-1">
                             <label className="text-[10px] font-bold text-slate-500 uppercase">Attached Images</label>
-                            <button type="button" onClick={() => document.getElementById(`review-img-upload-${idx}`)?.click()} className="text-[10px] font-bold text-[#e31c3d] flex items-center gap-1">
-                              <Upload size={12}/> Attach
+                            <button type="button" disabled={isUploading} onClick={() => reviewImageInputRefs.current[idx]?.click()} className="text-[10px] font-bold text-[#e31c3d] flex items-center gap-1 disabled:opacity-50">
+                              {isUploading ? <div className="size-2 border-2 border-[#e31c3d] border-t-transparent rounded-full animate-spin"></div> : <Upload size={12}/>}
+                              {isUploading ? 'Attaching...' : 'Attach'}
                             </button>
-                            <input type="file" id={`review-img-upload-${idx}`} className="hidden" accept="image/*" onChange={(e) => handleReviewImageUpload(e, idx)} />
+                            <input type="file" ref={el => reviewImageInputRefs.current[idx] = el} className="hidden" accept="image/*" onChange={(e) => handleReviewImageUpload(e, idx)} />
                           </div>
                           {rev.images.length > 0 && (
                             <div className="flex gap-2 mt-2 overflow-x-auto pb-1">

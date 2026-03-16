@@ -14,6 +14,8 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import { deleteFileFromStorage } from '../../lib/storage-utils';
+import { useRef } from 'react';
 
 
 const fadeInUpProps = {
@@ -32,6 +34,8 @@ export const CategoriesManagement = ({ categories, onCategoriesChange }: { categ
   // Modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState({ title: '', image: '', items: 0 });
 
@@ -49,7 +53,16 @@ export const CategoriesManagement = ({ categories, onCategoriesChange }: { categ
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
+    if (!file || isUploading) return;
+    
+    setIsUploading(true);
+    if (e.target) e.target.value = '';
+
+    try {
+      if (formData.image) {
+        await deleteFileFromStorage(formData.image);
+      }
+
       const fileExt = file.name.split('.').pop();
       const fileName = `cat-${Math.random()}.${fileExt}`;
       const filePath = `categories/${fileName}`;
@@ -58,18 +71,32 @@ export const CategoriesManagement = ({ categories, onCategoriesChange }: { categ
         .from('product-images')
         .upload(filePath, file);
 
-      if (uploadError) return;
+      if (uploadError) {
+        console.error('Category upload error:', uploadError);
+        return;
+      }
 
       const { data: { publicUrl } } = supabase.storage
         .from('product-images')
         .getPublicUrl(filePath);
 
       setFormData({ ...formData, image: publicUrl });
+    } finally {
+      setIsUploading(false);
     }
   };
 
 
   const handleDelete = async (id: string) => {
+    // 1. Fetch category to get image URL
+    const { data: category } = await supabase.from('categories').select('*').eq('id', id).single();
+    
+    // 2. Delete from storage
+    if (category?.image_url) {
+      await deleteFileFromStorage(category.image_url);
+    }
+
+    // 3. Delete from database
     const { error } = await supabase.from('categories').delete().eq('id', id);
     if (error) {
       console.error('Delete error:', error);
@@ -253,8 +280,15 @@ export const CategoriesManagement = ({ categories, onCategoriesChange }: { categ
                 <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block">Image URL or Upload</label>
                 <div className="relative flex items-center border border-slate-200 rounded-lg bg-slate-50 transition-colors focus-within:border-[#e31c3d]">
                   <input type="text" value={formData.image} onChange={e => setFormData({...formData, image: e.target.value})} className="w-full px-4 py-2 text-sm outline-none bg-transparent" placeholder="https://..." />
-                  <button type="button" onClick={() => document.getElementById('category-image-upload')?.click()} className="px-3 shrink-0 text-slate-400 hover:text-[#e31c3d] transition-colors"><Upload size={18} /></button>
-                  <input type="file" id="category-image-upload" className="hidden" accept="image/*" onChange={handleImageUpload} />
+                  <button 
+                    type="button" 
+                    disabled={isUploading}
+                    onClick={() => fileInputRef.current?.click()} 
+                    className="px-3 shrink-0 text-slate-400 hover:text-[#e31c3d] transition-colors disabled:opacity-50"
+                  >
+                    {isUploading ? <div className="size-4 border-2 border-[#e31c3d] border-t-transparent rounded-full animate-spin"></div> : <Upload size={18} />}
+                  </button>
+                  <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageUpload} />
                 </div>
                 {formData.image && (
                   <div className="mt-2 h-24 rounded-lg overflow-hidden bg-slate-100 border border-slate-200">
