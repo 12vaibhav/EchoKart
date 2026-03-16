@@ -547,13 +547,13 @@ const ProductDetailsAndReviews = ({ product }: { product: any }) => {
 
       {/* Reviews Right Side */}
       <div className="lg:col-span-2">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Customer Reviews</h2>
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Customer Reviews</h2>
         
         {/* Rating Summary */}
-        <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm mb-8">
-          <div className="flex items-center gap-6 mb-6">
+        <div className="bg-white p-4 md:p-6 rounded-lg border border-gray-100 shadow-sm mb-6 md:mb-8">
+          <div className="flex items-center gap-4 md:gap-6 mb-4 md:mb-6">
             <div className="text-center">
-              <div className="text-5xl font-bold text-gray-900 mb-2">4.0</div>
+              <div className="text-3xl md:text-5xl font-bold text-gray-900 mb-1 md:mb-2">4.0</div>
               <div className="flex justify-center gap-1">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className={`w-4 h-4 ${i < 4 ? 'fill-[#ff9c1a] text-[#ff9c1a]' : 'text-gray-300'}`} />
@@ -579,16 +579,16 @@ const ProductDetailsAndReviews = ({ product }: { product: any }) => {
         </div>
 
         {/* Reviews List */}
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           {reviews.slice(0, visibleReviews).map((review: any, idx: number) => (
-            <div key={idx} className="bg-gray-50 p-5 rounded-lg border border-gray-100 transition-all hover:bg-white hover:shadow-sm">
+            <div key={idx} className="bg-gray-50 p-3.5 md:p-5 rounded-lg border border-gray-100 transition-all hover:bg-white hover:shadow-sm">
               {/* Enlarged Review Image Gallery */}
               {review.images && review.images.length > 0 && (
-                <div className="flex gap-3 mb-4">
+                <div className="flex gap-2 md:gap-3 mb-3 md:mb-4">
                   {review.images.map((img: string, i: number) => (
                     <div 
                       key={i} 
-                      className="size-16 sm:size-20 rounded-xl overflow-hidden border border-gray-200 shadow-sm bg-white cursor-pointer hover:scale-105 transition-transform hover:border-[#e31c3d]"
+                      className="size-14 md:size-20 rounded-lg md:rounded-xl overflow-hidden border border-gray-200 shadow-sm bg-white cursor-pointer hover:scale-105 transition-transform hover:border-[#e31c3d]"
                       onClick={() => setExpandedImage(img)}
                     >
                       <img src={img} alt="Review" className="w-full h-full object-cover" />
@@ -597,18 +597,18 @@ const ProductDetailsAndReviews = ({ product }: { product: any }) => {
                 </div>
               )}
 
-              <p className="text-gray-600 text-sm mb-6 leading-relaxed font-medium">
+              <p className="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 leading-relaxed font-medium">
                 {review.text || review.comment}
               </p>
               
-              <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-gray-100">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-[#e31c3d] font-bold text-sm border border-red-100 shrink-0">
+              <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4 pt-3 md:pt-4 border-t border-gray-100">
+                <div className="flex items-center gap-2 md:gap-3">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-red-50 flex items-center justify-center text-[#e31c3d] font-bold text-xs md:text-sm border border-red-100 shrink-0">
                     {(review.author || review.name || 'U').charAt(0)}
                   </div>
                   <div>
-                    <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                      <div className="font-bold text-sm text-gray-900 leading-none">{review.author || review.name}</div>
+                    <div className="flex items-center gap-1.5 md:gap-2 mb-1 flex-wrap">
+                      <div className="font-bold text-xs md:text-sm text-gray-900 leading-none">{review.author || review.name}</div>
                       <div className="flex gap-0.5">
                         {[...Array(5)].map((_, i) => (
                           <Star key={i} className={`w-3 h-3 ${i < review.rating ? 'fill-[#ff9c1a] text-[#ff9c1a]' : 'fill-gray-200 text-gray-200'}`} />
