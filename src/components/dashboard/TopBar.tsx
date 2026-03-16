@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Search, Bell, Menu, User, Settings, LogOut, HelpCircle, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { supabase } from '../../lib/supabase';
 
 export const TopBar = ({ onMenuClick, onNavigate }: { onMenuClick: () => void, onNavigate: (path: string) => void }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -150,7 +151,11 @@ export const TopBar = ({ onMenuClick, onNavigate }: { onMenuClick: () => void, o
                 <div className="h-px bg-slate-50 my-1 mx-4"></div>
                 
                 <button 
-                  onClick={() => handleNavigate('home')}
+                  onClick={async () => {
+                    await supabase.auth.signOut();
+                    onNavigate('home');
+                    setIsProfileOpen(false);
+                  }}
                   className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-bold text-rose-500 hover:bg-rose-50 transition-all text-left mt-1"
                 >
                   <LogOut className="w-4 h-4" />
