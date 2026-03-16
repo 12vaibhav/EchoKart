@@ -84,7 +84,7 @@ export const ProductCarouselSection = ({ title, products, onNavigate }: { title:
             <a 
               href="#" 
               onClick={(e) => { e.preventDefault(); onNavigate('category', 0); }} 
-              className="group flex items-center gap-2 text-sm font-black uppercase tracking-widest text-slate-900 hover:text-[#e31c3d] transition-colors"
+              className="group hidden md:flex items-center gap-2 text-sm font-black uppercase tracking-widest text-slate-900 hover:text-[#e31c3d] transition-colors"
             >
               Explore All 
               <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-[#e31c3d] group-hover:text-white transition-all">
