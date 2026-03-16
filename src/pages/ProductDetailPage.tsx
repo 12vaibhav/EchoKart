@@ -37,6 +37,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
   const isWishlisted = isInWishlist(product.id);
   const [quantity, setQuantity] = useState(1);
   const [selectedSwatch, setSelectedSwatch] = useState(product.swatches?.[0] || null);
+  const [selectedPack, setSelectedPack] = useState<any>(product.pack_options?.[0] || null);
   const [activeImage, setActiveImage] = useState(0);
   const galleryRef = useRef<HTMLDivElement>(null);
   const fbtScrollRef = useRef<HTMLDivElement>(null);
@@ -271,23 +272,62 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               </div>
             </div>
 
-            {/* Swatches */}
-            {product.swatches && product.swatches.length > 0 && (
-              <div className="mb-4 md:mb-8 order-7 md:order-0">
-                <h3 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide">Select Color</h3>
-                <div className="flex gap-3">
-                  {product.swatches.map((color, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setSelectedSwatch(color)}
-                      className={`w-10 h-10 rounded-full border-2 transition-all ${selectedSwatch === color ? 'border-[#e31c3d] scale-110 shadow-md' : 'border-transparent hover:scale-105 shadow-sm'}`}
-                      style={{ backgroundColor: color }}
-                      aria-label={`Select color ${color}`}
-                    />
-                  ))}
+            {/* Product Options (Swatches & Packs) */}
+            <div className="flex flex-col gap-6 mb-6 order-7 md:order-0">
+              {/* Swatches */}
+              {product.swatches_visible !== false && product.swatches && product.swatches.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide flex items-center gap-2">
+                    Select Color
+                    {selectedSwatch && <span className="text-[10px] font-black text-[#e31c3d] bg-red-50 px-2 py-0.5 rounded">{selectedSwatch}</span>}
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
+                    {product.swatches.map((color: string, idx: number) => (
+                      <button
+                        key={idx}
+                        onClick={() => setSelectedSwatch(color)}
+                        className={`w-10 h-10 rounded-full border-2 transition-all flex items-center justify-center ${selectedSwatch === color ? 'border-[#e31c3d] scale-110 shadow-md ring-4 ring-red-50' : 'border-transparent hover:scale-105 shadow-sm bg-gray-50'}`}
+                        style={{ backgroundColor: color.toLowerCase().includes('#') || color.toLowerCase().includes('rgb') ? color : undefined }}
+                        aria-label={`Select color ${color}`}
+                      >
+                        {!(color.toLowerCase().includes('#') || color.toLowerCase().includes('rgb')) && (
+                          <span className="text-[8px] font-black uppercase text-center leading-tight px-1">{color}</span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+
+              {/* Pack Options */}
+              {product.packs_visible && product.pack_options && product.pack_options.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide">Select Pack</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {product.pack_options.map((pack: any, idx: number) => (
+                      <button
+                        key={idx}
+                        onClick={() => {
+                          setSelectedPack(pack);
+                          if (pack.price) {
+                            // Optionally update visible price if needed, but usually we just handle it in addToCart
+                          }
+                        }}
+                        className={`p-3 rounded-xl border-2 transition-all text-left flex flex-col gap-1 ${selectedPack?.label === pack.label ? 'border-[#e31c3d] bg-red-50 shadow-md ring-2 ring-red-50' : 'border-gray-100 bg-white hover:border-gray-200 shadow-sm'}`}
+                      >
+                        <span className={`text-[10px] font-black uppercase tracking-wider ${selectedPack?.label === pack.label ? 'text-[#e31c3d]' : 'text-gray-500'}`}>{pack.label}</span>
+                        {pack.price && (
+                          <span className="text-sm font-black text-gray-900">₹{pack.price.toLocaleString('en-IN')}</span>
+                        )}
+                        {pack.savings && (
+                          <span className="text-[9px] font-bold text-green-600 bg-green-50 px-1.5 py-0.5 rounded-full w-fit">Save {pack.savings}</span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* Actions (Product Unit Element) */}
             <div className="flex flex-col gap-2 md:gap-4 mb-4 md:mb-8 order-8 md:order-0">
@@ -307,14 +347,20 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                 
                 <div className="flex gap-3">
                   <button 
-                    onClick={() => addToCart(product, quantity, selectedSwatch || undefined)}
+                    onClick={() => {
+                      const variant = [selectedSwatch, selectedPack?.label].filter(Boolean).join(' / ');
+                      const itemPrice = selectedPack?.price || product.price;
+                      addToCart({ ...product, price: itemPrice }, quantity, variant || undefined);
+                    }}
                     className="flex-1 bg-white border border-gray-200 text-gray-900 font-bold h-12 rounded-md flex items-center justify-center gap-2 hover:border-gray-300 hover:shadow-sm transition-all text-xs uppercase tracking-widest"
                   >
                     <ShoppingBag className="w-4 h-4" /> Cart
                   </button>
                   <button 
                     onClick={() => {
-                      addToCart(product, quantity, selectedSwatch || undefined);
+                      const variant = [selectedSwatch, selectedPack?.label].filter(Boolean).join(' / ');
+                      const itemPrice = selectedPack?.price || product.price;
+                      addToCart({ ...product, price: itemPrice }, quantity, variant || undefined);
                       onNavigate?.('checkout');
                     }}
                     className="flex-[2] bg-slate-900 text-white font-black h-12 rounded-md hover:bg-black transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-lg"
@@ -325,7 +371,9 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               </div>
               <button 
                 onClick={() => {
-                  addToCart(product, quantity, selectedSwatch || undefined);
+                  const variant = [selectedSwatch, selectedPack?.label].filter(Boolean).join(' / ');
+                  const itemPrice = selectedPack?.price || product.price;
+                  addToCart({ ...product, price: itemPrice }, quantity, variant || undefined);
                   onNavigate?.('checkout', 'cod');
                 }}
                 className="relative w-full overflow-hidden h-14 rounded-md flex items-center justify-center gap-3 shadow-[0_8px_30px_rgba(255,152,0,0.3)] hover:shadow-[0_8px_40px_rgba(255,152,0,0.5)] transition-all duration-300 hover:-translate-y-1 border border-orange-400"

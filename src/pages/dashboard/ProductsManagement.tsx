@@ -39,12 +39,16 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState({ 
-    name: '', category: '', price: 0, stock: 0, status: 'In Stock', image: '', images: [] as string[], tags: [] as string[],
-    productCopy: '', shortDescription: '', featureImages: [] as string[], 
-    rating: 5, reviewsCount: 0,
-    reviews: [] as { author: string, rating: number, text: string, images: string[] }[],
-    isTrending: false, isNewArrival: false
+    isTrending: false, isNewArrival: false,
+    swatches: [] as string[],
+    swatchesVisible: true,
+    packOptions: [] as { label: string, price: number, savings: string }[],
+    packsVisible: false
   });
+  const [swatchInput, setSwatchInput] = useState('');
+  const [packLabel, setPackLabel] = useState('');
+  const [packPrice, setPackPrice] = useState(0);
+  const [packSavings, setPackSavings] = useState('');
   const [tagInput, setTagInput] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
@@ -154,13 +158,26 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
         reviewsCount: product.reviewsCount !== undefined ? product.reviewsCount : (typeof product.reviews === 'number' ? product.reviews : (product.reviews?.length || 0)),
         reviews: Array.isArray(product.reviews) ? product.reviews : [],
         isTrending: product.isTrending || false,
-        isNewArrival: product.isNewArrival || false
+        isNewArrival: product.isNewArrival || false,
+        swatches: product.swatches || [],
+        swatchesVisible: product.swatches_visible !== false,
+        packOptions: product.pack_options || [],
+        packsVisible: product.packs_visible || false
       });
     } else {
       setEditingId(null);
-      setFormData({ name: '', category: availableCategories[0] || 'Electronics', price: 0, stock: 0, status: 'In Stock', image: '', images: [], tags: [], productCopy: '', shortDescription: '', featureImages: [], rating: 5, reviewsCount: 0, reviews: [], isTrending: false, isNewArrival: false });
+      setFormData({ 
+        name: '', category: availableCategories[0] || 'Electronics', price: 0, stock: 0, status: 'In Stock', 
+        image: '', images: [], tags: [], productCopy: '', shortDescription: '', featureImages: [], 
+        rating: 5, reviewsCount: 0, reviews: [], isTrending: false, isNewArrival: false,
+        swatches: [], swatchesVisible: true, packOptions: [], packsVisible: false
+      });
     }
     setTagInput('');
+    setSwatchInput('');
+    setPackLabel('');
+    setPackPrice(0);
+    setPackSavings('');
     setIsModalOpen(true);
   };
 
@@ -375,7 +392,11 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
       reviews_count: formData.reviewsCount,
       reviews: formData.reviews,
       is_trending: formData.isTrending,
-      is_new_arrival: formData.isNewArrival
+      is_new_arrival: formData.isNewArrival,
+      swatches: formData.swatches,
+      swatches_visible: formData.swatchesVisible,
+      pack_options: formData.packOptions,
+      packs_visible: formData.packsVisible
     };
 
     if (editingId) {
@@ -680,6 +701,121 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
                     <input type="checkbox" className="sr-only peer" checked={formData.isNewArrival} onChange={e => setFormData({...formData, isNewArrival: e.target.checked})} />
                     <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-[#e31c3d] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
                   </label>
+                </div>
+
+                <div className="col-span-1 flex items-center justify-between border border-slate-200 rounded-lg p-4 bg-white transition-shadow hover:shadow-sm">
+                  <div>
+                    <h5 className="text-sm font-bold text-slate-800">Swatches Visible</h5>
+                    <p className="text-[10px] text-slate-500 font-medium mt-0.5 max-w-[160px]">Toggle color selection visibility</p>
+                  </div>
+                  <label className="relative inline-flex items-center cursor-pointer shrink-0">
+                    <input type="checkbox" className="sr-only peer" checked={formData.swatchesVisible} onChange={e => setFormData({...formData, swatchesVisible: e.target.checked})} />
+                    <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-[#e31c3d] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                  </label>
+                </div>
+
+                <div className="col-span-1 flex items-center justify-between border border-slate-200 rounded-lg p-4 bg-white transition-shadow hover:shadow-sm">
+                  <div>
+                    <h5 className="text-sm font-bold text-slate-800">Packs Visible</h5>
+                    <p className="text-[10px] text-slate-500 font-medium mt-0.5 max-w-[160px]">Toggle pack options visibility</p>
+                  </div>
+                  <label className="relative inline-flex items-center cursor-pointer shrink-0">
+                    <input type="checkbox" className="sr-only peer" checked={formData.packsVisible} onChange={e => setFormData({...formData, packsVisible: e.target.checked})} />
+                    <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-[#e31c3d] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                  </label>
+                </div>
+
+                <div className="col-span-2 space-y-4">
+                  <div>
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block">Color Swatches</label>
+                    <div className="border border-slate-200 rounded-lg p-2 focus-within:border-[#e31c3d] transition-colors flex flex-wrap gap-2 items-center bg-white">
+                      {formData.swatches.map(sw => (
+                        <span key={sw} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-bold">
+                          <div className="size-3 rounded-full border border-slate-300" style={{ backgroundColor: sw.toLowerCase().includes('#') || sw.toLowerCase().includes('rgb') ? sw : undefined }}></div>
+                          {sw}
+                          <button onClick={() => setFormData(prev => ({ ...prev, swatches: prev.swatches.filter(s => s !== sw) }))} className="hover:text-red-500"><X size={12} /></button>
+                        </span>
+                      ))}
+                      <input 
+                        type="text" 
+                        value={swatchInput}
+                        onChange={e => setSwatchInput(e.target.value)}
+                        onKeyDown={e => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            if (swatchInput.trim() && !formData.swatches.includes(swatchInput.trim())) {
+                              setFormData(prev => ({ ...prev, swatches: [...prev.swatches, swatchInput.trim()] }));
+                              setSwatchInput('');
+                            }
+                          }
+                        }}
+                        placeholder="Add color (e.g. Red, #FF0000)..."
+                        className="flex-1 min-w-[150px] outline-none text-sm px-1 py-1"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block">Pack Options</label>
+                    <div className="space-y-3">
+                      <div className="grid grid-cols-3 gap-2">
+                        <input 
+                          type="text" 
+                          placeholder="Pack Label (e.g. 2 Pack)" 
+                          value={packLabel} 
+                          onChange={e => setPackLabel(e.target.value)}
+                          className="border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#e31c3d]" 
+                        />
+                        <input 
+                          type="number" 
+                          placeholder="Price" 
+                          value={packPrice} 
+                          onChange={e => setPackPrice(parseFloat(e.target.value) || 0)}
+                          className="border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#e31c3d]" 
+                        />
+                        <input 
+                          type="text" 
+                          placeholder="Savings (e.g. 20%)" 
+                          value={packSavings} 
+                          onChange={e => setPackSavings(e.target.value)}
+                          className="border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#e31c3d]" 
+                        />
+                      </div>
+                      <button 
+                        type="button" 
+                        onClick={() => {
+                          if (packLabel.trim()) {
+                            setFormData(prev => ({
+                              ...prev,
+                              packOptions: [...prev.packOptions, { label: packLabel.trim(), price: packPrice, savings: packSavings }]
+                            }));
+                            setPackLabel('');
+                            setPackPrice(0);
+                            setPackSavings('');
+                          }
+                        }}
+                        className="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-lg transition-colors border border-slate-200"
+                      >
+                        + Add Pack Option
+                      </button>
+                      <div className="flex flex-wrap gap-2">
+                        {formData.packOptions.map((pack, idx) => (
+                          <div key={idx} className="bg-white border border-slate-200 rounded-lg p-3 flex flex-col gap-1 min-w-[140px] relative group">
+                            <button 
+                              type="button" 
+                              onClick={() => setFormData(prev => ({ ...prev, packOptions: prev.packOptions.filter((_, i) => i !== idx) }))}
+                              className="absolute top-1 right-1 size-5 bg-red-50 text-red-500 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                            >
+                              <X size={12} />
+                            </button>
+                            <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider ">{pack.label}</span>
+                            <span className="text-xs font-bold text-[#e31c3d]">₹{pack.price}</span>
+                            {pack.savings && <span className="text-[9px] font-medium text-green-600 bg-green-50 px-1 py-0.5 rounded w-fit">Save {pack.savings}</span>}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="col-span-2">
