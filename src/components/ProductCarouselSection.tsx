@@ -101,7 +101,7 @@ export const ProductCarouselSection = ({ title, products, onNavigate }: { title:
             initial="initial"
             whileInView="animate"
             viewport={{ once: true, margin: "-50px" }}
-            className="grid grid-rows-2 grid-flow-col overflow-x-auto -mx-3 px-3 gap-x-3 gap-y-3 pb-12 md:flex md:overflow-x-auto md:gap-8 md:pb-12 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth overscroll-x-contain pl-6 pr-4 md:pl-8 md:pr-0"
+            className="grid grid-rows-2 grid-flow-col overflow-x-auto -mx-3 gap-x-3 gap-y-3 pb-12 md:flex md:overflow-x-auto md:gap-8 md:pb-12 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth overscroll-x-contain pl-6 pr-6 scroll-pl-6 md:pl-8 md:pr-0 md:scroll-pl-0"
           >
             {products.map(product => (
               <motion.div 
