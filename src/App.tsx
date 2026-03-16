@@ -444,7 +444,10 @@ export default function App() {
         {route.path === 'shipping-policy' && <ShippingPolicyPage />}
         {route.path === 'auth' && <AuthPage onNavigate={navigate} />}
       </main>
-      <Footer onNavigate={navigate} />
+      {/* Hide footer on product detail page for mobile as per user request to stop scroll at Related Products */}
+      {!(route.path === 'product' && typeof window !== 'undefined' && window.innerWidth < 768) && (
+        <Footer onNavigate={navigate} />
+      )}
     </div>
   );
 }
