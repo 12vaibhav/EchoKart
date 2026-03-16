@@ -46,6 +46,7 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
     packsVisible: false
   });
   const [swatchInput, setSwatchInput] = useState('');
+  const [swatchName, setSwatchName] = useState('');
   const [packLabel, setPackLabel] = useState('');
   const [packPrice, setPackPrice] = useState(0);
   const [packSavings, setPackSavings] = useState('');
@@ -175,6 +176,7 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
     }
     setTagInput('');
     setSwatchInput('');
+    setSwatchName('');
     setPackLabel('');
     setPackPrice(0);
     setPackSavings('');
@@ -728,30 +730,63 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
                 <div className="col-span-2 space-y-4">
                   <div>
                     <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block">Color Swatches</label>
-                    <div className="border border-slate-200 rounded-lg p-2 focus-within:border-[#e31c3d] transition-colors flex flex-wrap gap-2 items-center bg-white">
-                      {formData.swatches.map(sw => (
-                        <span key={sw} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-bold">
-                          <div className="size-3 rounded-full border border-slate-300" style={{ backgroundColor: sw.toLowerCase().includes('#') || sw.toLowerCase().includes('rgb') ? sw : undefined }}></div>
-                          {sw}
-                          <button onClick={() => setFormData(prev => ({ ...prev, swatches: prev.swatches.filter(s => s !== sw) }))} className="hover:text-red-500"><X size={12} /></button>
-                        </span>
-                      ))}
-                      <input 
-                        type="text" 
-                        value={swatchInput}
-                        onChange={e => setSwatchInput(e.target.value)}
-                        onKeyDown={e => {
-                          if (e.key === 'Enter') {
-                            e.preventDefault();
-                            if (swatchInput.trim() && !formData.swatches.includes(swatchInput.trim())) {
-                              setFormData(prev => ({ ...prev, swatches: [...prev.swatches, swatchInput.trim()] }));
-                              setSwatchInput('');
+                    <div className="space-y-3">
+                      <div className="border border-slate-200 rounded-lg p-2 focus-within:border-[#e31c3d] transition-colors flex flex-wrap gap-2 items-center bg-white">
+                        {formData.swatches.map(sw => {
+                          const hasPipe = sw.includes('|');
+                          const name = hasPipe ? sw.split('|')[0] : sw;
+                          const color = hasPipe ? sw.split('|')[1] : sw;
+                          return (
+                            <span key={sw} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-[10px] font-bold">
+                              <div className="size-3 rounded-full border border-slate-300" style={{ backgroundColor: color.toLowerCase().includes('#') || color.toLowerCase().includes('rgb') ? color : undefined }}></div>
+                              {name}
+                              <button onClick={() => setFormData(prev => ({ ...prev, swatches: prev.swatches.filter(s => s !== sw) }))} className="hover:text-red-500"><X size={10} /></button>
+                            </span>
+                          );
+                        })}
+                      </div>
+                      <div className="flex gap-2">
+                        <input 
+                          type="text" 
+                          placeholder="Name (e.g. Red)" 
+                          value={swatchName} 
+                          onChange={e => setSwatchName(e.target.value)}
+                          className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#e31c3d]" 
+                        />
+                        <input 
+                          type="text" 
+                          placeholder="Color (#Hex)" 
+                          value={swatchInput} 
+                          onChange={e => setSwatchInput(e.target.value)}
+                          className="w-32 border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#e31c3d]" 
+                        />
+                        <button 
+                          type="button"
+                          onClick={() => {
+                            const name = swatchName.trim();
+                            const color = swatchInput.trim();
+                            if (name && color) {
+                              const value = `${name}|${color}`;
+                              if (!formData.swatches.includes(value)) {
+                                setFormData(prev => ({ ...prev, swatches: [...prev.swatches, value] }));
+                                setSwatchName('');
+                                setSwatchInput('');
+                              }
+                            } else if (name || color) {
+                              // Fallback for single value
+                              const val = name || color;
+                              if (!formData.swatches.includes(val)) {
+                                setFormData(prev => ({ ...prev, swatches: [...prev.swatches, val] }));
+                                setSwatchName('');
+                                setSwatchInput('');
+                              }
                             }
-                          }
-                        }}
-                        placeholder="Add color (e.g. Red, #FF0000)..."
-                        className="flex-1 min-w-[150px] outline-none text-sm px-1 py-1"
-                      />
+                          }}
+                          className="px-4 bg-slate-800 text-white rounded-lg text-xs font-bold hover:bg-slate-900 transition-colors"
+                        >
+                          Add
+                        </button>
+                      </div>
                     </div>
                   </div>
 

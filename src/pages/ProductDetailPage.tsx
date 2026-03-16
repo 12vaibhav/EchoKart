@@ -36,6 +36,17 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
   const packOptions = product.pack_options || [];
   const packsVisible = product.packs_visible || false;
 
+  // Helper to parse "Name|Color" swatches
+  const parseSwatch = (swatchStr: string) => {
+    if (!swatchStr) return { name: '', color: '' };
+    if (swatchStr.includes('|')) {
+      const [name, color] = swatchStr.split('|');
+      return { name: name.trim(), color: color.trim() };
+    }
+    // Fallback for legacy data or simple names
+    return { name: swatchStr, color: swatchStr };
+  };
+
   const { isInWishlist, toggleWishlist } = useWishlist();
   const { addToCart } = useCart();
   const isWishlisted = isInWishlist(product.id);
@@ -301,22 +312,29 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                 <div>
                   <h3 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide flex items-center gap-2">
                     Select Color
-                    {selectedSwatch && <span className="text-[10px] font-black text-[#e31c3d] bg-red-50 px-2 py-0.5 rounded">{selectedSwatch}</span>}
+                    {selectedSwatch && <span className="text-[10px] font-black text-[#e31c3d] bg-red-50 px-2 py-0.5 rounded">{parseSwatch(selectedSwatch).name}</span>}
                   </h3>
                   <div className="flex flex-wrap gap-3">
-                    {swatches.map((color: string, idx: number) => (
-                      <button
-                        key={idx}
-                        onClick={() => setSelectedSwatch(color)}
-                        className={`w-10 h-10 rounded-full border-2 transition-all flex items-center justify-center ${selectedSwatch === color ? 'border-[#e31c3d] scale-110 shadow-md ring-4 ring-red-50' : 'border-transparent hover:scale-105 shadow-sm bg-gray-50'}`}
-                        style={{ backgroundColor: color.toLowerCase().includes('#') || color.toLowerCase().includes('rgb') ? color : undefined }}
-                        aria-label={`Select color ${color}`}
-                      >
-                        {!(color.toLowerCase().includes('#') || color.toLowerCase().includes('rgb')) && (
-                          <span className="text-[8px] font-black uppercase text-center leading-tight px-1">{color}</span>
-                        )}
-                      </button>
-                    ))}
+                    {swatches.map((colorStr: string, idx: number) => {
+                      const { name, color } = parseSwatch(colorStr);
+                      const isHexOrRgb = color.toLowerCase().includes('#') || color.toLowerCase().includes('rgb');
+                      return (
+                        <button
+                          key={idx}
+                          onClick={() => setSelectedSwatch(colorStr)}
+                          className={`w-10 h-12 rounded-2xl border-2 transition-all flex flex-col items-center justify-center gap-1 ${selectedSwatch === colorStr ? 'border-[#e31c3d] scale-110 shadow-md ring-4 ring-red-50' : 'border-transparent hover:scale-105 shadow-sm bg-gray-50'}`}
+                          aria-label={`Select color ${name}`}
+                        >
+                          <div 
+                            className={`w-7 h-7 rounded-lg border border-gray-200 ${!isHexOrRgb ? 'flex items-center justify-center' : ''}`}
+                            style={{ backgroundColor: isHexOrRgb ? color : undefined }}
+                          >
+                            {!isHexOrRgb && <span className="text-[8px] font-black uppercase text-center leading-tight px-1">{name.slice(0, 2)}</span>}
+                          </div>
+                          <span className="text-[7px] font-black uppercase tracking-tighter opacity-70 truncate w-full px-1 text-center">{name}</span>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -325,22 +343,24 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               {packsVisible && packOptions.length > 0 && (
                 <div>
                   <h3 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide">Select Pack</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="flex md:grid md:grid-cols-3 gap-2 md:gap-3 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
                     {packOptions.map((pack: any, idx: number) => (
                       <button
                         key={idx}
                         onClick={() => {
                           setSelectedPack(pack);
                         }}
-                        className={`p-3 rounded-xl border-2 transition-all text-left flex flex-col gap-1 ${selectedPack?.label === pack.label ? 'border-[#e31c3d] bg-red-50 shadow-md ring-2 ring-red-50' : 'border-gray-100 bg-white hover:border-gray-200 shadow-sm'}`}
+                        className={`flex-shrink-0 md:flex-shrink p-2.5 px-4 md:p-3 rounded-full md:rounded-xl border-2 transition-all flex flex-row md:flex-col items-center md:items-start gap-2.5 md:gap-1 ${selectedPack?.label === pack.label ? 'border-[#e31c3d] bg-red-50 shadow-md ring-2 ring-red-50' : 'border-gray-100 bg-white hover:border-gray-200 shadow-sm'}`}
                       >
-                        <span className={`text-[10px] font-black uppercase tracking-wider ${selectedPack?.label === pack.label ? 'text-[#e31c3d]' : 'text-gray-500'}`}>{pack.label}</span>
-                        {pack.price && (
-                          <span className="text-sm font-black text-gray-900">₹{pack.price.toLocaleString('en-IN')}</span>
-                        )}
-                        {pack.savings && (
-                          <span className="text-[9px] font-bold text-green-600 bg-green-50 px-1.5 py-0.5 rounded-full w-fit">Save {pack.savings}</span>
-                        )}
+                        <span className={`text-[10px] font-black uppercase tracking-wider whitespace-nowrap ${selectedPack?.label === pack.label ? 'text-[#e31c3d]' : 'text-gray-500'}`}>{pack.label}</span>
+                        <div className="flex items-center gap-1.5 md:flex-col md:items-start md:gap-0.5">
+                          {pack.price && (
+                            <span className="text-xs md:text-sm font-black text-gray-900 whitespace-nowrap">₹{pack.price.toLocaleString('en-IN')}</span>
+                          )}
+                          {pack.savings && (
+                            <span className="text-[8px] md:text-[9px] font-bold text-green-600 bg-green-50 px-1.5 py-0.5 rounded-full whitespace-nowrap">Save {pack.savings}</span>
+                          )}
+                        </div>
                       </button>
                     ))}
                   </div>
@@ -367,7 +387,8 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                 <div className="flex gap-3">
                   <button 
                     onClick={() => {
-                      const variant = [selectedSwatch, selectedPack?.label].filter(Boolean).join(' / ');
+                      const swatchParts = parseSwatch(selectedSwatch || '');
+                      const variant = [swatchParts.name, selectedPack?.label].filter(Boolean).join(' / ');
                       const itemPrice = selectedPack?.price || product.price;
                       addToCart({ ...product, price: itemPrice }, quantity, variant || undefined);
                     }}
@@ -377,7 +398,8 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                   </button>
                   <button 
                     onClick={() => {
-                      const variant = [selectedSwatch, selectedPack?.label].filter(Boolean).join(' / ');
+                      const swatchParts = parseSwatch(selectedSwatch || '');
+                      const variant = [swatchParts.name, selectedPack?.label].filter(Boolean).join(' / ');
                       const itemPrice = selectedPack?.price || product.price;
                       addToCart({ ...product, price: itemPrice }, quantity, variant || undefined);
                       onNavigate?.('checkout');
@@ -390,7 +412,8 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               </div>
               <button 
                 onClick={() => {
-                  const variant = [selectedSwatch, selectedPack?.label].filter(Boolean).join(' / ');
+                  const swatchParts = parseSwatch(selectedSwatch || '');
+                  const variant = [swatchParts.name, selectedPack?.label].filter(Boolean).join(' / ');
                   const itemPrice = selectedPack?.price || product.price;
                   addToCart({ ...product, price: itemPrice }, quantity, variant || undefined);
                   onNavigate?.('checkout', 'cod');
