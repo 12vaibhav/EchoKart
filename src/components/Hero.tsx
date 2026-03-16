@@ -82,7 +82,7 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
           </AnimatePresence>
 
           {/* Staggered Content Area */}
-          <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 md:pb-28 text-center px-6 sm:px-12 pointer-events-none">
+          <div className="absolute inset-0 flex flex-col items-center justify-end pb-6 md:pb-28 text-center px-6 sm:px-12 pointer-events-none">
             <div className="max-w-4xl flex flex-col items-center">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -98,10 +98,10 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
                   <motion.div variants={itemVariants} className="pointer-events-auto">
                     <button 
                       onClick={(e) => { e.stopPropagation(); handleSlideClick(); }}
-                      className="group/btn relative overflow-hidden bg-white text-black hover:text-white font-black py-4 px-10 md:py-5 md:px-14 rounded-full transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_25px_50px_rgba(0,0,0,0.4)] text-[11px] md:text-base tracking-widest uppercase flex items-center justify-center gap-3"
+                      className="group/btn relative overflow-hidden bg-white text-black hover:text-white font-black py-2.5 px-7 md:py-5 md:px-14 rounded-full transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_25px_50px_rgba(0,0,0,0.4)] text-[10px] md:text-base tracking-widest uppercase flex items-center justify-center gap-2"
                     >
                       <span className="relative z-10">Explore Now</span>
-                      <ArrowRight className="w-4 h-4 md:w-5 md:h-5 relative z-10 group-hover/btn:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-3.5 h-3.5 md:w-5 md:h-5 relative z-10 group-hover/btn:translate-x-1 transition-transform" />
                       <div className="absolute inset-0 bg-[#e31c3d] -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500 ease-[0.22,1,0.36,1]" />
                     </button>
                   </motion.div>
