@@ -80,7 +80,17 @@ export const OrderDetailsPage = ({ orderId, onBack }: { orderId: string, onBack:
         .eq('id', orderId);
 
       if (error) throw error;
-      setOrder(prev => ({ ...prev, ...updates }));
+      const updatedOrder = { ...order, ...updates };
+      setOrder(updatedOrder);
+
+      // Trigger email notification
+      try {
+        await supabase.functions.invoke('notify-order-status-v1', {
+          body: { order: updatedOrder, status: newStatus }
+        });
+      } catch (emailErr) {
+        console.error('Error sending status email notification:', emailErr);
+      }
     } catch (err) {
       console.error('Error updating status:', err);
       alert('Failed to update status');
