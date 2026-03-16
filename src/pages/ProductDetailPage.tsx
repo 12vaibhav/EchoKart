@@ -101,7 +101,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
   const discount = product.oldPrice ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100) : 0;
 
   return (
-    <div className="bg-white min-h-screen pb-20">
+    <div className="bg-white min-h-screen pb-32 md:pb-20">
       {/* Breadcrumbs */}
       <div className="hidden md:block bg-white py-4 border-b border-gray-100">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center text-sm text-gray-500 font-medium">
@@ -259,8 +259,8 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             </div>
 
             {/* Important Highlights */}
-            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-2 md:gap-4 mb-4 md:mb-10 order-10 md:order-0">
-              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-lg bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-1.5 md:gap-4 mb-4 md:mb-10 order-10 md:order-0">
+              <div className="flex flex-row items-start text-left gap-3 md:gap-4 p-2 md:p-4 rounded-lg bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
                 <div className="absolute -right-6 -top-6 w-24 h-24 bg-[#e31c3d] opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
                 <div className="w-10 h-10 rounded-md bg-red-50 flex items-center justify-center text-[#e31c3d] group-hover:scale-110 transition-transform z-10 shrink-0">
                   <Truck className="w-5 h-5" />
@@ -306,7 +306,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             </div>
 
             {/* Product Options (Swatches & Packs) */}
-            <div className="flex flex-col gap-6 mb-6 order-7 md:order-0">
+            <div className="flex flex-col gap-3 md:gap-6 mb-3 md:mb-6 order-7 md:order-0">
               {/* Swatches */}
               {swatchesVisible && swatches.length > 0 && (
                 <div>
@@ -368,9 +368,9 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             </div>
 
             {/* Actions (Product Unit Element) */}
-            <div className="flex flex-col gap-2 md:gap-4 mb-4 md:mb-8 order-8 md:order-0">
-              <div className="bg-gray-50 p-2 rounded-lg border border-gray-100 flex flex-col gap-3">
-                <div className="flex items-center justify-between px-2 py-1">
+            <div className="fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-gray-100 p-3 shadow-[0_-8px_30px_rgba(0,0,0,0.08)] md:relative md:bg-transparent md:border-0 md:p-0 md:shadow-none md:z-0 flex flex-col gap-2 md:gap-4 mb-0 md:mb-8 order-8 md:order-0">
+              <div className="bg-gray-50 md:p-2 rounded-lg md:border md:border-gray-100 flex flex-col gap-3">
+                <div className="hidden md:flex items-center justify-between px-2 py-1">
                   <span className="text-sm font-bold text-gray-900 uppercase tracking-tight">Quantity</span>
                   <div className="flex items-center bg-white border border-gray-200 rounded-md h-11 w-32 overflow-hidden shadow-sm">
                     <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="w-10 h-full flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors">
@@ -383,7 +383,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                   </div>
                 </div>
                 
-                <div className="flex gap-3">
+                <div className="flex gap-2 divide-x divide-gray-200 md:divide-x-0 md:gap-3">
                   <button 
                     onClick={() => {
                       const swatchParts = parseSwatch(selectedSwatch || '');
@@ -391,9 +391,9 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                       const itemPrice = selectedPack?.price || product.price;
                       addToCart({ ...product, price: itemPrice }, quantity, variant || undefined);
                     }}
-                    className="flex-1 bg-white border border-gray-200 text-gray-900 font-bold h-12 rounded-md flex items-center justify-center gap-2 hover:border-gray-300 hover:shadow-sm transition-all text-xs uppercase tracking-widest"
+                    className="flex-1 bg-white border border-gray-200 md:border-gray-200 text-gray-900 font-bold h-12 md:h-12 rounded-lg md:rounded-md flex items-center justify-center gap-2 hover:border-gray-300 hover:shadow-sm transition-all text-xs uppercase tracking-widest"
                   >
-                    <ShoppingBag className="w-4 h-4" /> Cart
+                    <ShoppingBag className="w-4 h-4" /> <span className="hidden md:inline">Cart</span>
                   </button>
                   <button 
                     onClick={() => {
@@ -403,9 +403,21 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                       addToCart({ ...product, price: itemPrice }, quantity, variant || undefined);
                       onNavigate?.('checkout');
                     }}
-                    className="flex-[2] bg-slate-900 text-white font-black h-12 rounded-md hover:bg-black transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-lg"
+                    className="flex-[2] bg-slate-900 text-white font-black h-12 md:h-12 rounded-lg md:rounded-md hover:bg-black transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-lg"
                   >
                     Buy Now
+                  </button>
+                  <button 
+                    onClick={() => {
+                      const swatchParts = parseSwatch(selectedSwatch || '');
+                      const variant = [swatchParts.name, selectedPack?.label].filter(Boolean).join(' / ');
+                      const itemPrice = selectedPack?.price || product.price;
+                      addToCart({ ...product, price: itemPrice }, quantity, variant || undefined);
+                      onNavigate?.('checkout', 'cod');
+                    }}
+                    className="flex-[2] bg-[#e31c3d] text-white font-black h-12 md:h-12 rounded-lg md:rounded-md hover:bg-red-700 transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-lg md:hidden"
+                  >
+                    COD
                   </button>
                 </div>
               </div>
@@ -417,7 +429,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                   addToCart({ ...product, price: itemPrice }, quantity, variant || undefined);
                   onNavigate?.('checkout', 'cod');
                 }}
-                className="relative w-full overflow-hidden h-14 rounded-md flex items-center justify-center gap-3 shadow-[0_8px_30px_rgba(255,152,0,0.3)] hover:shadow-[0_8px_40px_rgba(255,152,0,0.5)] transition-all duration-300 hover:-translate-y-1 border border-orange-400"
+                className="hidden md:flex relative w-full overflow-hidden h-14 rounded-md items-center justify-center gap-3 shadow-[0_8px_30px_rgba(255,152,0,0.3)] hover:shadow-[0_8px_40px_rgba(255,152,0,0.5)] transition-all duration-300 hover:-translate-y-1 border border-orange-400"
               >
                 <style>{`
                   @keyframes shimmer {
