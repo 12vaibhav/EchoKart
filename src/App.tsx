@@ -236,7 +236,11 @@ export default function App() {
         description: p.description,
         shortDescription: p.short_description,
         images: p.images || [],
-        featureImages: p.feature_images || []
+        featureImages: p.feature_images || [],
+        swatches: p.swatches || [],
+        swatches_visible: p.swatches_visible ?? true,
+        pack_options: p.pack_options || [],
+        packs_visible: p.packs_visible ?? false
       })) || [];
 
       // Map Supabase category format

@@ -31,14 +31,36 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
   const tags = product.tags || (product.badges ? product.badges.map((b: any) => b.text) : []);
   const shortDesc = product.shortDescription || '';
   const fullCopy = product.description || '';
+  const swatches = product.swatches || [];
+  const swatchesVisible = product.swatches_visible !== false;
+  const packOptions = product.pack_options || [];
+  const packsVisible = product.packs_visible || false;
 
   const { isInWishlist, toggleWishlist } = useWishlist();
   const { addToCart } = useCart();
   const isWishlisted = isInWishlist(product.id);
   const [quantity, setQuantity] = useState(1);
-  const [selectedSwatch, setSelectedSwatch] = useState(product.swatches?.[0] || null);
-  const [selectedPack, setSelectedPack] = useState<any>(product.pack_options?.[0] || null);
+  const [selectedSwatch, setSelectedSwatch] = useState<string | null>(null);
+  const [selectedPack, setSelectedPack] = useState<any>(null);
   const [activeImage, setActiveImage] = useState(0);
+
+  // Sync selection states when product loads or changes
+  React.useEffect(() => {
+    if (product) {
+      if (swatches.length > 0) {
+        setSelectedSwatch(swatches[0]);
+      } else {
+        setSelectedSwatch(null);
+      }
+      if (packOptions.length > 0) {
+        setSelectedPack(packOptions[0]);
+      } else {
+        setSelectedPack(null);
+      }
+      setActiveImage(0);
+    }
+  }, [product?.id, swatches.length, packOptions.length]);
+
   const galleryRef = useRef<HTMLDivElement>(null);
   const fbtScrollRef = useRef<HTMLDivElement>(null);
 
@@ -275,14 +297,14 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             {/* Product Options (Swatches & Packs) */}
             <div className="flex flex-col gap-6 mb-6 order-7 md:order-0">
               {/* Swatches */}
-              {product.swatches_visible !== false && product.swatches && product.swatches.length > 0 && (
+              {swatchesVisible && swatches.length > 0 && (
                 <div>
                   <h3 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide flex items-center gap-2">
                     Select Color
                     {selectedSwatch && <span className="text-[10px] font-black text-[#e31c3d] bg-red-50 px-2 py-0.5 rounded">{selectedSwatch}</span>}
                   </h3>
                   <div className="flex flex-wrap gap-3">
-                    {product.swatches.map((color: string, idx: number) => (
+                    {swatches.map((color: string, idx: number) => (
                       <button
                         key={idx}
                         onClick={() => setSelectedSwatch(color)}
@@ -300,18 +322,15 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               )}
 
               {/* Pack Options */}
-              {product.packs_visible && product.pack_options && product.pack_options.length > 0 && (
+              {packsVisible && packOptions.length > 0 && (
                 <div>
                   <h3 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide">Select Pack</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    {product.pack_options.map((pack: any, idx: number) => (
+                    {packOptions.map((pack: any, idx: number) => (
                       <button
                         key={idx}
                         onClick={() => {
                           setSelectedPack(pack);
-                          if (pack.price) {
-                            // Optionally update visible price if needed, but usually we just handle it in addToCart
-                          }
                         }}
                         className={`p-3 rounded-xl border-2 transition-all text-left flex flex-col gap-1 ${selectedPack?.label === pack.label ? 'border-[#e31c3d] bg-red-50 shadow-md ring-2 ring-red-50' : 'border-gray-100 bg-white hover:border-gray-200 shadow-sm'}`}
                       >
