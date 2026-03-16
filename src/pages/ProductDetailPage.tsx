@@ -119,12 +119,12 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
           {/* Left: Image Gallery (Side-by-Side Reference Design) */}
           <div className="flex flex-col-reverse md:flex-row gap-4 lg:gap-6 lg:h-[600px] h-auto">
             {/* Vertical Thumbnails (Bottom on mobile, Left on desktop) */}
-            <div className="flex md:flex-col overflow-x-auto md:overflow-y-auto gap-2 md:gap-3 w-full md:w-20 lg:w-24 shrink-0 pb-2 md:pb-0 pr-2 md:pr-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <div className="flex md:flex-col overflow-x-auto md:overflow-y-auto gap-2 md:gap-3 w-full md:w-20 lg:w-24 shrink-0 pb-2 md:pb-0 pr-2 md:pr-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory scroll-px-4">
               {images.map((img: string, i: number) => (
                 <div 
                   key={i} 
                   onClick={() => scrollToImage(i)}
-                  className={`aspect-square w-16 md:w-full rounded-md md:rounded-lg p-0 cursor-pointer flex items-center justify-center shrink-0 overflow-hidden box-border transition-all duration-300 ${i === activeImage ? 'bg-white border-2 border-[#e31c3d] shadow-sm scale-[1.02]' : 'bg-gray-50 border border-transparent hover:border-gray-200 hover:bg-white'}`}
+                  className={`aspect-square w-16 md:w-full rounded-md md:rounded-lg p-0 cursor-pointer flex items-center justify-center shrink-0 overflow-hidden box-border snap-start transition-all duration-300 ${i === activeImage ? 'bg-white border-2 border-[#e31c3d] shadow-sm scale-[1.02]' : 'bg-gray-50 border border-transparent hover:border-gray-200 hover:bg-white'}`}
                 >
                   <img src={img} alt="" className="w-full h-full object-cover drop-shadow-sm" />
                 </div>
@@ -325,14 +325,14 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               {packsVisible && packOptions.length > 0 && (
                 <div>
                   <h3 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide">Select Pack</h3>
-                  <div className="flex md:grid md:grid-cols-3 gap-2 md:gap-3 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
+                  <div className="flex md:grid md:grid-cols-3 gap-2 md:gap-3 overflow-x-auto pb-2 md:pb-0 hide-scrollbar snap-x snap-mandatory scroll-px-4">
                     {packOptions.map((pack: any, idx: number) => (
                       <button
                         key={idx}
                         onClick={() => {
                           setSelectedPack(pack);
                         }}
-                        className={`flex-shrink-0 md:flex-shrink p-2.5 px-4 md:p-3 rounded-full md:rounded-xl border-2 transition-all flex flex-row md:flex-col items-center md:items-start gap-2.5 md:gap-1 ${selectedPack?.label === pack.label ? 'border-[#e31c3d] bg-red-50 shadow-md ring-2 ring-red-50' : 'border-gray-100 bg-white hover:border-gray-200 shadow-sm'}`}
+                        className={`flex-shrink-0 md:flex-shrink p-2.5 px-4 md:p-3 rounded-full md:rounded-xl border-2 transition-all flex flex-row md:flex-col items-center md:items-start gap-2.5 md:gap-1 snap-start ${selectedPack?.label === pack.label ? 'border-[#e31c3d] bg-red-50 shadow-md ring-2 ring-red-50' : 'border-gray-100 bg-white hover:border-gray-200 shadow-sm'}`}
                       >
                         <span className={`text-[10px] font-black uppercase tracking-wider whitespace-nowrap ${selectedPack?.label === pack.label ? 'text-[#e31c3d]' : 'text-gray-500'}`}>{pack.label}</span>
                         <div className="flex items-center gap-1.5 md:flex-col md:items-start md:gap-0.5">
@@ -463,7 +463,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               </button>
             </div>
           </div>
-          <div ref={fbtScrollRef} className="grid grid-rows-2 grid-flow-col md:flex md:overflow-x-auto gap-3 md:gap-6 pb-6 md:pb-4 overflow-x-auto snap-x snap-mandatory md:[&::-webkit-scrollbar]:hidden md:[-ms-overflow-style:none] md:[scrollbar-width:none] scroll-smooth">
+          <div ref={fbtScrollRef} className="grid grid-rows-2 grid-flow-col md:flex md:overflow-x-auto gap-3 md:gap-6 pb-6 md:pb-4 overflow-x-auto snap-x snap-mandatory scroll-px-4 md:[&::-webkit-scrollbar]:hidden md:[-ms-overflow-style:none] md:[scrollbar-width:none] scroll-smooth">
             {products.filter(p => p.id !== product.id).slice(-8).map((fbtProduct) => (
               <div key={fbtProduct.id} className="w-[180px] md:w-[300px] snap-start shrink-0">
                 <ProductCard 
@@ -487,7 +487,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               View All <ChevronRight className="w-4 h-4" />
             </button>
           </div>
-          <div className="grid grid-rows-2 grid-flow-col md:grid md:grid-cols-4 md:grid-rows-1 gap-3 md:gap-6 overflow-x-auto md:overflow-visible pb-6 md:pb-0 snap-x snap-mandatory md:[&::-webkit-scrollbar]:hidden md:[-ms-overflow-style:none] md:[scrollbar-width:none]">
+          <div className="grid grid-rows-2 grid-flow-col md:grid md:grid-cols-4 md:grid-rows-1 gap-3 md:gap-6 overflow-x-auto md:overflow-visible pb-6 md:pb-0 snap-x snap-mandatory scroll-px-4 md:[&::-webkit-scrollbar]:hidden md:[-ms-overflow-style:none] md:[scrollbar-width:none]">
             {products.filter(p => p.id !== product.id).slice(0, 8).map((relatedProduct) => (
               <div key={relatedProduct.id} className="w-[180px] md:w-auto snap-start shrink-0">
                 <ProductCard 
