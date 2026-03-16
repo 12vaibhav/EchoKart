@@ -160,6 +160,7 @@ import { PlaceholderPage } from './pages/dashboard/PlaceholderPage';
 import { OrderDetailsPage } from './pages/dashboard/OrderDetailsPage';
 import { OrderConfirmationPage } from './pages/OrderConfirmationPage';
 import { AdminProfilePage } from './pages/AdminProfilePage';
+import { AdminAuthPage } from './pages/dashboard/AdminAuthPage';
 
 // Helper to sync route with URL
 const getRouteFromUrl = () => {
@@ -189,6 +190,21 @@ export default function App() {
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const fetchData = async () => {
     try {
@@ -387,6 +403,14 @@ export default function App() {
   const isDashboard = route.path.startsWith('/dashboard');
 
   if (isDashboard) {
+    if (!user) {
+      return (
+        <div className="font-sans">
+          <AdminAuthPage onNavigate={navigate} />
+        </div>
+      );
+    }
+
     return (
       <DashboardLayout currentPath={route.path} onNavigate={navigate}>
         {route.path === '/dashboard' && <DashboardOverview onNavigate={navigate} />}
