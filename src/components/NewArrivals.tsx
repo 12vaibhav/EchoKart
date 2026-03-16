@@ -51,9 +51,9 @@ export const NewArrivals = ({ products: propProducts, onNavigate }: { products?:
       <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none mix-blend-overlay" style={{backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`}} />
 
       <div className="max-w-[1700px] mx-auto px-3 sm:px-8 lg:px-12">
-        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div className="mb-8 md:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="relative">
-             <div className="flex items-center gap-3 mb-4">
+             <div className="flex items-center gap-3 mb-2 md:mb-4">
               <div className="p-2 bg-[#e31c3d]/10 rounded-xl">
                 <Sparkles className="w-5 h-5 text-[#e31c3d]" />
               </div>
@@ -62,7 +62,7 @@ export const NewArrivals = ({ products: propProducts, onNavigate }: { products?:
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter leading-none mb-4">
               New Arrivals
             </h2>
-            <p className="text-slate-500 font-medium max-w-xl text-lg">
+            <p className="text-slate-500 font-medium max-w-xl text-lg hidden md:block">
               The latest drops curated for your style. Experience innovation with our newest collection.
             </p>
             <div className="absolute -bottom-4 left-0 w-24 h-1.5 bg-[#e31c3d] rounded-full" />
@@ -91,7 +91,7 @@ export const NewArrivals = ({ products: propProducts, onNavigate }: { products?:
             initial="initial"
             whileInView="animate"
             viewport={{ once: true, margin: "-50px" }}
-            className="grid grid-rows-2 grid-flow-col overflow-x-auto -mx-3 gap-x-3 gap-y-3 pb-12 md:flex md:overflow-x-auto md:gap-8 md:pb-12 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth overscroll-x-contain pl-2 pr-4 scroll-pl-2 md:pl-8 md:pr-0 md:scroll-pl-0"
+            className="grid grid-rows-2 grid-flow-col overflow-x-auto -mx-3 gap-x-2 gap-y-2 pb-8 md:flex md:overflow-x-auto md:gap-8 md:pb-12 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth overscroll-x-contain pl-2 pr-4 scroll-pl-2 md:pl-8 md:pr-0 md:scroll-pl-0"
           >
             {displayProducts.map((item: any, idx) => (
               <motion.div 

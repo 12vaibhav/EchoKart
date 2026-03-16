@@ -46,15 +46,15 @@ export const ProductCarouselSection = ({ title, products, onNavigate }: { title:
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-radial-gradient from-red-50 to-transparent opacity-40 pointer-events-none" />
       
       <div className="max-w-[1700px] mx-auto px-3 md:px-8 lg:px-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 md:mb-12 gap-6">
           <div className="relative">
             <motion.div 
               initial={{ width: 0 }}
               whileInView={{ width: '4rem' }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="h-1 bg-[#e31c3d] mb-4 rounded-full"
+              className="h-1 bg-[#e31c3d] mb-2 md:mb-4 rounded-full"
             />
-            <div className="flex items-center gap-3 mb-2">
+            <div className="flex items-center gap-3 mb-1 md:mb-2">
               <Zap className="w-5 h-5 text-[#e31c3d] fill-current" />
               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#e31c3d]">Handpicked for you</span>
             </div>
@@ -101,7 +101,7 @@ export const ProductCarouselSection = ({ title, products, onNavigate }: { title:
             initial="initial"
             whileInView="animate"
             viewport={{ once: true, margin: "-50px" }}
-            className="grid grid-rows-2 grid-flow-col overflow-x-auto -mx-3 gap-x-3 gap-y-3 pb-12 md:flex md:overflow-x-auto md:gap-8 md:pb-12 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth overscroll-x-contain pl-2 pr-4 scroll-pl-2 md:pl-8 md:pr-0 md:scroll-pl-0"
+            className="grid grid-rows-2 grid-flow-col overflow-x-auto -mx-3 gap-x-2 gap-y-2 pb-8 md:flex md:overflow-x-auto md:gap-8 md:pb-12 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth overscroll-x-contain pl-2 pr-4 scroll-pl-2 md:pl-8 md:pr-0 md:scroll-pl-0"
           >
             {products.map(product => (
               <motion.div 
