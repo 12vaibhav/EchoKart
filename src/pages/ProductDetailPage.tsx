@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'motion/react';
-import { Heart, Star, Truck, Shield, RotateCcw, ChevronRight, ChevronLeft, Minus, Plus, ShoppingBag, Headset, ShieldCheck, Lock, Undo2, ThumbsUp, Flame, Award, Users, X } from 'lucide-react';
+import { Heart, Star, Truck, Shield, RotateCcw, ChevronRight, ChevronLeft, Minus, Plus, ShoppingBag, Headset, ShieldCheck, Lock, Undo2, ThumbsUp, Flame, Award, Users, X, Upload } from 'lucide-react';
 
 import { useWishlist } from '../contexts/WishlistContext';
 import { useCart } from '../contexts/CartContext';
