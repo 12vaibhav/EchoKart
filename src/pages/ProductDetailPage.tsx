@@ -176,7 +176,6 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                     {item.type === 'video' ? (
                       <video 
                         src={item.url} 
-                        controls 
                         autoPlay 
                         muted 
                         loop 
