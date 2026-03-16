@@ -463,7 +463,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               </button>
             </div>
           </div>
-          <div ref={fbtScrollRef} className="flex gap-2 md:gap-6 pb-6 md:pb-4 overflow-x-auto -mx-4 px-4 snap-x snap-mandatory scroll-px-4 md:[&::-webkit-scrollbar]:hidden md:[-ms-overflow-style:none] md:[scrollbar-width:none] scroll-smooth">
+          <div ref={fbtScrollRef} className="flex gap-2 md:gap-6 pb-6 md:pb-4 overflow-x-auto -mx-4 px-4 snap-x snap-mandatory scroll-px-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth">
             {products.filter(p => p.id !== product.id).slice(-8).map((fbtProduct) => (
               <div key={fbtProduct.id} className="w-[180px] md:w-[300px] snap-start shrink-0">
                 <ProductCard 
@@ -487,7 +487,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               View All <ChevronRight className="w-4 h-4" />
             </button>
           </div>
-          <div className="flex md:grid md:grid-cols-4 gap-2 md:gap-6 overflow-x-auto md:overflow-visible -mx-4 px-4 pb-6 md:pb-0 snap-x snap-mandatory scroll-px-4 md:[&::-webkit-scrollbar]:hidden md:[-ms-overflow-style:none] md:[scrollbar-width:none]">
+          <div className="flex md:grid md:grid-cols-4 gap-2 md:gap-6 overflow-x-auto md:overflow-visible -mx-4 px-4 pb-6 md:pb-0 snap-x snap-mandatory scroll-px-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {products.filter(p => p.id !== product.id).slice(0, 8).map((relatedProduct) => (
               <div key={relatedProduct.id} className="w-[180px] md:w-auto snap-start shrink-0">
                 <ProductCard 
