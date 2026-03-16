@@ -242,8 +242,8 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
 
 
             {/* Important Highlights */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3 md:gap-4 mb-4 md:mb-10 order-10 md:order-0">
-              <div className="flex flex-row items-center text-left gap-3 md:gap-4 md:p-4 rounded-lg md:bg-gradient-to-br md:from-white md:to-gray-50 md:border md:border-gray-100 md:shadow-sm group relative overflow-hidden">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-2 md:gap-4 mb-4 md:mb-10 order-10 md:order-0">
+              <div className="flex flex-row items-center text-left gap-2 md:gap-4 p-2 md:p-4 rounded-lg md:bg-gradient-to-br md:from-white md:to-gray-50 md:border md:border-gray-100 md:shadow-sm group relative overflow-hidden">
                 <div className="hidden md:block absolute -right-6 -top-6 w-24 h-24 bg-[#e31c3d] opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-md bg-red-50 flex items-center justify-center text-[#e31c3d] group-hover:scale-110 transition-transform z-10 shrink-0">
                   <Truck className="w-4 h-4 md:w-5 md:h-5" />
@@ -254,7 +254,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                 </div>
               </div>
 
-              <div className="flex flex-row items-center text-left gap-3 md:gap-4 md:p-4 rounded-lg md:bg-gradient-to-br md:from-white md:to-gray-50 md:border md:border-gray-100 md:shadow-sm group relative overflow-hidden">
+              <div className="flex flex-row items-center text-left gap-2 md:gap-4 p-2 md:p-4 rounded-lg md:bg-gradient-to-br md:from-white md:to-gray-50 md:border md:border-gray-100 md:shadow-sm group relative overflow-hidden">
                 <div className="hidden md:block absolute -right-6 -top-6 w-24 h-24 bg-blue-500 opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-md bg-blue-50 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform z-10 shrink-0">
                   <RotateCcw className="w-4 h-4 md:w-5 md:h-5" />
@@ -265,7 +265,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                 </div>
               </div>
 
-              <div className="flex flex-row items-center text-left gap-3 md:gap-4 md:p-4 rounded-lg md:bg-gradient-to-br md:from-white md:to-gray-50 md:border md:border-gray-100 md:shadow-sm group relative overflow-hidden">
+              <div className="flex flex-row items-center text-left gap-2 md:gap-4 p-2 md:p-4 rounded-lg md:bg-gradient-to-br md:from-white md:to-gray-50 md:border md:border-gray-100 md:shadow-sm group relative overflow-hidden">
                 <div className="hidden md:block absolute -right-6 -top-6 w-24 h-24 bg-amber-500 opacity-[0.04] rounded-full blur-2xl group-hover:opacity-[0.08] transition-opacity"></div>
                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-md bg-amber-50 flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform z-10 shrink-0">
                   <Award className="w-4 h-4 md:w-5 md:h-5" />
@@ -276,7 +276,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                 </div>
               </div>
 
-              <div className="flex flex-row items-center text-left gap-3 md:gap-4 md:p-4 rounded-lg md:bg-gradient-to-br md:from-white md:to-gray-50 md:border md:border-gray-100 md:shadow-sm group relative overflow-hidden">
+              <div className="flex flex-row items-center text-left gap-2 md:gap-4 p-2 md:p-4 rounded-lg md:bg-gradient-to-br md:from-white md:to-gray-50 md:border md:border-gray-100 md:shadow-sm group relative overflow-hidden">
                 <div className="hidden md:block absolute -right-6 -top-6 w-24 h-24 bg-green-500 opacity-[0.03] rounded-full blur-2xl group-hover:opacity-[0.06] transition-opacity"></div>
                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-md bg-green-50 flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform z-10 shrink-0">
                   <Shield className="w-4 h-4 md:w-5 md:h-5" />
