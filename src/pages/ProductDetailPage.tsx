@@ -322,16 +322,15 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                         <button
                           key={idx}
                           onClick={() => setSelectedSwatch(colorStr)}
-                          className={`w-10 h-12 rounded-2xl border-2 transition-all flex flex-col items-center justify-center gap-1 ${selectedSwatch === colorStr ? 'border-[#e31c3d] scale-110 shadow-md ring-4 ring-red-50' : 'border-transparent hover:scale-105 shadow-sm bg-gray-50'}`}
+                          className={`w-10 h-10 rounded-full border-2 transition-all flex items-center justify-center ${selectedSwatch === colorStr ? 'border-[#e31c3d] scale-110 shadow-md ring-4 ring-red-50' : 'border-transparent hover:scale-105 shadow-sm bg-gray-50'}`}
                           aria-label={`Select color ${name}`}
                         >
                           <div 
-                            className={`w-7 h-7 rounded-lg border border-gray-200 ${!isHexOrRgb ? 'flex items-center justify-center' : ''}`}
+                            className={`w-full h-full rounded-full border border-gray-100 ${!isHexOrRgb ? 'flex items-center justify-center' : ''}`}
                             style={{ backgroundColor: isHexOrRgb ? color : undefined }}
                           >
                             {!isHexOrRgb && <span className="text-[8px] font-black uppercase text-center leading-tight px-1">{name.slice(0, 2)}</span>}
                           </div>
-                          <span className="text-[7px] font-black uppercase tracking-tighter opacity-70 truncate w-full px-1 text-center">{name}</span>
                         </button>
                       );
                     })}
