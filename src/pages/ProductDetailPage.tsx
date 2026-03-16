@@ -101,7 +101,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
   const discount = product.oldPrice ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100) : 0;
 
   return (
-    <div className="bg-white min-h-screen pb-20 md:pb-20">
+    <div className="bg-white min-h-screen pb-4 md:pb-20">
       {/* Breadcrumbs */}
       <div className="hidden md:block bg-white py-4 border-b border-gray-100">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center text-sm text-gray-500 font-medium">
@@ -477,7 +477,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
         </div>
 
         {/* Related Products Section */}
-        <div className="mt-8 md:mt-20 mb-2 md:mb-12">
+        <div className="mt-8 md:mt-20 mb-0 md:mb-12">
           <div className="flex items-center justify-between mb-4 md:mb-8">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Related Products</h2>
             <button 
