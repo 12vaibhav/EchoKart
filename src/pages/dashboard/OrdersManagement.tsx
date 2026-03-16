@@ -112,7 +112,9 @@ export const OrdersManagement = ({ onNavigate }: { onNavigate: (path: string, id
     switch(status) {
       case 'Order Placed': return 'bg-yellow-100 text-yellow-700';
       case 'Pending': return 'bg-yellow-100 text-yellow-700';
+      case 'Picked': return 'bg-blue-50 text-blue-600';
       case 'Shipped': return 'bg-blue-100 text-blue-700';
+      case 'In-Transit': return 'bg-indigo-50 text-indigo-600';
       case 'Delivered': return 'bg-green-100 text-green-700';
       case 'Cancelled': return 'bg-red-100 text-red-700';
       default: return 'bg-gray-100 text-gray-700';
@@ -156,7 +158,7 @@ export const OrdersManagement = ({ onNavigate }: { onNavigate: (path: string, id
 
         {/* Status Filter Chips */}
         <div className="flex gap-2 overflow-x-auto pb-2">
-          {['All Orders', 'Order Placed', 'Shipped', 'Delivered', 'Cancelled'].map((tab) => (
+          {['All Orders', 'Order Placed', 'Picked', 'Shipped', 'In-Transit', 'Delivered', 'Cancelled'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}

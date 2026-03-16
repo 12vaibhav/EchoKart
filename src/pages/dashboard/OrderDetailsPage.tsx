@@ -23,7 +23,7 @@ const fadeInUpProps = {
   transition: { duration: 0.5, ease: "easeOut" }
 };
 
-type OrderStatus = 'Order Placed' | 'Shipped' | 'Out for Delivery' | 'Delivered' | 'Cancelled' | 'Pending';
+type OrderStatus = 'Order Placed' | 'Picked' | 'Shipped' | 'In-Transit' | 'Out for Delivery' | 'Delivered' | 'Cancelled' | 'Pending';
 
 export const OrderDetailsPage = ({ orderId, onBack }: { orderId: string, onBack: () => void }) => {
   const [order, setOrder] = useState<any>(null);
@@ -31,7 +31,7 @@ export const OrderDetailsPage = ({ orderId, onBack }: { orderId: string, onBack:
   const [loading, setLoading] = useState(true);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const STATUS_STEPS: OrderStatus[] = ['Order Placed', 'Shipped', 'Out for Delivery', 'Delivered'];
+  const STATUS_STEPS: OrderStatus[] = ['Order Placed', 'Picked', 'Shipped', 'In-Transit', 'Out for Delivery', 'Delivered'];
 
   const fetchOrderDetails = async () => {
     try {

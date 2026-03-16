@@ -145,18 +145,15 @@ export const TrackOrderPage = ({ initialOrderId = '' }: { initialOrderId?: strin
   }
 
   const getStatusProgress = (status: string) => {
-    switch (status) {
-      case 'Pending': return '25%';
-      case 'Shipped': return '50%';
-      case 'Out for Delivery': return '75%';
-      case 'Delivered': return '100%';
-      default: return '25%';
-    }
+    const steps = ['Order Placed', 'Picked', 'Shipped', 'In-Transit', 'Out for Delivery', 'Delivered'];
+    const idx = steps.indexOf(status === 'Pending' ? 'Order Placed' : status);
+    if (idx === -1) return '0%';
+    return `${(idx / (steps.length - 1)) * 100}%`;
   };
 
   const statusIdx = (status: string) => {
-    const steps = ['Pending', 'Shipped', 'Out for Delivery', 'Delivered'];
-    const idx = steps.indexOf(status);
+    const steps = ['Order Placed', 'Picked', 'Shipped', 'In-Transit', 'Out for Delivery', 'Delivered'];
+    const idx = steps.indexOf(status === 'Pending' ? 'Order Placed' : status);
     return idx === -1 ? 0 : idx;
   };
 
@@ -209,9 +206,11 @@ export const TrackOrderPage = ({ initialOrderId = '' }: { initialOrderId?: strin
               
               <div className="relative flex justify-between">
                 {[
-                  { label: 'Confirmed', icon: Check, status: 'Pending' },
+                  { label: 'Placed', icon: Check, status: 'Order Placed' },
+                  { label: 'Picked', icon: Package, status: 'Picked' },
                   { label: 'Shipped', icon: Truck, status: 'Shipped' },
-                  { label: 'Out for Delivery', icon: MapPin, status: 'Out for Delivery' },
+                  { label: 'In-Transit', icon: RefreshCw, status: 'In-Transit' },
+                  { label: 'On Way', icon: MapPin, status: 'Out for Delivery' },
                   { label: 'Delivered', icon: Verified, status: 'Delivered' }
                 ].map((step, idx) => {
                   const isActive = statusIdx(order?.status) >= idx;

@@ -123,6 +123,9 @@ export const AccountPage = ({ onNavigate, initialTab = 'profile' }: { onNavigate
         statusColor: o.status === 'Delivered' ? 'bg-green-100 text-green-700' : 
                      o.status === 'Cancelled' ? 'bg-red-100 text-red-700' : 
                      o.status === 'Shipped' ? 'bg-blue-100 text-blue-700' : 
+                     o.status === 'Picked' ? 'bg-blue-50 text-blue-600' :
+                     o.status === 'In-Transit' ? 'bg-indigo-50 text-indigo-600' :
+                     o.status === 'Out for Delivery' ? 'bg-blue-100 text-blue-700' :
                      o.status === 'Order Placed' ? 'bg-yellow-100 text-yellow-700' :
                      'bg-yellow-100 text-yellow-700',
         items: o.order_items?.[0]?.count || 0,

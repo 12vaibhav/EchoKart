@@ -43,10 +43,13 @@ const StatCard = ({ title, value, change, isPositive, icon: Icon, colorClass, ic
 const RecentOrderRow = ({ id, customer, amount, status, avatar, onClick }: any) => {
   const getStatusStyles = () => {
     switch(status) {
-      case 'Processing': return 'bg-blue-100 text-blue-700';
-      case 'Shipped': return 'bg-green-100 text-green-700';
+      case 'Order Placed': return 'bg-yellow-100 text-yellow-700';
+      case 'Picked': return 'bg-blue-50 text-blue-600';
+      case 'Shipped': return 'bg-blue-100 text-blue-700';
+      case 'In-Transit': return 'bg-indigo-50 text-indigo-600';
       case 'Pending': return 'bg-yellow-100 text-yellow-700';
       case 'Cancelled': return 'bg-red-100 text-red-700';
+      case 'Delivered': return 'bg-green-100 text-green-700';
       default: return 'bg-slate-100 text-slate-700';
     }
   };
