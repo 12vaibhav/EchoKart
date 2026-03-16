@@ -507,6 +507,10 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
 const ProductDetailsAndReviews = ({ product }: { product: any }) => {
   const [visibleReviews, setVisibleReviews] = useState(3);
   const [expandedImage, setExpandedImage] = useState<string | null>(null);
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [newReviewRating, setNewReviewRating] = useState(5);
+  const [newReviewText, setNewReviewText] = useState('');
+  const [newReviewImages, setNewReviewImages] = useState<string[]>([]);
 
   const reviewsCount = product.reviewsCount !== undefined ? product.reviewsCount : (Array.isArray(product.reviews) ? product.reviews.length : (product.reviews || 0));
   
@@ -516,7 +520,7 @@ const ProductDetailsAndReviews = ({ product }: { product: any }) => {
   const featureImages = product.featureImages || [];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+    <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-12 lg:gap-16">
       {/* Description Left Side (Larger Space) */}
       <div className="lg:col-span-3">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Product Description</h2>
@@ -547,7 +551,16 @@ const ProductDetailsAndReviews = ({ product }: { product: any }) => {
 
       {/* Reviews Right Side */}
       <div className="lg:col-span-2">
-        <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Customer Reviews</h2>
+        <div className="flex items-center justify-between mb-4 md:mb-6">
+          <h2 className="text-xl md:text-2xl font-bold text-gray-900">Customer Reviews</h2>
+          <button 
+            onClick={() => setShowReviewModal(true)}
+            className="flex items-center gap-1.5 text-[#e31c3d] font-bold text-[10px] md:text-xs uppercase tracking-widest hover:bg-red-50 px-3 py-2 rounded-lg transition-all border border-red-100"
+          >
+            <Upload className="w-3.5 h-3.5" />
+            Write Review
+          </button>
+        </div>
         
         {/* Rating Summary */}
         <div className="bg-white p-4 md:p-6 rounded-lg border border-gray-100 shadow-sm mb-6 md:mb-8">
@@ -641,6 +654,119 @@ const ProductDetailsAndReviews = ({ product }: { product: any }) => {
           )}
         </div>
       </div>
+
+      {/* Review Upload Modal */}
+      {showReviewModal && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setShowReviewModal(false)}
+          />
+          <motion.div 
+            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden"
+          >
+            <div className="p-6 border-b border-gray-100 flex items-center justify-between">
+              <h3 className="text-lg font-bold text-gray-900">Write a Review</h3>
+              <button onClick={() => setShowReviewModal(false)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                <X className="w-5 h-5 text-gray-400" />
+              </button>
+            </div>
+            
+            <div className="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
+              {/* Rating Selection */}
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">Your Rating</label>
+                <div className="flex gap-2">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button 
+                      key={star}
+                      onClick={() => setNewReviewRating(star)}
+                      className="p-1 hover:scale-110 transition-transform"
+                    >
+                      <Star className={`w-8 h-8 ${star <= newReviewRating ? 'fill-[#ff9c1a] text-[#ff9c1a]' : 'text-gray-300'}`} />
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Feedback Text */}
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">Your Feedback</label>
+                <textarea 
+                  value={newReviewText}
+                  onChange={(e) => setNewReviewText(e.target.value)}
+                  placeholder="Tell others what you think about this product..."
+                  className="w-full h-32 p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#e31c3d] focus:border-transparent transition-all outline-none text-sm resize-none"
+                />
+              </div>
+
+              {/* Image Upload */}
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">Upload Photos</label>
+                <div className="flex flex-wrap gap-3">
+                  {newReviewImages.map((img, i) => (
+                    <div key={i} className="relative w-20 h-20 rounded-xl overflow-hidden border border-gray-200 group">
+                      <img src={img} alt="Preview" className="w-full h-full object-cover" />
+                      <button 
+                        onClick={() => setNewReviewImages(prev => prev.filter((_, idx) => idx !== i))}
+                        className="absolute top-1 right-1 bg-black/50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  ))}
+                  <label className="w-20 h-20 rounded-xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center gap-1 cursor-pointer hover:bg-gray-50 hover:border-gray-300 transition-all text-gray-400">
+                    <Plus className="w-6 h-6" />
+                    <span className="text-[10px] font-bold">Add Photo</span>
+                    <input 
+                      type="file" 
+                      className="hidden" 
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          const reader = new FileReader();
+                          reader.onloadend = () => {
+                            setNewReviewImages(prev => [...prev, reader.result as string]);
+                          };
+                          reader.readAsDataURL(file);
+                        }
+                      }}
+                    />
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6 bg-gray-50 border-t border-gray-100 flex gap-4">
+              <button 
+                onClick={() => setShowReviewModal(false)}
+                className="flex-1 px-6 py-3 font-bold text-gray-600 hover:bg-gray-100 rounded-xl transition-all"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={() => {
+                  // In a real app, this would send data to Supabase
+                  alert('Thank you for your review!');
+                  setShowReviewModal(false);
+                  setNewReviewText('');
+                  setNewReviewImages([]);
+                  setNewReviewRating(5);
+                }}
+                disabled={!newReviewText}
+                className="flex-[2] px-6 py-3 bg-[#e31c3d] text-white font-black rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:shadow-md transition-all disabled:opacity-50 disabled:translate-y-0 disabled:shadow-none"
+              >
+                Submit Review
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
 
       {/* Image Modal/Lightbox */}
       {expandedImage && (
