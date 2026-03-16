@@ -101,18 +101,18 @@ export const ProductCarouselSection = ({ title, products, onNavigate }: { title:
             initial="initial"
             whileInView="animate"
             viewport={{ once: true, margin: "-50px" }}
-            className="grid grid-cols-2 md:flex md:overflow-x-auto gap-3 md:gap-8 pb-12 md:pb-12 snap-x snap-mandatory md:[&::-webkit-scrollbar]:hidden md:[-ms-overflow-style:none] md:[scrollbar-width:none] scroll-smooth"
+            className="flex overflow-x-auto -mx-3 px-3 md:mx-0 md:px-0 gap-3 md:gap-8 pb-12 md:pb-12 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth overscroll-x-contain"
           >
             {products.map(product => (
               <motion.div 
                 key={product.id} 
                 variants={itemVariants} 
-                className="shrink-0 md:snap-start h-full"
+                className="shrink-0 w-[240px] md:w-[320px] snap-start h-full"
               >
                 <ProductCard 
                   product={product} 
                   onNavigate={onNavigate} 
-                  className="w-full md:w-[320px] transition-transform duration-500 hover:-translate-y-2" 
+                  className="w-full h-full transition-transform duration-500 hover:-translate-y-2" 
                 />
               </motion.div>
             ))}
