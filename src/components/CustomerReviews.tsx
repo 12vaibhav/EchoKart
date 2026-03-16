@@ -20,7 +20,7 @@ export const CustomerReviews = ({ reviews: propReviews }: { reviews?: any[] }) =
           <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 tracking-tight">Loved by Thousands</h2>
           <p className="text-gray-500 max-w-2xl mx-auto">See what our customers are saying about their trending finds from echokart.</p>
         </div>
-        <div className="flex md:grid md:grid-cols-3 gap-6 md:gap-8 overflow-x-auto md:overflow-visible -mx-3 px-3 md:mx-0 md:px-0 pb-8 md:pb-0 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth overscroll-x-contain">
+        <div className="flex md:grid md:grid-cols-3 gap-6 md:gap-8 overflow-x-auto md:overflow-visible -mx-3 px-3 md:mx-0 md:px-0 pb-8 md:pb-0 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth overscroll-x-contain pl-6 pr-4 md:pl-0 md:pr-0">
           {displayReviews.map((review: any) => (
             <motion.div
               key={review.id}

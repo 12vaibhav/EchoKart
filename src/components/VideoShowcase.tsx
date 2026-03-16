@@ -21,7 +21,7 @@ export const VideoShowcase = ({ videos: propVideos, onNavigate }: { videos?: any
           <p className="text-gray-400 max-w-2xl mx-auto">Watch our top trending products in action. Experience the viral sensations before you buy.</p>
         </div>
         
-        <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto -mx-3 px-3 md:mx-auto md:px-0 pb-6 md:pb-0 snap-x snap-mandatory scroll-smooth overscroll-x-contain hide-scrollbar">
+        <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto -mx-3 px-3 md:mx-auto md:px-0 pb-6 md:pb-0 snap-x snap-mandatory scroll-smooth overscroll-x-contain hide-scrollbar pl-6 pr-4 md:pl-0 md:pr-0">
           {displayVideos.map((video: any) => (
             <div key={video.id} className="relative rounded-xl overflow-hidden aspect-[9/16] shadow-2xl group border border-gray-800 bg-gray-900 shrink-0 w-[140px] md:w-auto snap-start">
               <video
