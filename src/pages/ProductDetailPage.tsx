@@ -119,7 +119,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
           {/* Left: Image Gallery (Side-by-Side Reference Design) */}
           <div className="flex flex-col-reverse md:flex-row gap-4 lg:gap-6 lg:h-[600px] h-auto">
             {/* Vertical Thumbnails (Bottom on mobile, Left on desktop) */}
-            <div className="flex md:flex-col overflow-x-auto md:overflow-y-auto gap-2 md:gap-3 w-[calc(100%+2rem)] -mx-4 px-4 md:w-20 lg:w-24 shrink-0 pb-2 md:pb-0 pr-2 md:pr-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory scroll-px-4 scroll-smooth">
+            <div className="flex md:flex-col overflow-x-auto md:overflow-y-auto gap-2 md:gap-3 w-[calc(100%+2rem)] -mx-4 px-4 md:w-20 lg:w-24 shrink-0 pb-2 md:pb-0 pr-2 md:pr-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory scroll-px-4 scroll-smooth overscroll-x-contain">
               {images.map((img: string, i: number) => (
                 <div 
                   key={i} 
@@ -153,10 +153,10 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               <div 
                 ref={galleryRef}
                 onScroll={handleGalleryScroll}
-                className="w-full h-full flex overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth"
+                className="w-full h-full flex overflow-x-auto snap-x snap-mandatory overscroll-x-contain [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth"
               >
                 {images.map((img: string, i: number) => (
-                  <div key={i} className="min-w-full h-full snap-center flex items-center justify-center">
+                  <div key={i} className="min-w-full h-full snap-center snap-normal flex items-center justify-center">
                     <img 
                       src={img} 
                       alt={`${title} - image ${i + 1}`} 
@@ -325,7 +325,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               {packsVisible && packOptions.length > 0 && (
                 <div>
                   <h3 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide">Select Pack</h3>
-                  <div className="flex md:grid md:grid-cols-3 gap-2 md:gap-3 overflow-x-auto -mx-4 px-4 pb-2 md:pb-0 hide-scrollbar snap-x snap-mandatory scroll-px-4 scroll-smooth">
+                  <div className="flex md:grid md:grid-cols-3 gap-2 md:gap-3 overflow-x-auto -mx-4 px-4 pb-2 md:pb-0 hide-scrollbar snap-x snap-mandatory scroll-px-4 scroll-smooth overscroll-x-contain">
                     {packOptions.map((pack: any, idx: number) => (
                       <button
                         key={idx}
@@ -463,7 +463,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               </button>
             </div>
           </div>
-          <div ref={fbtScrollRef} className="flex gap-2 md:gap-6 pb-6 md:pb-4 overflow-x-auto -mx-4 px-4 snap-x snap-mandatory scroll-px-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth">
+          <div ref={fbtScrollRef} className="flex gap-2 md:gap-6 pb-6 md:pb-4 overflow-x-auto -mx-4 px-4 snap-x snap-mandatory scroll-px-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth overscroll-x-contain">
             {products.filter(p => p.id !== product.id).slice(-8).map((fbtProduct) => (
               <div key={fbtProduct.id} className="w-[180px] md:w-[300px] snap-start shrink-0">
                 <ProductCard 
@@ -487,7 +487,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
               View All <ChevronRight className="w-4 h-4" />
             </button>
           </div>
-          <div className="flex md:grid md:grid-cols-4 gap-2 md:gap-6 overflow-x-auto md:overflow-visible -mx-4 px-4 pb-6 md:pb-0 snap-x snap-mandatory scroll-px-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth">
+          <div className="flex md:grid md:grid-cols-4 gap-2 md:gap-6 overflow-x-auto md:overflow-visible -mx-4 px-4 pb-6 md:pb-0 snap-x snap-mandatory scroll-px-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth overscroll-x-contain">
             {products.filter(p => p.id !== product.id).slice(0, 8).map((relatedProduct) => (
               <div key={relatedProduct.id} className="w-[180px] md:w-auto snap-start shrink-0">
                 <ProductCard 
@@ -597,7 +597,7 @@ const ProductDetailsAndReviews = ({ product }: { product: any }) => {
             <div key={idx} className="bg-gray-50 p-3.5 md:p-5 rounded-lg border border-gray-100 transition-all hover:bg-white hover:shadow-sm">
               {/* Enlarged Review Image Gallery */}
               {review.images && review.images.length > 0 && (
-                <div className="flex gap-2 md:gap-3 mb-3 md:mb-4">
+                <div className="flex gap-2 md:gap-3 mb-3 md:mb-4 overflow-x-auto scroll-smooth snap-x snap-mandatory overscroll-x-contain hide-scrollbar">
                   {review.images.map((img: string, i: number) => (
                     <div 
                       key={i} 
