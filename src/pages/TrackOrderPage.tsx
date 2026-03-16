@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Receipt, Check, Truck, MapPin, Verified, Search, ArrowRight, Package, Calendar, Loader2 } from 'lucide-react';
+import { Receipt, Check, Truck, MapPin, Verified, Search, ArrowRight, Package, Calendar, Loader2, RefreshCw } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 const fadeInUpProps = {
