@@ -158,8 +158,8 @@ export const TrackOrderPage = ({ initialOrderId = '' }: { initialOrderId?: strin
   };
 
   return (
-    <motion.div {...fadeInUpProps} className="max-w-7xl mx-auto px-4 py-8 md:py-16 bg-white">
-      <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between border-b border-slate-100 pb-8">
+    <motion.div {...fadeInUpProps} className="max-w-7xl mx-auto px-4 py-4 md:py-16 bg-white">
+      <div className="mb-6 md:mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between border-b border-slate-100 pb-4 md:pb-8">
         <div>
           <nav className="mb-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
              <span>Account</span>
@@ -186,10 +186,10 @@ export const TrackOrderPage = ({ initialOrderId = '' }: { initialOrderId?: strin
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
-        <div className="lg:col-span-2 space-y-10">
+      <div className="grid grid-cols-1 gap-6 lg:gap-12 lg:grid-cols-3">
+        <div className="lg:col-span-2 space-y-6 md:space-y-10">
           <div className="rounded-lg bg-slate-50 p-6 md:p-10 border border-slate-100 shadow-sm">
-            <div className="mb-12 flex items-center justify-between">
+            <div className="mb-8 md:mb-12 flex items-center justify-between">
               <div>
                 <h3 className="text-xl font-black uppercase tracking-tight text-slate-900 italic">Delivery Timeline</h3>
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">{order?.status === 'Delivered' ? 'Package successfully delivered' : 'Your package is on the way'}</p>
@@ -197,10 +197,10 @@ export const TrackOrderPage = ({ initialOrderId = '' }: { initialOrderId?: strin
               <span className="rounded-md bg-white border border-slate-200 px-4 py-2 text-[10px] font-black text-[#e31c3d] tracking-widest uppercase shadow-sm">{order?.status}</span>
             </div>
 
-            <div className="relative mb-16 md:mb-20 px-2 sm:px-4">
-              <div className="absolute left-0 top-5 h-1 w-full bg-slate-200 rounded-full -z-10"></div>
+            <div className="relative mb-8 md:mb-20 px-2 sm:px-4">
+              <div className="absolute left-0 top-4 md:top-5 h-1 w-full bg-slate-200 rounded-full -z-10"></div>
               <div 
-                className="absolute left-0 top-5 h-1 bg-[#e31c3d] rounded-full -z-10 transition-all duration-1000 shadow-[0_0_10px_rgba(227,28,61,0.5)]"
+                className="absolute left-0 top-4 md:top-5 h-1 bg-[#e31c3d] rounded-full -z-10 transition-all duration-1000 shadow-[0_0_10px_rgba(227,28,61,0.5)]"
                 style={{ width: getStatusProgress(order?.status) }}
               ></div>
               
@@ -217,10 +217,10 @@ export const TrackOrderPage = ({ initialOrderId = '' }: { initialOrderId?: strin
                   const isCurrent = statusIdx(order?.status) === idx;
                   return (
                     <div key={idx} className="flex flex-col items-center">
-                      <div className={`flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-md ring-4 md:ring-8 ring-slate-50 shadow-md transition-all ${isActive ? 'bg-[#e31c3d] text-white' : 'bg-white text-slate-200 border border-slate-100'} ${isCurrent ? 'scale-110 shadow-lg shadow-[#e31c3d]/20' : ''}`}>
-                        <step.icon className="w-5 h-5 md:w-6 md:h-6" />
+                      <div className={`flex h-8 w-8 md:h-12 md:w-12 items-center justify-center rounded-md ring-2 md:ring-8 ring-slate-50 shadow-md transition-all ${isActive ? 'bg-[#e31c3d] text-white' : 'bg-white text-slate-200 border border-slate-100'} ${isCurrent ? 'scale-110 shadow-lg shadow-[#e31c3d]/20' : ''}`}>
+                        <step.icon className="w-4 h-4 md:w-6 md:h-6" />
                       </div>
-                      <p className={`mt-4 text-[8px] md:text-[10px] font-black uppercase tracking-widest text-center ${isActive ? 'text-slate-900' : 'text-slate-300'}`}>{step.label}</p>
+                      <p className={`mt-2 md:mt-4 text-[7px] md:text-[10px] font-black uppercase tracking-widest text-center ${isActive ? 'text-slate-900' : 'text-slate-300'}`}>{step.label}</p>
                     </div>
                   );
                 })}
@@ -228,8 +228,8 @@ export const TrackOrderPage = ({ initialOrderId = '' }: { initialOrderId?: strin
             </div>
           </div>
 
-          <div className="rounded-lg bg-white p-6 md:p-10 border border-slate-100 shadow-sm">
-            <h3 className="mb-8 text-xl font-black uppercase tracking-tight text-slate-900 border-b pb-6 italic">Package Contents <span className="text-slate-300 not-italic ml-2">({items.length})</span></h3>
+          <div className="rounded-lg bg-white p-4 md:p-10 border border-slate-100 shadow-sm">
+            <h3 className="mb-4 md:mb-8 text-xl font-black uppercase tracking-tight text-slate-900 border-b pb-6 italic">Package Contents <span className="text-slate-300 not-italic ml-2">({items.length})</span></h3>
             <div className="space-y-6">
               {items.map((item, idx) => (
                 <div key={idx} className="flex items-center gap-6 pb-6 border-b border-slate-50 last:border-0 last:pb-0 group">
@@ -247,9 +247,9 @@ export const TrackOrderPage = ({ initialOrderId = '' }: { initialOrderId?: strin
           </div>
         </div>
 
-        <div className="space-y-8">
-          <div className="rounded-lg bg-white p-8 border border-slate-100 shadow-sm">
-            <h3 className="mb-8 text-xs font-black uppercase tracking-widest text-[#e31c3d] border-b border-slate-50 pb-4 flex items-center gap-2">
+        <div className="space-y-6 md:space-y-8">
+          <div className="rounded-lg bg-white p-6 md:p-8 border border-slate-100 shadow-sm">
+            <h3 className="mb-4 md:mb-8 text-xs font-black uppercase tracking-widest text-[#e31c3d] border-b border-slate-50 pb-4 flex items-center gap-2">
               <MapPin size={14} /> Shipping Destination
             </h3>
             <div className="flex gap-5">
@@ -259,8 +259,8 @@ export const TrackOrderPage = ({ initialOrderId = '' }: { initialOrderId?: strin
             </div>
           </div>
 
-          <div className="rounded-lg bg-[#151515] p-8 text-white shadow-xl shadow-black/10">
-            <h3 className="mb-8 text-xs font-black uppercase tracking-widest text-slate-400 border-b border-white/10 pb-4">Transaction Details</h3>
+          <div className="rounded-lg bg-[#151515] p-6 md:p-8 text-white shadow-xl shadow-black/10">
+            <h3 className="mb-4 md:mb-8 text-xs font-black uppercase tracking-widest text-slate-400 border-b border-white/10 pb-4">Transaction Details</h3>
             <div className="space-y-6">
               <div className="flex justify-between items-end">
                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">Total Charged</span>
