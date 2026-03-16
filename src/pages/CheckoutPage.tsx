@@ -12,7 +12,7 @@ const fadeInUpProps = {
   transition: { duration: 0.5, ease: "easeOut" }
 };
 
-export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: any) => void }) => {
+export const CheckoutPage = ({ onNavigate, id }: { onNavigate: (path: string, id?: any) => void, id?: any }) => {
   const { cart, cartTotal, clearCart } = useCart();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSummaryExpanded, setIsSummaryExpanded] = useState(false);
@@ -27,7 +27,7 @@ export const CheckoutPage = ({ onNavigate }: { onNavigate: (path: string, id?: a
     roadName: '',
     city: '',
     pincode: '',
-    paymentMethod: 'upi',
+    paymentMethod: id === 'cod' ? 'cod' : 'upi',
     utrNumber: ''
   });
 

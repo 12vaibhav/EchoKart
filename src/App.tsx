@@ -425,7 +425,7 @@ export default function App() {
             {route.path === 'category-products' && <CategoryProductsPage products={products} categories={categories} categoryName={route.categoryName || 'All Products'} initialSearchQuery={route.searchQuery} onNavigate={navigate} />}
             {route.path === 'product' && <ProductDetailPage productId={route.id} products={products} onNavigate={navigate} />}
         {route.path === 'cart' && <CartPage onNavigate={navigate} />}
-        {route.path === 'checkout' && <CheckoutPage onNavigate={navigate} />}
+        {route.path === 'checkout' && <CheckoutPage onNavigate={navigate} id={route.id} />}
         {route.path === 'order-confirmation' && <OrderConfirmationPage onNavigate={navigate} orderId={route.id} />}
         {route.path === 'account' && <AccountPage onNavigate={navigate} initialTab={route.id ?? undefined} />}
         {route.path === 'wishlist' && <AccountPage onNavigate={navigate} initialTab={'wishlist' as any} />}

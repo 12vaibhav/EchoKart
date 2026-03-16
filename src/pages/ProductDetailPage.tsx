@@ -324,7 +324,10 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
                 </div>
               </div>
               <button 
-                onClick={() => onNavigate?.('checkout')}
+                onClick={() => {
+                  addToCart(product, quantity, selectedSwatch || undefined);
+                  onNavigate?.('checkout', 'cod');
+                }}
                 className="relative w-full overflow-hidden h-14 rounded-md flex items-center justify-center gap-3 shadow-[0_8px_30px_rgba(255,152,0,0.3)] hover:shadow-[0_8px_40px_rgba(255,152,0,0.5)] transition-all duration-300 hover:-translate-y-1 border border-orange-400"
               >
                 <style>{`
