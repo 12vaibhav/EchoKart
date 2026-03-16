@@ -403,7 +403,9 @@ export default function App() {
   const isDashboard = route.path.startsWith('/dashboard');
 
   if (isDashboard) {
-    if (!user) {
+    const isAdmin = user?.email === 'vs022480o@gmail.com';
+    
+    if (!user || !isAdmin) {
       return (
         <div className="font-sans">
           <AdminAuthPage onNavigate={navigate} />
