@@ -163,61 +163,9 @@ export const CheckoutPage = ({ onNavigate, id }: { onNavigate: (path: string, id
         </div>
       </div>
 
-      {/* Mini Summary Mobile Header - Sticky */}
-      <div className="lg:hidden sticky top-0 z-40 bg-white border-b border-slate-100 -mx-4 px-4 py-3 flex items-center justify-between mb-6 shadow-sm">
-        <div className="flex flex-col">
-          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Total to Pay</span>
-          <span className="text-lg font-black text-[#e31c3d] tracking-tight">₹{total.toLocaleString()}</span>
-        </div>
-        <button 
-          onClick={() => setIsSummaryExpanded(!isSummaryExpanded)}
-          className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-md border border-slate-100 active:scale-95 transition-all outline-none"
-        >
-          <span className="text-xs font-black uppercase tracking-widest text-slate-600">Review Items</span>
-          {isSummaryExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-        </button>
-      </div>
+      {/* Removed Mini Summary Mobile Header from here */}
 
-      {/* Expanded Summary Overlay for Mobile */}
-      <AnimatePresence>
-        {isSummaryExpanded && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden overflow-hidden bg-slate-50 -mx-4 px-4 pb-6 mb-6 border-b border-slate-200"
-          >
-            <div className="pt-4 space-y-4">
-               {cart.map((item: any, idx: number) => (
-                <div key={idx} className="flex gap-4 bg-white p-3 rounded-md border border-slate-100 shadow-sm">
-                  <div className="relative size-14 bg-slate-100 rounded-md overflow-hidden border border-slate-100 shrink-0">
-                    <img className="w-full h-full object-cover mix-blend-multiply" alt={item.name} src={item.image} />
-                    <span className="absolute -top-1 -right-1 size-5 bg-black text-white text-[10px] flex items-center justify-center rounded-full font-black">{item.quantity}</span>
-                  </div>
-                  <div className="flex-1 flex flex-col justify-center">
-                    <h4 className="text-xs font-black text-slate-900 leading-tight uppercase tracking-tight">{item.name}</h4>
-                    <span className="text-xs font-bold text-[#e31c3d] mt-1">₹{(item.price * item.quantity).toLocaleString()}</span>
-                  </div>
-                </div>
-              ))}
-              <div className="p-4 bg-white rounded-md border border-slate-100 space-y-2">
-                 <div className="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                    <span>Subtotal</span>
-                    <span>₹{subtotal.toLocaleString()}</span>
-                 </div>
-                 <div className="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                    <span>GST (18%)</span>
-                    <span>₹{tax.toLocaleString()}</span>
-                 </div>
-                 <div className="flex justify-between text-sm font-black text-slate-900 uppercase tracking-widest pt-2 border-t border-slate-50">
-                    <span>Total Amount</span>
-                    <span className="text-[#e31c3d]">₹{total.toLocaleString()}</span>
-                 </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Removed Expanded Summary Overlay from here */}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         {/* Left Column: Forms */}
@@ -552,18 +500,77 @@ export const CheckoutPage = ({ onNavigate, id }: { onNavigate: (path: string, id
         </div>
       </div>
 
-      {/* Mobile Sticky Footer Purchase Button */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-xl border-t border-slate-100 z-50">
-          <button 
-            onClick={handleCompletePurchase}
-            disabled={isSubmitting || cart.length === 0}
-            className="w-full bg-[#e31c3d] text-white font-black py-4 rounded-md shadow-xl shadow-[#e31c3d]/20 active:scale-95 transition-all text-xs uppercase tracking-widest flex items-center justify-center gap-3"
-          >
-            {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : "Complete Purchase"}
-            {!isSubmitting && <ArrowRight size={18} />}
-          </button>
+      {/* Mobile Sticky Footer Purchase Section */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-slate-100 z-50 p-4 pb-6">
+          {/* Expanded Summary Area (Slides up) */}
+          <AnimatePresence>
+            {isSummaryExpanded && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="overflow-hidden mb-4 bg-slate-50 rounded-xl p-3 border border-slate-100"
+              >
+                <div className="max-h-[50vh] overflow-y-auto space-y-3 pr-1">
+                  {cart.map((item: any, idx: number) => (
+                    <div key={idx} className="flex gap-3 bg-white p-2 rounded-lg border border-slate-50">
+                      <div className="relative size-12 bg-slate-50 rounded-md overflow-hidden shrink-0">
+                        <img className="w-full h-full object-cover mix-blend-multiply" alt={item.name} src={item.image} />
+                        <span className="absolute -top-1 -right-1 size-4 bg-black text-white text-[8px] flex items-center justify-center rounded-full font-black">{item.quantity}</span>
+                      </div>
+                      <div className="flex-1 flex flex-col justify-center min-w-0">
+                        <h4 className="text-[10px] font-black text-slate-900 leading-tight uppercase truncate">{item.name}</h4>
+                        <span className="text-[10px] font-bold text-[#e31c3d]">₹{(item.price * item.quantity).toLocaleString()}</span>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="pt-2 border-t border-slate-100 space-y-1">
+                    <div className="flex justify-between text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+                      <span>Subtotal</span>
+                      <span>₹{subtotal.toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+                      <span>GST (18%)</span>
+                      <span>₹{tax.toLocaleString()}</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div className="flex items-stretch gap-2 h-14">
+            {/* Price & Review Bar alongside button */}
+            <div className="flex-1 bg-slate-100/50 border border-slate-100 rounded-lg px-3 flex items-center justify-between">
+              <div className="flex flex-col">
+                <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest leading-none mb-0.5">Total Pay</span>
+                <span className="text-sm font-black text-[#e31c3d] tracking-tight">₹{total.toLocaleString()}</span>
+              </div>
+              <button 
+                onClick={() => setIsSummaryExpanded(!isSummaryExpanded)}
+                className="size-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 active:scale-95 transition-all shadow-sm"
+              >
+                {isSummaryExpanded ? <ChevronDown size={14} /> : <ChevronUp size={14} />}
+              </button>
+            </div>
+
+            <button 
+              onClick={handleCompletePurchase}
+              disabled={isSubmitting || cart.length === 0}
+              className="flex-[1.5] bg-[#e31c3d] text-white font-black rounded-lg shadow-xl shadow-[#e31c3d]/20 active:scale-95 transition-all text-[11px] uppercase tracking-widest flex items-center justify-center gap-2"
+            >
+              {isSubmitting ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <>
+                  Complete Order
+                  <ArrowRight size={16} />
+                </>
+              )}
+            </button>
+          </div>
       </div>
-      <div className="h-16 lg:hidden"></div> {/* Spacer for fixed footer */}
+      <div className="h-28 lg:hidden"></div> {/* Increased spacer for larger bottom footer */}
 
       {/* Simplified COD Conversion Modal */}
       <AnimatePresence>
