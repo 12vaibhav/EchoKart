@@ -98,7 +98,7 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
                   <motion.div variants={itemVariants} className="pointer-events-auto">
                     <button 
                       onClick={(e) => { e.stopPropagation(); handleSlideClick(); }}
-                      className="group/btn relative overflow-hidden bg-white text-black hover:text-white font-black py-2.5 px-7 md:py-5 md:px-14 rounded-full transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_25px_50px_rgba(0,0,0,0.4)] text-[10px] md:text-base tracking-widest uppercase flex items-center justify-center gap-2"
+                      className="group/btn relative overflow-hidden bg-transparent md:bg-white text-white md:text-black border border-white md:border-transparent font-black py-2.5 px-7 md:py-5 md:px-14 rounded-full transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_25px_50px_rgba(0,0,0,0.4)] text-[10px] md:text-base tracking-widest uppercase flex items-center justify-center gap-2"
                     >
                       <span className="relative z-10">Explore Now</span>
                       <ArrowRight className="w-3.5 h-3.5 md:w-5 md:h-5 relative z-10 group-hover/btn:translate-x-1 transition-transform" />
