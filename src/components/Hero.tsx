@@ -152,7 +152,7 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
               {/* Desktop Content */}
               <div className="absolute inset-0 flex flex-col items-center justify-end pb-10 text-center px-8 pointer-events-none">
                 <button 
-                  className="group/btn relative overflow-hidden bg-white text-black font-black py-4 px-10 rounded-full transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(0,0,0,0.4)] text-[11px] tracking-widest uppercase flex items-center justify-center gap-2 pointer-events-auto"
+                  className="group/btn relative overflow-hidden bg-transparent text-white border border-white font-black py-4 px-10 rounded-full transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(0,0,0,0.4)] text-[11px] tracking-widest uppercase flex items-center justify-center gap-2 pointer-events-auto"
                 >
                   <span className="relative z-10">Explore Now</span>
                   <ArrowRight className="w-4 h-4 relative z-10 group-hover/btn:translate-x-1 transition-transform" />
