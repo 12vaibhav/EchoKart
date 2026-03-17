@@ -148,7 +148,7 @@ export const ProductDetailPage = ({ productId, products = [], onNavigate }: { pr
             </div>
 
             {/* Main Image Viewport (Now Swipeable) */}
-            <div className="relative flex-1 bg-gradient-to-br from-gray-50 to-white rounded-lg md:rounded-xl border border-gray-100 shadow-sm group overflow-hidden min-h-[350px] md:min-h-[400px]">
+            <div className="relative w-full h-[320px] md:h-auto md:flex-1 bg-gradient-to-br from-gray-50 to-white rounded-lg md:rounded-xl border border-gray-100 shadow-sm group overflow-hidden md:min-h-[400px]">
               {tags && tags.length > 0 && (
                 <div className="absolute top-6 left-6 flex flex-col gap-2 z-10">
                   {tags.map((tag: any, idx: number) => (
