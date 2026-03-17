@@ -134,7 +134,7 @@ export const Hero = ({ slides: propSlides, onNavigate }: { slides?: any[], onNav
                 if (slide.category_name) onNavigate('category-products', null, slide.category_name);
                 else onNavigate('category', 0);
               }}
-              className="flex-none w-[calc((100%-32px)/3)] min-w-[320px] h-[360px] lg:h-[400px] relative rounded-2xl overflow-hidden group shadow-2xl border border-gray-100 cursor-pointer transition-all duration-500 hover:scale-[1.02] snap-start"
+              className="flex-none w-[calc((100%-32px)/3)] min-w-[320px] h-[300px] lg:h-[340px] relative rounded-2xl overflow-hidden group shadow-2xl border border-gray-100 cursor-pointer transition-all duration-500 hover:scale-[1.02] snap-start"
             >
               {/* Background with Parallel Zoom */}
               <div 
