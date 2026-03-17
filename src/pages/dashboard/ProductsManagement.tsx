@@ -488,15 +488,21 @@ export const ProductsManagement = ({ products, onProductsChange }: { products: a
       finalTags.push(tagInput.trim());
     }
 
-    // Use the ID if we already have it, otherwise look it up
-    let categoryId = formData.categoryId;
-    if (!categoryId) {
-      const { data: catData } = await supabase
-        .from('categories')
-        .select('id')
-        .eq('name', formData.category)
-        .single();
-      categoryId = catData?.id;
+    // Always look up the ID by name to ensure it matches the selected category name
+    const { data: catData, error: catError } = await supabase
+      .from('categories')
+      .select('id')
+      .eq('name', formData.category)
+      .maybeSingle();
+
+    if (catError) {
+      console.error('Error looking up category:', catError);
+    }
+
+    const categoryId = catData?.id;
+    
+    if (!categoryId && formData.category !== 'Uncategorized') {
+      console.warn(`Category ID not found for name: ${formData.category}`);
     }
 
     const productData = {
