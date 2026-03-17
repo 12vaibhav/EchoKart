@@ -35,6 +35,12 @@ export const CategoryProductsPage = ({
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
+  const isSaleCategory = (name: string | null) => {
+    if (!name) return false;
+    const n = name.toLowerCase();
+    return n === 'sale' || n === 'sale items';
+  };
+
   // Sync search query from props if it changes
   React.useEffect(() => {
     setSearchQuery(initialSearchQuery || '');
@@ -58,9 +64,13 @@ export const CategoryProductsPage = ({
 
     // Category Filter
     if (selectedCategory) {
-      result = result.filter(p => p.category === selectedCategory);
+      if (!isSaleCategory(selectedCategory)) {
+        result = result.filter(p => p.category === selectedCategory);
+      }
     } else if (propCategoryName && propCategoryName !== 'All Products') {
-       result = result.filter(p => p.category === propCategoryName);
+      if (!isSaleCategory(propCategoryName)) {
+        result = result.filter(p => p.category === propCategoryName);
+      }
     }
 
     // Brand Filter
@@ -167,7 +177,9 @@ export const CategoryProductsPage = ({
           {propCategories.length > 0 ? (
             propCategories.map((cat, idx) => {
               const name = cat.name || cat.title;
-              const count = allProducts.filter(p => p.category === name).length;
+              const count = isSaleCategory(name) 
+                ? allProducts.length 
+                : allProducts.filter(p => p.category === name).length;
               return (
                 <label 
                   key={cat.id || idx} 
