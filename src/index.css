@@ -80,3 +80,28 @@
   border-radius: 0.5rem;
   margin: 1rem 0;
 }
+
+/* Chatbot widget responsiveness overrides */
+@media (max-width: 480px) {
+  #chatlayer-container {
+    width: calc(100% - 32px) !important;
+    max-width: calc(100vw - 32px) !important;
+    height: 70vh !important;
+    max-height: 500px !important;
+    bottom: 80px !important;
+    right: 16px !important;
+    left: 16px !important;
+    border-radius: 12px !important;
+  }
+  
+  #chatlayer-btn {
+    bottom: 16px !important;
+  }
+  #chatlayer-btn[style*="right:"] {
+    right: 16px !important;
+  }
+  #chatlayer-btn[style*="left:"] {
+    left: 16px !important;
+  }
+}
+
